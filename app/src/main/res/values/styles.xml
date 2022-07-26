@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="HorizontalDivider" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:layout_marginVertical">20dp</item>
+        <item name="android:background">#aaa</item>
+    </style>
+
+<!--    Categories-->
+
     <style name="CategoryButton" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">100dp</item>

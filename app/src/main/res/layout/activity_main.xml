@@ -35,6 +35,17 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+<!--        Banner-->
+
+        <ImageButton
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:background="#ddd"/>
+
+        <View style="@style/HorizontalDivider"/>
+
 <!--        Categories-->
 <!--        OU-AN: refer to res/values/styles.xml to find style definitions-->
 
@@ -54,7 +65,7 @@
 
             <RelativeLayout style="@style/CategoryContainer">
                 <ImageButton style="@style/CategoryButton"
-                    android:id="@+id/category_btn_ios"/>
+                    android:id="@+id/category_btn_ios" />
 
                 <TextView style="@style/CategoryTitle"
                     android:text="iOS"
