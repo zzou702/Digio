@@ -11,13 +11,14 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/label">
+        android:hint="@string/label"
+        android:orientation="vertical">
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_margin="20dp"
             android:hint="Search..."
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -32,8 +33,57 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
         </com.google.android.material.textfield.TextInputLayout>
+
+<!--        Banner-->
+
+        <ImageButton
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:background="#ddd"/>
+
+        <View style="@style/HorizontalDivider"/>
+
+<!--        Categories-->
+<!--        OU-AN: refer to res/values/styles.xml to find style definitions-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp">
+
+            <RelativeLayout style="@style/CategoryContainer">
+                <ImageButton style="@style/CategoryButton"
+                    android:id="@+id/category_btn_android"/>
+
+                <TextView style="@style/CategoryTitle"
+                    android:text="Android"
+                    android:layout_below="@id/category_btn_android"/>
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/CategoryContainer">
+                <ImageButton style="@style/CategoryButton"
+                    android:id="@+id/category_btn_ios" />
+
+                <TextView style="@style/CategoryTitle"
+                    android:text="iOS"
+                    android:layout_below="@id/category_btn_ios"/>
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/CategoryContainer">
+                <ImageButton style="@style/CategoryButton"
+                    android:id="@+id/category_btn_other"/>
+
+                <TextView style="@style/CategoryTitle"
+                    android:text="Other"
+                    android:layout_below="@id/category_btn_other"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+
 
 
 
