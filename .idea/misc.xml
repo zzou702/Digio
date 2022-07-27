@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/joaom/Documents/Joao Madelino/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/drawable/circle.xml" value="0.184" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22283020019531247" />
+        <entry key="app/src/main/res/layout/activity_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2359375" />
+        <entry key="app/src/main/res/layout/content_list.xml" value="0.15520833333333334" />
       </map>
     </option>
   </component>
