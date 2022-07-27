@@ -57,8 +57,9 @@
 
             <RelativeLayout style="@style/CategoryContainer">
                 <ImageButton style="@style/CategoryButton"
-                    android:id="@+id/category_btn_android"/>
-
+                    android:id="@+id/category_btn_android"
+                    android:onClick="categoryButtonPressed"
+                    />
                 <TextView style="@style/CategoryTitle"
                     android:text="Android"
                     android:layout_below="@id/category_btn_android"/>
@@ -66,8 +67,9 @@
 
             <RelativeLayout style="@style/CategoryContainer">
                 <ImageButton style="@style/CategoryButton"
-                    android:id="@+id/category_btn_ios" />
-
+                    android:id="@+id/category_btn_ios"
+                    android:onClick="categoryButtonPressed"
+                    />
                 <TextView style="@style/CategoryTitle"
                     android:text="iOS"
                     android:layout_below="@id/category_btn_ios"/>
@@ -75,7 +77,9 @@
 
             <RelativeLayout style="@style/CategoryContainer">
                 <ImageButton style="@style/CategoryButton"
-                    android:id="@+id/category_btn_other"/>
+                    android:id="@+id/category_btn_other"
+                    android:onClick="categoryButtonPressed"
+                    />
 
                 <TextView style="@style/CategoryTitle"
                     android:text="Other"
