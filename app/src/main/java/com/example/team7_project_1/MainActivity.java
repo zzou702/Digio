@@ -1,12 +1,19 @@
 package com.example.team7_project_1;
 
+import static com.google.android.material.textfield.TextInputLayout.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import android.widget.ImageButton;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +24,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextInputEditText search_bar = (TextInputEditText) findViewById(R.id.search_result);
+
+
+        search_bar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // If the user presses enter we want to switch activities
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    // clearing the text bar
+                    search_bar.getText().clear();
+                    Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                    startActivity(searchIntent);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     //this method takes the user to the category page when each of the category buttons are pressed
@@ -47,6 +72,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 }
