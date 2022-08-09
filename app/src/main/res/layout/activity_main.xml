@@ -1,99 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
-    <LinearLayout
-
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/label"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="20dp"
-            android:hint="Search..."
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxBackgroundColor="@color/material_dynamic_neutral90"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/search_icon"
-            app:boxCornerRadiusBottomEnd="40dp"
-            app:boxCornerRadiusTopEnd="40dp"
-            app:boxCornerRadiusBottomStart="40dp"
-            app:boxCornerRadiusTopStart="40dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-<!--        Banner-->
-
-        <ImageButton
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="200dp"
-            android:background="#ddd"/>
-
-        <View style="@style/HorizontalDivider"/>
-
-<!--        Categories-->
-<!--        OU-AN: refer to res/values/styles.xml to find style definitions-->
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="20dp">
+            android:hint="@string/label"
+            android:orientation="vertical">
 
-            <RelativeLayout style="@style/CategoryContainer">
-                <ImageButton style="@style/CategoryButton"
-                    android:id="@+id/category_btn_android"
-                    android:onClick="categoryButtonPressed"
-                    />
-                <TextView style="@style/CategoryTitle"
-                    android:text="Android"
-                    android:layout_below="@id/category_btn_android"/>
-            </RelativeLayout>
 
-            <RelativeLayout style="@style/CategoryContainer">
-                <ImageButton style="@style/CategoryButton"
-                    android:id="@+id/category_btn_ios"
-                    android:onClick="categoryButtonPressed"
-                    />
-                <TextView style="@style/CategoryTitle"
-                    android:text="iOS"
-                    android:layout_below="@id/category_btn_ios"/>
-            </RelativeLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:hint="Search..."
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="@color/material_dynamic_neutral90"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/search_icon"
+                app:boxCornerRadiusBottomEnd="40dp"
+                app:boxCornerRadiusTopEnd="40dp"
+                app:boxCornerRadiusBottomStart="40dp"
+                app:boxCornerRadiusTopStart="40dp">
 
-            <RelativeLayout style="@style/CategoryContainer">
-                <ImageButton style="@style/CategoryButton"
-                    android:id="@+id/category_btn_other"
-                    android:onClick="categoryButtonPressed"
-                    />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView style="@style/CategoryTitle"
-                    android:text="Other"
-                    android:layout_below="@id/category_btn_other"/>
-            </RelativeLayout>
+    <!--        Banner-->
+
+            <ImageButton
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp"
+                android:background="#ddd"/>
+
+
+            <View style="@style/HorizontalDivider"/>
+
+    <!--        Categories-->
+    <!--        OU-AN: refer to res/values/styles.xml to find style definitions-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp">
+
+                <RelativeLayout style="@style/CategoryContainer">
+                    <ImageButton style="@style/CategoryButton"
+                        android:id="@+id/category_btn_android"
+                        android:onClick="categoryButtonPressed"
+                        />
+                    <TextView style="@style/CategoryTitle"
+                        android:text="Android"
+                        android:layout_below="@id/category_btn_android"/>
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/CategoryContainer">
+                    <ImageButton style="@style/CategoryButton"
+                        android:id="@+id/category_btn_ios"
+                        android:onClick="categoryButtonPressed"
+                        />
+                    <TextView style="@style/CategoryTitle"
+                        android:text="iOS"
+                        android:layout_below="@id/category_btn_ios"/>
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/CategoryContainer">
+                    <ImageButton style="@style/CategoryButton"
+                        android:id="@+id/category_btn_other"
+                        android:onClick="categoryButtonPressed"
+                        />
+
+                    <TextView style="@style/CategoryTitle"
+                        android:text="Other"
+                        android:layout_below="@id/category_btn_other"/>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
 
+    </ScrollView>
 
-
-
-    </LinearLayout>
-
-
-
-</ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_menu"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        />
+</FrameLayout>
