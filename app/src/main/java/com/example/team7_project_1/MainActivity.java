@@ -35,24 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initializeNavItem();
-
-//        TextInputEditText search_bar = (TextInputEditText) findViewById(R.id.search_result);
-//
-//
-//        search_bar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                // If the user presses enter we want to switch activities
-//                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-//                    // clearing the text bar
-//                    search_bar.getText().clear();
-//                    Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
-//                    startActivity(searchIntent);
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
     }
 
     @Override
@@ -71,9 +53,32 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         };
+
         menu.findItem(R.id.search_bar).setOnActionExpandListener(onActionExpandListener);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_bar).getActionView();
-        searchView.setQueryHint("Search...");
+        SearchView search_view = (SearchView) menu.findItem(R.id.search_bar).getActionView();
+        search_view.setQueryHint("Search...");
+
+        // Listening for when the user commits to searching something
+        search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        ImageView clear_text_icon = (ImageView) search_view.findViewById(androidx.appcompat.R.id.search_close_btn);
+        EditText hint_text = (EditText) search_view.findViewById(androidx.appcompat.R.id.search_src_text);
+
+        clear_text_icon.setColorFilter(getResources().getColor(R.color.black));
+        hint_text.setHintTextColor(getResources().getColor(R.color.black));
+
 
         return true;
     }
