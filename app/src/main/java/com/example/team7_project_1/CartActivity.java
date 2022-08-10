@@ -1,24 +1,20 @@
 package com.example.team7_project_1;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.os.Bundle;
-import android.view.View;
-
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class SearchActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_cart);
 
         initializeNavItem();
     }
@@ -36,22 +32,16 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
                     case R.id.nav_home:
-                        startActivity(new Intent(SearchActivity.this, MainActivity.class));
+                        startActivity(new Intent(CartActivity.this, MainActivity.class));
                         return true;
                     case R.id.nav_search:
+                        startActivity(new Intent(CartActivity.this, SearchActivity.class));
                         return true;
                     case R.id.nav_cart:
-                        startActivity(new Intent(SearchActivity.this, CartActivity.class));
                         return true;
                 }
                 return false;
             }
         });
     }
-    
-    /** This method takes the user back to the previous page*/
-    public void backButtonClicked(View v){
-        finish();
-    }
-
 }
