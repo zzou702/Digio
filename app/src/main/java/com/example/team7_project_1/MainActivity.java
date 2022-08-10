@@ -6,9 +6,13 @@ import static com.google.android.material.textfield.TextInputLayout.*;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,23 +36,46 @@ public class MainActivity extends AppCompatActivity {
 
         initializeNavItem();
 
-        TextInputEditText search_bar = (TextInputEditText) findViewById(R.id.search_result);
+//        TextInputEditText search_bar = (TextInputEditText) findViewById(R.id.search_result);
+//
+//
+//        search_bar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                // If the user presses enter we want to switch activities
+//                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+//                    // clearing the text bar
+//                    search_bar.getText().clear();
+//                    Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+//                    startActivity(searchIntent);
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_menu, menu);
 
-        search_bar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        MenuItem.OnActionExpandListener onActionExpandListener = new MenuItem.OnActionExpandListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                // If the user presses enter we want to switch activities
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    // clearing the text bar
-                    search_bar.getText().clear();
-                    Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
-                    startActivity(searchIntent);
-                    return true;
-                }
-                return false;
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
             }
-        });
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                return true;
+            }
+        };
+        menu.findItem(R.id.search_bar).setOnActionExpandListener(onActionExpandListener);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_bar).getActionView();
+        searchView.setQueryHint("Search...");
+
+        return true;
     }
 
     //this method takes the user to the category page when each of the category buttons are pressed

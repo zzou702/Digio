@@ -23,31 +23,6 @@
         android:orientation="vertical"
         android:hint="@string/label" >
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="20dp"
-            android:hint="Search..."
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxBackgroundColor="@color/material_dynamic_neutral90"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/search_icon"
-            app:boxCornerRadiusBottomEnd="40dp"
-            app:boxCornerRadiusTopEnd="40dp"
-            app:boxCornerRadiusBottomStart="40dp"
-            app:boxCornerRadiusTopStart="40dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionDone"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
             <!--Banner-->
 
             <ImageButton
