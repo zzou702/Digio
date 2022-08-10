@@ -7,6 +7,10 @@ public abstract class Specification {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public abstract String getFormattedValue();
-    public abstract boolean isBetterThan();
+    public abstract boolean isBetterThan(Specification otherSpec);
 }
