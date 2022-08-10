@@ -18,10 +18,10 @@
 
 
         <LinearLayout
-
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:hint="@string/label">
+        android:hint="@string/label" >
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -47,36 +47,8 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-<!--        Banner-->
 
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label"
-            android:orientation="vertical">
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="20dp"
-                android:hint="Search..."
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxBackgroundColor="@color/material_dynamic_neutral90"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/search_icon"
-                app:boxCornerRadiusBottomEnd="40dp"
-                app:boxCornerRadiusTopEnd="40dp"
-                app:boxCornerRadiusBottomStart="40dp"
-                app:boxCornerRadiusTopStart="40dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-    <!--        Banner-->
+            <!--Banner-->
 
             <ImageButton
                 android:id="@+id/banner"
@@ -98,10 +70,11 @@
                 android:paddingHorizontal="20dp">
 
                 <RelativeLayout style="@style/CategoryContainer">
-                    <ImageButton style="@style/CategoryButton"
+
+                    <ImageButton
                         android:id="@+id/category_btn_android"
-                        android:onClick="categoryButtonPressed"
-                        />
+                        style="@style/CategoryButton"
+                        android:onClick="categoryButtonPressed" />
                     <TextView style="@style/CategoryTitle"
                         android:text="Android"
                         android:layout_below="@id/category_btn_android"/>
