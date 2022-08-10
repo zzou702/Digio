@@ -1,11 +1,15 @@
 package com.example.team7_project_1;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.os.Bundle;
+import android.view.View;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,4 +48,10 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+    
+    /** This method takes the user back to the previous page*/
+    public void backButtonClicked(View v){
+        finish();
+    }
+
 }

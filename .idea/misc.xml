@@ -4,9 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/joaom/Documents/Joao Madelino/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_main.xml" value="0.25" />
+
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/selector.xml" value="0.1635" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.15520833333333334" />
+
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_list.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/search_results.xml" value="0.1" />
+
         <entry key="app/src/main/res/layout/activity_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.15520833333333334" />
