@@ -15,6 +15,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="toolbarNavigationButtonStyle">@style/Toolbar.Button.Navigation.Tinted</item>
+        <item name="actionBarTheme">@style/ActionBar</item>
+
+    </style>
+
+    <style name="Toolbar.Button.Navigation.Tinted" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="tint">@color/black</item>
     </style>
 
     <style name="Theme.Team7_Project_1.NoActionBar">
@@ -25,4 +32,23 @@
     <style name="Theme.Team7_Project_1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Team7_Project_1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView.ActionBar">
+        <!--search view customization-->
+        <item name="layout">@layout/abc_search_view</item>
+        <item name="queryBackground">@drawable/abc_textfield_search_material</item>
+        <item name="submitBackground">@drawable/abc_textfield_search_material</item>
+        <item name="closeIcon">@drawable/ic_baseline_close_24</item>
+        <item name="searchIcon">@drawable/ic_search</item>
+        <item name="searchHintIcon">@drawable/ic_search</item>
+        <item name="goIcon">@drawable/ic_shopping_cart</item>
+        <item name="voiceIcon">@drawable/ic_home</item>
+        <item name="commitIcon">@drawable/abc_ic_commit_search_api_mtrl_alpha</item>
+        <item name="suggestionRowLayout">@layout/abc_search_dropdown_item_icons_2line</item>
+    </style>
+
 </resources>

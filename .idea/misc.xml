@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/joaom/.gradle/caches/transforms-3/f053ca72a4906620f9d7f529c412475e/transformed/appcompat-1.4.2/res/layout/abc_search_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/joaom/Documents/Joao Madelino/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_list.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/joaom/Documents/Joao Madelino/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/joaom/Documents/Joao Madelino/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_search.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/drawable/circle.xml" value="0.14" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/drawable/ic_home.xml" value="0.14" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/drawable/ic_search.xml" value="0.14" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.14" />
+        <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/drawable/selector.xml" value="0.14" />
         <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_cart.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/joaom/Documents/UNI/Year 3/Semester 2/SOFTENG 306/Projects/Project 1/project-1-java-team7/app/src/main/res/layout/activity_search.xml" value="0.18802083333333333" />
