@@ -18,7 +18,7 @@ public class DetailsActivity extends AppCompatActivity {
     ViewPager mViewPager;
 
     // images array
-    int[] images = {R.drawable.ic_launcher_background, R.drawable.ic_home, R.drawable.circle};
+    int[] images = {R.drawable.mphapp113111__1, R.drawable.mphapp113111__2, R.drawable.mphapp113111__3, R.drawable.mphapp113111__4};
 
     // Creating Object of ViewPagerAdapter
     ViewPagerAdapter mViewPagerAdapter;
