@@ -73,13 +73,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView clear_text_icon = (ImageView) search_view.findViewById(androidx.appcompat.R.id.search_close_btn);
-        EditText hint_text = (EditText) search_view.findViewById(androidx.appcompat.R.id.search_src_text);
-
-        clear_text_icon.setColorFilter(getResources().getColor(R.color.black));
-        hint_text.setHintTextColor(getResources().getColor(R.color.black));
-
-
         return true;
     }
 
