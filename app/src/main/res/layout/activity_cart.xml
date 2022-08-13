@@ -26,4 +26,10 @@
         app:itemIconTint="@drawable/selector"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST: open details"
+        android:onClick="detailsButtonClicked" />
+
 </FrameLayout>
