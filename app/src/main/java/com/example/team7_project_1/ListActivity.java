@@ -23,10 +23,25 @@ public class ListActivity extends AppCompatActivity {
         OTHER,
     }
 
+    /** View holder class*/
+    private class ViewHolder{
+        BottomNavigationView bottomNavigationView;
+        TextView test;
+
+        public ViewHolder(){
+            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            test = findViewById(R.id.test);
+        }
+    }
+
+    ViewHolder vh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        vh = new ViewHolder();
 
         //getting the chosen category that has been passed through the putExtra() method
         chosenCat = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
@@ -39,18 +54,17 @@ public class ListActivity extends AppCompatActivity {
 
     /** This method populates the ListActivity based on the category chosen in main activity*/
     public void populateList(Category category){
-        TextView test = findViewById(R.id.test);
 
         // Compare to see which category was chosen from the main activity page
         switch (category){
             case ANDROID:
-                test.setText("Android was chosen");
+                vh.test.setText("Android was chosen");
             break;
             case IOS:
-                test.setText("IOS was chosen");
+                vh.test.setText("IOS was chosen");
             break;
             case OTHER:
-                test.setText("Other Operating systems was chosen");
+                vh.test.setText("Other Operating systems was chosen");
             break;
         }
     }
@@ -63,8 +77,6 @@ public class ListActivity extends AppCompatActivity {
     /** This method sets the bottom navigation bar visible or invisible depending on whether the
      *  keyboard is activated */
     public void setNavVisibility(){
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,
@@ -72,9 +84,9 @@ public class ListActivity extends AppCompatActivity {
                     @Override
                     public void onVisibilityChanged(boolean isOpen) {
                         if(isOpen){
-                            bottomNavigationView.setVisibility(View.INVISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
                         }else{
-                            bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
                         }
                     }
                 }

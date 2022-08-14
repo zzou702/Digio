@@ -18,10 +18,23 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 
 public class CartActivity extends AppCompatActivity {
 
+    /** View holder class*/
+    private class ViewHolder{
+        BottomNavigationView bottomNavigationView;
+
+        public ViewHolder(){
+            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+        }
+    }
+
+    ViewHolder vh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        vh = new ViewHolder();
 
         initializeNavItem();
         setNavVisibility();
@@ -29,13 +42,11 @@ public class CartActivity extends AppCompatActivity {
 
     /** This method initialises the navigation item selected for the search page*/
     public void initializeNavItem(){
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-
         //set home selected
-        bottomNavigationView.setSelectedItemId(R.id.nav_search);
+        vh.bottomNavigationView.setSelectedItemId(R.id.nav_search);
 
         //setting ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
@@ -96,7 +107,6 @@ public class CartActivity extends AppCompatActivity {
     /** This method sets the bottom navigation bar visible or invisible depending on whether the
      *  keyboard is activated */
     public void setNavVisibility(){
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
 
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
@@ -105,9 +115,9 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onVisibilityChanged(boolean isOpen) {
                         if(isOpen){
-                            bottomNavigationView.setVisibility(View.INVISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
                         }else{
-                            bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
                         }
                     }
                 }
