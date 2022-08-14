@@ -20,7 +20,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="NAME"
-                android:textSize="20dp"/>
+                android:style="@style/CardViewTextViewStyle" />
 
             <ImageView
                 android:id="@+id/phone_main_image"
@@ -38,7 +38,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="PRICE"
-                android:textSize="20dp"/>
+                android:style="@style/CardViewTextViewStyle" />
 
         </LinearLayout>
 

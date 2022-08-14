@@ -10,16 +10,17 @@
 
 <!--    Categories-->
 
-<!--    IOS-->
+    <!--    Android-->
     <style name="CategoryButtonAndroid" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
         <item name="android:layout_centerHorizontal">true</item>
 
-        <!--        See res/drawable/windows_logo.xml-->
+        <!--        See res/drawable/android_logo.xml-->
         <item name="android:background">@drawable/android_logo</item>
     </style>
 
+    <!--    IOS-->
     <style name="CategoryButtonIOS" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
@@ -29,6 +30,7 @@
         <item name="android:background">@drawable/ios_logo</item>
     </style>
 
+    <!--    Other-->
     <style name="CategoryButtonOther" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
@@ -42,8 +44,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/robotoslab_medium</item>
     </style>
 
     <style name="CategoryContainer" parent="TextAppearance.AppCompat">
@@ -51,5 +54,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:orientation">vertical</item>
+    </style>
+
+    <!--    Text in CardViews in Search Activity style-->
+    <style name="CardViewTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/robotoslab_regular</item>
     </style>
 </resources>
