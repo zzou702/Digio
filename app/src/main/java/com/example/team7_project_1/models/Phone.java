@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Phone {
     private String brand;
     private String manufacturerPartNo;
+    private int price;
     private Specification[] specifications;
 
     public Phone(String brand, String manufacturerPartNo, Specification[] specifications) {
@@ -12,6 +13,12 @@ public class Phone {
         this.manufacturerPartNo = manufacturerPartNo;
         this.specifications = specifications;
     }
+
+    public Phone(String brand, int price) {
+        this.brand = brand;
+        this.price = price;
+    }
+    public int getPrice() {return price;}
 
     public String getBrand() {
         return brand;
