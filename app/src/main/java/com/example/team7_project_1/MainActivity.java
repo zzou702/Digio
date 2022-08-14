@@ -23,6 +23,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initializeNavItem();
+        setNavVisibility();
     }
 
     @Override
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //this method takes the user to the category page when each of the category buttons are pressed
+    /** this method takes the user to the category page when each of the category buttons are pressed */
     public void categoryButtonPressed(View v){
         switch(v.getId())
         {
@@ -97,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, ListActivity.class);
         intent.putExtra("CATEGORY_CHOSEN", cat);
         startActivity(intent);
-
     }
 
     /** This method initialises the navigation item selected for the home page*/
@@ -125,5 +128,26 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    /** This method sets the bottom navigation bar visible or invisible depending on whether the
+     *  keyboard is activated */
+    public void setNavVisibility(){
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+
+        // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        if(isOpen){
+                            bottomNavigationView.setVisibility(View.INVISIBLE);
+                        }else{
+                            bottomNavigationView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+        );
     }
 }

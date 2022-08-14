@@ -12,6 +12,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 public class DetailsActivity extends AppCompatActivity {
 
     // creating object of ViewPager
@@ -35,6 +38,29 @@ public class DetailsActivity extends AppCompatActivity {
 
         // Adding the Adapter to the ViewPager
         mViewPager.setAdapter(mViewPagerAdapter);
+
+        setNavVisibility();
+    }
+
+    /** This method sets the bottom navigation bar visible or invisible depending on whether the
+     *  keyboard is activated */
+    public void setNavVisibility(){
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+
+        // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        if(isOpen){
+                            bottomNavigationView.setVisibility(View.INVISIBLE);
+                        }else{
+                            bottomNavigationView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+        );
     }
 
     /** This method takes the user back to the previous page*/

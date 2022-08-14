@@ -7,6 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 public class ListActivity extends AppCompatActivity {
 
     private Category chosenCat; //the chosen category
@@ -28,6 +33,8 @@ public class ListActivity extends AppCompatActivity {
 
         //calling the method to populate the ListActivity
         populateList(chosenCat);
+
+        setNavVisibility();
     }
 
     /** This method populates the ListActivity based on the category chosen in main activity*/
@@ -53,4 +60,24 @@ public class ListActivity extends AppCompatActivity {
         finish();
     }
 
+    /** This method sets the bottom navigation bar visible or invisible depending on whether the
+     *  keyboard is activated */
+    public void setNavVisibility(){
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+
+        // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        if(isOpen){
+                            bottomNavigationView.setVisibility(View.INVISIBLE);
+                        }else{
+                            bottomNavigationView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+        );
+    }
 }
