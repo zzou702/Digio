@@ -94,10 +94,6 @@ public class ListActivity extends AppCompatActivity {
         vh.recycler_view_phones.setAdapter(adapter);
     }
 
-    /** This method takes the user back to the previous page*/
-    public void backButtonClicked(View v){
-        finish();
-    }
 
     /** This method initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
