@@ -46,7 +46,7 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:textSize">24dp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:fontFamily">@font/robotoslab_medium</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
     <style name="CategoryContainer" parent="TextAppearance.AppCompat">
@@ -60,6 +60,6 @@
     <style name="CardViewTextViewStyle" parent="android:Widget.TextView">
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:fontFamily">@font/robotoslab_regular</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 </resources>
