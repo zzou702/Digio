@@ -54,8 +54,6 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         this.phones = phones;
     }
 
-
-
     @NonNull
     @Override
     public PhoneAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
