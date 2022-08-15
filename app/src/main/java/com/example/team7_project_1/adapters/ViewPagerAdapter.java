@@ -14,6 +14,8 @@ import com.example.team7_project_1.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
 
+    // reference: https://www.digitalocean.com/community/tutorials/android-viewpager-example-tutorial
+
     Context context;
     int[] images;
     LayoutInflater mLayoutInflater;
@@ -37,10 +39,10 @@ public class ViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        // inflating the item.xml
+        // inflating the pager_item.xml
         View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
 
-        // referencing the image view from the item.xml file
+        // referencing the image view from the pager_item.xml file
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewMain);
 
         // setting the image in the imageView
