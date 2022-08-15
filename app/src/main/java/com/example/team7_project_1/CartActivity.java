@@ -13,25 +13,40 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 public class CartActivity extends AppCompatActivity {
+
+    /** View holder class*/
+    private class ViewHolder{
+        BottomNavigationView bottomNavigationView;
+
+        public ViewHolder(){
+            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+        }
+    }
+
+    ViewHolder vh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        vh = new ViewHolder();
+
         initializeNavItem();
+        setNavVisibility();
     }
 
     /** This method initialises the navigation item selected for the search page*/
     public void initializeNavItem(){
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-
         //set home selected
-        bottomNavigationView.setSelectedItemId(R.id.nav_search);
+        vh.bottomNavigationView.setSelectedItemId(R.id.nav_search);
 
         //setting ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
@@ -87,6 +102,26 @@ public class CartActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    /** This method sets the bottom navigation bar visible or invisible depending on whether the
+     *  keyboard is activated */
+    public void setNavVisibility(){
+
+        // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        if(isOpen){
+                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
+                        }else{
+                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+        );
     }
 
     public void detailsButtonClicked(View v) {

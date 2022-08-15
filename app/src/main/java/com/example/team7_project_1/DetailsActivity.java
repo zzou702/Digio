@@ -12,6 +12,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 public class DetailsActivity extends AppCompatActivity {
 
     // creating object of ViewPager
@@ -23,18 +26,55 @@ public class DetailsActivity extends AppCompatActivity {
     // Creating Object of ViewPagerAdapter
     ViewPagerAdapter mViewPagerAdapter;
 
+    /** View holder class*/
+    private class ViewHolder{
+        BottomNavigationView bottomNavigationView;
+        ViewPager mViewPager; // creating object of ViewPager
+        ViewPagerAdapter mViewPagerAdapter; // Creating Object of ViewPagerAdapter
+
+        public ViewHolder(){
+            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            mViewPager = (ViewPager)findViewById(R.id.viewPager);
+            mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
+        }
+    }
+
+    ViewHolder vh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        vh = new ViewHolder();
+
         // View pager initialisation
-        mViewPager = (ViewPager)findViewById(R.id.viewPager);
-        mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
+        //mViewPager = (ViewPager)findViewById(R.id.viewPager);
+        //mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
 
         // Adding the Adapter to the ViewPager
-        mViewPager.setAdapter(mViewPagerAdapter);
+        vh.mViewPager.setAdapter(mViewPagerAdapter);
+
+        setNavVisibility();
+    }
+
+    /** This method sets the bottom navigation bar visible or invisible depending on whether the
+     *  keyboard is activated */
+    public void setNavVisibility(){
+        // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        if(isOpen){
+                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
+                        }else{
+                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+        );
     }
 
     /** This method takes the user back to the previous page*/
