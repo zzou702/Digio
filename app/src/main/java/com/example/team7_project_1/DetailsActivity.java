@@ -17,9 +17,6 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 
 public class DetailsActivity extends AppCompatActivity {
 
-    // creating object of ViewPager
-    ViewPager mViewPager;
-
     // images array
     int[] images = {R.drawable.mphapp113111__1, R.drawable.mphapp113111__2, R.drawable.mphapp113111__3, R.drawable.mphapp113111__4};
 
@@ -30,7 +27,6 @@ public class DetailsActivity extends AppCompatActivity {
     private class ViewHolder{
         BottomNavigationView bottomNavigationView;
         ViewPager mViewPager; // creating object of ViewPager
-        ViewPagerAdapter mViewPagerAdapter; // Creating Object of ViewPagerAdapter
 
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
