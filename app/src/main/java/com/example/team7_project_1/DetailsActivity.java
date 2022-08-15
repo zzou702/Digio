@@ -35,7 +35,6 @@ public class DetailsActivity extends AppCompatActivity {
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
             mViewPager = (ViewPager)findViewById(R.id.viewPager);
-            mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
         }
     }
 
@@ -49,8 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
         vh = new ViewHolder();
 
         // View pager initialisation
-        //mViewPager = (ViewPager)findViewById(R.id.viewPager);
-        //mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
+        mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
 
         // Adding the Adapter to the ViewPager
         vh.mViewPager.setAdapter(mViewPagerAdapter);
