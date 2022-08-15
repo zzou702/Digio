@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
     android:elevation="8dp"
-    app:cardCornerRadius="20dp">
+    android:background="@drawable/border"
+    android:layout_margin="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,6 +21,7 @@
                 android:gravity="center"
                 android:text="NAME"
                 style="@style/CardViewTextViewStyle"/>
+
 
             <ImageView
                 android:id="@+id/phone_main_image"
@@ -39,6 +40,7 @@
                 android:gravity="center"
                 android:text="PRICE"
                 style="@style/CardViewTextViewStyle" />
+
 
         </LinearLayout>
 

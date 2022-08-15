@@ -44,7 +44,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Getting what the user searched
         String user_search = getIntent().getStringExtra("user_search");
-        initializeNavItem();
+
 
         adapter = new PhoneAdapter(this, phones);
 
@@ -54,7 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         // Attach the adapter to the recyclerview to populate items
         recycler_view_phones.setAdapter(adapter);
 
-
+        initializeNavItem();
         setNavVisibility();
 
     }
