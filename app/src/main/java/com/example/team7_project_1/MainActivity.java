@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,12 +20,21 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import android.widget.ImageButton;
+
+import com.example.team7_project_1.models.Phone;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +45,11 @@ public class MainActivity extends AppCompatActivity {
     /** View holder class*/
     private class ViewHolder{
         BottomNavigationView bottomNavigationView;
+        ProgressBar phoneLoadProgressBar;
 
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            phoneLoadProgressBar = findViewById(R.id.phone_load_progressBar);
         }
     }
 
@@ -50,8 +62,50 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         vh = new ViewHolder();
+
+        fetchPhoneData();
+
         initializeNavItem();
         setNavVisibility();
+    }
+
+    public void fetchPhoneData() {
+        ArrayList<Phone> phoneList = new ArrayList<Phone>();
+
+        // Getting phone collection from Firestore
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("phones").get()
+                .addOnSuccessListener(documentSnapshots -> {
+                    if (documentSnapshots.isEmpty()) {
+                        Log.d("i", "onSuccess: LIST EMPTY");
+                    } else {
+                        List<DocumentSnapshot> list = documentSnapshots.getDocuments();
+                        for (DocumentSnapshot document : list) {
+                            // after getting this list we are passing
+                            // that list to our object class.
+
+                            Map<String,Object> data = document.getData();
+
+                            // int id, String name, String subtitle, String operatingSystem, String brand, String manufacturerPartNo
+                            Phone phone = new Phone();
+                            phone.parseSpecifications(data.get("specifications"));
+
+                            // works
+                            Log.i("test", document.getData().toString());
+                            // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
+                            // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
+//                            phone = document.toObject(Phone.class);
+//
+//                            // and we will pass this object class
+//                            // inside our arraylist which we have
+//                            // created for recycler view.
+//                            phoneList.add(phone);
+                        }
+                        Log.d("i", "onSuccess: " + phoneList);
+                        vh.phoneLoadProgressBar.setVisibility(View.GONE);
+                    }
+                });
     }
 
     @Override
