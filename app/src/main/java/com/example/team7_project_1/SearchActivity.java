@@ -66,9 +66,14 @@ public class SearchActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        //calling the method to populate the ListActivity
-        initializeArrays();
+        //calling the method to populate the SearchActivity
+        generateList();
+        initializeNavItem();
+        setNavVisibility();
+    }
 
+    public void generateList() {
+        initializeArrays();
         adapter = new PhoneAdapter(phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
@@ -76,9 +81,6 @@ public class SearchActivity extends AppCompatActivity {
 
         // Attach the adapter to the recyclerview to populate items
         vh.recycler_view_phones.setAdapter(adapter);
-
-        initializeNavItem();
-        setNavVisibility();
     }
 
 

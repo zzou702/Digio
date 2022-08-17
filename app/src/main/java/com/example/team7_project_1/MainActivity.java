@@ -7,6 +7,9 @@ import static com.google.android.material.textfield.TextInputLayout.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +24,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import android.widget.ImageButton;
 
+import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,15 +50,20 @@ public class MainActivity extends AppCompatActivity {
 
     /** View holder class*/
     private class ViewHolder{
-        BottomNavigationView bottomNavigationView;
-        ProgressBar phoneLoadProgressBar;
+        BottomNavigationView bottom_navigation_view;
+        RecyclerView top_picks_recycler_view;
+        ProgressBar phone_load_progressbar;
 
         public ViewHolder(){
-            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-            phoneLoadProgressBar = findViewById(R.id.phone_load_progressBar);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            top_picks_recycler_view = findViewById(R.id.top_picks_recycler_view);
+            phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
         }
     }
 
+    ArrayList<Phone> phones = new ArrayList<Phone>();
+    ArrayList<Product> products = new ArrayList<Product>();
+    PhoneAdapter adapter;
     ViewHolder vh;
 
 
@@ -65,8 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        // fetch and store data from Firestore
+        // Fetch and store data from Firestore
         fetchPhoneData();
+
+        // Generating the Top Picks
+        generatedTopPicks();
 
         // Setup navigation bar
         initializeNavItem();
@@ -77,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public void fetchPhoneData() {
         // Check if data has already been fetched before
         if (DataProvider.isHasFetchedData()) {
-            vh.phoneLoadProgressBar.setVisibility(View.GONE);
+            vh.phone_load_progressbar.setVisibility(View.GONE);
             return;
         }
         ArrayList<Phone> phoneList = new ArrayList<>();
@@ -139,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 //                            phoneList.add(phone);
                         }
                         Log.d("LoadPhones", "onSuccess: " + phoneList);
-                        vh.phoneLoadProgressBar.setVisibility(View.GONE);
+                        vh.phone_load_progressbar.setVisibility(View.GONE);
                     }
                 });
 
@@ -148,6 +160,33 @@ public class MainActivity extends AppCompatActivity {
         DataProvider.setProductList(productList);
 
         DataProvider.setHasFetchedData(true);
+    }
+
+    public void generatedTopPicks() {
+        initializeArrays();
+        adapter = new PhoneAdapter(phones, products,this);
+
+        LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        vh.top_picks_recycler_view.setLayoutManager(layout_manager);
+
+        // Attach the adapter to the recyclerview to populate items
+        vh.top_picks_recycler_view.setAdapter(adapter);
+    }
+
+    public void initializeArrays() {
+        for (Product product : DataProvider.getProducts()) {
+            if (product.getRating() >= 4.3) {
+                this.products.add(product);
+            }
+        }
+
+        for (Product product: this.products) {
+            for (Phone phone: DataProvider.getPhones()) {
+                if (product.getSoldPhoneId() == phone.getId()) {
+                    this.phones.add(phone);
+                }
+            }
+        }
     }
 
     @Override
@@ -215,10 +254,10 @@ public class MainActivity extends AppCompatActivity {
     /** This method initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //set home selected
-        vh.bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
 
         //setting ItemSelectedListener
-        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
@@ -247,9 +286,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onVisibilityChanged(boolean isOpen) {
                         if(isOpen){
-                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
+                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
                         }else{
-                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                         }
                     }
                 }

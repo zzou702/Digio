@@ -31,6 +31,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Declare objects of all the views to be manipulated in item_contact.xml
+        public TextView phone_subtitle;
         public TextView phone_name;
         public ImageView phone_main_image;
         public TextView phone_price;
@@ -39,9 +40,10 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             super(v);
             v.setOnClickListener(this);
             // Initialize the view objects
-            phone_name = v.findViewById(R.id.phone_name);
-            phone_main_image = v.findViewById(R.id.phone_main_image);
-            phone_price = v.findViewById(R.id.phone_price);
+            this.phone_name = v.findViewById(R.id.phone_name);
+            this.phone_main_image = v.findViewById(R.id.phone_main_image);
+            this.phone_price = v.findViewById(R.id.phone_price);
+            this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
         }
 
         @Override
@@ -86,6 +88,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         Product equivalent_product = getProductByPhoneId(this_phone.getId());
 
         holder.phone_name.setText(equivalent_product.getName());
+        holder.phone_subtitle.setText(this_phone.getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
         holder.phone_main_image.setImageResource(R.drawable.ic_home);
     }
