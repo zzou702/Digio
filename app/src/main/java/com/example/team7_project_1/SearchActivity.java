@@ -197,9 +197,9 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onVisibilityChanged(boolean isOpen) {
                         if(isOpen){
-                            bottomNavigationView.setVisibility(View.INVISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
                         }else{
-                            bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
                         }
                     }
                 }
