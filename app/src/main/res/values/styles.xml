@@ -11,40 +11,32 @@
 <!--    Categories-->
 
     <!--    Android-->
-    <style name="CategoryButtonAndroid" parent="TextAppearance.AppCompat">
+    <style name="CategoryButton" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">67dp</item>
         <item name="android:layout_height">67dp</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginBottom">7dp</item>
         <item name="android:layout_marginTop">5dp</item>
+    </style>
 
 
+    <style name="CategoryButtonAndroid" parent="CategoryButton">
         <!--        See res/drawable/android_logo.xml-->
         <item name="android:background">@drawable/android_logo</item>
 
     </style>
 
     <!--    IOS-->
-    <style name="CategoryButtonIOS" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">67dp</item>
-        <item name="android:layout_height">67dp</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginBottom">7dp</item>
-        <item name="android:layout_marginTop">5dp</item>
 
+    <style name="CategoryButtonIOS" parent="CategoryButton">
+<!--        See res/drawable/ios_logo.xml-->
 
-        <!--        See res/drawable/ios_logo.xml-->
         <item name="android:background">@drawable/ios_logo</item>
     </style>
 
     <!--    Other-->
-    <style name="CategoryButtonOther" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">67dp</item>
-        <item name="android:layout_height">67dp</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginBottom">7dp</item>
-        <item name="android:layout_marginTop">5dp</item>
 
+    <style name="CategoryButtonOther" parent="CategoryButton">
 
         <!--        See res/drawable/windows_logo.xml-->
         <item name="android:background">@drawable/windows_logo</item>

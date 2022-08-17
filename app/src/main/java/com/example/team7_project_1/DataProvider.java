@@ -23,8 +23,16 @@ import java.util.Random;
 
 public class DataProvider {
 
+    private static boolean hasFetchedData = false;
     private static ArrayList<Phone> phoneList;
     private static ArrayList<Product> productList;
+
+    public static void setHasFetchedData(boolean hasFetchedData) {
+        DataProvider.hasFetchedData = hasFetchedData;
+    }
+    public static boolean isHasFetchedData() {
+        return hasFetchedData;
+    }
 
     public static void setPhoneList(ArrayList<Phone> phoneList) {
         DataProvider.phoneList = phoneList;
@@ -32,7 +40,6 @@ public class DataProvider {
     public static void setProductList(ArrayList<Product> productList) {
         DataProvider.productList = productList;
     }
-
 
     public static ArrayList<Phone> getPhones() {
         return phoneList;
