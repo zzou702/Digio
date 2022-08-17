@@ -36,11 +36,6 @@ public class Phone {
 
     }
 
-    public Phone(String brand, int price) {
-        this.brand = brand;
-        this.price = price;
-    }
-
     public void parseSpecifications(Object specObj) {
         // TODO: see if theres an alternative to remove unchecked cast; we know that specObj is a hashmap in database
         HashMap<String,Object> specMap = (HashMap<String, Object>) specObj;

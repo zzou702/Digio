@@ -42,7 +42,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     //categories to be chosen
-    public ListActivity.Category cat;
+    public SearchActivity.Category cat;
 
     /** View holder class*/
     private class ViewHolder{
@@ -187,19 +187,19 @@ public class MainActivity extends AppCompatActivity {
         switch(v.getId())
         {
             case R.id.category_btn_android: //if android button is pressed
-                cat = ListActivity.Category.ANDROID;
+                cat = SearchActivity.Category.ANDROID;
                 break;
             case R.id.category_btn_ios: //if ios button is pressed
-                cat = ListActivity.Category.IOS;
+                cat = SearchActivity.Category.IOS;
                 break;
             case R.id.category_btn_other: // if OTHER button is pressed
-                cat = ListActivity.Category.OTHER;
+                cat = SearchActivity.Category.OTHER;
                 break;
         }
 
         // directing to the new activity(ListActivity) and passing the category selected to
         // the new activity via putExtra()
-        Intent intent = new Intent(MainActivity.this, ListActivity.class);
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
         intent.putExtra("CATEGORY_CHOSEN", cat);
         startActivity(intent);
     }

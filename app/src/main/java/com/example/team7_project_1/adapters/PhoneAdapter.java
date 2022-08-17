@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_project_1.R;
 import com.example.team7_project_1.models.Phone;
+import com.example.team7_project_1.models.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +49,13 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
 
     // Declare the data collection object that holds the data to be populated in the RecyclerView
     private List<Phone> phones;
+    private ArrayList<Product> products;
     private Context search_context;
 
-    public PhoneAdapter(Context context, ArrayList<Phone> phones) {
-        this.search_context = context;
+    public PhoneAdapter(ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
         this.phones = phones;
+        this.products = products;
+        this.search_context = context;
     }
 
     @NonNull
