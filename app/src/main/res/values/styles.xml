@@ -11,27 +11,33 @@
 <!--    Categories-->
 
     <!--    Android-->
-
     <style name="CategoryButton" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">60dp</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_width">67dp</item>
+        <item name="android:layout_height">67dp</item>
         <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">7dp</item>
+        <item name="android:layout_marginTop">5dp</item>
     </style>
+
 
     <style name="CategoryButtonAndroid" parent="CategoryButton">
         <!--        See res/drawable/android_logo.xml-->
         <item name="android:background">@drawable/android_logo</item>
+
     </style>
 
     <!--    IOS-->
+
     <style name="CategoryButtonIOS" parent="CategoryButton">
 <!--        See res/drawable/ios_logo.xml-->
+
         <item name="android:background">@drawable/ios_logo</item>
     </style>
 
     <!--    Other-->
+
     <style name="CategoryButtonOther" parent="CategoryButton">
+
         <!--        See res/drawable/windows_logo.xml-->
         <item name="android:background">@drawable/windows_logo</item>
     </style>
@@ -40,9 +46,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">23dp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
 
     <style name="CategoryContainer" parent="TextAppearance.AppCompat">
@@ -54,9 +60,9 @@
 
     <!--    Text in CardViews in Search Activity style-->
     <style name="CardViewTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:textSize">20dp</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">#676464</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
 
     <!--    Details Activity styles-->
@@ -72,14 +78,17 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:layout_marginBottom">3dip</item>
+        <item name="android:layout_marginTop">3dip</item>
     </style>
 
     <style name="SpecValue" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingHorizontal">10dp</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:fontFamily">@font/lato_regular</item>
     </style>
-
 
 </resources>

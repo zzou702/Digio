@@ -60,15 +60,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="iPhone 13 Pro Max"
-                        android:textSize="24sp"
-                        android:textStyle="bold"/>
+                        android:textSize="23sp"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/montserrat_bold"/>
 
                     <TextView
                         android:id="@+id/phone_subtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="256GB Sierra Blue"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp"
+                        android:fontFamily="@font/lato_regular"
+                        android:textColor="#030303"/>
                 </LinearLayout>
 
                 <TextView
@@ -77,8 +80,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="$2,199"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    android:fontFamily="@font/lato_regular"
                     android:textAlignment="viewEnd"/>
 
 
@@ -88,7 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Add to cart +" />
+                android:text="Add to cart +"
+                android:fontFamily="@font/lato_bold"/>
 
             <View style="@style/HorizontalDivider"/>
 
@@ -102,7 +106,7 @@
 
                 <LinearLayout style="@style/SpecContainer">
                     <TextView style="@style/SpecTitle"
-                        android:text="Rated"/>
+                        android:text="Rated" />
                     <TextView style="@style/SpecValue"
                         android:id="@+id/phone_rating"
                         android:text="4.7"/>
@@ -152,13 +156,16 @@
                     android:layout_marginBottom="10dp"
                     android:text="Description"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="#030303"/>
                 <TextView
                     android:id="@+id/phone_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n\nPhasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Cursus mattis molestie a iaculis at. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna. Duis at consectetur lorem donec. Id aliquet risus feugiat in ante metus dictum."
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:fontFamily="@font/lato_regular"/>
             </LinearLayout>
 
 
