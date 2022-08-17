@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
@@ -27,10 +28,9 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
-
-    private Category chosen_cat; //the chosen category
 
     /** Represents the type of category the user selected */
     public enum Category {
@@ -52,6 +52,8 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    private Category chosen_cat; //the chosen category
+    private String user_search; //the chosen category
     ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
@@ -83,24 +85,48 @@ public class SearchActivity extends AppCompatActivity {
     public void initializeArrays() {
         //getting the chosen category that has been passed through the putExtra() method
         this.chosen_cat = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
+        this.user_search = (String) getIntent().getStringExtra("user_search");
         if (this.chosen_cat != null) {
-            filterCategories(this.chosen_cat);
+            filterCategories();
+        } else if (this.user_search != null) {
+            filterUserSearches();
+        } else {
+            this.phones = DataProvider.getPhones();
+            this.products = DataProvider.getProducts();
         }
-//        this.phones = DataProvider.getPhones();
-//        this.products = DataProvider.getProducts();
     }
 
-    public void filterCategories(Category category) {
-        String operating_system = category.name();
+    public void filterCategories() {
+        String category = this.chosen_cat.name();
         for (Phone phone: DataProvider.getPhones()) {
-            if (phone.getOperatingSystem().equalsIgnoreCase(operating_system)) {
+            String current_phone_operating_system = phone.getOperatingSystem();
+            if (current_phone_operating_system.equalsIgnoreCase(category)) {
                 this.phones.add(phone);
             }
         }
 
         for (Phone phone: this.phones) {
             for (Product product: DataProvider.getProducts()) {
-                int id = phone.getId();
+                if (phone.getId() == product.getSoldPhoneId()) {
+                    this.products.add(product);
+                }
+            }
+        }
+    }
+
+    public void filterUserSearches() {
+        // "Cleaning" the user search
+        this.user_search = this.user_search.trim();
+        for (Phone phone: DataProvider.getPhones()) {
+            String current_phone_name = phone.getName();
+            if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
+            (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
+                this.phones.add(phone);
+            }
+        }
+
+        for (Phone phone: this.phones) {
+            for (Product product: DataProvider.getProducts()) {
                 if (phone.getId() == product.getSoldPhoneId()) {
                     this.products.add(product);
                 }
