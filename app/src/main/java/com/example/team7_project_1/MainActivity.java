@@ -74,90 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        // Fetch and store data from Firestore
-        fetchPhoneData();
+        // Generating the Top Picks
+        generatedTopPicks();
 
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
 
-    }
-
-    public void fetchPhoneData() {
-        // Check if data has already been fetched before
-        if (DataProvider.isHasFetchedData()) {
-            vh.phone_load_progressbar.setVisibility(View.GONE);
-            return;
-        }
-        ArrayList<Phone> phoneList = new ArrayList<>();
-        ArrayList<Product> productList = new ArrayList<>();
-
-        // Getting phone collection from Firestore
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("phones").get()
-                .addOnSuccessListener(documentSnapshots -> {
-                    if (documentSnapshots.isEmpty()) {
-                        Log.d("LoadPhones", "onSuccess: LIST EMPTY");
-                        return;
-                    }
-
-                    List<DocumentSnapshot> phoneDocuments = documentSnapshots.getDocuments();
-
-                    for (DocumentSnapshot document : phoneDocuments) {
-                        Map<String,Object> data = document.getData();
-
-                        if (data == null) {
-                            Log.e("LoadPhones", "Phone document is NULL");
-                            return;
-                        }
-
-                        Log.i("LoadPhones", "Parsing phone: " + data.toString());
-
-                        // requiresNonNull to prevent passing null values to constructor
-                        // NOTE: if NullPointerException, might be due to field not added to database
-
-                        Phone phone = new Phone(
-                                Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
-                                Objects.requireNonNull(data.get("name")).toString(),
-                                Objects.requireNonNull(data.get("subtitle")).toString(),
-                                Objects.requireNonNull(data.get("operatingSystem")).toString(),
-                                Objects.requireNonNull(data.get("brand")).toString(),
-                                Objects.requireNonNull(data.get("manufacturerPartNo")).toString());
-
-                        phone.parseSpecifications(data.get("specifications"));
-
-                        phoneList.add(phone);
-                        Log.i("LoadPhones", "Created phone: " + phone.toString());
-
-                        Product product = new Product(
-                                phone.getId(),
-                                phone.getName(),
-                                Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
-                                Objects.requireNonNull(data.get("description")).toString(),
-                                Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()));
-
-                        productList.add(product);
-                        Log.i("LoadPhones", "Created product: " + product.toString());
-
-                        // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
-                        // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
-//                            phone = document.toObject(Phone.class);
-
-                        Log.d("LoadPhones", "onSuccess: " + phoneList);
-                        vh.phone_load_progressbar.setVisibility(View.GONE);
-
-                        // Generating the Top Picks
-                        // TODO: can we put this method call elsewhere?
-                        generatedTopPicks();
-                    }
-                });
-
-        // Store data in DataProvider
-        DataProvider.setPhoneList(phoneList);
-        DataProvider.setProductList(productList);
-
-        DataProvider.setHasFetchedData(true);
     }
 
     public void generatedTopPicks() {
