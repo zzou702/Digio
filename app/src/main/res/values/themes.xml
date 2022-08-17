@@ -17,6 +17,7 @@
         <!-- Customize your theme here. -->
         <item name="toolbarNavigationButtonStyle">@style/Toolbar.Button.Navigation.Tinted</item>
         <item name="actionBarTheme">@style/ActionBar</item>
+        <item name="android:textAppearance">@style/CustomTextFont</item>
 
     </style>
 
@@ -49,6 +50,10 @@
         <item name="voiceIcon">@drawable/ic_home</item>
         <item name="commitIcon">@drawable/abc_ic_commit_search_api_mtrl_alpha</item>
         <item name="suggestionRowLayout">@layout/abc_search_dropdown_item_icons_2line</item>
+    </style>
+
+    <style name="CustomTextFont" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="fontFamily">@font/montserrat_thin</item>
     </style>
 
 </resources>

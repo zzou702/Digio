@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
+
     }
 
     public void fetchPhoneData() {
