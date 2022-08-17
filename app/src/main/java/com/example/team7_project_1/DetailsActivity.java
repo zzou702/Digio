@@ -18,7 +18,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 public class DetailsActivity extends AppCompatActivity {
 
     // images array
-    int[] images = {R.drawable.mphapp113111__1, R.drawable.mphapp113111__2, R.drawable.mphapp113111__3, R.drawable.mphapp113111__4};
+    int[] images = { R.drawable.mphapp113111__1, R.drawable.mphapp113111__2, R.drawable.mphapp113111__3, R.drawable.mphapp113111__4};
 
     // Creating Object of ViewPagerAdapter
     ViewPagerAdapter mViewPagerAdapter;
