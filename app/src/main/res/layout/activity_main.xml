@@ -21,19 +21,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:hint="@string/label">
+            android:hint="@string/label"
+            >
 
             <!--Banner-->
 
             <ImageButton
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="225dp"
                 android:minHeight="200dp"
-                android:background="#ddd" />
+                android:background="@drawable/banner_1"
+                />
 
-
+            <!--
             <View style="@style/HorizontalDivider"/>
+            -->
 
             <!--        Categories-->
             <!--        OU-AN: refer to res/values/styles.xml to find style definitions-->
@@ -42,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp">
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="30dp">
 
                 <RelativeLayout style="@style/CategoryContainer">
 

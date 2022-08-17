@@ -12,10 +12,12 @@
 
     <!--    Android-->
     <style name="CategoryButtonAndroid" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">75dp</item>
-        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_width">67dp</item>
+        <item name="android:layout_height">67dp</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginBottom">7dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+
 
         <!--        See res/drawable/android_logo.xml-->
         <item name="android:background">@drawable/android_logo</item>
@@ -24,10 +26,11 @@
 
     <!--    IOS-->
     <style name="CategoryButtonIOS" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">75dp</item>
-        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_width">67dp</item>
+        <item name="android:layout_height">67dp</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginBottom">7dp</item>
+        <item name="android:layout_marginTop">5dp</item>
 
 
         <!--        See res/drawable/ios_logo.xml-->
@@ -36,10 +39,11 @@
 
     <!--    Other-->
     <style name="CategoryButtonOther" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">75dp</item>
-        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_width">67dp</item>
+        <item name="android:layout_height">67dp</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginBottom">7dp</item>
+        <item name="android:layout_marginTop">5dp</item>
 
 
         <!--        See res/drawable/windows_logo.xml-->
@@ -50,7 +54,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">23dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>

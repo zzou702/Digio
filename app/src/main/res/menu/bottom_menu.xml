@@ -11,6 +11,6 @@
         android:icon="@drawable/ic_search"/>
 
     <item android:id="@+id/nav_cart"
-        android:title="Shopping Cart"
+        android:title="Cart"
         android:icon="@drawable/ic_shopping_cart"/>
 </menu>
