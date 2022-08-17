@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
 import com.example.team7_project_1.SearchActivity;
@@ -47,7 +48,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         public void onClick(View v) {
             // What to do when the view item is clicked
             Phone clicked_phone = phones.get(getAdapterPosition());
-            Intent intent = new Intent(search_context, SearchActivity.class);
+            Intent intent = new Intent(search_context, DetailsActivity.class);
             intent.putExtra("phone_id", clicked_phone.getId());
             Toast.makeText(search_context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
             search_context.startActivity(intent);
