@@ -15,6 +15,7 @@ import com.example.team7_project_1.R;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -48,7 +49,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     }
 
     // Declare the data collection object that holds the data to be populated in the RecyclerView
-    private List<Phone> phones;
+    private ArrayList<Phone> phones;
     private ArrayList<Product> products;
     private Context search_context;
 
@@ -75,9 +76,21 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull PhoneAdapter. ViewHolder holder, int position) {
         Phone this_phone = phones.get(position);
-        holder.phone_name.setText(this_phone.getBrand());
-        holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_phone.getPrice()));
+        Product equivalent_product = getProductByPhoneId(this_phone.getId());
+
+        holder.phone_name.setText(equivalent_product.getName());
+        holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
         holder.phone_main_image.setImageResource(R.drawable.ic_home);
+    }
+
+    public Product getProductByPhoneId(int phoneId) {
+        for (Product product : products) {
+            if (product.getSoldPhoneId() == phoneId) {
+                return product;
+            }
+        }
+        // could not find product of phoneId
+        return null;
     }
 
     @Override
