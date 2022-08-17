@@ -12,7 +12,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="100dp"
             android:orientation="vertical">
 
             <Button
@@ -44,7 +46,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
@@ -55,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/phone_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="iPhone 13 Pro Max"
@@ -62,6 +64,7 @@
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/phone_subtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="256GB Sierra Blue"
@@ -69,6 +72,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/phone_price"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -79,20 +83,68 @@
 
 
             </LinearLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
                 android:layout_gravity="center_horizontal"
                 android:text="Add to cart +" />
 
+            <View style="@style/HorizontalDivider"/>
+
+            <!--  Specifications -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <LinearLayout style="@style/SpecContainer">
+                    <TextView style="@style/SpecTitle"
+                        android:text="Rated"/>
+                    <TextView style="@style/SpecValue"
+                        android:id="@+id/phone_rating"
+                        android:text="4.7"/>
+                    <TextView style="@style/SpecTitle"
+                        android:text="out of 5"/>
+                </LinearLayout>
+
+                <!--  TEST Specifications -->
+
+                <LinearLayout style="@style/SpecContainer">
+                    <TextView style="@style/SpecTitle"
+                        android:text="Storage"/>
+                    <TextView style="@style/SpecValue"
+                        android:text="128"/>
+                    <TextView style="@style/SpecTitle"
+                        android:text="GB"/>
+                </LinearLayout>
+                <LinearLayout style="@style/SpecContainer">
+                    <TextView style="@style/SpecTitle"
+                        android:text="Memory"/>
+                    <TextView style="@style/SpecValue"
+                        android:text="16"/>
+                    <TextView style="@style/SpecTitle"
+                        android:text="GB"/>
+                </LinearLayout>
+                <LinearLayout style="@style/SpecContainer">
+                    <TextView style="@style/SpecTitle"
+                        android:text="Battery"/>
+                    <TextView style="@style/SpecValue"
+                        android:text="4500"/>
+                    <TextView style="@style/SpecTitle"
+                        android:text="mAh"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
             <View style="@style/HorizontalDivider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="30dp"
+                android:paddingHorizontal="10dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
@@ -102,6 +154,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/phone_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n\nPhasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Cursus mattis molestie a iaculis at. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna. Duis at consectetur lorem donec. Id aliquet risus feugiat in ante metus dictum."

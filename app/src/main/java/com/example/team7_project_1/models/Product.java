@@ -1,26 +1,57 @@
 package com.example.team7_project_1.models;
 
+import com.example.team7_project_1.DataProvider;
+
 import java.math.BigDecimal;
 
 public class Product {
-    private Phone phoneSold;
-    private int id;
+    private int soldPhoneId;
     private String name;
-    private BigDecimal price;
+    private double price;
     private String description;
-    private int rating;
+    private double rating;
 
-    public Product(Phone phoneSold, int id, String name, BigDecimal price, String description, int rating) {
-        this.phoneSold = phoneSold;
-        this.id = id;
+    public Product(int soldPhoneId, String name, double price, String description, double rating) {
+        this.soldPhoneId = soldPhoneId;
         this.name = name;
         this.price = price;
         this.description = description;
         this.rating = rating;
     }
 
-    public String getPhoneDetails() {
-        return "";
+    @Override
+    public String toString() {
+        return "Product{" +
+                "soldPhoneId=" + soldPhoneId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
+
+    public int getSoldPhoneId() {
+        return soldPhoneId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public Phone getSoldPhone() {
+        return DataProvider.getPhoneById(soldPhoneId);
     }
 
 }

@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,12 +20,23 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import android.widget.ImageButton;
+
+import com.example.team7_project_1.models.Phone;
+import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
     /** View holder class*/
     private class ViewHolder{
         BottomNavigationView bottomNavigationView;
+        ProgressBar phoneLoadProgressBar;
 
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            phoneLoadProgressBar = findViewById(R.id.phone_load_progressBar);
         }
     }
 
@@ -50,8 +64,82 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         vh = new ViewHolder();
+
+        // fetch and store data from Firestore
+        fetchPhoneData();
+
+        // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
+    }
+
+    public void fetchPhoneData() {
+        ArrayList<Phone> phoneList = new ArrayList<>();
+        ArrayList<Product> productList = new ArrayList<>();
+
+        // Getting phone collection from Firestore
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("phones").get()
+                .addOnSuccessListener(documentSnapshots -> {
+                    if (documentSnapshots.isEmpty()) {
+                        Log.d("LoadPhones", "onSuccess: LIST EMPTY");
+                    } else {
+                        List<DocumentSnapshot> phoneDocuments = documentSnapshots.getDocuments();
+                        for (DocumentSnapshot document : phoneDocuments) {
+
+                            Map<String,Object> data = document.getData();
+
+                            if (data == null) {
+                                Log.e("LoadPhones", "Phone document is NULL");
+                                return;
+                            }
+
+                            Log.i("LoadPhones", "Parsing phone: " + data.toString());
+
+                            // requiresNonNull to prevent passing null values to constructor
+                            // NOTE: if NullPointerException, might be due to field not added to database
+
+                            Phone phone = new Phone(
+                                    Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
+                                    Objects.requireNonNull(data.get("name")).toString(),
+                                    Objects.requireNonNull(data.get("subtitle")).toString(),
+                                    Objects.requireNonNull(data.get("operatingSystem")).toString(),
+                                    Objects.requireNonNull(data.get("brand")).toString(),
+                                    Objects.requireNonNull(data.get("manufacturerPartNo")).toString());
+
+                            phone.parseSpecifications(data.get("specifications"));
+
+                            phoneList.add(phone);
+                            Log.i("LoadPhones", "Created phone: " + phone.toString());
+
+                            Product product = new Product(
+                                    phone.getId(),
+                                    phone.getName(),
+                                    Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
+                                    Objects.requireNonNull(data.get("description")).toString(),
+                                    Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()));
+
+                            productList.add(product);
+                            Log.i("LoadPhones", "Created product: " + product.toString());
+
+                            // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
+                            // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
+//                            phone = document.toObject(Phone.class);
+//
+//                            // and we will pass this object class
+//                            // inside our arraylist which we have
+//                            // created for recycler view.
+//                            phoneList.add(phone);
+                        }
+                        Log.d("LoadPhones", "onSuccess: " + phoneList);
+                        vh.phoneLoadProgressBar.setVisibility(View.GONE);
+                    }
+                });
+
+        // Store data in DataProvider
+        DataProvider.setPhoneList(phoneList);
+        DataProvider.setProductList(productList);
     }
 
     @Override
