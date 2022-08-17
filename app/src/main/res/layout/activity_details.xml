@@ -12,7 +12,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="100dp"
             android:orientation="vertical">
 
             <Button
@@ -43,7 +45,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
@@ -81,20 +82,53 @@
 
 
             </LinearLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
                 android:layout_gravity="center_horizontal"
                 android:text="Add to cart +" />
-
 
             <View style="@style/HorizontalDivider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="30dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rated"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/phone_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.7"
+                        android:textSize="30sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="out of 5"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View style="@style/HorizontalDivider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
@@ -104,6 +138,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/phone_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n\nPhasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Cursus mattis molestie a iaculis at. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna. Duis at consectetur lorem donec. Id aliquet risus feugiat in ante metus dictum."

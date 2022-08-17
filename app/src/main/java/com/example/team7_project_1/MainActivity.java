@@ -22,6 +22,7 @@ import android.widget.*;
 import android.widget.ImageButton;
 
 import com.example.team7_project_1.models.Phone;
+import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -63,14 +65,17 @@ public class MainActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
+        // fetch and store data from Firestore
         fetchPhoneData();
 
+        // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
     }
 
     public void fetchPhoneData() {
-        ArrayList<Phone> phoneList = new ArrayList<Phone>();
+        ArrayList<Phone> phoneList = new ArrayList<>();
+        ArrayList<Product> productList = new ArrayList<>();
 
         // Getting phone collection from Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -78,21 +83,46 @@ public class MainActivity extends AppCompatActivity {
         db.collection("phones").get()
                 .addOnSuccessListener(documentSnapshots -> {
                     if (documentSnapshots.isEmpty()) {
-                        Log.d("i", "onSuccess: LIST EMPTY");
+                        Log.d("LoadPhones", "onSuccess: LIST EMPTY");
                     } else {
-                        List<DocumentSnapshot> list = documentSnapshots.getDocuments();
-                        for (DocumentSnapshot document : list) {
-                            // after getting this list we are passing
-                            // that list to our object class.
+                        List<DocumentSnapshot> phoneDocuments = documentSnapshots.getDocuments();
+                        for (DocumentSnapshot document : phoneDocuments) {
 
                             Map<String,Object> data = document.getData();
 
-                            // int id, String name, String subtitle, String operatingSystem, String brand, String manufacturerPartNo
-                            Phone phone = new Phone();
+                            if (data == null) {
+                                Log.e("LoadPhones", "Phone document is NULL");
+                                return;
+                            }
+
+                            Log.i("LoadPhones", "Parsing phone: " + data.toString());
+
+                            // requiresNonNull to prevent passing null values to constructor
+                            // NOTE: if NullPointerException, might be due to field not added to database
+
+                            Phone phone = new Phone(
+                                    Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
+                                    Objects.requireNonNull(data.get("name")).toString(),
+                                    Objects.requireNonNull(data.get("subtitle")).toString(),
+                                    Objects.requireNonNull(data.get("operatingSystem")).toString(),
+                                    Objects.requireNonNull(data.get("brand")).toString(),
+                                    Objects.requireNonNull(data.get("manufacturerPartNo")).toString());
+
                             phone.parseSpecifications(data.get("specifications"));
 
-                            // works
-                            Log.i("test", document.getData().toString());
+                            phoneList.add(phone);
+                            Log.i("LoadPhones", "Created phone: " + phone.toString());
+
+                            Product product = new Product(
+                                    phone.getId(),
+                                    phone.getName(),
+                                    Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
+                                    Objects.requireNonNull(data.get("description")).toString(),
+                                    Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()));
+
+                            productList.add(product);
+                            Log.i("LoadPhones", "Created product: " + product.toString());
+
                             // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
                             // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
 //                            phone = document.toObject(Phone.class);
@@ -102,10 +132,14 @@ public class MainActivity extends AppCompatActivity {
 //                            // created for recycler view.
 //                            phoneList.add(phone);
                         }
-                        Log.d("i", "onSuccess: " + phoneList);
+                        Log.d("LoadPhones", "onSuccess: " + phoneList);
                         vh.phoneLoadProgressBar.setVisibility(View.GONE);
                     }
                 });
+
+        // Store data in DataProvider
+        DataProvider.setPhoneList(phoneList);
+        DataProvider.setProductList(productList);
     }
 
     @Override

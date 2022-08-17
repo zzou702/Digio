@@ -2,6 +2,9 @@ package com.example.team7_project_1.models;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +16,10 @@ public class Phone {
     private String operatingSystem;
     private String brand;
     private String manufacturerPartNo;
-    private List<Specification> specifications;
+    private ArrayList<Specification> specifications = new ArrayList<>();;
 
     // TODO: temporary variable, must move to Product model class
-    private int price;
+    private double price;
 
     public Phone() {
         // empty constructor
@@ -43,14 +46,27 @@ public class Phone {
         HashMap<String,Object> specMap = (HashMap<String, Object>) specObj;
 
         for (HashMap.Entry<String, Object> entry : specMap.entrySet()) {
-            Log.i("test", entry.getKey() + ":" + entry.getValue().toString());
+            Specification spec = new StringSpecification(entry.getKey(), entry.getValue().toString());
+            specifications.add(spec);
         }
-        Log.i("END", "end----------");
 
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", operatingSystem='" + operatingSystem + '\'' +
+                ", brand='" + brand + '\'' +
+                ", manufacturerPartNo='" + manufacturerPartNo + '\'' +
+                ", specifications=" + specifications +
+                '}';
+    }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

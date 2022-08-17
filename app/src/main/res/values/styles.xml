@@ -3,7 +3,7 @@
     <style name="HorizontalDivider" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2dp</item>
-        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:layout_marginHorizontal">0dp</item>
         <item name="android:layout_marginVertical">20dp</item>
         <item name="android:background">#aaa</item>
     </style>

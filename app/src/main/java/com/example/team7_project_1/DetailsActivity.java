@@ -13,12 +13,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
 import com.example.team7_project_1.models.Phone;
+import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -32,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
     private class ViewHolder{
         BottomNavigationView bottomNavigationView;
         ViewPager mViewPager; // creating object of ViewPager
-        TextView phoneName, phoneSubtitle, phonePrice;
+        TextView phoneName, phoneSubtitle, phonePrice, phoneDescription, phoneRating;
 
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
@@ -41,6 +43,8 @@ public class DetailsActivity extends AppCompatActivity {
             phoneName = (TextView) findViewById(R.id.phone_name);
             phoneSubtitle = (TextView) findViewById(R.id.phone_subtitle);
             phonePrice = (TextView) findViewById(R.id.phone_price);
+            phoneDescription = (TextView) findViewById(R.id.phone_description);
+            phoneRating = (TextView) findViewById(R.id.phone_rating);
         }
     }
 
@@ -53,10 +57,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        //loadProduct();
-
-        // View pager initialisation
-        mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
+        loadProduct();
 
         // Adding the Adapter to the ViewPager
         vh.mViewPager.setAdapter(mViewPagerAdapter);
@@ -65,11 +66,23 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void loadProduct() {
-        ArrayList<Phone> phones = DataProvider.getPhoneDataAsList();
-        Phone currentPhone = phones.get(0);
-        vh.phoneName.setText(currentPhone.getName());
+        Product currentProduct = DataProvider.getProductByPhoneId(4);
+
+        if (currentProduct == null) {
+            Log.e("LoadProduct", "Could not get product; product was NULL.");
+            return;
+        }
+
+        Phone currentPhone = currentProduct.getSoldPhone();
+
+        // TODO: get images based on id
+        mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
+
+        vh.phoneName.setText(currentProduct.getName());
         vh.phoneSubtitle.setText(currentPhone.getSubtitle());
-        vh.phonePrice.setText(currentPhone.getPrice());
+        vh.phonePrice.setText(String.format(Locale.getDefault(),"$%.2f", currentProduct.getPrice()));
+        vh.phoneDescription.setText(currentProduct.getDescription());
+        vh.phoneRating.setText(String.format(Locale.getDefault(), "%.1f", currentProduct.getRating()));
     }
 
     /** This method sets the bottom navigation bar visible or invisible depending on whether the
