@@ -74,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fetchPhoneData() {
+        // Check if data has already been fetched before
+        if (DataProvider.isHasFetchedData()) {
+            vh.phoneLoadProgressBar.setVisibility(View.GONE);
+            return;
+        }
         ArrayList<Phone> phoneList = new ArrayList<>();
         ArrayList<Product> productList = new ArrayList<>();
 
@@ -140,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
         // Store data in DataProvider
         DataProvider.setPhoneList(phoneList);
         DataProvider.setProductList(productList);
+
+        DataProvider.setHasFetchedData(true);
     }
 
     @Override
