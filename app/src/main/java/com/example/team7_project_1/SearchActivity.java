@@ -15,10 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.TextView;
 
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
+import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
@@ -28,35 +30,87 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-    RecyclerView recycler_view_phones;
-    ArrayList<Phone> phones;
-    PhoneAdapter adapter;
+    private Category chosenCat; //the chosen category
 
+    /** Represents the type of category the user selected */
+    public enum Category {
+        ANDROID,
+        IOS,
+        OTHER,
+    }
+
+    /** View holder class*/
+    private class ViewHolder {
+        BottomNavigationView bottomNavigationView;
+        TextView test;
+        RecyclerView recycler_view_phones;
+
+        public ViewHolder(){
+            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            test = findViewById(R.id.test);
+            recycler_view_phones = (RecyclerView) findViewById(R.id.recycler_view);
+        }
+    }
+
+    ArrayList<Phone> phones;
+    ArrayList<Product> products;
+    PhoneAdapter adapter;
+    ViewHolder vh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        recycler_view_phones = (RecyclerView) findViewById(R.id.recycler_view);
+        vh = new ViewHolder();
 
-        phones = DataProvider.generateData();
+        //calling the method to populate the ListActivity
+        initalizeArrays();
 
-        // Getting what the user searched
-        String user_search = getIntent().getStringExtra("user_search");
+        adapter = new PhoneAdapter(phones, products,this);
 
+        //getting the chosen category that has been passed through the putExtra() method
+        chosenCat = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
 
-        adapter = new PhoneAdapter(this, phones);
+        initalizeArrays();
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        recycler_view_phones.setLayoutManager(gridLayoutManager);
+        vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
 
         // Attach the adapter to the recyclerview to populate items
-        recycler_view_phones.setAdapter(adapter);
+        vh.recycler_view_phones.setAdapter(adapter);
 
         initializeNavItem();
         setNavVisibility();
+    }
 
+    /** This method populates the ListActivity based on the category chosen in main activity*/
+    public void populateList(Category category){
+
+        // Compare to see which category was chosen from the main activity page
+        /**
+         switch (category){
+         case ANDROID:
+         vh.test.setText("Android was chosen");
+         break;
+         case IOS:
+         vh.test.setText("IOS was chosen");
+         break;
+         case OTHER:
+         vh.test.setText("Other Operating systems was chosen");
+         break;
+         }*/
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
+
+        // Attach the adapter to the recyclerview to populate items
+        vh.recycler_view_phones.setAdapter(adapter);
+    }
+
+    public void initalizeArrays() {
+        this.phones = DataProvider.getPhones();
+        this.products = DataProvider.getProducts();
     }
 
     /** This method initialises the navigation item selected for the search page*/

@@ -26,20 +26,6 @@ public class DataProvider {
     private static ArrayList<Phone> phoneList;
     private static ArrayList<Product> productList;
 
-    static String[] names = {"Iphone", "Iphone", "Iphone", "Iphone", "Iphone", "Iphone", "Iphone"};
-
-    public static ArrayList<Phone> generateData() {
-        ArrayList<Phone> phones = new ArrayList<>();
-
-        Random random = new Random();
-        for (String name : names) {
-            int rnd = random.nextInt(1200);
-            Phone phone = new Phone(name, rnd);
-            phones.add(phone);
-        }
-        return phones;
-    }
-
     public static void setPhoneList(ArrayList<Phone> phoneList) {
         DataProvider.phoneList = phoneList;
     }
@@ -48,9 +34,12 @@ public class DataProvider {
     }
 
 
-
     public static ArrayList<Phone> getPhones() {
         return phoneList;
+    }
+
+    public static ArrayList<Product> getProducts() {
+        return productList;
     }
 
     public static Phone getPhoneById(int id) {
