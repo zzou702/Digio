@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
         // Fetch and store data from Firestore
         fetchPhoneData();
 
-        // Generating the Top Picks
-        generatedTopPicks();
-
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
@@ -102,56 +99,57 @@ public class MainActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshots -> {
                     if (documentSnapshots.isEmpty()) {
                         Log.d("LoadPhones", "onSuccess: LIST EMPTY");
-                    } else {
-                        List<DocumentSnapshot> phoneDocuments = documentSnapshots.getDocuments();
-                        for (DocumentSnapshot document : phoneDocuments) {
+                        return;
+                    }
 
-                            Map<String,Object> data = document.getData();
+                    List<DocumentSnapshot> phoneDocuments = documentSnapshots.getDocuments();
 
-                            if (data == null) {
-                                Log.e("LoadPhones", "Phone document is NULL");
-                                return;
-                            }
+                    for (DocumentSnapshot document : phoneDocuments) {
+                        Map<String,Object> data = document.getData();
 
-                            Log.i("LoadPhones", "Parsing phone: " + data.toString());
-
-                            // requiresNonNull to prevent passing null values to constructor
-                            // NOTE: if NullPointerException, might be due to field not added to database
-
-                            Phone phone = new Phone(
-                                    Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
-                                    Objects.requireNonNull(data.get("name")).toString(),
-                                    Objects.requireNonNull(data.get("subtitle")).toString(),
-                                    Objects.requireNonNull(data.get("operatingSystem")).toString(),
-                                    Objects.requireNonNull(data.get("brand")).toString(),
-                                    Objects.requireNonNull(data.get("manufacturerPartNo")).toString());
-
-                            phone.parseSpecifications(data.get("specifications"));
-
-                            phoneList.add(phone);
-                            Log.i("LoadPhones", "Created phone: " + phone.toString());
-
-                            Product product = new Product(
-                                    phone.getId(),
-                                    phone.getName(),
-                                    Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
-                                    Objects.requireNonNull(data.get("description")).toString(),
-                                    Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()));
-
-                            productList.add(product);
-                            Log.i("LoadPhones", "Created product: " + product.toString());
-
-                            // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
-                            // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
-//                            phone = document.toObject(Phone.class);
-//
-//                            // and we will pass this object class
-//                            // inside our arraylist which we have
-//                            // created for recycler view.
-//                            phoneList.add(phone);
+                        if (data == null) {
+                            Log.e("LoadPhones", "Phone document is NULL");
+                            return;
                         }
+
+                        Log.i("LoadPhones", "Parsing phone: " + data.toString());
+
+                        // requiresNonNull to prevent passing null values to constructor
+                        // NOTE: if NullPointerException, might be due to field not added to database
+
+                        Phone phone = new Phone(
+                                Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
+                                Objects.requireNonNull(data.get("name")).toString(),
+                                Objects.requireNonNull(data.get("subtitle")).toString(),
+                                Objects.requireNonNull(data.get("operatingSystem")).toString(),
+                                Objects.requireNonNull(data.get("brand")).toString(),
+                                Objects.requireNonNull(data.get("manufacturerPartNo")).toString());
+
+                        phone.parseSpecifications(data.get("specifications"));
+
+                        phoneList.add(phone);
+                        Log.i("LoadPhones", "Created phone: " + phone.toString());
+
+                        Product product = new Product(
+                                phone.getId(),
+                                phone.getName(),
+                                Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
+                                Objects.requireNonNull(data.get("description")).toString(),
+                                Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()));
+
+                        productList.add(product);
+                        Log.i("LoadPhones", "Created product: " + product.toString());
+
+                        // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
+                        // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
+//                            phone = document.toObject(Phone.class);
+
                         Log.d("LoadPhones", "onSuccess: " + phoneList);
                         vh.phone_load_progressbar.setVisibility(View.GONE);
+
+                        // Generating the Top Picks
+                        // TODO: can we put this method call elsewhere?
+                        generatedTopPicks();
                     }
                 });
 
