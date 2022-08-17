@@ -66,7 +66,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void loadProduct() {
-        Product currentProduct = DataProvider.getProductByPhoneId(4);
+        int phoneId = getIntent().getIntExtra("phone_id", 1);
+        Product currentProduct = DataProvider.getProductByPhoneId(phoneId);
 
         if (currentProduct == null) {
             Log.e("LoadProduct", "Could not get product; product was NULL.");
