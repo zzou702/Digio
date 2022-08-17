@@ -1,6 +1,7 @@
 package com.example.team7_project_1.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
+import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
@@ -44,7 +47,10 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         public void onClick(View v) {
             // What to do when the view item is clicked
             Phone clicked_phone = phones.get(getAdapterPosition());
+            Intent intent = new Intent(search_context, SearchActivity.class);
+            intent.putExtra("phone_id", clicked_phone.getId());
             Toast.makeText(search_context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            search_context.startActivity(intent);
         }
     }
 
