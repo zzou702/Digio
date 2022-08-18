@@ -134,10 +134,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }, DELAY_MS, PERIOD_MS);
 
-
-        // fetch and store data from Firestore
-        fetchPhoneData();
-
         // Generating the Top Picks
         generatedTopPicks();
 
