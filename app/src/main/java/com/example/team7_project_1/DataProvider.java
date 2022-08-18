@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
+import com.example.team7_project_1.models.SpecificationDatabaseType;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -25,6 +26,7 @@ public class DataProvider {
 
     private static ArrayList<Phone> phoneList;
     private static ArrayList<Product> productList;
+    private static ArrayList<SpecificationDatabaseType> specificationTypesList;
 
     public static void setPhoneList(ArrayList<Phone> phoneList) {
         DataProvider.phoneList = phoneList;
@@ -60,4 +62,12 @@ public class DataProvider {
         // could not find product of phoneId
         return null;
     }
+
+
+
+    public static void setSpecificationTypesList(ArrayList<SpecificationDatabaseType> specificationTypesList) {
+        DataProvider.specificationTypesList = specificationTypesList;
+        Log.i("Test", specificationTypesList.toString());
+    }
+
 }
