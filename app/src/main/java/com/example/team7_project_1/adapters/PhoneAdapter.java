@@ -59,7 +59,6 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 extras.putInt("first_phone_id", ComparisonFilterActivity.getPhoneID());
                 extras.putInt("second_phone_id", clicked_phone.getId());
                 intent.putExtras(extras);
-                intent.putExtra("phone_id", clicked_phone.getId());
                 Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             } else {
