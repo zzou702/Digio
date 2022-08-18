@@ -59,9 +59,12 @@ public class DetailsActivity extends AppCompatActivity {
 
         loadProduct();
 
+        setTitle(vh.phoneName.getText());
+
         // Adding the Adapter to the ViewPager
         vh.mViewPager.setAdapter(mViewPagerAdapter);
 
+        initializeNavItem();
         setNavVisibility();
     }
 
@@ -103,6 +106,28 @@ public class DetailsActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    /** This method initialises the navigation item selected for the home page*/
+    public void initializeNavItem(){
+        //setting ItemSelectedListener
+        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
+                switch(menuItem.getItemId()){
+                    case R.id.nav_home:
+                        startActivity(new Intent(DetailsActivity.this, MainActivity.class));
+                        return true;
+                    case R.id.nav_search:
+                        startActivity(new Intent(DetailsActivity.this, SearchActivity.class));
+                        return true;
+                    case R.id.nav_cart:
+                        startActivity(new Intent(DetailsActivity.this, CartActivity.class));
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     /** This method takes the user back to the previous page*/

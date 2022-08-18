@@ -15,15 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
-import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.zip.Inflater;
 
 public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> {
 
@@ -31,50 +27,57 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Declare objects of all the views to be manipulated in item_contact.xml
-        public TextView phone_subtitle;
-        public TextView phone_name;
-        public ImageView phone_main_image;
-        public TextView phone_price;
+        public TextView phoneSubtitle;
+        public TextView phoneName;
+        public ImageView phoneMainImage;
+        public TextView phonePrice;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
             // Initialize the view objects
-            this.phone_name = v.findViewById(R.id.phone_name);
-            this.phone_main_image = v.findViewById(R.id.phone_main_image);
-            this.phone_price = v.findViewById(R.id.phone_price);
-            this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
+            this.phoneName = v.findViewById(R.id.phone_name);
+            this.phoneMainImage = v.findViewById(R.id.phone_main_image);
+            this.phonePrice = v.findViewById(R.id.phone_price);
+            this.phoneSubtitle = v.findViewById(R.id.phone_subtitle);
         }
 
         @Override
         public void onClick(View v) {
             // What to do when the view item is clicked
             Phone clicked_phone = phones.get(getAdapterPosition());
-            Intent intent = new Intent(search_context, DetailsActivity.class);
+            Intent intent = new Intent(context, DetailsActivity.class);
             intent.putExtra("phone_id", clicked_phone.getId());
-            Toast.makeText(search_context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
-            search_context.startActivity(intent);
+            Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            context.startActivity(intent);
         }
     }
 
     // Declare the data collection object that holds the data to be populated in the RecyclerView
     private ArrayList<Phone> phones;
     private ArrayList<Product> products;
-    private Context search_context;
+    private Context context;
 
     public PhoneAdapter(ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
         this.phones = phones;
         this.products = products;
-        this.search_context = context;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public PhoneAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater  inflater = LayoutInflater.from(search_context);
+        LayoutInflater  inflater = LayoutInflater.from(context);
+        View phone_view;
 
-        // Inflate the custom layout
-        View phone_view = inflater.inflate(R.layout.phone_list_view_item, parent, false);
+        // If the current context is main
+        if(this.context instanceof MainActivity){
+            // Inflate the custom layout for the top picks items
+            phone_view = inflater.inflate(R.layout.top_picks_items, parent, false);
+        }else{
+            // Inflate the custom layout for the listview/recycleView items
+            phone_view = inflater.inflate(R.layout.phone_list_view_item, parent, false);
+        }
 
         // Return a new holder instance
         ViewHolder holder = new ViewHolder(phone_view);
@@ -87,10 +90,10 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         Phone this_phone = phones.get(position);
         Product equivalent_product = getProductByPhoneId(this_phone.getId());
 
-        holder.phone_name.setText(equivalent_product.getName());
-        holder.phone_subtitle.setText(this_phone.getSubtitle());
-        holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
-        holder.phone_main_image.setImageResource(R.drawable.ic_home);
+        holder.phoneName.setText(equivalent_product.getName());
+        holder.phoneSubtitle.setText(this_phone.getSubtitle());
+        holder.phonePrice.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
+        holder.phoneMainImage.setImageResource(R.drawable.ic_home);
     }
 
     public Product getProductByPhoneId(int phoneId) {
