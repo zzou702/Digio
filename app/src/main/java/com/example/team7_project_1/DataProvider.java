@@ -125,7 +125,6 @@ public class DataProvider {
             }
 
             phone.setSpecifications(typed_specifications);
-            Log.i("test", typed_specifications.toString());
         }
     }
 }

@@ -126,8 +126,4 @@ public class CartActivity extends AppCompatActivity {
                 }
         );
     }
-
-    public void detailsButtonClicked(View v) {
-        startActivity(new Intent(CartActivity.this, DetailsActivity.class));
-    }
 }
