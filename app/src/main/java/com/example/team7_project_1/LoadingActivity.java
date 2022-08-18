@@ -4,27 +4,15 @@ package com.example.team7_project_1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +27,10 @@ public class LoadingActivity extends AppCompatActivity {
 
     /** View holder class*/
     private class ViewHolder{
-        ProgressBar phone_load_progressbar;
+        ProgressBar phoneLoadProgressbar;
 
         public ViewHolder(){
-            phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
+            phoneLoadProgressbar = findViewById(R.id.phone_load_progressBar);
         }
     }
 
@@ -116,7 +104,7 @@ public class LoadingActivity extends AppCompatActivity {
 //                            phone = document.toObject(Phone.class);
 
                         Log.d("LoadPhones", "onSuccess: " + phoneList);
-                        vh.phone_load_progressbar.setVisibility(View.INVISIBLE);
+                        vh.phoneLoadProgressbar.setVisibility(View.INVISIBLE);
 
                         // Start Main Activity once all data has been fetched
                         asycStartMainActivity();

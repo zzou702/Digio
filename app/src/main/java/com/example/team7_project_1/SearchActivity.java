@@ -16,7 +16,6 @@ import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
@@ -28,7 +27,6 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -43,12 +41,12 @@ public class SearchActivity extends AppCompatActivity {
     private class ViewHolder {
         BottomNavigationView bottomNavigationView;
         TextView test;
-        RecyclerView recycler_view_phones;
+        RecyclerView recyclerViewPhones;
 
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
             test = findViewById(R.id.test);
-            recycler_view_phones = (RecyclerView) findViewById(R.id.recycler_view);
+            recyclerViewPhones = (RecyclerView) findViewById(R.id.recycler_view);
         }
     }
 
@@ -77,10 +75,10 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new PhoneAdapter(phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
+        vh.recyclerViewPhones.setLayoutManager(gridLayoutManager);
 
         // Attach the adapter to the recyclerview to populate items
-        vh.recycler_view_phones.setAdapter(adapter);
+        vh.recyclerViewPhones.setAdapter(adapter);
     }
 
 

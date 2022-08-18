@@ -2,30 +2,23 @@ package com.example.team7_project_1;
 
 
 import androidx.annotation.NonNull;
-import static com.google.android.material.textfield.TextInputLayout.*;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.viewpager.widget.ViewPager;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.*;
-import android.widget.ImageButton;
 
 
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
@@ -33,19 +26,11 @@ import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -61,23 +46,24 @@ public class MainActivity extends AppCompatActivity {
     //adapter for the banner images
     ViewPagerAdapter bannerViewPagerAdapter;
 
-    int currentPage = 0;
-    Timer timer;
+    /* variables for the banner and timer*/
+    int currentPage = 0; // Keeps track of the current item in the banner
+    Timer timer; // Timer for auto sliding for the banner
     final long DELAY_MS = 500;
     final long PERIOD_MS = 5000; // 5 seconds before executing the next task
 
 
     /** View holder class*/
     private class ViewHolder{
-        BottomNavigationView bottom_navigation_view;
-        RecyclerView top_picks_recycler_view;
-        ProgressBar phone_load_progressbar;
+        BottomNavigationView bottomNavigationView;
+        RecyclerView topPicksRecyclerView;
+        ProgressBar phoneLoadProgressbar;
         ViewPager bannerViewPager;
         
         public ViewHolder(){
-            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
-            top_picks_recycler_view = findViewById(R.id.top_picks_recycler_view);
-            phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
+            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            topPicksRecyclerView = findViewById(R.id.top_picks_recycler_view);
+            phoneLoadProgressbar = findViewById(R.id.phone_load_progressBar);
             bannerViewPager = findViewById(R.id.banner);
         }
     }
@@ -96,7 +82,19 @@ public class MainActivity extends AppCompatActivity {
         // Initialising the viewholder
         vh = new ViewHolder();
 
+        initialiseBanner();
 
+        // Generating the Top Picks
+        generatedTopPicks();
+
+        // Setup navigation bar
+        initializeNavItem();
+        setNavVisibility();
+    }
+
+    /** This method initialises the banner images with a timer that automatically
+     * scrolls indefinitely*/
+    public void initialiseBanner(){
         //setting up the adapter for the banner image
         bannerViewPagerAdapter = new ViewPagerAdapter(MainActivity.this, banner);
         vh.bannerViewPager.setAdapter(bannerViewPagerAdapter);
@@ -133,32 +131,21 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(update);
             }
         }, DELAY_MS, PERIOD_MS);
-
-
-        // fetch and store data from Firestore
-        fetchPhoneData();
-
-        // Generating the Top Picks
-        generatedTopPicks();
-
-
-        // Setup navigation bar
-        initializeNavItem();
-        setNavVisibility();
-
     }
 
+    /** This method generates the top picks section of the main activity*/
     public void generatedTopPicks() {
         initializeArrays();
         adapter = new PhoneAdapter(phones, products,this);
 
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        vh.top_picks_recycler_view.setLayoutManager(layout_manager);
+        vh.topPicksRecyclerView.setLayoutManager(layout_manager);
 
         // Attach the adapter to the recyclerview to populate items
-        vh.top_picks_recycler_view.setAdapter(adapter);
+        vh.topPicksRecyclerView.setAdapter(adapter);
     }
 
+    /** This method adds the corresponding product and phone to array for later use*/
     public void initializeArrays() {
         for (Product product : DataProvider.getProducts()) {
             if (product.getRating() >= 4.3) {
@@ -240,10 +227,10 @@ public class MainActivity extends AppCompatActivity {
     /** This method initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //set home selected
-        vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
+        vh.bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
@@ -272,9 +259,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onVisibilityChanged(boolean isOpen) {
                         if(isOpen){
-                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
                         }else{
-                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
+                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
                         }
                     }
                 }

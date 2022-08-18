@@ -43,7 +43,7 @@ public class CartActivity extends AppCompatActivity {
     /** This method initialises the navigation item selected for the search page*/
     public void initializeNavItem(){
         //set home selected
-        vh.bottomNavigationView.setSelectedItemId(R.id.nav_search);
+        vh.bottomNavigationView.setSelectedItemId(R.id.nav_cart);
 
         //setting ItemSelectedListener
         vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
