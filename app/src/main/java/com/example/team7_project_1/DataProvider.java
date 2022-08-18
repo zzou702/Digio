@@ -30,28 +30,29 @@ public class DataProvider {
 
     public static final String NOT_APPLICABLE = "N/A";
 
-    private static ArrayList<Phone> phoneList;
-    private static ArrayList<Product> productList;
-    private static ArrayList<SpecificationDatabaseType> specificationTypesList;
+    private static ArrayList<Phone> all_phones;
+    private static ArrayList<Product> all_products;
+    private static ArrayList<SpecificationDatabaseType> all_specification_types;
 
-    public static void setPhoneList(ArrayList<Phone> phoneList) {
-        DataProvider.phoneList = phoneList;
+    /** Getters and setters for the all_phones and all_products ArrayLists*/
+    public static void setPhoneList(ArrayList<Phone> phones) {
+        DataProvider.all_phones = phones;
     }
 
-    public static void setProductList(ArrayList<Product> productList) {
-        DataProvider.productList = productList;
+    public static void setProductList(ArrayList<Product> products) {
+        DataProvider.all_products = products;
     }
 
     public static ArrayList<Phone> getPhones() {
-        return phoneList;
+        return all_phones;
     }
 
     public static ArrayList<Product> getProducts() {
-        return productList;
+        return all_products;
     }
 
     public static Phone getPhoneById(int id) {
-        for (Phone phone : phoneList) {
+        for (Phone phone : all_phones) {
             if (phone.getId() == id) {
                 return phone;
             }
@@ -61,7 +62,7 @@ public class DataProvider {
     }
 
     public static Product getProductByPhoneId(int phoneId) {
-        for (Product product : productList) {
+        for (Product product : all_products) {
             if (product.getSoldPhoneId() == phoneId) {
                 return product;
             }
@@ -72,45 +73,45 @@ public class DataProvider {
 
 
     public static void setSpecificationTypesList(ArrayList<SpecificationDatabaseType> specificationTypesList) {
-        DataProvider.specificationTypesList = specificationTypesList;
+        DataProvider.all_specification_types = specificationTypesList;
     }
 
     public static void parsePhoneSpecifications() {
         // For each phone, convert stored string specifications into one of the Specification classes
-        for (Phone phone : phoneList) {
-            ArrayList<Specification> typedSpecifications = new ArrayList<>();
-            ArrayList<Specification> storedStringSpecs = phone.getSpecifications();
+        for (Phone phone : all_phones) {
+            ArrayList<Specification> typed_specifications = new ArrayList<>();
+            ArrayList<Specification> stored_string_specs = phone.getSpecifications();
 
-            for (Specification stringSpec : storedStringSpecs) {
-                SpecificationDatabaseType specType = null;
+            for (Specification string_spec : stored_string_specs) {
+                SpecificationDatabaseType spec_type = null;
 
                 // Lookup specification type of stored string specification
-                for (SpecificationDatabaseType specTypeItem : specificationTypesList) {
-                    if (specTypeItem.getFieldName().equals(stringSpec.getFieldName())) {
-                        specType = specTypeItem;
+                for (SpecificationDatabaseType spec_type_item : all_specification_types) {
+                    if (spec_type_item.getFieldName().equals(string_spec.getFieldName())) {
+                        spec_type = spec_type_item;
                         break;
                     }
                 }
 
                 // Use String type as default (existing stored stringSpec)
-                Specification specification = stringSpec;
+                Specification specification = string_spec;
 
                 // null if no matching spec type found
-                if (specType != null && !specType.getType().equals("String")) {
+                if (spec_type != null && !spec_type.getType().equals("String")) {
                     // Create typed specifications
-                    switch (specType.getType()) {
+                    switch (spec_type.getType()) {
                         case "Boolean": {
                             boolean value;
 
-                            if (stringSpec.getFormattedValue().equals(NOT_APPLICABLE)) {
+                            if (string_spec.getFormattedValue().equals(NOT_APPLICABLE)) {
                                 value = false; // default
                             } else {
-                                value = Boolean.parseBoolean(stringSpec.getValue());
+                                value = Boolean.parseBoolean(string_spec.getValue());
                             }
 
                             specification = new BoolSpecification(
-                                    specType.getFieldName(),
-                                    specType.getDisplayName(),
+                                    spec_type.getFieldName(),
+                                    spec_type.getDisplayName(),
                                     value);
                             break;
                         }
@@ -118,28 +119,28 @@ public class DataProvider {
                         case "UnitValue": {
                             double value;
 
-                            if (stringSpec.getFormattedValue().equals(NOT_APPLICABLE)) {
+                            if (string_spec.getFormattedValue().equals(NOT_APPLICABLE)) {
                                 value = -1; // default
                             } else {
-                                value = Double.parseDouble(stringSpec.getValue());
+                                value = Double.parseDouble(string_spec.getValue());
                             }
 
                             specification = new UnitValueSpecification(
-                                    specType.getFieldName(),
-                                    specType.getDisplayName(),
+                                    spec_type.getFieldName(),
+                                    spec_type.getDisplayName(),
                                     value,
-                                    specType.getUnit());
+                                    spec_type.getUnit());
 
                             break;
                         }
                     }
                 }
 
-                typedSpecifications.add(specification);
+                typed_specifications.add(specification);
             }
 
-            phone.setSpecifications(typedSpecifications);
-            Log.i("test", typedSpecifications.toString());
+            phone.setSpecifications(typed_specifications);
+            Log.i("test", typed_specifications.toString());
         }
     }
 }

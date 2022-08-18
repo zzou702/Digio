@@ -38,7 +38,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     //categories to be chosen
-    public SearchActivity.Category cat;
+    public SearchActivity.Category category;
 
     //array for banners
     int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter bannerViewPagerAdapter;
 
     /* variables for the banner and timer*/
-    int currentPage = 0; // Keeps track of the current item in the banner
+    int current_page = 0; // Keeps track of the current item in the banner
     Timer timer; // Timer for auto sliding for the banner
     final long DELAY_MS = 500;
     final long PERIOD_MS = 5000; // 5 seconds before executing the next task
@@ -55,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
     /** View holder class*/
     private class ViewHolder{
-        BottomNavigationView bottomNavigationView;
-        RecyclerView topPicksRecyclerView;
-        ProgressBar phoneLoadProgressbar;
-        ViewPager bannerViewPager;
+        BottomNavigationView bottom_navigation_view;
+        RecyclerView top_pics_recycler_view;
+        ProgressBar phone_load_progressbar;
+        ViewPager banner_view_pager;
         
         public ViewHolder(){
-            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-            topPicksRecyclerView = findViewById(R.id.top_picks_recycler_view);
-            phoneLoadProgressbar = findViewById(R.id.phone_load_progressBar);
-            bannerViewPager = findViewById(R.id.banner);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            top_pics_recycler_view = findViewById(R.id.top_picks_recycler_view);
+            phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
+            banner_view_pager = findViewById(R.id.banner);
         }
     }
 
@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
     public void initialiseBanner(){
         //setting up the adapter for the banner image
         bannerViewPagerAdapter = new ViewPagerAdapter(MainActivity.this, banner);
-        vh.bannerViewPager.setAdapter(bannerViewPagerAdapter);
+        vh.banner_view_pager.setAdapter(bannerViewPagerAdapter);
 
         //initialise the last item of the banner
-        vh.bannerViewPager.setCurrentItem(currentPage, true);
+        vh.banner_view_pager.setCurrentItem(current_page, true);
 
 
         //setting the timer for the banner image
@@ -109,17 +109,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Getting the current item index
-                currentPage = vh.bannerViewPager.getCurrentItem();
+                current_page = vh.banner_view_pager.getCurrentItem();
 
                 // If the current banner image is the last one in the array
-                if(currentPage == banner.length-1){
-                    currentPage = 0; // Set the current page to the first item
+                if(current_page == banner.length-1){
+                    current_page = 0; // Set the current page to the first item
                 }else {
-                    currentPage++; // Else set to the next page
+                    current_page++; // Else set to the next page
                 }
 
                 //setting the current item for the banner
-                vh.bannerViewPager.setCurrentItem(currentPage, true);
+                vh.banner_view_pager.setCurrentItem(current_page, true);
             }
         };
 
@@ -147,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
         adapter = new PhoneAdapter(phones, products,this);
 
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        vh.topPicksRecyclerView.setLayoutManager(layout_manager);
+        vh.top_pics_recycler_view.setLayoutManager(layout_manager);
 
         // Attach the adapter to the recyclerview to populate items
-        vh.topPicksRecyclerView.setAdapter(adapter);
+        vh.top_pics_recycler_view.setAdapter(adapter);
     }
 
     /** This method adds the corresponding product and phone to array for later use*/
@@ -215,30 +215,30 @@ public class MainActivity extends AppCompatActivity {
         switch(v.getId())
         {
             case R.id.category_btn_android: //if android button is pressed
-                cat = SearchActivity.Category.ANDROID;
+                this.category = SearchActivity.Category.ANDROID;
                 break;
             case R.id.category_btn_ios: //if ios button is pressed
-                cat = SearchActivity.Category.IOS;
+                this.category = SearchActivity.Category.IOS;
                 break;
             case R.id.category_btn_other: // if OTHER button is pressed
-                cat = SearchActivity.Category.OTHER;
+                this.category = SearchActivity.Category.OTHER;
                 break;
         }
 
         // directing to the new activity(ListActivity) and passing the category selected to
         // the new activity via putExtra()
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-        intent.putExtra("CATEGORY_CHOSEN", cat);
+        intent.putExtra("CATEGORY_CHOSEN", this.category);
         startActivity(intent);
     }
 
     /** This method initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //set home selected
-        vh.bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
 
         //setting ItemSelectedListener
-        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
@@ -265,11 +265,11 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 new KeyboardVisibilityEventListener() {
                     @Override
-                    public void onVisibilityChanged(boolean isOpen) {
-                        if(isOpen){
-                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
+                    public void onVisibilityChanged(boolean is_open) {
+                        if(is_open){
+                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
                         }else{
-                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                         }
                     }
                 }

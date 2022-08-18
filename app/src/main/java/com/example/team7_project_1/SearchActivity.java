@@ -39,18 +39,18 @@ public class SearchActivity extends AppCompatActivity {
 
     /** View holder class*/
     private class ViewHolder {
-        BottomNavigationView bottomNavigationView;
+        BottomNavigationView bottom_navigation_view;
         TextView test;
-        RecyclerView recyclerViewPhones;
+        RecyclerView recycler_view_phones;
 
         public ViewHolder(){
-            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
             test = findViewById(R.id.test);
-            recyclerViewPhones = (RecyclerView) findViewById(R.id.search_recycler_view);
+            recycler_view_phones = (RecyclerView) findViewById(R.id.search_recycler_view);
         }
     }
 
-    private Category chosen_cat; //the chosen category
+    private Category chosen_category; //the chosen category
     private String user_search; //the user search
     ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
@@ -73,34 +73,34 @@ public class SearchActivity extends AppCompatActivity {
 
     /** This method changes the title on the header based on user action*/
     public void setLabel(){
-        if(chosen_cat == null){
+        if(this.chosen_category == null){
             setTitle("Search");
-        }else if (chosen_cat != null && user_search == null){
-            setTitle(chosen_cat.toString());
+        }else if (this.chosen_category != null && user_search == null){
+            setTitle(this.chosen_category.toString());
         }
     }
 
     public void generatePhoneList() {
         initializeArrays();
-        setListAdapter();
+        setRecyclerAdapter();
     }
 
-    public void setListAdapter() {
+    public void setRecyclerAdapter() {
         adapter = new PhoneAdapter( phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        vh.recyclerViewPhones.setLayoutManager(gridLayoutManager);
+        vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
 
         // Attach the adapter to the recyclerview to populate items
-        vh.recyclerViewPhones.setAdapter(adapter);
+        vh.recycler_view_phones.setAdapter(adapter);
     }
 
 
     public void initializeArrays() {
         //getting the chosen category that has been passed through the putExtra() method
-        this.chosen_cat = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
+        this.chosen_category = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
         this.user_search = (String) getIntent().getStringExtra("user_search");
-        if (this.chosen_cat != null) {
+        if (this.chosen_category != null) {
             filterCategories();
         } else if (this.user_search != null) {
             filterUserSearches();
@@ -111,7 +111,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void filterCategories() {
-        String category = this.chosen_cat.name();
+        String category = this.chosen_category.name();
         for (Phone phone: DataProvider.getPhones()) {
             String current_phone_operating_system = phone.getOperatingSystem();
             if (current_phone_operating_system.equalsIgnoreCase(category)) {
@@ -233,11 +233,11 @@ public class SearchActivity extends AppCompatActivity {
                 this,
                 new KeyboardVisibilityEventListener() {
                     @Override
-                    public void onVisibilityChanged(boolean isOpen) {
-                        if(isOpen){
-                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
-                        }else{
-                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                    public void onVisibilityChanged(boolean is_open) {
+                        if(is_open) {
+                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                        }else {
+                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                         }
                     }
                 }

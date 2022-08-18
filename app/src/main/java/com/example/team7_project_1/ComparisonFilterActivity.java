@@ -58,10 +58,10 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
     public void generatePhoneList() {
         initializeArrays();
-        setListAdapter();
+        setRecyclerAdapter();
     }
 
-    public void setListAdapter() {
+    public void setRecyclerAdapter() {
         adapter = new PhoneAdapter(phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);

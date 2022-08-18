@@ -28,27 +28,27 @@ public class DetailsActivity extends AppCompatActivity {
     int[] images = { R.drawable.mphapp113111__1, R.drawable.mphapp113111__2, R.drawable.mphapp113111__3, R.drawable.mphapp113111__4};
 
     // Creating Object of ViewPagerAdapter
-    ViewPagerAdapter mViewPagerAdapter;
+    ViewPagerAdapter view_pager_adapter;
 
     /** View holder class*/
     private class ViewHolder{
-        BottomNavigationView bottomNavigationView;
-        ViewPager mViewPager; // creating object of ViewPager
-        TextView phoneName, phoneSubtitle, phonePrice, phoneDescription, phoneRating, phoneStorage, phoneMemory, phoneBatteryCapacity;
+        BottomNavigationView bottom_navigation_view;
+        ViewPager view_pager; // creating object of ViewPager
+        TextView phone_name, phone_subtitle, phone_price, phone_description, phone_rating, phone_storage, phone_memory, phone_battery_capacity;
 
         public ViewHolder(){
-            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-            mViewPager = (ViewPager) findViewById(R.id.viewPager);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            view_pager = (ViewPager) findViewById(R.id.viewPager);
 
-            phoneName = (TextView) findViewById(R.id.phone_name);
-            phoneSubtitle = (TextView) findViewById(R.id.phone_subtitle);
-            phonePrice = (TextView) findViewById(R.id.phone_price);
-            phoneDescription = (TextView) findViewById(R.id.phone_description);
-            phoneRating = (TextView) findViewById(R.id.phone_rating);
+            phone_name = (TextView) findViewById(R.id.phone_name);
+            phone_subtitle = (TextView) findViewById(R.id.phone_subtitle);
+            phone_price = (TextView) findViewById(R.id.phone_price);
+            phone_description = (TextView) findViewById(R.id.phone_description);
+            phone_rating = (TextView) findViewById(R.id.phone_rating);
 
-            phoneStorage = (TextView) findViewById(R.id.phone_storage);
-            phoneMemory = (TextView) findViewById(R.id.phone_memory);
-            phoneBatteryCapacity = (TextView) findViewById(R.id.phone_battery_capacity);
+            phone_storage = (TextView) findViewById(R.id.phone_storage);
+            phone_memory = (TextView) findViewById(R.id.phone_memory);
+            phone_battery_capacity = (TextView) findViewById(R.id.phone_battery_capacity);
         }
     }
 
@@ -64,10 +64,10 @@ public class DetailsActivity extends AppCompatActivity {
 
         loadProduct();
 
-        setTitle(vh.phoneName.getText());
+        setTitle(vh.phone_name.getText());
 
         // Adding the Adapter to the ViewPager
-        vh.mViewPager.setAdapter(mViewPagerAdapter);
+        vh.view_pager.setAdapter(view_pager_adapter);
 
         initializeNavItem();
         setNavVisibility();
@@ -75,26 +75,26 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void loadProduct() {
         this.phone_id = (Integer) getIntent().getIntExtra("phone_id", 1);
-        Product currentProduct = DataProvider.getProductByPhoneId(phone_id);
+        Product current_product = DataProvider.getProductByPhoneId(phone_id);
 
-        if (currentProduct == null) {
+        if (current_product == null) {
             Log.e("LoadProduct", "Could not get product; product was NULL.");
             return;
         }
 
-        Phone currentPhone = currentProduct.getSoldPhone();
+        Phone current_phone = current_product.getSoldPhone();
 
         // TODO: get images based on id
-        mViewPagerAdapter = new ViewPagerAdapter(DetailsActivity.this, images);
+        view_pager_adapter = new ViewPagerAdapter(DetailsActivity.this, images);
 
-        vh.phoneName.setText(currentProduct.getName());
-        vh.phoneSubtitle.setText(currentPhone.getSubtitle());
-        vh.phonePrice.setText(String.format(Locale.getDefault(),"$%.2f", currentProduct.getPrice()));
-        vh.phoneDescription.setText(currentProduct.getDescription());
-        vh.phoneRating.setText(String.format(Locale.getDefault(), "%.1f", currentProduct.getRating()));
-        vh.phoneStorage.setText(currentPhone.getSpecification("storageSize").getValue());
-        vh.phoneMemory.setText(currentPhone.getSpecification("memorySize").getValue());
-        vh.phoneBatteryCapacity.setText(currentPhone.getSpecification("batteryCapacity").getValue());
+        vh.phone_name.setText(current_product.getName());
+        vh.phone_subtitle.setText(current_phone.getSubtitle());
+        vh.phone_price.setText(String.format(Locale.getDefault(),"$%.2f", current_product.getPrice()));
+        vh.phone_description.setText(current_product.getDescription());
+        vh.phone_rating.setText(String.format(Locale.getDefault(), "%.1f", current_product.getRating()));
+        vh.phone_storage.setText(current_phone.getSpecification("storageSize").getValue());
+        vh.phone_memory.setText(current_phone.getSpecification("memorySize").getValue());
+        vh.phone_battery_capacity.setText(current_phone.getSpecification("batteryCapacity").getValue());
     }
 
     /** This method sets the bottom navigation bar visible or invisible depending on whether the
@@ -105,11 +105,11 @@ public class DetailsActivity extends AppCompatActivity {
                 this,
                 new KeyboardVisibilityEventListener() {
                     @Override
-                    public void onVisibilityChanged(boolean isOpen) {
-                        if(isOpen){
-                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
+                    public void onVisibilityChanged(boolean is_open) {
+                        if(is_open) {
+                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
                         }else{
-                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -119,10 +119,10 @@ public class DetailsActivity extends AppCompatActivity {
     /** This method initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //setting ItemSelectedListener
-        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
-                switch(menuItem.getItemId()){
+                switch(menuItem.getItemId()) {
                     case R.id.nav_home:
                         startActivity(new Intent(DetailsActivity.this, MainActivity.class));
                         return true;
