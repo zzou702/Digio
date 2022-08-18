@@ -24,8 +24,7 @@ import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    // images array
-    int[] images = { R.drawable.mphapp113111__1, R.drawable.mphapp113111__2, R.drawable.mphapp113111__3, R.drawable.mphapp113111__4};
+    private final int IMAGE_COUNT = 4;
 
     // Creating Object of ViewPagerAdapter
     ViewPagerAdapter view_pager_adapter;
@@ -85,6 +84,14 @@ public class DetailsActivity extends AppCompatActivity {
         Phone current_phone = current_product.getSoldPhone();
 
         // TODO: get images based on id
+
+
+
+        int[] images = new int[IMAGE_COUNT];
+
+        for (int image_index = 0; image_index < IMAGE_COUNT; image_index++) {
+            images[image_index] = this.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", this.getPackageName());
+        }
         view_pager_adapter = new ViewPagerAdapter(DetailsActivity.this, images);
 
         vh.phone_name.setText(current_product.getName());
