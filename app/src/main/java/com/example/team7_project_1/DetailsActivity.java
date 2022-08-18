@@ -48,6 +48,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    private int phone_id;
     ViewHolder vh;
 
     @Override
@@ -69,8 +70,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void loadProduct() {
-        int phoneId = getIntent().getIntExtra("phone_id", 1);
-        Product currentProduct = DataProvider.getProductByPhoneId(phoneId);
+        this.phone_id = (Integer) getIntent().getIntExtra("phone_id", 1);
+        Product currentProduct = DataProvider.getProductByPhoneId(phone_id);
 
         if (currentProduct == null) {
             Log.e("LoadProduct", "Could not get product; product was NULL.");
@@ -91,7 +92,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     /** This method sets the bottom navigation bar visible or invisible depending on whether the
      *  keyboard is activated */
-    public void setNavVisibility(){
+    public void setNavVisibility() {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,
@@ -136,13 +137,13 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void compareButtonClicked(View v) {
-        //Phone otherPhone = getPhoneForComparison from ListActivity
-
-        // TODO (Ou-An): upon getting phone for comparison, open modal with side by side specifications comparison
-        // comparePhone(otherPhone)
+        Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
+        intent.putExtra("first_phone_id", this.phone_id);
+        startActivity(intent);
     }
 
     private void comparePhone(Phone otherPhone) {
-
+        // TODO (Ou-An): upon getting phone for comparison, open modal with side by side specifications comparison
+        // comparePhone(otherPhone)
     }
 }
