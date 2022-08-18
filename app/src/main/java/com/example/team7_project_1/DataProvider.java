@@ -1,30 +1,15 @@
 package com.example.team7_project_1;
 
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.example.team7_project_1.models.BoolSpecification;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.models.Specification;
 import com.example.team7_project_1.models.SpecificationDatabaseType;
-import com.example.team7_project_1.models.StringSpecification;
 import com.example.team7_project_1.models.UnitValueSpecification;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class DataProvider {
 

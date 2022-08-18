@@ -1,48 +1,36 @@
 package com.example.team7_project_1.models;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.team7_project_1.DataProvider;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class Phone {
     private int id;
     private String name;
     private String subtitle;
-    private String operatingSystem;
+    private String operating_system;
     private String brand;
-    private String manufacturerPartNo;
+    private String manufacturer_part_no;
     private ArrayList<Specification> specifications = new ArrayList<>();;
 
-    // TODO: temporary variable, must move to Product model class
-    private double price;
-
-    public Phone() {
-        // empty constructor
-        // required for Firebase converting to object.
-    }
-
-    public Phone(int id, String name, String subtitle, String operatingSystem, String brand, String manufacturerPartNo) {
+    public Phone(int id, String name, String subtitle, String operating_system, String brand, String manufacturer_part_no) {
         this.id = id;
         this.name = name;
         this.subtitle = subtitle;
-        this.operatingSystem = operatingSystem;
+        this.operating_system = operating_system;
         this.brand = brand;
-        this.manufacturerPartNo = manufacturerPartNo;
+        this.manufacturer_part_no = manufacturer_part_no;
 
     }
 
-    public void parseSpecifications(Object specObj) {
-        // TODO: see if theres an alternative to remove unchecked cast; we know that specObj is a hashmap in database
-        HashMap<String,Object> specMap = (HashMap<String, Object>) specObj;
+    public void parseSpecifications(Object spec_obj) {
+        // TODO: see if theres an alternative to remove unchecked cast; we know that spec_obj is a hashmap in database
+        HashMap<String,Object> spec_map = (HashMap<String, Object>) spec_obj;
 
-        for (HashMap.Entry<String, Object> entry : specMap.entrySet()) {
+        for (HashMap.Entry<String, Object> entry : spec_map.entrySet()) {
             String value = entry.getValue().toString();
 
             // Empty string due to N/A value in database
@@ -64,15 +52,11 @@ public class Phone {
                 "id=" + this.id +
                 ", name='" + this.name + '\'' +
                 ", subtitle='" + this.subtitle + '\'' +
-                ", operatingSystem='" + this.operatingSystem + '\'' +
+                ", operatingSystem='" + this.operating_system + '\'' +
                 ", brand='" + this.brand + '\'' +
-                ", manufacturerPartNo='" + this.manufacturerPartNo + '\'' +
+                ", manufacturerPartNo='" + this.manufacturer_part_no + '\'' +
                 ", specifications=" + this.specifications +
                 '}';
-    }
-
-    public double getPrice() {
-        return this.price;
     }
 
     public int getId() {
@@ -92,10 +76,10 @@ public class Phone {
     }
 
     public String getManufacturerPartNo() {
-        return this.manufacturerPartNo;
+        return this.manufacturer_part_no;
     }
 
-    public String getOperatingSystem() {return this.operatingSystem; }
+    public String getOperatingSystem() {return this.operating_system; }
 
     public void setSpecifications(ArrayList<Specification> specifications) {
         this.specifications = specifications;
@@ -105,9 +89,9 @@ public class Phone {
         return specifications;
     }
 
-    public Specification getSpecification(String specFieldName) {
+    public Specification getSpecification(String spec_field_name) {
         for (Specification specification : specifications) {
-            if (specification.getFieldName().equals(specFieldName)) {
+            if (specification.getFieldName().equals(spec_field_name)) {
                 return specification;
             }
         }

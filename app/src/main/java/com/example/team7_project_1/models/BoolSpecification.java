@@ -3,8 +3,8 @@ package com.example.team7_project_1.models;
 public class BoolSpecification extends Specification {
     private boolean value;
 
-    public BoolSpecification(String fieldName, String displayName, boolean value) {
-        super(fieldName, displayName);
+    public BoolSpecification(String field_name, String display_name, boolean value) {
+        super(field_name, display_name);
         this.value = value;
     }
 
@@ -19,7 +19,7 @@ public class BoolSpecification extends Specification {
     }
 
     @Override
-    public boolean isBetterThan(Specification otherSpec) {
+    public boolean isBetterThan(Specification other_spec) {
         // TODO: implement
         return false;
     }

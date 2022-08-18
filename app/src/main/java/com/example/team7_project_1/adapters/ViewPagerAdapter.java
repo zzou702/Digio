@@ -18,12 +18,12 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
     int[] images;
-    LayoutInflater mLayoutInflater;
+    LayoutInflater m_layout_inflater;
 
     public ViewPagerAdapter(Context context, int[] images) {
         this.context = context;
         this.images = images;
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        m_layout_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -40,18 +40,18 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         // inflating the pager_item.xml
-        View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
+        View item_view = m_layout_inflater.inflate(R.layout.pager_item, container, false);
 
         // referencing the image view from the pager_item.xml file
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewMain);
+        ImageView image_view = (ImageView) item_view.findViewById(R.id.imageViewMain);
 
         // setting the image in the imageView
-        imageView.setImageResource(images[position]);
+        image_view.setImageResource(images[position]);
 
         // Adding the View
-        Objects.requireNonNull(container).addView(itemView);
+        Objects.requireNonNull(container).addView(item_view);
 
-        return itemView;
+        return item_view;
     }
 
     @Override

@@ -3,20 +3,20 @@ package com.example.team7_project_1.models;
 import androidx.annotation.NonNull;
 
 public class SpecificationDatabaseType {
-    private String fieldName;
+    private String field_name;
     private String type;
-    private String displayName;
+    private String display_name;
     private String unit;
 
-    public SpecificationDatabaseType(String fieldName, String type, String displayName, String unit) {
-        this.fieldName = fieldName;
+    public SpecificationDatabaseType(String field_name, String type, String display_name, String unit) {
+        this.field_name = field_name;
         this.type = type;
-        this.displayName = displayName;
+        this.display_name = display_name;
         this.unit = unit;
     }
 
     public String getFieldName() {
-        return fieldName;
+        return field_name;
     }
 
     public String getType() {
@@ -24,7 +24,7 @@ public class SpecificationDatabaseType {
     }
 
     public String getDisplayName() {
-        return displayName;
+        return display_name;
     }
 
     public String getUnit() {
@@ -35,9 +35,9 @@ public class SpecificationDatabaseType {
     @Override
     public String toString() {
         return "SpecificationDatabaseType{" +
-                "fieldName='" + fieldName + '\'' +
+                "fieldName='" + field_name + '\'' +
                 ", type='" + type + '\'' +
-                ", displayName='" + displayName + '\'' +
+                ", displayName='" + display_name + '\'' +
                 ", unit='" + unit + '\'' +
                 '}';
     }
