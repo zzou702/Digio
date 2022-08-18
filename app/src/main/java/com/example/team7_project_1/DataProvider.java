@@ -1,8 +1,6 @@
 package com.example.team7_project_1;
 
-import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 
 import com.example.team7_project_1.models.BoolSpecification;
 import com.example.team7_project_1.models.Phone;
@@ -132,11 +130,11 @@ public class DataProvider {
         }
     }
 
-    public static int[] getPhoneImageResourcesById(int phone_id, AppCompatActivity activity) {
+    public static int[] getPhoneImageResourcesById(int phone_id, Context context) {
         int[] images = new int[NUM_PHONE_IMAGES];
 
         for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
-            images[image_index] = activity.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", activity.getPackageName());
+            images[image_index] = context.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", context.getPackageName());
         }
 
         // TODO: handle when images not found, return NotFound image?

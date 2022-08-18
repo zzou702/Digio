@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
+import com.example.team7_project_1.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
@@ -111,7 +112,9 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         holder.phone_name.setText(equivalent_product.getName());
         holder.phone_subtitle.setText(this_phone.getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
-        holder.phone_main_image.setImageResource(R.drawable.ic_home);
+
+        int image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
+        holder.phone_main_image.setImageResource(image);
     }
 
     public Product getProductByPhoneId(int phoneId) {
