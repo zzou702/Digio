@@ -2,6 +2,7 @@ package com.example.team7_project_1.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,10 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 context.startActivity(intent);
             } else {
                 Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra("phone_id", clicked_phone.getId());
+                Bundle extras = new Bundle();
+                extras.putInt("first_phone_id", ComparisonFilterActivity.getPhoneID());
+                extras.putInt("second_phone_id", clicked_phone.getId());
+                intent.putExtras(extras);
                 Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             }
@@ -68,13 +72,11 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     }
 
     // Declare the data collection object that holds the data to be populated in the RecyclerView
-    private int phone_id; // Used in Comparison
     private ArrayList<Phone> phones;
     private ArrayList<Product> products;
     private Context context;
 
-    public PhoneAdapter(int phone_id, ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
-        this.phone_id = phone_id;
+    public PhoneAdapter(ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
         this.phones = phones;
         this.products = products;
         this.context = context;

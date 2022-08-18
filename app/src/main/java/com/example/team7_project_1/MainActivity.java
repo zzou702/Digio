@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     /** This method generates the top picks section of the main activity*/
     public void generatedTopPicks() {
         initializeArrays();
-        adapter = new PhoneAdapter(-1, phones, products,this);
+        adapter = new PhoneAdapter(phones, products,this);
 
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         vh.topPicksRecyclerView.setLayoutManager(layout_manager);

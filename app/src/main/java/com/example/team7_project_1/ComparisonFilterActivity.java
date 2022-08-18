@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -31,7 +29,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     }
 
     private String user_search; //the user search
-    private int first_phone_id;
+    private static int first_phone_id = -1;
     ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
@@ -47,11 +45,15 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
         //calling the method to populate the SearchActivity
         generatePhoneList();
-        setPhoneIDs();
+        setPhoneID();
     }
 
-    public void setPhoneIDs() {
+    public void setPhoneID() {
         this.first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", 0);
+    }
+
+    public static int getPhoneID() {
+        return this.first_phone_id;
     }
 
     public void generatePhoneList() {
@@ -60,7 +62,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     }
 
     public void setListAdapter() {
-        adapter = new PhoneAdapter(first_phone_id, phones, products,this);
+        adapter = new PhoneAdapter(phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         vh.recyclerViewPhones.setLayoutManager(gridLayoutManager);
