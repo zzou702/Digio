@@ -1,6 +1,7 @@
 package com.example.team7_project_1.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.team7_project_1.DetailsActivity;
+import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
+import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
@@ -27,6 +31,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Declare objects of all the views to be manipulated in item_contact.xml
+        public TextView phone_subtitle;
         public TextView phone_name;
         public ImageView phone_main_image;
         public TextView phone_price;
@@ -35,16 +40,20 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             super(v);
             v.setOnClickListener(this);
             // Initialize the view objects
-            phone_name = v.findViewById(R.id.phone_name);
-            phone_main_image = v.findViewById(R.id.phone_main_image);
-            phone_price = v.findViewById(R.id.phone_price);
+            this.phone_name = v.findViewById(R.id.phone_name);
+            this.phone_main_image = v.findViewById(R.id.phone_main_image);
+            this.phone_price = v.findViewById(R.id.phone_price);
+            this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
         }
 
         @Override
         public void onClick(View v) {
             // What to do when the view item is clicked
             Phone clicked_phone = phones.get(getAdapterPosition());
+            Intent intent = new Intent(search_context, DetailsActivity.class);
+            intent.putExtra("phone_id", clicked_phone.getId());
             Toast.makeText(search_context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            search_context.startActivity(intent);
         }
     }
 
@@ -79,6 +88,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         Product equivalent_product = getProductByPhoneId(this_phone.getId());
 
         holder.phone_name.setText(equivalent_product.getName());
+        holder.phone_subtitle.setText(this_phone.getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
         holder.phone_main_image.setImageResource(R.drawable.ic_home);
     }

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
@@ -27,10 +28,9 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
-
-    private Category chosenCat; //the chosen category
 
     /** Represents the type of category the user selected */
     public enum Category {
@@ -52,8 +52,10 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    ArrayList<Phone> phones;
-    ArrayList<Product> products;
+    private Category chosen_cat; //the chosen category
+    private String user_search; //the chosen category
+    ArrayList<Phone> phones = new ArrayList<Phone>();
+    ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
     ViewHolder vh;
 
@@ -64,42 +66,15 @@ public class SearchActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        //calling the method to populate the ListActivity
-        initalizeArrays();
-
-        adapter = new PhoneAdapter(phones, products,this);
-
-        //getting the chosen category that has been passed through the putExtra() method
-        chosenCat = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
-
-        initalizeArrays();
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
-
-        // Attach the adapter to the recyclerview to populate items
-        vh.recycler_view_phones.setAdapter(adapter);
-
+        //calling the method to populate the SearchActivity
+        generateList();
         initializeNavItem();
         setNavVisibility();
     }
 
-    /** This method populates the ListActivity based on the category chosen in main activity*/
-    public void populateList(Category category){
-
-        // Compare to see which category was chosen from the main activity page
-        /**
-         switch (category){
-         case ANDROID:
-         vh.test.setText("Android was chosen");
-         break;
-         case IOS:
-         vh.test.setText("IOS was chosen");
-         break;
-         case OTHER:
-         vh.test.setText("Other Operating systems was chosen");
-         break;
-         }*/
+    public void generateList() {
+        initializeArrays();
+        adapter = new PhoneAdapter(phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
@@ -108,10 +83,63 @@ public class SearchActivity extends AppCompatActivity {
         vh.recycler_view_phones.setAdapter(adapter);
     }
 
-    public void initalizeArrays() {
-        this.phones = DataProvider.getPhones();
-        this.products = DataProvider.getProducts();
+
+    public void initializeArrays() {
+        //getting the chosen category that has been passed through the putExtra() method
+        this.chosen_cat = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
+        this.user_search = (String) getIntent().getStringExtra("user_search");
+        if (this.chosen_cat != null) {
+            filterCategories();
+        } else if (this.user_search != null) {
+            filterUserSearches();
+        } else {
+            this.phones = DataProvider.getPhones();
+            this.products = DataProvider.getProducts();
+        }
     }
+
+    public void filterCategories() {
+        String category = this.chosen_cat.name();
+        for (Phone phone: DataProvider.getPhones()) {
+            String current_phone_operating_system = phone.getOperatingSystem();
+            if (current_phone_operating_system.equalsIgnoreCase(category)) {
+                this.phones.add(phone);
+            }
+        }
+
+        for (Phone phone: this.phones) {
+            for (Product product: DataProvider.getProducts()) {
+                if (phone.getId() == product.getSoldPhoneId()) {
+                    this.products.add(product);
+                }
+            }
+        }
+    }
+
+    public void filterUserSearches() {
+        // "Cleaning" the user search
+        this.user_search = this.user_search.trim();
+        for (Phone phone: DataProvider.getPhones()) {
+            String current_phone_name = phone.getName();
+            if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
+            (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
+                this.phones.add(phone);
+            }
+        }
+
+        for (Phone phone: this.phones) {
+            for (Product product: DataProvider.getProducts()) {
+                if (phone.getId() == product.getSoldPhoneId()) {
+                    this.products.add(product);
+                }
+            }
+        }
+    }
+
+
+
+
+
 
     /** This method initialises the navigation item selected for the search page*/
     public void initializeNavItem() {

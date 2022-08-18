@@ -42,7 +42,7 @@ public class Phone {
 
         for (HashMap.Entry<String, Object> entry : specMap.entrySet()) {
             Specification spec = new StringSpecification(entry.getKey(), entry.getValue().toString());
-            specifications.add(spec);
+            this.specifications.add(spec);
         }
 
     }
@@ -51,39 +51,41 @@ public class Phone {
     @Override
     public String toString() {
         return "Phone{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", operatingSystem='" + operatingSystem + '\'' +
-                ", brand='" + brand + '\'' +
-                ", manufacturerPartNo='" + manufacturerPartNo + '\'' +
-                ", specifications=" + specifications +
+                "id=" + this.id +
+                ", name='" + this.name + '\'' +
+                ", subtitle='" + this.subtitle + '\'' +
+                ", operatingSystem='" + this.operatingSystem + '\'' +
+                ", brand='" + this.brand + '\'' +
+                ", manufacturerPartNo='" + this.manufacturerPartNo + '\'' +
+                ", specifications=" + this.specifications +
                 '}';
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getSubtitle() {
-        return subtitle;
+        return this.subtitle;
     }
 
     public String getBrand() {
-        return brand;
+        return this.brand;
     }
 
     public String getManufacturerPartNo() {
-        return manufacturerPartNo;
+        return this.manufacturerPartNo;
     }
+
+    public String getOperatingSystem() {return this.operatingSystem; }
 
     public List<Specification> getSpecifications() {
         // Return copy rather than reference of array; prevents external modification

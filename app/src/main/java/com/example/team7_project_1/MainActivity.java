@@ -8,6 +8,10 @@ import static com.google.android.material.textfield.TextInputLayout.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,7 +27,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import android.widget.ImageButton;
 
+
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
+import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -63,17 +69,22 @@ public class MainActivity extends AppCompatActivity {
 
     /** View holder class*/
     private class ViewHolder{
-        BottomNavigationView bottomNavigationView;
-        ProgressBar phoneLoadProgressBar;
+        BottomNavigationView bottom_navigation_view;
+        RecyclerView top_picks_recycler_view;
+        ProgressBar phone_load_progressbar;
         ViewPager bannerViewPager;
-
+        
         public ViewHolder(){
-            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-            phoneLoadProgressBar = findViewById(R.id.phone_load_progressBar);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            top_picks_recycler_view = findViewById(R.id.top_picks_recycler_view);
+            phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
             bannerViewPager = findViewById(R.id.banner);
         }
     }
 
+    ArrayList<Phone> phones = new ArrayList<Phone>();
+    ArrayList<Product> products = new ArrayList<Product>();
+    PhoneAdapter adapter;
     ViewHolder vh;
 
 
@@ -84,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialising the viewholder
         vh = new ViewHolder();
+
 
         //setting up the adapter for the banner image
         bannerViewPagerAdapter = new ViewPagerAdapter(MainActivity.this, banner);
@@ -126,86 +138,41 @@ public class MainActivity extends AppCompatActivity {
         // fetch and store data from Firestore
         fetchPhoneData();
 
+        // Generating the Top Picks
+        generatedTopPicks();
+
+
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
 
     }
 
-    public void fetchPhoneData() {
-        // Check if data has already been fetched before
-        if (DataProvider.isHasFetchedData()) {
-            vh.phoneLoadProgressBar.setVisibility(View.GONE);
-            return;
+    public void generatedTopPicks() {
+        initializeArrays();
+        adapter = new PhoneAdapter(phones, products,this);
+
+        LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        vh.top_picks_recycler_view.setLayoutManager(layout_manager);
+
+        // Attach the adapter to the recyclerview to populate items
+        vh.top_picks_recycler_view.setAdapter(adapter);
+    }
+
+    public void initializeArrays() {
+        for (Product product : DataProvider.getProducts()) {
+            if (product.getRating() >= 4.3) {
+                this.products.add(product);
+            }
         }
-        ArrayList<Phone> phoneList = new ArrayList<>();
-        ArrayList<Product> productList = new ArrayList<>();
 
-        // Getting phone collection from Firestore
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("phones").get()
-                .addOnSuccessListener(documentSnapshots -> {
-                    if (documentSnapshots.isEmpty()) {
-                        Log.d("LoadPhones", "onSuccess: LIST EMPTY");
-                    } else {
-                        List<DocumentSnapshot> phoneDocuments = documentSnapshots.getDocuments();
-                        for (DocumentSnapshot document : phoneDocuments) {
-
-                            Map<String,Object> data = document.getData();
-
-                            if (data == null) {
-                                Log.e("LoadPhones", "Phone document is NULL");
-                                return;
-                            }
-
-                            Log.i("LoadPhones", "Parsing phone: " + data.toString());
-
-                            // requiresNonNull to prevent passing null values to constructor
-                            // NOTE: if NullPointerException, might be due to field not added to database
-
-                            Phone phone = new Phone(
-                                    Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
-                                    Objects.requireNonNull(data.get("name")).toString(),
-                                    Objects.requireNonNull(data.get("subtitle")).toString(),
-                                    Objects.requireNonNull(data.get("operatingSystem")).toString(),
-                                    Objects.requireNonNull(data.get("brand")).toString(),
-                                    Objects.requireNonNull(data.get("manufacturerPartNo")).toString());
-
-                            phone.parseSpecifications(data.get("specifications"));
-
-                            phoneList.add(phone);
-                            Log.i("LoadPhones", "Created phone: " + phone.toString());
-
-                            Product product = new Product(
-                                    phone.getId(),
-                                    phone.getName(),
-                                    Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
-                                    Objects.requireNonNull(data.get("description")).toString(),
-                                    Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()));
-
-                            productList.add(product);
-                            Log.i("LoadPhones", "Created product: " + product.toString());
-
-                            // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
-                            // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
-//                            phone = document.toObject(Phone.class);
-//
-//                            // and we will pass this object class
-//                            // inside our arraylist which we have
-//                            // created for recycler view.
-//                            phoneList.add(phone);
-                        }
-                        Log.d("LoadPhones", "onSuccess: " + phoneList);
-                        vh.phoneLoadProgressBar.setVisibility(View.GONE);
-                    }
-                });
-
-        // Store data in DataProvider
-        DataProvider.setPhoneList(phoneList);
-        DataProvider.setProductList(productList);
-
-        DataProvider.setHasFetchedData(true);
+        for (Product product: this.products) {
+            for (Phone phone: DataProvider.getPhones()) {
+                if (product.getSoldPhoneId() == phone.getId()) {
+                    this.phones.add(phone);
+                }
+            }
+        }
     }
 
     @Override
@@ -273,10 +240,10 @@ public class MainActivity extends AppCompatActivity {
     /** This method initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //set home selected
-        vh.bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
 
         //setting ItemSelectedListener
-        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
@@ -305,9 +272,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onVisibilityChanged(boolean isOpen) {
                         if(isOpen){
-                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
+                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
                         }else{
-                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                         }
                     }
                 }
