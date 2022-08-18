@@ -6,8 +6,8 @@ public class UnitValueSpecification extends Specification {
     private double value;
     private String unit;
 
-    public UnitValueSpecification(String fieldName, String displayName, double value, String unit) {
-        super(fieldName, displayName);
+    public UnitValueSpecification(String field_name, String displayName, double value, String unit) {
+        super(field_name, displayName);
         this.value = value;
         this.unit = unit;
     }
@@ -33,7 +33,7 @@ public class UnitValueSpecification extends Specification {
     }
 
     @Override
-    public boolean isBetterThan(Specification otherSpec) {
+    public boolean isBetterThan(Specification other_spec) {
         // TODO: implement
         return false;
     }

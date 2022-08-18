@@ -20,18 +20,18 @@ public class CartActivity extends AppCompatActivity {
 
     /** View holder class*/
     private class ViewHolder{
-        BottomNavigationView bottomNavigationView;
+        BottomNavigationView bottom_navigation_view;
 
         public ViewHolder(){
-            bottomNavigationView = findViewById(R.id.bottom_nav_bar);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
         }
     }
 
     ViewHolder vh;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle saved_instance_state) {
+        super.onCreate(saved_instance_state);
         setContentView(R.layout.activity_cart);
 
         vh = new ViewHolder();
@@ -46,13 +46,13 @@ public class CartActivity extends AppCompatActivity {
     /** This method initialises the navigation item selected for the search page*/
     public void initializeNavItem(){
         //set home selected
-        vh.bottomNavigationView.setSelectedItemId(R.id.nav_cart);
+        vh.bottom_navigation_view.setSelectedItemId(R.id.nav_cart);
 
         //setting ItemSelectedListener
-        vh.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
-                switch(menuItem.getItemId()){
+            public boolean onNavigationItemSelected(@NonNull MenuItem menu_item){
+                switch(menu_item.getItemId()){
                     case R.id.nav_home:
                         startActivity(new Intent(CartActivity.this, MainActivity.class));
                         return true;
@@ -74,12 +74,12 @@ public class CartActivity extends AppCompatActivity {
 
         MenuItem.OnActionExpandListener onActionExpandListener = new MenuItem.OnActionExpandListener() {
             @Override
-            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+            public boolean onMenuItemActionExpand(MenuItem menu_item) {
                 return true;
             }
 
             @Override
-            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+            public boolean onMenuItemActionCollapse(MenuItem menu_item) {
                 return true;
             }
         };
@@ -99,7 +99,7 @@ public class CartActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(String new_text) {
                 return false;
             }
         });
@@ -116,11 +116,11 @@ public class CartActivity extends AppCompatActivity {
                 this,
                 new KeyboardVisibilityEventListener() {
                     @Override
-                    public void onVisibilityChanged(boolean isOpen) {
-                        if(isOpen){
-                            vh.bottomNavigationView.setVisibility(View.INVISIBLE);
+                    public void onVisibilityChanged(boolean is_open) {
+                        if(is_open){
+                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
                         }else{
-                            vh.bottomNavigationView.setVisibility(View.VISIBLE);
+                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                         }
                     }
                 }

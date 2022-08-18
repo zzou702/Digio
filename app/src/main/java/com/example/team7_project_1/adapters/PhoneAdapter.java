@@ -18,7 +18,6 @@ import com.example.team7_project_1.ComparisonFilterActivity;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
-import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
@@ -31,19 +30,19 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Declare objects of all the views to be manipulated in item_contact.xml
-        public TextView phoneSubtitle;
-        public TextView phoneName;
-        public ImageView phoneMainImage;
-        public TextView phonePrice;
+        public TextView phone_subtitle;
+        public TextView phone_name;
+        public ImageView phone_main_image;
+        public TextView phone_price;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
             // Initialize the view objects
-            this.phoneName = v.findViewById(R.id.phone_name);
-            this.phoneMainImage = v.findViewById(R.id.phone_main_image);
-            this.phonePrice = v.findViewById(R.id.phone_price);
-            this.phoneSubtitle = v.findViewById(R.id.phone_subtitle);
+            this.phone_name = v.findViewById(R.id.phone_name);
+            this.phone_main_image = v.findViewById(R.id.phone_main_image);
+            this.phone_price = v.findViewById(R.id.phone_price);
+            this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
         }
 
         @Override
@@ -86,7 +85,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     @NonNull
     @Override
     public PhoneAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater  inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View phone_view;
 
         // If the current context is main
@@ -109,10 +108,10 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         Phone this_phone = phones.get(position);
         Product equivalent_product = getProductByPhoneId(this_phone.getId());
 
-        holder.phoneName.setText(equivalent_product.getName());
-        holder.phoneSubtitle.setText(this_phone.getSubtitle());
-        holder.phonePrice.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
-        holder.phoneMainImage.setImageResource(R.drawable.ic_home);
+        holder.phone_name.setText(equivalent_product.getName());
+        holder.phone_subtitle.setText(this_phone.getSubtitle());
+        holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",equivalent_product.getPrice()));
+        holder.phone_main_image.setImageResource(R.drawable.ic_home);
     }
 
     public Product getProductByPhoneId(int phoneId) {

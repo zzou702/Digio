@@ -2,17 +2,15 @@ package com.example.team7_project_1.models;
 
 import com.example.team7_project_1.DataProvider;
 
-import java.math.BigDecimal;
-
 public class Product {
-    private int soldPhoneId;
+    private int sold_phone_id;
     private String name;
     private double price;
     private String description;
     private double rating;
 
-    public Product(int soldPhoneId, String name, double price, String description, double rating) {
-        this.soldPhoneId = soldPhoneId;
+    public Product(int sold_phone_id, String name, double price, String description, double rating) {
+        this.sold_phone_id = sold_phone_id;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -22,7 +20,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "soldPhoneId=" + soldPhoneId +
+                "soldPhoneId=" + sold_phone_id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
@@ -31,7 +29,7 @@ public class Product {
     }
 
     public int getSoldPhoneId() {
-        return soldPhoneId;
+        return sold_phone_id;
     }
 
     public String getName() {
@@ -51,7 +49,7 @@ public class Product {
     }
 
     public Phone getSoldPhone() {
-        return DataProvider.getPhoneById(soldPhoneId);
+        return DataProvider.getPhoneById(sold_phone_id);
     }
 
 }

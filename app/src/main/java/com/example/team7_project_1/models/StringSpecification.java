@@ -3,8 +3,8 @@ package com.example.team7_project_1.models;
 public class StringSpecification extends Specification {
     private String value;
 
-    public StringSpecification(String fieldName, String displayName, String value) {
-        super(fieldName, displayName);
+    public StringSpecification(String field_name, String display_name, String value) {
+        super(field_name, display_name);
         this.value = value;
     }
 
@@ -18,7 +18,7 @@ public class StringSpecification extends Specification {
     }
 
     @Override
-    public boolean isBetterThan(Specification otherSpec) {
+    public boolean isBetterThan(Specification other_spec) {
         // TODO: implement
         return false;
     }
