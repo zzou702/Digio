@@ -12,9 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.team7_project_1.ComparisonActivity;
+import com.example.team7_project_1.ComparisonFilterActivity;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
+import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
@@ -46,19 +49,32 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         public void onClick(View v) {
             // What to do when the view item is clicked
             Phone clicked_phone = phones.get(getAdapterPosition());
-            Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("phone_id", clicked_phone.getId());
-            Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
-            context.startActivity(intent);
+
+            Context current_context = v.getContext();
+
+            if (current_context instanceof ComparisonFilterActivity) {
+                Intent intent = new Intent(context, ComparisonActivity.class);
+                intent.putExtra("phone_id", clicked_phone.getId());
+                Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                context.startActivity(intent);
+            } else {
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("phone_id", clicked_phone.getId());
+                Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                context.startActivity(intent);
+            }
+
         }
     }
 
     // Declare the data collection object that holds the data to be populated in the RecyclerView
+    private int phone_id; // Used in Comparison
     private ArrayList<Phone> phones;
     private ArrayList<Product> products;
     private Context context;
 
-    public PhoneAdapter(ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
+    public PhoneAdapter(int phone_id, ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
+        this.phone_id = phone_id;
         this.phones = phones;
         this.products = products;
         this.context = context;
@@ -71,10 +87,10 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         View phone_view;
 
         // If the current context is main
-        if(this.context instanceof MainActivity){
+        if(this.context instanceof MainActivity) {
             // Inflate the custom layout for the top picks items
             phone_view = inflater.inflate(R.layout.top_picks_items, parent, false);
-        }else{
+        }else {
             // Inflate the custom layout for the listview/recycleView items
             phone_view = inflater.inflate(R.layout.phone_list_view_item, parent, false);
         }

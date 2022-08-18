@@ -46,12 +46,12 @@ public class SearchActivity extends AppCompatActivity {
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
             test = findViewById(R.id.test);
-            recyclerViewPhones = (RecyclerView) findViewById(R.id.recycler_view);
+            recyclerViewPhones = (RecyclerView) findViewById(R.id.search_recycler_view);
         }
     }
 
     private Category chosen_cat; //the chosen category
-    private String user_search; //the chosen category
+    private String user_search; //the user search
     ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
@@ -65,7 +65,7 @@ public class SearchActivity extends AppCompatActivity {
         vh = new ViewHolder();
 
         //calling the method to populate the SearchActivity
-        generateList();
+        generatePhoneList();
         initializeNavItem();
         setNavVisibility();
         setLabel();
@@ -80,9 +80,13 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void generateList() {
+    public void generatePhoneList() {
         initializeArrays();
-        adapter = new PhoneAdapter(phones, products,this);
+        setListAdapter();
+    }
+
+    public void setListAdapter() {
+        adapter = new PhoneAdapter(-1, phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         vh.recyclerViewPhones.setLayoutManager(gridLayoutManager);
