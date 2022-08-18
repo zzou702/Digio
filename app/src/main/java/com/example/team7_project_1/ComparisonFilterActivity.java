@@ -32,7 +32,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
     private String user_search; //the user search
     private int first_phone_id;
-    private int second_phone_id;
     ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
@@ -61,7 +60,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     }
 
     public void setListAdapter() {
-        adapter = new PhoneAdapter(phones, products,this);
+        adapter = new PhoneAdapter(first_phone_id, phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         vh.recyclerViewPhones.setLayoutManager(gridLayoutManager);

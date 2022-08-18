@@ -86,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void setListAdapter() {
-        adapter = new PhoneAdapter(phones, products,this);
+        adapter = new PhoneAdapter(-1, phones, products,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         vh.recyclerViewPhones.setLayoutManager(gridLayoutManager);

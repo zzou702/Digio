@@ -68,11 +68,13 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     }
 
     // Declare the data collection object that holds the data to be populated in the RecyclerView
+    private int phone_id; // Used in Comparison
     private ArrayList<Phone> phones;
     private ArrayList<Product> products;
     private Context context;
 
-    public PhoneAdapter(ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
+    public PhoneAdapter(int phone_id, ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
+        this.phone_id = phone_id;
         this.phones = phones;
         this.products = products;
         this.context = context;
