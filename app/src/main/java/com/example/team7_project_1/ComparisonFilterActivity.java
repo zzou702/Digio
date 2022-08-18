@@ -49,11 +49,11 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     }
 
     public void setPhoneID() {
-        this.first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", 0);
+        first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", 0);
     }
 
     public static int getPhoneID() {
-        return this.first_phone_id;
+        return first_phone_id;
     }
 
     public void generatePhoneList() {
