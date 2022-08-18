@@ -73,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /** This method changes the title on the header based on user action*/
     public void setLabel(){
-        if(this.chosen_category == null){
+        if(this.chosen_category == null) {
             setTitle("Search");
         }else if (this.chosen_category != null && user_search == null){
             setTitle(this.chosen_category.toString());
@@ -114,7 +114,10 @@ public class SearchActivity extends AppCompatActivity {
         String category = this.chosen_category.name();
         for (Phone phone: DataProvider.getPhones()) {
             String current_phone_operating_system = phone.getOperatingSystem();
-            if (current_phone_operating_system.equalsIgnoreCase(category)) {
+            if (category.equals("OTHER") && !current_phone_operating_system.equals("iOS") && !current_phone_operating_system.equals("Android")) {
+                this.phones.add(phone);
+            }
+            else if (current_phone_operating_system.equalsIgnoreCase(category)) {
                 this.phones.add(phone);
             }
         }
