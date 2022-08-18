@@ -34,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
     private class ViewHolder{
         BottomNavigationView bottomNavigationView;
         ViewPager mViewPager; // creating object of ViewPager
-        TextView phoneName, phoneSubtitle, phonePrice, phoneDescription, phoneRating;
+        TextView phoneName, phoneSubtitle, phonePrice, phoneDescription, phoneRating, phoneStorage, phoneMemory, phoneBatteryCapacity;
 
         public ViewHolder(){
             bottomNavigationView = findViewById(R.id.bottom_nav_bar);
@@ -45,6 +45,10 @@ public class DetailsActivity extends AppCompatActivity {
             phonePrice = (TextView) findViewById(R.id.phone_price);
             phoneDescription = (TextView) findViewById(R.id.phone_description);
             phoneRating = (TextView) findViewById(R.id.phone_rating);
+
+            phoneStorage = (TextView) findViewById(R.id.phone_storage);
+            phoneMemory = (TextView) findViewById(R.id.phone_memory);
+            phoneBatteryCapacity = (TextView) findViewById(R.id.phone_battery_capacity);
         }
     }
 
@@ -87,6 +91,9 @@ public class DetailsActivity extends AppCompatActivity {
         vh.phonePrice.setText(String.format(Locale.getDefault(),"$%.2f", currentProduct.getPrice()));
         vh.phoneDescription.setText(currentProduct.getDescription());
         vh.phoneRating.setText(String.format(Locale.getDefault(), "%.1f", currentProduct.getRating()));
+        vh.phoneStorage.setText(currentPhone.getSpecification("storageSize").getValue());
+        vh.phoneMemory.setText(currentPhone.getSpecification("memorySize").getValue());
+        vh.phoneBatteryCapacity.setText(currentPhone.getSpecification("batteryCapacity").getValue());
     }
 
     /** This method sets the bottom navigation bar visible or invisible depending on whether the

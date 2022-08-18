@@ -135,6 +135,7 @@
                     <TextView style="@style/SpecTitle"
                         android:text="Storage"/>
                     <TextView style="@style/SpecValue"
+                        android:id="@+id/phone_storage"
                         android:text="128"/>
                     <TextView style="@style/SpecTitle"
                         android:text="GB"/>
@@ -143,6 +144,7 @@
                     <TextView style="@style/SpecTitle"
                         android:text="Memory"/>
                     <TextView style="@style/SpecValue"
+                        android:id="@+id/phone_memory"
                         android:text="16"/>
                     <TextView style="@style/SpecTitle"
                         android:text="GB"/>
@@ -151,6 +153,7 @@
                     <TextView style="@style/SpecTitle"
                         android:text="Battery"/>
                     <TextView style="@style/SpecValue"
+                        android:id="@+id/phone_battery_capacity"
                         android:text="4500"/>
                     <TextView style="@style/SpecTitle"
                         android:text="mAh"/>

@@ -19,6 +19,7 @@ public abstract class Specification {
         return displayName;
     }
 
+    public abstract String getValue();
     public abstract String getFormattedValue();
     public abstract boolean isBetterThan(Specification otherSpec);
 

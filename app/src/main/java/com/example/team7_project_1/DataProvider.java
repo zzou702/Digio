@@ -105,7 +105,7 @@ public class DataProvider {
                             if (stringSpec.getFormattedValue().equals(NOT_APPLICABLE)) {
                                 value = false; // default
                             } else {
-                                value = Boolean.getBoolean(stringSpec.getFormattedValue());
+                                value = Boolean.parseBoolean(stringSpec.getValue());
                             }
 
                             specification = new BoolSpecification(
@@ -121,7 +121,7 @@ public class DataProvider {
                             if (stringSpec.getFormattedValue().equals(NOT_APPLICABLE)) {
                                 value = -1; // default
                             } else {
-                                value = Double.parseDouble(stringSpec.getFormattedValue());
+                                value = Double.parseDouble(stringSpec.getValue());
                             }
 
                             specification = new UnitValueSpecification(

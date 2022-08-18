@@ -104,4 +104,13 @@ public class Phone {
     public ArrayList<Specification> getSpecifications() {
         return specifications;
     }
+
+    public Specification getSpecification(String specFieldName) {
+        for (Specification specification : specifications) {
+            if (specification.getFieldName().equals(specFieldName)) {
+                return specification;
+            }
+        }
+        return null;
+    }
 }

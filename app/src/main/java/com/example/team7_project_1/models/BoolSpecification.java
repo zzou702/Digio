@@ -9,6 +9,11 @@ public class BoolSpecification extends Specification {
     }
 
     @Override
+    public String getValue() {
+        return Boolean.toString(this.value);
+    }
+
+    @Override
     public String getFormattedValue() {
         return Boolean.toString(this.value);
     }

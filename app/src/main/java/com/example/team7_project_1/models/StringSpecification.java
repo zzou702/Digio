@@ -8,6 +8,10 @@ public class StringSpecification extends Specification {
         this.value = value;
     }
 
+    public String getValue() {
+        return this.value;
+    }
+
     @Override
     public String getFormattedValue() {
         return this.value;
