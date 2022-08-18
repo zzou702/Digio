@@ -7,13 +7,16 @@ import static com.google.android.material.textfield.TextInputLayout.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +27,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import android.widget.ImageButton;
 
+
+import com.example.team7_project_1.adapters.ViewPagerAdapter;
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
@@ -41,6 +46,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,16 +55,30 @@ public class MainActivity extends AppCompatActivity {
     //categories to be chosen
     public SearchActivity.Category cat;
 
+    //array for banners
+    int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
+
+    //adapter for the banner images
+    ViewPagerAdapter bannerViewPagerAdapter;
+
+    int currentPage = 0;
+    Timer timer;
+    final long DELAY_MS = 500;
+    final long PERIOD_MS = 5000; // 5 seconds before executing the next task
+
+
     /** View holder class*/
     private class ViewHolder{
         BottomNavigationView bottom_navigation_view;
         RecyclerView top_picks_recycler_view;
         ProgressBar phone_load_progressbar;
-
+        ViewPager bannerViewPager;
+        
         public ViewHolder(){
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
             top_picks_recycler_view = findViewById(R.id.top_picks_recycler_view);
             phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
+            bannerViewPager = findViewById(R.id.banner);
         }
     }
 
@@ -72,10 +93,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialising the viewholder
         vh = new ViewHolder();
+
+
+        //setting up the adapter for the banner image
+        bannerViewPagerAdapter = new ViewPagerAdapter(MainActivity.this, banner);
+        vh.bannerViewPager.setAdapter(bannerViewPagerAdapter);
+
+        //initialise the last item of the banner
+        vh.bannerViewPager.setCurrentItem(currentPage, true);
+
+
+        //setting the timer for the banner image
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            @Override
+            public void run() {
+                // Getting the current item index
+                currentPage = vh.bannerViewPager.getCurrentItem();
+
+                // If the current banner image is the last one in the array
+                if(currentPage == banner.length-1){
+                    currentPage = 0; // Set the current page to the first item
+                }else {
+                    currentPage++; // Else set to the next page
+                }
+
+                //setting the current item for the banner
+                vh.bannerViewPager.setCurrentItem(currentPage, true);
+            }
+        };
+
+        //new thread for the timer
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, DELAY_MS, PERIOD_MS);
+
+
+        // fetch and store data from Firestore
+        fetchPhoneData();
 
         // Generating the Top Picks
         generatedTopPicks();
+
 
         // Setup navigation bar
         initializeNavItem();
