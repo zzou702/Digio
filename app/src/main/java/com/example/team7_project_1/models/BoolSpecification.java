@@ -3,8 +3,8 @@ package com.example.team7_project_1.models;
 public class BoolSpecification extends Specification {
     private boolean value;
 
-    public BoolSpecification(String name, boolean value) {
-        super(name);
+    public BoolSpecification(String fieldName, String displayName, boolean value) {
+        super(fieldName, displayName);
         this.value = value;
     }
 

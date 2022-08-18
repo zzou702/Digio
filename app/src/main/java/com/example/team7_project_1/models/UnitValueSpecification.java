@@ -4,8 +4,8 @@ public class UnitValueSpecification extends Specification {
     private double value;
     private String unit;
 
-    public UnitValueSpecification(String name, double value, String unit) {
-        super(name);
+    public UnitValueSpecification(String fieldName, String displayName, double value, String unit) {
+        super(fieldName, displayName);
         this.value = value;
         this.unit = unit;
     }

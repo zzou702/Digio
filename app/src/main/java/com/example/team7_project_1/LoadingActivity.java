@@ -162,11 +162,11 @@ public class LoadingActivity extends AppCompatActivity {
 
     private void asycStartMainActivity() {
         // Check if both fetch tasks are complete
-        Log.i("Test", isFetchPhonesComplete + " or " + isFetchSpecificationsComplete);
         if (!isFetchPhonesComplete || !isFetchSpecificationsComplete) {
             return;
         }
 
+        DataProvider.parsePhoneSpecifications();
         vh.phoneLoadProgressbar.setVisibility(View.INVISIBLE);
 
         finish();

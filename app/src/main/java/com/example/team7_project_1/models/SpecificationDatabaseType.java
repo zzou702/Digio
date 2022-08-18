@@ -15,6 +15,22 @@ public class SpecificationDatabaseType {
         this.unit = unit;
     }
 
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
     @NonNull
     @Override
     public String toString() {

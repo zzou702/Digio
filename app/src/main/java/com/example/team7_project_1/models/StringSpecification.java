@@ -3,8 +3,8 @@ package com.example.team7_project_1.models;
 public class StringSpecification extends Specification {
     private String value;
 
-    public StringSpecification(String name, String value) {
-        super(name);
+    public StringSpecification(String fieldName, String displayName, String value) {
+        super(fieldName, displayName);
         this.value = value;
     }
 

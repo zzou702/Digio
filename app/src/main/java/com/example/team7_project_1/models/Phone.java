@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.team7_project_1.DataProvider;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,7 +43,15 @@ public class Phone {
         HashMap<String,Object> specMap = (HashMap<String, Object>) specObj;
 
         for (HashMap.Entry<String, Object> entry : specMap.entrySet()) {
-            Specification spec = new StringSpecification(entry.getKey(), entry.getValue().toString());
+            String value = entry.getValue().toString();
+
+            // Empty string due to N/A value in database
+            if (value.equals("")) {
+                value = DataProvider.NOT_APPLICABLE;
+            }
+            Specification spec = new StringSpecification(entry.getKey(), entry.getKey(), value);
+
+            // temporarily store as string; wait for specification types to be fetched
             this.specifications.add(spec);
         }
 
@@ -87,8 +97,11 @@ public class Phone {
 
     public String getOperatingSystem() {return this.operatingSystem; }
 
-    public List<Specification> getSpecifications() {
-        // Return copy rather than reference of array; prevents external modification
-        return null;
+    public void setSpecifications(ArrayList<Specification> specifications) {
+        this.specifications = specifications;
+    }
+
+    public ArrayList<Specification> getSpecifications() {
+        return specifications;
     }
 }
