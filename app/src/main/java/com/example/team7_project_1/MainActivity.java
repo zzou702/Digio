@@ -131,6 +131,14 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(update);
             }
         }, DELAY_MS, PERIOD_MS);
+
+        // Generating the Top Picks
+        generatedTopPicks();
+
+
+        // Setup navigation bar
+        initializeNavItem();
+        setNavVisibility();
     }
 
     /** This method generates the top picks section of the main activity*/

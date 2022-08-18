@@ -134,4 +134,15 @@ public class DetailsActivity extends AppCompatActivity {
     public void backButtonClicked(View v){
         finish();
     }
+
+    public void compareButtonClicked(View v) {
+        //Phone otherPhone = getPhoneForComparison from ListActivity
+
+        // TODO (Ou-An): upon getting phone for comparison, open modal with side by side specifications comparison
+        // comparePhone(otherPhone)
+    }
+
+    private void comparePhone(Phone otherPhone) {
+
+    }
 }

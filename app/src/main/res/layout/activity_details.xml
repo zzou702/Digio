@@ -87,12 +87,27 @@
 
             </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Add to cart +"
-                android:fontFamily="@font/lato_bold"/>
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Compare"
+                    android:fontFamily="@font/lato_bold"
+                    android:onClick="compareButtonClicked"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Add to cart +"
+                    android:fontFamily="@font/lato_bold"/>
+            </LinearLayout>
+
 
             <View style="@style/HorizontalDivider"/>
 
