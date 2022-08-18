@@ -6,6 +6,7 @@ import com.example.team7_project_1.DataProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class Phone {
     private int id;

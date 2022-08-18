@@ -2,6 +2,8 @@ package com.example.team7_project_1;
 
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.team7_project_1.models.BoolSpecification;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
@@ -10,9 +12,11 @@ import com.example.team7_project_1.models.SpecificationDatabaseType;
 import com.example.team7_project_1.models.UnitValueSpecification;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DataProvider {
 
+    private static final int NUM_PHONE_IMAGES = 4;
     public static final String NOT_APPLICABLE = "N/A";
 
     private static ArrayList<Phone> all_phones;
@@ -126,5 +130,16 @@ public class DataProvider {
 
             phone.setSpecifications(typed_specifications);
         }
+    }
+
+    public static int[] getPhoneImageResourcesById(int phone_id, AppCompatActivity activity) {
+        int[] images = new int[NUM_PHONE_IMAGES];
+
+        for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
+            images[image_index] = activity.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", activity.getPackageName());
+        }
+
+        // TODO: handle when images not found, return NotFound image?
+        return images;
     }
 }
