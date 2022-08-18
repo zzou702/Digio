@@ -68,6 +68,16 @@ public class SearchActivity extends AppCompatActivity {
         generateList();
         initializeNavItem();
         setNavVisibility();
+        setLabel();
+    }
+
+    /** This method changes the title on the header based on user action*/
+    public void setLabel(){
+        if(chosen_cat == null){
+            setTitle("Search");
+        }else if (chosen_cat != null && user_search == null){
+            setTitle(chosen_cat.toString());
+        }
     }
 
     public void generateList() {
@@ -136,9 +146,6 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-
-
-
     /** This method initialises the navigation item selected for the search page*/
     public void initializeNavItem() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
@@ -155,6 +162,7 @@ public class SearchActivity extends AppCompatActivity {
                         startActivity(new Intent(SearchActivity.this, MainActivity.class));
                         return true;
                     case R.id.nav_search:
+                        startActivity(new Intent(SearchActivity.this, SearchActivity.class));
                         return true;
                     case R.id.nav_cart:
                         startActivity(new Intent(SearchActivity.this, CartActivity.class));

@@ -36,6 +36,9 @@ public class CartActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
+        //setting the title of the header
+        setTitle("Shopping Cart");
+
         initializeNavItem();
         setNavVisibility();
     }
