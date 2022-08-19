@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     final long DELAY_MS = 500;
     final long PERIOD_MS = 5000; // 5 seconds before executing the next task
 
-
     /**
      * View holder class
      */
@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView top_pics_recycler_view;
         ProgressBar phone_load_progressbar;
         ViewPager banner_view_pager;
+
+
 
         /**
          * Constructor
@@ -79,13 +81,12 @@ public class MainActivity extends AppCompatActivity {
     PhoneAdapter adapter;
     ViewHolder vh;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialising the viewholder
+        // Initialising the ViewHolder
         vh = new ViewHolder();
 
         initialiseBanner();
@@ -98,10 +99,12 @@ public class MainActivity extends AppCompatActivity {
         setNavVisibility();
     }
 
+
+
     /**
      * Initializes the banner images with a timer that automatically scrolls indefinitely
      */
-    public void initialiseBanner(){
+    public void initialiseBanner() {
         //setting up the adapter for the banner image
         banner_view_pager_adapter = new ViewPagerAdapter(MainActivity.this, banner);
         vh.banner_view_pager.setAdapter(banner_view_pager_adapter);
@@ -148,19 +151,34 @@ public class MainActivity extends AppCompatActivity {
         setNavVisibility();
     }
 
+
+
     /**
-     * Generates the top picks section of the main activity
+     * Generates the top picks phone list used to populated the RecyclerView, and setting the adapter needed
+     * in order to achieve this
      */
     public void generatedTopPicks() {
         initializeArrays();
+        setPhoneAdapter();
+    }
+
+
+
+    /**
+     * Sets the adapter for the RecyclerView
+     */
+    public void setPhoneAdapter() {
         adapter = new PhoneAdapter(phones, products,this);
 
+        // Creating horizontal linear layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         vh.top_pics_recycler_view.setLayoutManager(layout_manager);
 
-        // Attach the adapter to the recyclerview to populate items
+        // Attaching the adapter to the recyclerView in order to populate it
         vh.top_pics_recycler_view.setAdapter(adapter);
     }
+
+
 
     /**
      * Adds the corresponding product and phone to array for later use
@@ -180,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
     /**
      * Creates the top bar menu used for the user to search for phones
@@ -227,10 +247,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     /**
      * Takes the user to the category page depending on what category button is pressed
      */
-    public void categoryButtonPressed(View v){
+    public void categoryButtonPressed(View v) {
         switch(v.getId())
         {
             case R.id.category_btn_android: //if android button is pressed
@@ -251,10 +273,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     /**
      * Initialises the navigation item selected for the main page
      */
-    public void initializeNavItem(){
+    public void initializeNavItem() {
         //set home selected
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
 
@@ -278,11 +302,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     /**
      * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
      * activated
      */
-    public void setNavVisibility(){
+    public void setNavVisibility() {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,

@@ -44,9 +44,12 @@ public class CartActivity extends AppCompatActivity {
         //setting the title of the header
         setTitle("Shopping Cart");
 
+        // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
     }
+
+
 
     /**
      * Initialises the navigation item selected for the search page
@@ -73,6 +76,8 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     /**
      * Creates the top bar menu used for the user to search for phones
@@ -119,6 +124,8 @@ public class CartActivity extends AppCompatActivity {
 
         return true;
     }
+
+
 
     /**
      * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is

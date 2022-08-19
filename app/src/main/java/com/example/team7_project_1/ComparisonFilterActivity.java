@@ -46,13 +46,17 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comparison_search);
 
-
+        // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        //calling the method to populate the SearchActivity
+        // Generating Phone List
         generatePhoneList();
+
+        // Setting the PhoneID that was passed in the putExtra() method
         setPhoneID();
     }
+
+
 
     public void setPhoneID() {
         first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", 0);
@@ -62,6 +66,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         return first_phone_id;
     }
 
+
+
     /**
      * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
      * in order to achieve this
@@ -70,6 +76,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         initializeArrays();
         setPhoneAdapter();
     }
+
+
 
     /**
      * Sets the adapter for the RecyclerView
@@ -84,6 +92,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // Attaching the adapter to the recyclerView in order to populate it
         vh.recycler_view_phones.setAdapter(adapter);
     }
+
+
 
     /**
      * Initializes the phones and products ArrayLists
@@ -102,6 +112,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             this.products = DataProvider.getProducts();
         }
     }
+
+
 
     /**
      * Filters phones by the given user search and puts these phones and associated products into

@@ -47,6 +47,8 @@ public class SearchActivity extends AppCompatActivity {
         TextView test;
         RecyclerView recycler_view_phones;
 
+
+
         /**
          * Constructor
          */
@@ -70,26 +72,32 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        //calling the method to populate the SearchActivity
+        // Generating Phone List
         generatePhoneList();
 
+        // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
         setLabel();
     }
 
+
+
     /**
      * Changes the title on the header based on user action
      */
-    public void setLabel(){
+    public void setLabel() {
         if(this.chosen_category == null) {
             setTitle("Search");
         }else if (this.chosen_category != null && user_search == null){
             setTitle(this.chosen_category.toString());
         }
     }
+
+
 
     /**
      * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
@@ -99,6 +107,8 @@ public class SearchActivity extends AppCompatActivity {
         initializeArrays();
         setPhoneAdapter();
     }
+
+
 
     /**
      * Sets the adapter for the RecyclerView
@@ -113,6 +123,7 @@ public class SearchActivity extends AppCompatActivity {
         // Attaching the adapter to the recyclerView in order to populate it
         vh.recycler_view_phones.setAdapter(adapter);
     }
+
 
 
     /**
@@ -139,6 +150,8 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+
+
     /**
      * Filters phones by the chosen category and puts these phones and associated products into
      * the phones and products ArrayLists
@@ -164,6 +177,8 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
     /**
      * Filters phones by the given user search and puts these phones and associated products into
@@ -222,6 +237,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Creates the top bar menu used for the user to search for phones
      */
@@ -267,13 +283,17 @@ public class SearchActivity extends AppCompatActivity {
 
         return true;
     }
-    
+
+
+
     /**
      * Takes the user back to the previous page
      */
     public void backButtonClicked(View v){
         finish();
     }
+
+
 
     /**
      * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
