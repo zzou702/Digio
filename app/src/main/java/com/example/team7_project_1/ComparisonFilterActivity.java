@@ -23,13 +23,13 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * View holder class
      */
     private class ViewHolder {
-        RecyclerView recyclerViewPhones;
+        RecyclerView recycler_view_phones;
 
         /**
          * Constructor
          */
         public ViewHolder() {
-            recyclerViewPhones = (RecyclerView) findViewById(R.id.comparison_recycler_view);
+            recycler_view_phones = (RecyclerView) findViewById(R.id.comparison_recycler_view);
         }
     }
 
@@ -62,24 +62,39 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         return first_phone_id;
     }
 
+    /**
+     * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
+     * in order to achieve this
+     */
     public void generatePhoneList() {
         initializeArrays();
-        setRecyclerAdapter();
+        setPhoneAdapter();
     }
 
-    public void setRecyclerAdapter() {
+    /**
+     * Sets the adapter for the RecyclerView
+     */
+    public void setPhoneAdapter() {
         adapter = new PhoneAdapter(phones, products,this);
 
+        // Creating layout with 2 vertical columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        vh.recyclerViewPhones.setLayoutManager(gridLayoutManager);
+        vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
 
-        // Attach the adapter to the recyclerview to populate items
-        vh.recyclerViewPhones.setAdapter(adapter);
+        // Attaching the adapter to the recyclerView in order to populate it
+        vh.recycler_view_phones.setAdapter(adapter);
     }
 
+    /**
+     * Initializes the phones and products ArrayLists
+     */
     public void initializeArrays() {
-        //getting the chosen category that has been passed through the putExtra() method
+        // Getting the user search that have been passed using the putExtra() method
         this.user_search = (String) getIntent().getStringExtra("user_search");
+
+        // If the user_search is not null - filter all phones by the user_search and get only the
+        // phones whose name is somewhat associated with the user_search
+        // if both chosen_category and user_search are null - get all phones
         if (this.user_search != null) {
             filterUserSearches();
         } else {
@@ -88,6 +103,10 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Filters phones by the given user search and puts these phones and associated products into
+     * the phones and products ArrayLists
+     */
     public void filterUserSearches() {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
@@ -99,6 +118,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             }
         }
 
+        // Getting associated products
         for (Phone phone: this.phones) {
             for (Product product: DataProvider.getProducts()) {
                 if (phone.getId() == product.getSoldPhoneId()) {
