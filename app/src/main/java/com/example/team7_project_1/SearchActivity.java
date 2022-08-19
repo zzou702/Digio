@@ -30,26 +30,34 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-    /** Represents the type of category the user selected */
+    /**
+     * Represents the type of category the user selected
+     */
     public enum Category {
         ANDROID,
         IOS,
         OTHER,
     }
 
-    /** View holder class*/
+    /**
+     * View holder class
+     */
     private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         TextView test;
         RecyclerView recycler_view_phones;
 
-        public ViewHolder(){
+        /**
+         * Constructor
+         */
+        public ViewHolder() {
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
             test = findViewById(R.id.test);
             recycler_view_phones = (RecyclerView) findViewById(R.id.search_recycler_view);
         }
     }
 
+    // Fields
     private Category chosen_category; //the chosen category
     private String user_search; //the user search
     ArrayList<Phone> phones = new ArrayList<Phone>();
@@ -66,12 +74,15 @@ public class SearchActivity extends AppCompatActivity {
 
         //calling the method to populate the SearchActivity
         generatePhoneList();
+
         initializeNavItem();
         setNavVisibility();
         setLabel();
     }
 
-    /** This method changes the title on the header based on user action*/
+    /**
+     * Changes the title on the header based on user action
+     */
     public void setLabel(){
         if(this.chosen_category == null) {
             setTitle("Search");
@@ -80,6 +91,10 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
+     * in order to achieve this
+     */
     public void generatePhoneList() {
         initializeArrays();
         setRecyclerAdapter();
@@ -88,10 +103,11 @@ public class SearchActivity extends AppCompatActivity {
     public void setRecyclerAdapter() {
         adapter = new PhoneAdapter( phones, products,this);
 
+        // Creating layout with 2 vertical columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         vh.recycler_view_phones.setLayoutManager(gridLayoutManager);
 
-        // Attach the adapter to the recyclerview to populate items
+        // Attach the adapter to the recyclerView in order to populate it
         vh.recycler_view_phones.setAdapter(adapter);
     }
 
@@ -153,7 +169,9 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-    /** This method initialises the navigation item selected for the search page*/
+    /**
+     * Initialises the navigation item selected for the shopping cart page
+     */
     public void initializeNavItem() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
 
@@ -181,8 +199,12 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Creates the top bar menu used for the user to search for phones
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Creating menu inflater
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top_menu, menu);
 
@@ -198,6 +220,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         };
 
+        // Setting the listener for search bar
         menu.findItem(R.id.search_bar).setOnActionExpandListener(onActionExpandListener);
         SearchView search_view = (SearchView) menu.findItem(R.id.search_bar).getActionView();
         search_view.setQueryHint("Search...");
@@ -206,6 +229,7 @@ public class SearchActivity extends AppCompatActivity {
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                // Passing the user search to the SearchActivity
                 Intent intent = new Intent(SearchActivity.this, SearchActivity.class);
                 intent.putExtra("user_search", s);
                 startActivity(intent);
@@ -221,18 +245,22 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
     
-    /** This method takes the user back to the previous page*/
+    /**
+     * Takes the user back to the previous page
+     */
     public void backButtonClicked(View v){
         finish();
     }
 
-    /** This method sets the bottom navigation bar visible or invisible depending on whether the
-     *  keyboard is activated */
+    /**
+     * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
+     * activated
+     */
     public void setNavVisibility(){
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
 
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
-        KeyboardVisibilityEvent.setEventListener(
+        KeyboardVisibilityEvent.setEventListener (
                 this,
                 new KeyboardVisibilityEventListener() {
                     @Override

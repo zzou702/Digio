@@ -95,8 +95,10 @@ public class DetailsActivity extends AppCompatActivity {
         vh.phone_battery_capacity.setText(current_phone.getSpecification("batteryCapacity").getValue());
     }
 
-    /** This method sets the bottom navigation bar visible or invisible depending on whether the
-     *  keyboard is activated */
+    /**
+     * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
+     * activated
+     */
     public void setNavVisibility() {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
@@ -114,7 +116,7 @@ public class DetailsActivity extends AppCompatActivity {
         );
     }
 
-    /** This method initialises the navigation item selected for the home page*/
+    /** Initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
@@ -136,11 +138,16 @@ public class DetailsActivity extends AppCompatActivity {
         });
     }
 
-    /** This method takes the user back to the previous page*/
+    /**
+     * Takes the user back to the previous page
+     */
     public void backButtonClicked(View v){
         finish();
     }
 
+    /**
+     * Takes the
+     */
     public void compareButtonClicked(View v) {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
         intent.putExtra("first_phone_id", this.phone_id);

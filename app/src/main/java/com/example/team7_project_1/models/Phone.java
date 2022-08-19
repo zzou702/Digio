@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class Phone {
+    // Fields
     private int id;
     private String name;
     private String subtitle;
@@ -17,6 +18,9 @@ public class Phone {
     private String manufacturer_part_no;
     private ArrayList<Specification> specifications = new ArrayList<>();;
 
+    /**
+     * Constructor
+     */
     public Phone(int id, String name, String subtitle, String operating_system, String brand, String manufacturer_part_no) {
         this.id = id;
         this.name = name;
@@ -60,6 +64,7 @@ public class Phone {
                 '}';
     }
 
+    /** Getters and setters for fields */
     public int getId() {
         return this.id;
     }

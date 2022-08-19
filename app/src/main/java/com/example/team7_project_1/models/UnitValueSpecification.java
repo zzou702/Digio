@@ -3,15 +3,22 @@ package com.example.team7_project_1.models;
 import com.example.team7_project_1.DataProvider;
 
 public class UnitValueSpecification extends Specification {
+    // Fields
     private double value;
     private String unit;
 
+    /**
+     * Constructor
+     */
     public UnitValueSpecification(String field_name, String displayName, double value, String unit) {
         super(field_name, displayName);
         this.value = value;
         this.unit = unit;
     }
 
+    /**
+     * Getter and setter for value field
+     */
     @Override
     public String getValue() {
         // -1 set by DataProvider due to empty field value

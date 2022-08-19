@@ -3,12 +3,16 @@ package com.example.team7_project_1.models;
 import com.example.team7_project_1.DataProvider;
 
 public class Product {
+    // Fields
     private int sold_phone_id;
     private String name;
     private double price;
     private String description;
     private double rating;
 
+    /**
+     * Constructor
+     */
     public Product(int sold_phone_id, String name, double price, String description, double rating) {
         this.sold_phone_id = sold_phone_id;
         this.name = name;
@@ -28,6 +32,9 @@ public class Product {
                 '}';
     }
 
+    /**
+     * Getters and Setters for fields
+     */
     public int getSoldPhoneId() {
         return sold_phone_id;
     }

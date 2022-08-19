@@ -3,9 +3,13 @@ package com.example.team7_project_1.models;
 import androidx.annotation.NonNull;
 
 public abstract class Specification {
+    // Fields
     private String field_name;
     private String display_name;
 
+    /**
+     * Constructor
+     */
     protected Specification(String field_name, String display_name) {
         this.field_name = field_name;
         this.display_name = display_name;

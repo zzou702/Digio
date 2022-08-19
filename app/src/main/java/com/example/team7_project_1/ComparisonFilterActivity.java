@@ -19,15 +19,21 @@ import java.util.ArrayList;
 
 public class ComparisonFilterActivity extends AppCompatActivity {
 
-    /** View holder class*/
+    /**
+     * View holder class
+     */
     private class ViewHolder {
         RecyclerView recyclerViewPhones;
 
+        /**
+         * Constructor
+         */
         public ViewHolder() {
             recyclerViewPhones = (RecyclerView) findViewById(R.id.comparison_recycler_view);
         }
     }
 
+    // Fields
     private String user_search; //the user search
     private static int first_phone_id = -1;
     ArrayList<Phone> phones = new ArrayList<Phone>();
@@ -104,8 +110,12 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
 
 
+    /**
+     * Creates the top bar menu used for the user to search for phones
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Creating menu inflater
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top_menu, menu);
 
@@ -121,6 +131,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             }
         };
 
+        // Setting the listener for search bar
         menu.findItem(R.id.search_bar).setOnActionExpandListener(onActionExpandListener);
         SearchView search_view = (SearchView) menu.findItem(R.id.search_bar).getActionView();
         search_view.setQueryHint("Search...");
@@ -129,8 +140,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                // Passing the user search to the ComparisonFilterActivity
                 Intent intent = new Intent(ComparisonFilterActivity.this, ComparisonFilterActivity.class);
-                intent.putExtra("phone_id", first_phone_id);
                 intent.putExtra("user_search", s);
                 startActivity(intent);
                 return false;

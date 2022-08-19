@@ -14,6 +14,7 @@ import java.util.Locale;
 
 public class DataProvider {
 
+    // Fields
     private static final int NUM_PHONE_IMAGES = 4;
     public static final String NOT_APPLICABLE = "N/A";
 
@@ -21,7 +22,9 @@ public class DataProvider {
     private static ArrayList<Product> all_products;
     private static ArrayList<SpecificationDatabaseType> all_specification_types;
 
-    /** Getters and setters for the all_phones and all_products ArrayLists*/
+    /**
+     * Getters and setters for the all_phones and all_products ArrayLists
+     */
     public static void setPhoneList(ArrayList<Phone> phones) {
         DataProvider.all_phones = phones;
     }

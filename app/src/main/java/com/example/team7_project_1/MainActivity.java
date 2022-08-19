@@ -44,23 +44,28 @@ public class MainActivity extends AppCompatActivity {
     int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
 
     //adapter for the banner images
-    ViewPagerAdapter bannerViewPagerAdapter;
+    ViewPagerAdapter banner_view_pager_adapter;
 
-    /* variables for the banner and timer*/
+    /* variables for the banner and timer */
     int current_page = 0; // Keeps track of the current item in the banner
     Timer timer; // Timer for auto sliding for the banner
     final long DELAY_MS = 500;
     final long PERIOD_MS = 5000; // 5 seconds before executing the next task
 
 
-    /** View holder class*/
-    private class ViewHolder{
+    /**
+     * View holder class
+     */
+    private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         RecyclerView top_pics_recycler_view;
         ProgressBar phone_load_progressbar;
         ViewPager banner_view_pager;
-        
-        public ViewHolder(){
+
+        /**
+         * Constructor
+         */
+        public ViewHolder() {
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
             top_pics_recycler_view = findViewById(R.id.top_picks_recycler_view);
             phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Fields
     ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
@@ -92,12 +98,13 @@ public class MainActivity extends AppCompatActivity {
         setNavVisibility();
     }
 
-    /** This method initialises the banner images with a timer that automatically
-     * scrolls indefinitely*/
+    /**
+     * Initializes the banner images with a timer that automatically scrolls indefinitely
+     */
     public void initialiseBanner(){
         //setting up the adapter for the banner image
-        bannerViewPagerAdapter = new ViewPagerAdapter(MainActivity.this, banner);
-        vh.banner_view_pager.setAdapter(bannerViewPagerAdapter);
+        banner_view_pager_adapter = new ViewPagerAdapter(MainActivity.this, banner);
+        vh.banner_view_pager.setAdapter(banner_view_pager_adapter);
 
         //initialise the last item of the banner
         vh.banner_view_pager.setCurrentItem(current_page, true);
@@ -141,7 +148,9 @@ public class MainActivity extends AppCompatActivity {
         setNavVisibility();
     }
 
-    /** This method generates the top picks section of the main activity*/
+    /**
+     * Generates the top picks section of the main activity
+     */
     public void generatedTopPicks() {
         initializeArrays();
         adapter = new PhoneAdapter(phones, products,this);
@@ -153,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
         vh.top_pics_recycler_view.setAdapter(adapter);
     }
 
-    /** This method adds the corresponding product and phone to array for later use*/
+    /**
+     * Adds the corresponding product and phone to array for later use
+     */
     public void initializeArrays() {
         for (Product product : DataProvider.getProducts()) {
             if (product.getRating() >= 4.3) {
@@ -170,8 +181,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates the top bar menu used for the user to search for phones
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Creating menu inflater
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top_menu, menu);
 
@@ -187,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        // Setting the listener for search bar
         menu.findItem(R.id.search_bar).setOnActionExpandListener(onActionExpandListener);
         SearchView search_view = (SearchView) menu.findItem(R.id.search_bar).getActionView();
         search_view.setQueryHint("Search...");
@@ -195,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                // Passing the user search to the SearchActivity
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 intent.putExtra("user_search", s);
                 startActivity(intent);
@@ -210,7 +227,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /** this method takes the user to the category page when each of the category buttons are pressed */
+    /**
+     * Takes the user to the category page depending on what category button is pressed
+     */
     public void categoryButtonPressed(View v){
         switch(v.getId())
         {
@@ -232,7 +251,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /** This method initialises the navigation item selected for the home page*/
+    /**
+     * Initialises the navigation item selected for the main page
+     */
     public void initializeNavItem(){
         //set home selected
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
@@ -257,8 +278,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /** This method sets the bottom navigation bar visible or invisible depending on whether the
-     *  keyboard is activated */
+    /**
+     * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
+     * activated
+     */
     public void setNavVisibility(){
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(

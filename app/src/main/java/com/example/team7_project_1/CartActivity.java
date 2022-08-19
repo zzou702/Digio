@@ -18,10 +18,15 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 
 public class CartActivity extends AppCompatActivity {
 
-    /** View holder class*/
-    private class ViewHolder{
+    /**
+     *  View holder class
+     */
+    private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
 
+        /**
+         * Constructor
+         */
         public ViewHolder(){
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
         }
@@ -43,7 +48,9 @@ public class CartActivity extends AppCompatActivity {
         setNavVisibility();
     }
 
-    /** This method initialises the navigation item selected for the search page*/
+    /**
+     * Initialises the navigation item selected for the search page
+     */
     public void initializeNavItem(){
         //set home selected
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_cart);
@@ -67,23 +74,28 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Creates the top bar menu used for the user to search for phones
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Creating menu inflater
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top_menu, menu);
 
         MenuItem.OnActionExpandListener onActionExpandListener = new MenuItem.OnActionExpandListener() {
             @Override
-            public boolean onMenuItemActionExpand(MenuItem menu_item) {
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
                 return true;
             }
 
             @Override
-            public boolean onMenuItemActionCollapse(MenuItem menu_item) {
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
                 return true;
             }
         };
 
+        // Setting the listener for search bar
         menu.findItem(R.id.search_bar).setOnActionExpandListener(onActionExpandListener);
         SearchView search_view = (SearchView) menu.findItem(R.id.search_bar).getActionView();
         search_view.setQueryHint("Search...");
@@ -92,6 +104,7 @@ public class CartActivity extends AppCompatActivity {
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                // Passing the user search to the SearchActivity
                 Intent intent = new Intent(CartActivity.this, SearchActivity.class);
                 intent.putExtra("user_search", s);
                 startActivity(intent);
@@ -99,7 +112,7 @@ public class CartActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String new_text) {
+            public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });
@@ -107,8 +120,10 @@ public class CartActivity extends AppCompatActivity {
         return true;
     }
 
-    /** This method sets the bottom navigation bar visible or invisible depending on whether the
-     *  keyboard is activated */
+    /**
+     * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
+     * activated
+     */
     public void setNavVisibility(){
 
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
