@@ -35,7 +35,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
     // Fields
     private String user_search; //the user search
-    private static int first_phone_id = -1;
     ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
@@ -60,11 +59,11 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
 
     public void setPhoneID() {
-        first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", first_phone_id);
+        DataHolder.first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", DataHolder.first_phone_id);
     }
 
     public static int getPhoneID() {
-        return first_phone_id;
+        return DataHolder.first_phone_id;
     }
 
 
@@ -126,7 +125,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             String current_phone_name = phone.getName();
             if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
                     (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                if (phone.getId() != first_phone_id) {
+                if (phone.getId() != DataHolder.first_phone_id) {
                     this.phones.add(phone);
                 }
             }
@@ -148,7 +147,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void filterOutFirstPhoneID() {
         for (Phone phone: DataProvider.getPhones()) {
-            if (phone.getId() != first_phone_id) {
+            if (phone.getId() != DataHolder.first_phone_id) {
                 this.phones.add(phone);
             }
         }

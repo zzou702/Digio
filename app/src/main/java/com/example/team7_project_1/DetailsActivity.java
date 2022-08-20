@@ -154,8 +154,4 @@ public class DetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void comparePhone(Phone otherPhone) {
-        // TODO (Ou-An): upon getting phone for comparison, open modal with side by side specifications comparison
-        // comparePhone(otherPhone)
-    }
 }
