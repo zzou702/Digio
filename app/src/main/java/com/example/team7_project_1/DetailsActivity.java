@@ -155,8 +155,12 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void addToCartButtonClicked(View v) {
-        Toast.makeText(this, "Added to cart!", Toast.LENGTH_LONG).show();
-        //DataHolder.addToShoppingCart(phone_id);
+        boolean is_in_shopping_cart = DataHolder.addToShoppingCart(phone_id);
+        if (!is_in_shopping_cart) {
+            Toast.makeText(this, "Added to cart!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "This phone is already inside your cart!", Toast.LENGTH_LONG).show();
+        }
     }
 
 }
