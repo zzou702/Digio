@@ -49,17 +49,18 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
+        // Setting the PhoneID that was passed in the putExtra() method
+        setPhoneID();
+
         // Generating Phone List
         generatePhoneList();
 
-        // Setting the PhoneID that was passed in the putExtra() method
-        setPhoneID();
     }
 
 
 
     public void setPhoneID() {
-        first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", 0);
+        first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", first_phone_id);
     }
 
     public static int getPhoneID() {
@@ -108,8 +109,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         if (this.user_search != null) {
             filterUserSearches();
         } else {
-            this.phones = DataProvider.getPhones();
-            this.products = DataProvider.getProducts();
+            filterOutFirstPhoneID();
         }
     }
 
@@ -126,7 +126,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             String current_phone_name = phone.getName();
             if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
                     (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                this.phones.add(phone);
+                if (phone.getId() != first_phone_id) {
+                    this.phones.add(phone);
+                }
             }
         }
 
@@ -140,6 +142,25 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Filters out the first_phone_id out of our phones and products ArrayLists as it doesn't make
+     * sense to be able to compare a given phone to itself
+     */
+    public void filterOutFirstPhoneID() {
+        for (Phone phone: DataProvider.getPhones()) {
+            if (phone.getId() != first_phone_id) {
+                this.phones.add(phone);
+            }
+        }
+        // Getting associated products
+        for (Phone phone: this.phones) {
+            for (Product product : DataProvider.getProducts()) {
+                if (phone.getId() == product.getSoldPhoneId()) {
+                    this.products.add(product);
+                }
+            }
+        }
+    }
 
 
     /**
