@@ -20,7 +20,6 @@ import com.example.team7_project_1.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
-import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
 import java.lang.reflect.Array;
@@ -55,7 +54,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         @Override
         public void onClick(View v) {
             // What to do when the view item is clicked
-            Phone clicked_phone = phones.get(getAdapterPosition());
+            Product clicked_product = products.get(getAdapterPosition());
 
             Context current_context = v.getContext();
 
@@ -66,15 +65,15 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
                 extras.putInt("first_phone_id", ComparisonFilterActivity.getPhoneID());
-                extras.putInt("second_phone_id", clicked_phone.getId());
+                extras.putInt("second_phone_id", clicked_product.getSoldPhoneId());
                 intent.putExtras(extras);
-                Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             } else {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 Bundle extras = new Bundle();
-                intent.putExtra("phone_id", clicked_phone.getId());
-                Toast.makeText(context, clicked_phone.getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                intent.putExtra("phone_id",  clicked_product.getSoldPhoneId());
+                Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             }
 
@@ -82,13 +81,11 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     }
 
     // Fields
-    private ArrayList<Phone> phones;
     private ArrayList<Product> products;
     private Context context;
 
     /** Constructor */
-    public PhoneAdapter(ArrayList<Phone> phones, ArrayList<Product> products, Context context) {
-        this.phones = phones;
+    public PhoneAdapter(ArrayList<Product> products, Context context) {
         this.products = products;
         this.context = context;
     }
@@ -124,35 +121,20 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull PhoneAdapter. ViewHolder holder, int position) {
         // Getting the phone and product associated with it in the given position in the RecyclerView
-        Phone this_phone = phones.get(position);
-        Product associated_product = getProductByPhoneId(this_phone.getId());
+        Product this_product = products.get(position);
 
-        holder.phone_name.setText(associated_product.getName());
-        holder.phone_subtitle.setText(this_phone.getSubtitle());
-        holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",associated_product.getPrice()));
+        holder.phone_name.setText(this_product.getName());
+        holder.phone_subtitle.setText(this_product.getSoldPhone().getSubtitle());
+        holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
-        int image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
+        int image = DataProvider.getPhoneImageResourcesById(this_product.getSoldPhoneId(), this.context)[0];
         holder.phone_main_image.setImageResource(image);
     }
 
-    /**
-     * Finds the product that corresponds to the phone with the given ID
-     * @param phoneId
-     * @return product with ID = phoneId
-     */
-    public Product getProductByPhoneId(int phoneId) {
-        for (Product product : products) {
-            if (product.getSoldPhoneId() == phoneId) {
-                return product;
-            }
-        }
-        // could not find product of phoneId
-        return null;
-    }
 
     @Override
     public int getItemCount() {
-        return phones.size();
+        return products.size();
     }
 
 

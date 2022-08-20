@@ -60,7 +60,6 @@ public class SearchActivity extends AppCompatActivity {
     // Fields
     private Category chosen_category; //the chosen category
     private String user_search; //the user search
-    ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
     ViewHolder vh;
@@ -90,7 +89,7 @@ public class SearchActivity extends AppCompatActivity {
     public void setLabel() {
         if(this.chosen_category == null) {
             setTitle("Search");
-        }else if (this.chosen_category != null && user_search == null){
+        }else if (this.chosen_category != null && user_search == null) {
             setTitle(this.chosen_category.toString());
         }
     }
@@ -102,7 +101,7 @@ public class SearchActivity extends AppCompatActivity {
      * in order to achieve this
      */
     public void generatePhoneList() {
-        initializeArrays();
+        initializeArray();
         setPhoneAdapter();
     }
 
@@ -112,7 +111,7 @@ public class SearchActivity extends AppCompatActivity {
      * Sets the adapter for the RecyclerView
      */
     public void setPhoneAdapter() {
-        adapter = new PhoneAdapter( phones, products,this);
+        adapter = new PhoneAdapter(products,this);
 
         // Creating layout with 2 vertical columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
@@ -127,7 +126,7 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * Initializes the phones and products ArrayLists
      */
-    public void initializeArrays() {
+    public void initializeArray() {
         // Getting the chosen category and user search that have been passed using the putExtra()
         // method
         this.chosen_category = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
@@ -143,7 +142,6 @@ public class SearchActivity extends AppCompatActivity {
         } else if (this.user_search != null) {
             filterUserSearches();
         } else {
-            this.phones = DataProvider.getPhones();
             this.products = DataProvider.getProducts();
         }
     }
@@ -156,22 +154,13 @@ public class SearchActivity extends AppCompatActivity {
      */
     public void filterCategories() {
         String category = this.chosen_category.name();
-        for (Phone phone: DataProvider.getPhones()) {
-            String current_phone_operating_system = phone.getOperatingSystem();
+        for (Product product: DataProvider.getProducts()) {
+            String current_phone_operating_system = product.getSoldPhone().getOperatingSystem();
             if (category.equals("OTHER") && !current_phone_operating_system.equals("iOS") && !current_phone_operating_system.equals("Android")) {
-                this.phones.add(phone);
+                this.products.add(product);
             }
             else if (current_phone_operating_system.equalsIgnoreCase(category)) {
-                this.phones.add(phone);
-            }
-        }
-
-        // Getting associated products
-        for (Phone phone: this.phones) {
-            for (Product product: DataProvider.getProducts()) {
-                if (phone.getId() == product.getSoldPhoneId()) {
-                    this.products.add(product);
-                }
+                this.products.add(product);
             }
         }
     }
@@ -185,20 +174,11 @@ public class SearchActivity extends AppCompatActivity {
     public void filterUserSearches() {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
-        for (Phone phone: DataProvider.getPhones()) {
-            String current_phone_name = phone.getName();
-            if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
-            (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                this.phones.add(phone);
-            }
-        }
-
-        // Getting associated products
-        for (Phone phone: this.phones) {
-            for (Product product: DataProvider.getProducts()) {
-                if (phone.getId() == product.getSoldPhoneId()) {
-                    this.products.add(product);
-                }
+        for (Product product: DataProvider.getProducts()) {
+            String current_product_name = product.getSoldPhone().getName();
+            if ((current_product_name.equalsIgnoreCase(this.user_search)) ||
+            (current_product_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
+                this.products.add(product);
             }
         }
     }

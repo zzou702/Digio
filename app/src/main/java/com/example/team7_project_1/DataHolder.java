@@ -14,9 +14,9 @@ public class DataHolder {
     static ArrayList<Phone> shopping_cart_phones = new ArrayList<>();
     static ArrayList<Product> shopping_cart_products = new ArrayList<>();
 
-    // Field used in the ComparisonFilterActivity to keep track of the ID of the first phone we
+    // Field used in the ComparisonFilterActivity to keep track of the ID of the first product we
     // decided to compare
-    static int first_phone_id = -1;
+    static int first_product_id = -1;
 
     public static boolean addToShoppingCart(int phone_id) {
         Phone phone = DataProvider.getPhoneById(phone_id);

@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Fields
-    ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
     ViewHolder vh;
@@ -153,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
      * in order to achieve this
      */
     public void generatedTopPicks() {
-        initializeArrays();
+        initializeArray();
         setPhoneAdapter();
     }
 
@@ -163,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
      * Sets the adapter for the RecyclerView
      */
     public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(phones, products,this);
+        adapter = new PhoneAdapter(products,this);
 
         // Creating horizontal linear layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -178,18 +177,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Adds the corresponding product and phone to array for later use
      */
-    public void initializeArrays() {
+    public void initializeArray() {
         for (Product product : DataProvider.getProducts()) {
             if (product.getRating() >= 4.3) {
                 this.products.add(product);
-            }
-        }
-
-        for (Product product: this.products) {
-            for (Phone phone: DataProvider.getPhones()) {
-                if (product.getSoldPhoneId() == phone.getId()) {
-                    this.phones.add(phone);
-                }
             }
         }
     }

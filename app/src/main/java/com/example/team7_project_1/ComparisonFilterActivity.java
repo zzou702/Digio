@@ -59,11 +59,11 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
 
     public void setPhoneID() {
-        DataHolder.first_phone_id = (Integer) getIntent().getIntExtra("first_phone_id", DataHolder.first_phone_id);
+        DataHolder.first_product_id = (Integer) getIntent().getIntExtra("first_phone_id", DataHolder.first_product_id);
     }
 
     public static int getPhoneID() {
-        return DataHolder.first_phone_id;
+        return DataHolder.first_product_id;
     }
 
 
@@ -73,7 +73,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * in order to achieve this
      */
     public void generatePhoneList() {
-        initializeArrays();
+        initializeArray();
         setPhoneAdapter();
     }
 
@@ -83,7 +83,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * Sets the adapter for the RecyclerView
      */
     public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(phones, products,this);
+        adapter = new PhoneAdapter(products,this);
 
         // Creating layout with 2 vertical columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
@@ -98,7 +98,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     /**
      * Initializes the phones and products ArrayLists
      */
-    public void initializeArrays() {
+    public void initializeArray() {
         // Getting the user search that have been passed using the putExtra() method
         this.user_search = (String) getIntent().getStringExtra("user_search");
 
@@ -121,20 +121,11 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     public void filterUserSearches() {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
-        for (Phone phone: DataProvider.getPhones()) {
-            String current_phone_name = phone.getName();
+        for (Product product: DataProvider.getProducts()) {
+            String current_phone_name = product.getSoldPhone().getName();
             if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
                     (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                if (phone.getId() != DataHolder.first_phone_id) {
-                    this.phones.add(phone);
-                }
-            }
-        }
-
-        // Getting associated products
-        for (Phone phone: this.phones) {
-            for (Product product: DataProvider.getProducts()) {
-                if (phone.getId() == product.getSoldPhoneId()) {
+                if (product.getSoldPhone().getId() != DataHolder.first_product_id) {
                     this.products.add(product);
                 }
             }
@@ -146,17 +137,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * sense to be able to compare a given phone to itself
      */
     public void filterOutFirstPhoneID() {
-        for (Phone phone: DataProvider.getPhones()) {
-            if (phone.getId() != DataHolder.first_phone_id) {
-                this.phones.add(phone);
-            }
-        }
-        // Getting associated products
-        for (Phone phone: this.phones) {
-            for (Product product : DataProvider.getProducts()) {
-                if (phone.getId() == product.getSoldPhoneId()) {
-                    this.products.add(product);
-                }
+        for (Product product: DataProvider.getProducts()) {
+            if (product.getSoldPhone().getId() != DataHolder.first_product_id) {
+                this.products.add(product);
             }
         }
     }
