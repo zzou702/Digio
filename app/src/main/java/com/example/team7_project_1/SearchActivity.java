@@ -142,7 +142,7 @@ public class SearchActivity extends AppCompatActivity {
         } else if (this.user_search != null) {
             filterUserSearches();
         } else {
-            this.products = DataProvider.getProducts();
+            this.products = new ArrayList<>(DataProvider.getProducts());
         }
     }
 
@@ -253,6 +253,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String new_text) {
+                adapter.getFilter().filter(new_text);
                 return false;
             }
         });
@@ -284,7 +285,7 @@ public class SearchActivity extends AppCompatActivity {
                 new KeyboardVisibilityEventListener() {
                     @Override
                     public void onVisibilityChanged(boolean is_open) {
-                        if(is_open) {
+                        if (is_open) {
                             vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
                         }else {
                             vh.bottom_navigation_view.setVisibility(View.VISIBLE);

@@ -82,11 +82,13 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
 
     // Fields
     private ArrayList<Product> products;
+    private ArrayList<Product> products_all;
     private Context context;
 
     /** Constructor */
     public PhoneAdapter(ArrayList<Product> products, Context context) {
         this.products = products;
+        this.products_all = new ArrayList<>(products);
         this.context = context;
     }
 
@@ -138,37 +140,38 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     }
 
 
-//    public Filter getFilter() {
-//        return filter;
-//    }
-//
-//    Filter filter = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence char_sequence) {
-//            ArrayList<Product> filtered_products = new ArrayList<>();
-//
-//            if (char_sequence.toString().isEmpty()) {
-//                filtered_products.addAll(all_products);
-//            } else {
-//                for (Product product : all_products) {
-//                    if ((product.getName().equalsIgnoreCase(char_sequence.toString().toLowerCase())) ||
-//                            (product.getName().toLowerCase().contains(char_sequence.toString().toLowerCase()))) {
-//                        filtered_products.add(product);
-//                    }
-//                }
-//            }
-//
-//            FilterResults filter_results = new FilterResults();
-//            filter_results.values = filtered_products;
-//            return filter_results;
-//        }
-//
-//
-//        @Override
-//        protected void publishResults(CharSequence char_sequence, FilterResults filter_results) {
-//            products.clear();
-//            products.addAll((Collection<? extends Product>) filter_results.values);
-//            notifyDataSetChanged();
-//        }
-//    };
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence char_sequence) {
+            ArrayList<Product> filtered_products = new ArrayList<>();
+
+            if (char_sequence.toString().isEmpty()) {
+                filtered_products.addAll(products_all);
+            } else {
+                for (Product product : products_all) {
+                    if ((product.getName().equalsIgnoreCase(char_sequence.toString().toLowerCase())) ||
+                            (product.getName().toLowerCase().contains(char_sequence.toString().toLowerCase()))) {
+                        filtered_products.add(product);
+                    }
+                }
+            }
+
+            FilterResults filter_results = new FilterResults();
+            filter_results.values = filtered_products;
+            return filter_results;
+        }
+
+
+        @Override
+        protected void publishResults(CharSequence char_sequence, FilterResults filter_results) {
+            products.clear();
+            products.addAll((Collection<? extends Product>) filter_results.values);
+            notifyDataSetChanged();
+        }
+    };
+
 }
