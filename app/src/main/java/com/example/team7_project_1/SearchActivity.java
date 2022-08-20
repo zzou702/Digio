@@ -47,8 +47,6 @@ public class SearchActivity extends AppCompatActivity {
         TextView test;
         RecyclerView recycler_view_phones;
 
-
-
         /**
          * Constructor
          */
@@ -211,13 +209,11 @@ public class SearchActivity extends AppCompatActivity {
      * Initialises the navigation item selected for the shopping cart page
      */
     public void initializeNavItem() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-
         //set home selected
-        bottomNavigationView.setSelectedItemId(R.id.nav_search);
+        vh.bottom_navigation_view.setSelectedItemId(R.id.nav_search);
 
         //setting ItemSelectedListener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch(menuItem.getItemId()){
