@@ -9,8 +9,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:paddingBottom="54dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_bar"
@@ -22,5 +22,4 @@
         app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
         />
-
 </FrameLayout>
