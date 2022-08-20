@@ -105,7 +105,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Add to cart +"
-                    android:fontFamily="@font/lato_bold"/>
+                    android:fontFamily="@font/lato_bold"
+                    android:onClick="addToCartButtonClicked"/>
             </LinearLayout>
 
 

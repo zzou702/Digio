@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     // Creating Object of ViewPagerAdapter
     ViewPagerAdapter view_pager_adapter;
+
+    int phone_id;
+    Product current_product;
 
     /** View holder class*/
     private class ViewHolder{
@@ -49,7 +53,6 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
-    private int phone_id;
     ViewHolder vh;
 
     @Override
@@ -71,8 +74,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void loadProduct() {
-        this.phone_id = (Integer) getIntent().getIntExtra("phone_id", 1);
-        Product current_product = DataProvider.getProductByPhoneId(phone_id);
+        phone_id = (Integer) getIntent().getIntExtra("phone_id", 1);
+        current_product = DataProvider.getProductByPhoneId(phone_id);
 
         if (current_product == null) {
             Log.e("LoadProduct", "Could not get product; product was NULL.");
@@ -145,13 +148,15 @@ public class DetailsActivity extends AppCompatActivity {
         finish();
     }
 
-    /**
-     * Takes the
-     */
     public void compareButtonClicked(View v) {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
         intent.putExtra("first_phone_id", this.phone_id);
         startActivity(intent);
+    }
+
+    public void addToCartButtonClicked(View v) {
+        Toast.makeText(this, "Added to cart!", Toast.LENGTH_LONG).show();
+        //DataHolder.addToShoppingCart(phone_id);
     }
 
 }
