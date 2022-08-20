@@ -9,18 +9,48 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="100dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/phone_name"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_gravity="top|center_horizontal"
-                android:text="Comparison activity"
-                android:textSize="30sp"
-                />
+                <LinearLayout style="@style/ComparisonPhoneContainer">
+                    <ImageView style="@style/ComparisonPhoneImage"
+                        android:id="@+id/phone_one_image"
+                        android:src="@drawable/p4_1_medium"/>
+                    <TextView style="@style/ComparisonPhoneTitle"
+                        android:id="@+id/phone_one_title"
+                        android:text="Apple iPhone 13 Pro Max"/>
+                    <TextView style="@style/ComparisonPhoneSubtitle"
+                        android:id="@+id/phone_one_subtitle"
+                        android:text="256GB Sierra Blue"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="View"
+                        android:onClick="backButtonClicked"/>
+                </LinearLayout>
 
+                <LinearLayout style="@style/ComparisonPhoneContainer">
+                    <ImageView style="@style/ComparisonPhoneImage"
+                        android:id="@+id/phone_two_image"
+                        android:src="@drawable/p7_1_medium"/>
+                    <TextView style="@style/ComparisonPhoneTitle"
+                        android:id="@+id/phone_two_title"
+                        android:text="OnePlus Nord CE 2"/>
+                    <TextView style="@style/ComparisonPhoneSubtitle"
+                        android:id="@+id/phone_two_subtitle"
+                        android:text="128GB Grey Mirror"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="View"
+                        android:onClick="backButtonClicked"/>
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
