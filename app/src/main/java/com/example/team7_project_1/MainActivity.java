@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     final long DELAY_MS = 500;
     final long PERIOD_MS = 5000; // 5 seconds before executing the next task
 
+
     /**
      * View holder class
      */
@@ -61,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView top_pics_recycler_view;
         ProgressBar phone_load_progressbar;
         ViewPager banner_view_pager;
-
-
 
         /**
          * Constructor
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         vh = new ViewHolder();
 
         initialiseBanner();
+
+
 
         // Generating the Top Picks
         generatedTopPicks();
@@ -141,14 +144,6 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(update);
             }
         }, DELAY_MS, PERIOD_MS);
-
-        // Generating the Top Picks
-        generatedTopPicks();
-
-
-        // Setup navigation bar
-        initializeNavItem();
-        setNavVisibility();
     }
 
 

@@ -11,7 +11,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         tools:context=".MainActivity">
 
@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingBottom="70dp"
             android:hint="@string/label"
             >
 
@@ -33,9 +34,6 @@
                 android:background="@color/white"
                 />
 
-            <!--
-            <View style="@style/HorizontalDivider"/>
-            -->
 
             <!--        Categories-->
             <!--        OU-AN: refer to res/values/styles.xml to find style definitions-->
@@ -96,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Top Picks"
-                    android:textSize="24sp"
+                    android:textSize="26sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_regular"
                     android:layout_marginBottom="10dp"/>
@@ -107,7 +105,73 @@
                     />
             </LinearLayout>
 
+            <!-- News Section-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center_horizontal"
+                android:text="News"
+                android:textSize="27sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_regular"
+                />
+
+            <LinearLayout
+                style="@style/NewsContainer"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                >
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/news_1"/>
+
+                <TextView
+                    style="@style/NewsCaption"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="iPhone 14, Rethink What a Phone Can Do"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/NewsContainer"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                >
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/news_2"/>
+
+                <TextView
+                    style="@style/NewsCaption"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="Seize the Night with Samsung S22 Ultra"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/NewsContainer"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                >
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/news_3"/>
+
+                <TextView
+                    style="@style/NewsCaption"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="The Xiaomi 12 Holds the Camera of the Future"/>
+            </LinearLayout>
+
+
         </LinearLayout>
+
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

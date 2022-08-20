@@ -10,8 +10,8 @@
         android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="80sp"
-        android:text="cart"
+        android:textSize="40sp"
+        android:text="Your cart is empty"
         android:layout_gravity="center"
         />
 
