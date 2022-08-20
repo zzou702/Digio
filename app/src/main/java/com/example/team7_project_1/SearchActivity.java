@@ -272,7 +272,7 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(String new_text) {
                 return false;
             }
         });

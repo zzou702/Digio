@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,9 @@ import com.example.team7_project_1.R;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 
 public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> {
@@ -151,4 +154,39 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     public int getItemCount() {
         return phones.size();
     }
+
+
+//    public Filter getFilter() {
+//        return filter;
+//    }
+//
+//    Filter filter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence char_sequence) {
+//            ArrayList<Product> filtered_products = new ArrayList<>();
+//
+//            if (char_sequence.toString().isEmpty()) {
+//                filtered_products.addAll(all_products);
+//            } else {
+//                for (Product product : all_products) {
+//                    if ((product.getName().equalsIgnoreCase(char_sequence.toString().toLowerCase())) ||
+//                            (product.getName().toLowerCase().contains(char_sequence.toString().toLowerCase()))) {
+//                        filtered_products.add(product);
+//                    }
+//                }
+//            }
+//
+//            FilterResults filter_results = new FilterResults();
+//            filter_results.values = filtered_products;
+//            return filter_results;
+//        }
+//
+//
+//        @Override
+//        protected void publishResults(CharSequence char_sequence, FilterResults filter_results) {
+//            products.clear();
+//            products.addAll((Collection<? extends Product>) filter_results.values);
+//            notifyDataSetChanged();
+//        }
+//    };
 }

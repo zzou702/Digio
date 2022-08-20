@@ -40,13 +40,13 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    //categories to be chosen
+    // Categories to be chosen
     public SearchActivity.Category category;
 
-    //array for banners
+    // Array for banners
     int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
 
-    //adapter for the banner images
+    // Adapter for the banner images
     ViewPagerAdapter banner_view_pager_adapter;
 
     /* variables for the banner and timer */
