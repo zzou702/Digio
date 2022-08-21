@@ -9,24 +9,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="20dp"
             android:paddingBottom="100dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:padding="20dp"
+                android:orientation="horizontal"
+                android:background="@color/white">
 
                 <LinearLayout style="@style/ComparisonPhoneContainer">
                     <ImageView style="@style/ComparisonPhoneImage"
                         android:id="@+id/phone_1_image"
                         android:src="@drawable/p4_1_medium"/>
-                    <TextView style="@style/ComparisonPhoneTitle"
-                        android:id="@+id/phone_1_title"
-                        android:text="Apple iPhone 13 Pro Max"/>
-                    <TextView style="@style/ComparisonPhoneSubtitle"
-                        android:id="@+id/phone_1_subtitle"
-                        android:text="256GB Sierra Blue"/>
+                    <LinearLayout style="@style/ComparisonPhoneTextContainer">
+                        <TextView style="@style/ComparisonPhoneTitle"
+                            android:id="@+id/phone_1_title"
+                            android:text="Apple iPhone 13 Pro Max"/>
+                        <TextView style="@style/ComparisonPhoneSubtitle"
+                            android:id="@+id/phone_1_subtitle"
+                            android:text="256GB Sierra Blue"/>
+                    </LinearLayout>
+
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -38,19 +42,29 @@
                     <ImageView style="@style/ComparisonPhoneImage"
                         android:id="@+id/phone_2_image"
                         android:src="@drawable/p7_1_medium"/>
-                    <TextView style="@style/ComparisonPhoneTitle"
-                        android:id="@+id/phone_2_title"
-                        android:text="OnePlus Nord CE 2"/>
-                    <TextView style="@style/ComparisonPhoneSubtitle"
-                        android:id="@+id/phone_2_subtitle"
-                        android:text="128GB Grey Mirror"/>
+                    <LinearLayout style="@style/ComparisonPhoneTextContainer">
+                        <TextView style="@style/ComparisonPhoneTitle"
+                            android:id="@+id/phone_2_title"
+                            android:text="OnePlus Nord CE 2"/>
+                        <TextView style="@style/ComparisonPhoneSubtitle"
+                            android:id="@+id/phone_2_subtitle"
+                            android:text="128GB Grey Mirror"/>
+                    </LinearLayout>
+
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="View"
                         android:onClick="viewPhone2ButtonClicked"/>
                 </LinearLayout>
+
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/specs_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"/>
 
         </LinearLayout>
 
