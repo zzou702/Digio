@@ -106,7 +106,15 @@
 
     <style name="ComparisonPhoneImage">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">250dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="ComparisonPhoneTextContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="ComparisonPhoneTitle" parent="TextAppearance.AppCompat">
