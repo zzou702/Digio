@@ -69,8 +69,12 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
 
             Context current_context = v.getContext();
 
-            // If the context is an instance of ComparisonFilterActivity we want to go to the
-            // comparison activity, if the instance of CartActivity otherwise we want to go to the details activity.
+            // Context instance of ComparisonFilterActivity - go to the comparison activity
+            // Context instance of CartActivity - check if the view is the remove button or the
+            // cardView:
+            //      - Remove button ---> remove product from the shopping cart
+            //      - CardView ---> go to to that product's details activity
+            // Otherwise we want to go to the details activity
             if (current_context instanceof ComparisonFilterActivity) {
                 Intent intent = new Intent(context, ComparisonActivity.class);
                 Bundle extras = new Bundle();
