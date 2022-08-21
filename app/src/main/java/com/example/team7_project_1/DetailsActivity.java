@@ -150,7 +150,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void compareButtonClicked(View v) {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
-        intent.putExtra("first_phone_id", this.phone_id);
+        intent.putExtra("phone1_id", this.phone_id);
         startActivity(intent);
     }
 

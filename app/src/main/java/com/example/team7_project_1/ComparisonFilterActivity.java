@@ -58,7 +58,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
 
     public void setPhoneID() {
-        DataHolder.first_product_id = (Integer) getIntent().getIntExtra("first_phone_id", DataHolder.first_product_id);
+        DataHolder.first_product_id = (Integer) getIntent().getIntExtra("phone1_id", DataHolder.first_product_id);
     }
 
     public static int getPhoneID() {

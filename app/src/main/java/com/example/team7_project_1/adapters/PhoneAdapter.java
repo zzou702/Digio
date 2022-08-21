@@ -79,8 +79,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Intent intent = new Intent(context, ComparisonActivity.class);
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
-                extras.putInt("first_phone_id", ComparisonFilterActivity.getPhoneID());
-                extras.putInt("second_phone_id", clicked_product.getSoldPhoneId());
+                extras.putInt("phone1_id", ComparisonFilterActivity.getPhoneID());
+                extras.putInt("phone2_id", clicked_product.getSoldPhoneId());
                 intent.putExtras(extras);
                 context.startActivity(intent);
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {

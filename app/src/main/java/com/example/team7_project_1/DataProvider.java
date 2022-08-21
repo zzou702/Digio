@@ -1,6 +1,7 @@
 package com.example.team7_project_1;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.team7_project_1.models.BoolSpecification;
 import com.example.team7_project_1.models.Phone;
@@ -26,11 +27,13 @@ public class DataProvider {
      * Getters and setters for the all_phones and all_products ArrayLists
      */
     public static void setPhoneList(ArrayList<Phone> phones) {
-        DataProvider.all_phones = phones;
+        // Create copy of list for storage
+        DataProvider.all_phones = new ArrayList<>(phones);
     }
 
     public static void setProductList(ArrayList<Product> products) {
-        DataProvider.all_products = products;
+        // Create copy of list for storage
+        DataProvider.all_products = new ArrayList<>(products);
     }
 
     public static ArrayList<Phone> getPhones() {
@@ -51,13 +54,13 @@ public class DataProvider {
         return null;
     }
 
-    public static Product getProductByPhoneId(int phoneId) {
+    public static Product getProductByPhoneId(int phone_id) {
         for (Product product : all_products) {
-            if (product.getSoldPhoneId() == phoneId) {
+            if (product.getSoldPhoneId() == phone_id) {
                 return product;
             }
         }
-        // could not find product of phoneId
+        // could not find product of phone_id
         return null;
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsActivity">
+    tools:context=".ComparisonActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,36 +19,36 @@
 
                 <LinearLayout style="@style/ComparisonPhoneContainer">
                     <ImageView style="@style/ComparisonPhoneImage"
-                        android:id="@+id/phone_one_image"
+                        android:id="@+id/phone_1_image"
                         android:src="@drawable/p4_1_medium"/>
                     <TextView style="@style/ComparisonPhoneTitle"
-                        android:id="@+id/phone_one_title"
+                        android:id="@+id/phone_1_title"
                         android:text="Apple iPhone 13 Pro Max"/>
                     <TextView style="@style/ComparisonPhoneSubtitle"
-                        android:id="@+id/phone_one_subtitle"
+                        android:id="@+id/phone_1_subtitle"
                         android:text="256GB Sierra Blue"/>
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="View"
-                        android:onClick="backButtonClicked"/>
+                        android:onClick="viewPhone1ButtonClicked"/>
                 </LinearLayout>
 
                 <LinearLayout style="@style/ComparisonPhoneContainer">
                     <ImageView style="@style/ComparisonPhoneImage"
-                        android:id="@+id/phone_two_image"
+                        android:id="@+id/phone_2_image"
                         android:src="@drawable/p7_1_medium"/>
                     <TextView style="@style/ComparisonPhoneTitle"
-                        android:id="@+id/phone_two_title"
+                        android:id="@+id/phone_2_title"
                         android:text="OnePlus Nord CE 2"/>
                     <TextView style="@style/ComparisonPhoneSubtitle"
-                        android:id="@+id/phone_two_subtitle"
+                        android:id="@+id/phone_2_subtitle"
                         android:text="128GB Grey Mirror"/>
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="View"
-                        android:onClick="backButtonClicked"/>
+                        android:onClick="viewPhone2ButtonClicked"/>
                 </LinearLayout>
             </LinearLayout>
 
