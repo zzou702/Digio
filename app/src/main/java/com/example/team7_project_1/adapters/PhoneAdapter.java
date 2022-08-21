@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,12 +15,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
+import com.example.team7_project_1.DataHolder;
 import com.example.team7_project_1.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
+import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Product;
 
 import java.lang.reflect.Array;
@@ -37,6 +41,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         public TextView phone_name;
         public ImageView phone_main_image;
         public TextView phone_price;
+        public Button remove_from_cart_button;
 
         /**
          * Constructor
@@ -49,7 +54,12 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             this.phone_main_image = v.findViewById(R.id.phone_main_image);
             this.phone_price = v.findViewById(R.id.phone_price);
             this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
+
+            if (is_cart) {
+                remove_from_cart_button.setOnClickListener(this);
+            }
         }
+
 
         @Override
         public void onClick(View v) {
@@ -69,14 +79,28 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 intent.putExtras(extras);
                 Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
-            } else {
+            } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);
-                Bundle extras = new Bundle();
                 intent.putExtra("phone_id",  clicked_product.getSoldPhoneId());
                 Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
+            } else if (current_context instanceof CartActivity) {
+                if (v.equals(remove_from_cart_button)) {
+                    removeAt(getAdapterPosition());
+                    DataHolder.removeFromShoppingCart(clicked_product.getSoldPhoneId());
+                } else {
+                    Intent intent = new Intent(context, DetailsActivity.class);
+                    intent.putExtra("phone_id", clicked_product.getSoldPhoneId());
+                    Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    context.startActivity(intent);
+                }
             }
+        }
 
+        public void removeAt(int position) {
+            products.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, products.size());
         }
     }
 
@@ -84,12 +108,14 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     private ArrayList<Product> products;
     private ArrayList<Product> products_all;
     private Context context;
+    private boolean is_cart;
 
     /** Constructor */
-    public PhoneAdapter(ArrayList<Product> products, Context context) {
+    public PhoneAdapter(ArrayList<Product> products, boolean is_cart, Context context) {
         this.products = products;
         this.products_all = new ArrayList<>(products);
         this.context = context;
+        this.is_cart = is_cart;
     }
 
     @NonNull
@@ -103,6 +129,9 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         if(this.context instanceof MainActivity) {
             // Inflate the custom layout for the top picks items
             phone_view = inflater.inflate(R.layout.top_picks_items, parent, false);
+        }else if (this.context instanceof CartActivity) {
+            // Inflate the custom layout for the cart items
+            phone_view = inflater.inflate(R.layout.cart_list_view_item, parent, false);
         }else {
             // Inflate the custom layout for the recycleView items
             phone_view = inflater.inflate(R.layout.phone_list_view_item, parent, false);

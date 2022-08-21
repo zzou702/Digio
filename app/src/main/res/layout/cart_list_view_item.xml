@@ -61,12 +61,12 @@
                     android:text="$47.99"
                     style="@style/CardViewTitle" />
                 <Button
+                    android:id="@+id/remove_from_cart_button"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:text="×"
                     android:textSize="30sp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:onClick="removeFromCart" />
+                    android:background="?android:attr/selectableItemBackground" />
             </LinearLayout>
         </LinearLayout>
 

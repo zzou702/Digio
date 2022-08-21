@@ -14,6 +14,11 @@
         android:text="Your cart is empty"
         android:layout_gravity="center"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="54dp"/>
 
     <LinearLayout
         android:id="@+id/cart_details"

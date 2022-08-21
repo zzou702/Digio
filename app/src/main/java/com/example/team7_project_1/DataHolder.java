@@ -30,4 +30,11 @@ public class DataHolder {
         }
     }
 
+    public static void removeFromShoppingCart(int phone_id) {
+        Phone phone = DataProvider.getPhoneById(phone_id);
+        Product equivalent_product = DataProvider.getProductByPhoneId(phone_id);
+        shopping_cart_phones.remove(phone);
+        shopping_cart_products.remove(equivalent_product);
+    }
+
 }

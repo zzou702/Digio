@@ -3,6 +3,9 @@ package com.example.team7_project_1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +14,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
+import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -22,17 +29,21 @@ public class CartActivity extends AppCompatActivity {
      *  View holder class
      */
     private class ViewHolder {
+        RecyclerView recycler_view_phones;
         BottomNavigationView bottom_navigation_view;
 
         /**
          * Constructor
          */
         public ViewHolder(){
+            recycler_view_phones = (RecyclerView) findViewById(R.id.cart_recycler_view);
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
         }
     }
 
     ViewHolder vh;
+    PhoneAdapter adapter;
+    ArrayList<Product> products = new ArrayList<Product>();
 
     @Override
     protected void onCreate(Bundle saved_instance_state) {
@@ -44,11 +55,41 @@ public class CartActivity extends AppCompatActivity {
         //setting the title of the header
         setTitle("Shopping Cart");
 
+        generatePhoneList();
+
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
     }
 
+    /**
+     * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
+     * in order to achieve this
+     */
+    public void generatePhoneList() {
+        initializeArray();
+        setPhoneAdapter();
+    }
+
+
+    public void initializeArray() {
+        this.products = DataHolder.shopping_cart_products;
+    }
+
+
+    /**
+     * Sets the adapter for the RecyclerView
+     */
+    public void setPhoneAdapter() {
+        adapter = new PhoneAdapter(products,true,this);
+
+        // Creating horizontal vertical layout
+        LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        vh.recycler_view_phones.setLayoutManager(layout_manager);
+
+        // Attaching the adapter to the recyclerView in order to populate it
+        vh.recycler_view_phones.setAdapter(adapter);
+    }
 
 
     /**

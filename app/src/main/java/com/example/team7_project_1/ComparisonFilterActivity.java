@@ -35,7 +35,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
     // Fields
     private String user_search; //the user search
-    ArrayList<Phone> phones = new ArrayList<Phone>();
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
     ViewHolder vh;
@@ -83,7 +82,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * Sets the adapter for the RecyclerView
      */
     public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,this);
+        adapter = new PhoneAdapter(products,false,this);
 
         // Creating layout with 2 vertical columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
@@ -183,7 +182,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(String new_text) {
                 return false;
             }
         });

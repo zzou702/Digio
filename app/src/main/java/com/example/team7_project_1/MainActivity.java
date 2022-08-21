@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
      * Sets the adapter for the RecyclerView
      */
     public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,this);
+        adapter = new PhoneAdapter(products,false,this);
 
         // Creating horizontal linear layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
