@@ -82,21 +82,19 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 extras.putInt("first_phone_id", ComparisonFilterActivity.getPhoneID());
                 extras.putInt("second_phone_id", clicked_product.getSoldPhoneId());
                 intent.putExtras(extras);
-                Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("phone_id",  clicked_product.getSoldPhoneId());
-                Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             } else if (current_context instanceof CartActivity) {
                 if (v.equals(remove_from_cart_button)) {
                     removeAt(getAdapterPosition());
                     DataHolder.removeFromShoppingCart(clicked_product.getSoldPhoneId());
+                    Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
                     intent.putExtra("phone_id", clicked_product.getSoldPhoneId());
-                    Toast.makeText(context, clicked_product.getSoldPhone().getBrand() + " is clicked in position " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                     context.startActivity(intent);
                 }
             }

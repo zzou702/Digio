@@ -9,10 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Product;
@@ -31,19 +35,23 @@ public class CartActivity extends AppCompatActivity {
     private class ViewHolder {
         RecyclerView recycler_view_phones;
         BottomNavigationView bottom_navigation_view;
+        TextView cart_empty_text;
+        LinearLayout cart_details;
 
         /**
          * Constructor
          */
         public ViewHolder(){
-            recycler_view_phones = (RecyclerView) findViewById(R.id.cart_recycler_view);
+            recycler_view_phones = findViewById(R.id.cart_recycler_view);
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            cart_empty_text = findViewById(R.id.cart_empty_text);
+            cart_details = findViewById(R.id.cart_details);
         }
     }
 
     ViewHolder vh;
     PhoneAdapter adapter;
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle saved_instance_state) {
@@ -60,6 +68,8 @@ public class CartActivity extends AppCompatActivity {
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
+
+        updateCheckoutVisibility();
     }
 
     /**
@@ -190,6 +200,22 @@ public class CartActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     * Shows "cart is empty" text if empty, otherwise show list of added phones
+     * and checkout details
+     */
+    public void updateCheckoutVisibility() {
+        if (DataHolder.isCartEmpty()) {
+            vh.cart_details.setVisibility(View.GONE);
+            vh.cart_empty_text.setVisibility(View.VISIBLE);
+        } else {
+            vh.cart_details.setVisibility(View.VISIBLE);
+            vh.cart_empty_text.setVisibility(View.GONE);
+        }
+    }
+
     public void checkoutButtonClicked(View view) {
+        DataHolder.emptyCart();
+        //startActivity(CheckoutActivity);
     }
 }
