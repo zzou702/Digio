@@ -56,6 +56,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
 
             if (is_cart) {
+                this.remove_from_cart_button = v.findViewById(R.id.remove_from_cart_button);
                 remove_from_cart_button.setOnClickListener(this);
             }
         }
@@ -69,7 +70,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             Context current_context = v.getContext();
 
             // If the context is an instance of ComparisonFilterActivity we want to go to the
-            // comparison activity, otherwise we want to go to the details activity.
+            // comparison activity, if the instance of CartActivity otherwise we want to go to the details activity.
             if (current_context instanceof ComparisonFilterActivity) {
                 Intent intent = new Intent(context, ComparisonActivity.class);
                 Bundle extras = new Bundle();
