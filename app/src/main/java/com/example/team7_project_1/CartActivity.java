@@ -148,4 +148,7 @@ public class CartActivity extends AppCompatActivity {
                 }
         );
     }
+
+    public void checkoutButtonClicked(View view) {
+    }
 }

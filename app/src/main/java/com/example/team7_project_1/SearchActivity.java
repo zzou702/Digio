@@ -44,7 +44,6 @@ public class SearchActivity extends AppCompatActivity {
      */
     private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
-        TextView test;
         RecyclerView recycler_view_phones;
 
         /**
@@ -52,7 +51,6 @@ public class SearchActivity extends AppCompatActivity {
          */
         public ViewHolder() {
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
-            test = findViewById(R.id.test);
             recycler_view_phones = (RecyclerView) findViewById(R.id.search_recycler_view);
         }
     }

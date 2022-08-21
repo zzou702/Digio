@@ -7,13 +7,58 @@
     tools:context=".CartActivity">
 
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/cart_empty_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:text="Your cart is empty"
-        android:layout_gravity="center"
-        />
+        android:layout_gravity="center"/>
+
+
+    <LinearLayout
+        android:id="@+id/cart_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:padding="10dp"
+            android:layout_marginBottom="60dp"
+            android:orientation="vertical"
+            android:gravity="end">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Summary"
+                android:gravity="center"
+                style="@style/CardViewTitle"/>
+
+            <View style="@style/HorizontalDivider"
+                android:layout_marginVertical="10dp"/>
+
+            <TextView
+                android:id="@+id/subtotal_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal: $0"
+                style="@style/CardViewTitle"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="Proceed to Checkout"
+                android:onClick="checkoutButtonClicked" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_bar"

@@ -20,7 +20,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Go Back"
+                android:text="Back"
                 android:onClick="backButtonClicked" />
 
             <androidx.viewpager.widget.ViewPager
@@ -110,7 +110,8 @@
             </LinearLayout>
 
 
-            <View style="@style/HorizontalDivider"/>
+            <View style="@style/HorizontalDivider"
+                android:layout_marginVertical="20dp"/>
 
             <!--  Specifications -->
 
@@ -162,7 +163,8 @@
 
             </LinearLayout>
 
-            <View style="@style/HorizontalDivider"/>
+            <View style="@style/HorizontalDivider"
+                android:layout_marginVertical="20dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
