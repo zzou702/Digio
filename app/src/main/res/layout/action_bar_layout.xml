@@ -8,6 +8,9 @@
         android:id="@+id/action_bar_title"
         android:gravity="center"
         android:text="Digio"
+        android:textSize="28sp"
+        android:textScaleX="1.1"
+        android:fontFamily="@font/montserrat_medium"
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
