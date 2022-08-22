@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class CartActivity extends AppCompatActivity {
         TextView cart_empty_text;
         LinearLayout cart_details;
         TextView action_bar_title;
+        ImageButton action_bar_back_button;
 
         /**
          * Constructor
@@ -73,7 +75,7 @@ public class CartActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a customer layout
+     * This method initialises the action bar using a custom layout
      * */
     public void initialiseActionBar(){
         // Use the customer layout for the action bar
@@ -83,6 +85,10 @@ public class CartActivity extends AppCompatActivity {
         // Get the custom view and title id to set title suitable for the current page
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         vh.action_bar_title.setText("Shopping Cart");
+
+        // Setting the back button to be invisible
+        vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
+        vh.action_bar_back_button.setVisibility(View.INVISIBLE);
     }
 
 

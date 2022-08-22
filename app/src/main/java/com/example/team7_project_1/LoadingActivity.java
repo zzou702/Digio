@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class LoadingActivity extends AppCompatActivity {
     private class ViewHolder{
         ProgressBar phone_load_progressbar;
         TextView action_bar_title;
+        ImageButton action_bar_back_button;
 
         public ViewHolder(){
             phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
@@ -67,6 +69,10 @@ public class LoadingActivity extends AppCompatActivity {
         // Get the custom view and title id to set title suitable for the current page
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         vh.action_bar_title.setText("DIGIO");
+
+        // Setting the back button to be invisible
+        vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
+        vh.action_bar_back_button.setVisibility(View.GONE);
     }
 
 
