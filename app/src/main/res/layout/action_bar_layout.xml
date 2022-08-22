@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ActionBarContainer">
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/ActionBarTitle"
         android:id="@+id/action_bar_title"
+        style="@style/ActionBarTitle"
         android:text="DIGIO"
-        android:textScaleX="1.04"
-        />
-</LinearLayout>
+        android:textScaleX="1.04" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/Action_bar_back_button"
+        style="@style/backButton"
+        android:background="@drawable/ic_baseline_arrow_back_24" />
+</RelativeLayout>
