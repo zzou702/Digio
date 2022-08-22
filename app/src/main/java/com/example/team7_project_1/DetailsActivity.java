@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -34,7 +35,9 @@ public class DetailsActivity extends AppCompatActivity {
     private class ViewHolder{
         BottomNavigationView bottom_navigation_view;
         ViewPager view_pager; // creating object of ViewPager
-        TextView phone_name, phone_subtitle, phone_price, phone_description, phone_rating, phone_storage, phone_memory, phone_battery_capacity;
+        TextView phone_name, phone_subtitle, phone_price, phone_description,
+                phone_rating, phone_storage, phone_memory, phone_battery_capacity,
+                action_bar_title;
 
         public ViewHolder(){
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
@@ -64,15 +67,37 @@ public class DetailsActivity extends AppCompatActivity {
 
         loadProduct();
 
-        setTitle(vh.phone_name.getText());
+        // Action bar
+        initialiseActionBar();
 
         // Adding the Adapter to the ViewPager
         vh.view_pager.setAdapter(view_pager_adapter);
 
+        // Bottom navigation menu
         initializeNavItem();
         setNavVisibility();
     }
 
+
+    /**
+     * This method initialises the action bar using a customer layout
+     * */
+    public void initialiseActionBar(){
+        // Use the customer layout for the action bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+
+        // Get the custom view and title id to set title suitable for the current page
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        vh.action_bar_title.setText(vh.phone_name.getText());
+        vh.action_bar_title.setTextSize(21);
+    }
+
+
+    /**
+     * This method loads the product that has been selected from the previous page and populates the
+     * detailed page
+     * */
     public void loadProduct() {
         phone_id = (Integer) getIntent().getIntExtra("phone_id", 1);
         current_product = DataProvider.getProductByPhoneId(phone_id);
@@ -119,6 +144,7 @@ public class DetailsActivity extends AppCompatActivity {
         );
     }
 
+
     /** Initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //setting ItemSelectedListener
@@ -141,6 +167,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
     }
 
+
     /**
      * Takes the user back to the previous page
      */
@@ -148,12 +175,20 @@ public class DetailsActivity extends AppCompatActivity {
         finish();
     }
 
+
+    /**
+     * Takes the user to the compare filter page
+     * */
     public void compareButtonClicked(View v) {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
         intent.putExtra("phone1_id", this.phone_id);
         startActivity(intent);
     }
 
+
+    /**
+     * Adds the current item/product to cart(DataHolder)
+     * */
     public void addToCartButtonClicked(View v) {
         boolean is_in_shopping_cart = DataHolder.addToShoppingCart(phone_id);
         if (!is_in_shopping_cart) {

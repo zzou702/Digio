@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,6 +28,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     private class ViewHolder {
         RecyclerView recycler_view_phones;
         BottomNavigationView bottom_navigation_view;
+        TextView action_bar_title;
 
         /**
          * Constructor
@@ -53,6 +56,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // Setting the PhoneID that was passed in the putExtra() method
         setPhoneID();
 
+        // Initialising the action bar
+        initialiseActionBar();
+
         // initialising the bottom navigation bar ie setting onClickListener for each item
         initializeNavItem();
 
@@ -61,6 +67,20 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * This method initialises the action bar using a custom layout
+     * */
+    public void initialiseActionBar(){
+        // Use the customer layout for the action bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+
+        // Get the custom view and title id to set title suitable for the current page
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        vh.action_bar_title.setText("Choose one to compare");
+        vh.action_bar_title.setTextSize(20);
+    }
 
 
     public void setPhoneID() {

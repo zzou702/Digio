@@ -79,6 +79,8 @@ public class CartActivity extends AppCompatActivity {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+
+        // Get the custom view and title id to set title suitable for the current page
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         vh.action_bar_title.setText("Shopping Cart");
     }
@@ -211,6 +213,7 @@ public class CartActivity extends AppCompatActivity {
                 }
         );
     }
+
 
     /**
      * Shows "cart is empty" text if empty, otherwise show list of added phones

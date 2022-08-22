@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +25,7 @@ public class ComparisonActivity extends AppCompatActivity {
     class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         ImageView phone_1_image, phone_2_image;
-        TextView phone_1_title, phone_1_subtitle, phone_2_title, phone_2_subtitle;
+        TextView phone_1_title, phone_1_subtitle, phone_2_title, phone_2_subtitle, action_bar_title;
 
         public ViewHolder() {
             phone_1_image = findViewById(R.id.phone_1_image);
@@ -46,10 +47,26 @@ public class ComparisonActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
+        // Action bar
+        initialiseActionBar();
+
         initializeNavItem();
 
         initializePhones();
         initializeViewDetails();
+    }
+
+    /**
+     * This method initialises the action bar using a customer layout
+     * */
+    public void initialiseActionBar(){
+        // Use the customer layout for the action bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+
+        // Get the custom view and title id to set title suitable for the current page
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        vh.action_bar_title.setText("Comparison");
     }
 
     private void initializePhones() {
