@@ -45,6 +45,7 @@ public class SearchActivity extends AppCompatActivity {
     private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         RecyclerView recycler_view_phones;
+        TextView action_bar_title;
 
         /**
          * Constructor
@@ -84,12 +85,14 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a custom layout
+     * This method initialises the action bar using a customer layout
      * */
     public void initialiseActionBar(){
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.action_bar_layout_search);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        vh.action_bar_title.setText("Search");
     }
 
 

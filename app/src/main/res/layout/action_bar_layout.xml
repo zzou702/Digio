@@ -6,6 +6,6 @@
         style="@style/ActionBarTitle"
         android:id="@+id/action_bar_title"
         android:text="DIGIO"
-        android:textScaleX="1.1"
+        android:textScaleX="1.04"
         />
 </LinearLayout>
