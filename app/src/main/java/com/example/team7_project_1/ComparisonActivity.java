@@ -22,6 +22,7 @@ public class ComparisonActivity extends AppCompatActivity {
 
     int phone1_id, phone2_id;
 
+    /** View Holder Class */
     class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         ImageView phone_1_image, phone_2_image;
@@ -50,11 +51,14 @@ public class ComparisonActivity extends AppCompatActivity {
         // Action bar
         initialiseActionBar();
 
+        // Navigation bar
         initializeNavItem();
 
+        // Phones selected
         initializePhones();
         initializeViewDetails();
     }
+
 
     /**
      * This method initialises the action bar using a customer layout
@@ -69,11 +73,19 @@ public class ComparisonActivity extends AppCompatActivity {
         vh.action_bar_title.setText("Comparison");
     }
 
+
+    /**
+     * This method initialises the two phones that have been selected to be compared
+     * */
     private void initializePhones() {
         phone1_id = getIntent().getIntExtra("phone1_id", 1);
         phone2_id = getIntent().getIntExtra("phone2_id", 1);
     }
 
+
+    /**
+     * This method initailises the details of the two phones selected that is displayed
+     * */
     private void initializeViewDetails() {
         Phone phone1 = DataProvider.getPhoneById(phone1_id);
         Phone phone2 = DataProvider.getPhoneById(phone2_id);
@@ -88,17 +100,24 @@ public class ComparisonActivity extends AppCompatActivity {
         vh.phone_2_subtitle.setText(phone2.getSubtitle());
     }
 
+
+    /** Takes the user to details page of phone 1 */
     public void viewPhone1ButtonClicked(View v) {
         gotoDetailsActivity(phone1_id);
     }
+
+    /** Takes the user to details page of phone 2 */
     public void viewPhone2ButtonClicked(View v) {
         gotoDetailsActivity(phone2_id);
     }
+
+    /** Stars the details activity based on the phone selected*/
     private void gotoDetailsActivity(int phone_id) {
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("phone_id", phone_id);
         startActivity(intent);
     }
+
 
     /**
      * Initialises the navigation item selected for the comparison page
