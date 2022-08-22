@@ -4,6 +4,7 @@ package com.example.team7_project_1;
 import androidx.annotation.NonNull;
 
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -91,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
 
         initialiseBanner();
 
-
+        //actionbar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
 
         // Generating the Top Picks
         generatedTopPicks();
