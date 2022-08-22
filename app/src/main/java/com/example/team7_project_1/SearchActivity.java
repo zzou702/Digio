@@ -77,10 +77,12 @@ public class SearchActivity extends AppCompatActivity {
         // Action bar
         initialiseActionBar();
 
+        //Setting the title of the page
+        setLabel();
+
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
-        setLabel();
     }
 
 
@@ -91,10 +93,6 @@ public class SearchActivity extends AppCompatActivity {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
-
-        // Get the custom view and title id to set title suitable for the current page
-        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
-        vh.action_bar_title.setText("Search");
     }
 
 
@@ -103,10 +101,23 @@ public class SearchActivity extends AppCompatActivity {
      * Changes the title on the header based on user action
      */
     public void setLabel() {
+        // Get the custom view and title id to set title suitable for the current page
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+
+        //Check whether the user clicked into the page through the category buttons or not
         if(this.chosen_category == null) {
-            setTitle("Search");
+            vh.action_bar_title.setText("Search");
         }else if (this.chosen_category != null && user_search == null) {
-            setTitle(this.chosen_category.toString());
+
+            /* Change the string that will be outputted based on the category selected */
+            // If the Category chosen is iOS
+            if(this.chosen_category == Category.IOS){
+                vh.action_bar_title.setText("iOS");
+            }else if(this.chosen_category == Category.ANDROID){ // If the Category chose is Android
+                vh.action_bar_title.setText("Android");
+            }else if(this.chosen_category == Category.OTHER){ // If the Category Chosen is Other
+                vh.action_bar_title.setText("Other OS");
+            }
         }
     }
 
