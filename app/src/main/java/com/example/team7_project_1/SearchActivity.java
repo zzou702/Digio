@@ -108,7 +108,16 @@ public class SearchActivity extends AppCompatActivity {
         if(this.chosen_category == null) {
             vh.action_bar_title.setText("Search");
         }else if (this.chosen_category != null && user_search == null) {
-            vh.action_bar_title.setText(this.chosen_category.toString());
+
+            /* Change the string that will be outputted based on the category selected */
+            // If the Category chosen is iOS
+            if(this.chosen_category == Category.IOS){
+                vh.action_bar_title.setText("iOS");
+            }else if(this.chosen_category == Category.ANDROID){ // If the Category chose is Android
+                vh.action_bar_title.setText("Android");
+            }else if(this.chosen_category == Category.OTHER){ // If the Category Chosen is Other
+                vh.action_bar_title.setText("Other OS");
+            }
         }
     }
 
