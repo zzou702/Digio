@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
-import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -39,7 +38,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
     // Fields
     private String user_search; //the user search
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
     PhoneAdapter adapter;
     ViewHolder vh;
 
@@ -53,6 +52,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
         // Setting the PhoneID that was passed in the putExtra() method
         setPhoneID();
+
+        // initialising the bottom navigation bar ie setting onClickListener for each item
+        initializeNavItem();
 
         // Generating Phone List
         generatePhoneList();
@@ -135,6 +137,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         }
     }
 
+
     /**
      * Filters out the first_phone_id out of our phones and products ArrayLists as it doesn't make
      * sense to be able to compare a given phone to itself
@@ -193,6 +196,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
         return true;
     }
+
+
 
     /**
      * Initialises the navigation item selected for the comparison filter page

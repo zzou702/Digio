@@ -20,7 +20,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
