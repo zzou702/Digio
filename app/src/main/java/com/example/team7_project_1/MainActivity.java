@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -322,5 +323,37 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+
+    /**
+     * This method takes the user to the website on the browser if the user clicks on one
+     * of the news
+     * */
+    public void newsClicked(View v){
+        String url_string = "https://www.google.com/"; //default website
+
+        // Conditional statement to see which item is selected
+        switch(v.getId())
+        {
+            // If news 1 is clicked
+            case R.id.news_1 | R.id.news_text_1:
+                url_string = "https://9to5mac.com/2022/08/19/iphone-14-news/";
+                break;
+            // If news 2 is clicked
+            case R.id.news_2 | R.id.news_text_2:
+                url_string = "https://www.samsung.com/nz/news/local/seize-the-night-with-the-" +
+                        "samsung-galaxy-s22-ultra/";
+                break;
+            // If news 3 is clicked
+            case R.id.news_3 | R.id.news_text_3:
+                url_string = "https://www.theverge.com/23278136/xiaomi-12s-ultra-camera-leica-" +
+                        "versus-pixel-6-pro-galaxy-s22-iphone-13-max";
+                break;
+        }
+
+        // directing to the an external browser based on the selected news
+        Intent browser_intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url_string));
+        startActivity(browser_intent);
     }
 }
