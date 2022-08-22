@@ -184,7 +184,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /**
-     * Initialises the navigation item selected for the shopping cart page
+     * Initialises the navigation item selected for the search page
      */
     public void initializeNavItem() {
         //set home selected

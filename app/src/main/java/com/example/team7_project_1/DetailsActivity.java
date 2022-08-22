@@ -39,6 +39,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         public ViewHolder(){
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+
             view_pager = (ViewPager) findViewById(R.id.viewPager);
 
             phone_name = (TextView) findViewById(R.id.phone_name);

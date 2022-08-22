@@ -3,20 +3,27 @@ package com.example.team7_project_1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_project_1.models.Phone;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 public class ComparisonActivity extends AppCompatActivity {
 
     int phone1_id, phone2_id;
 
     class ViewHolder {
+        BottomNavigationView bottom_navigation_view;
         ImageView phone_1_image, phone_2_image;
         TextView phone_1_title, phone_1_subtitle, phone_2_title, phone_2_subtitle;
 
@@ -27,6 +34,7 @@ public class ComparisonActivity extends AppCompatActivity {
             phone_2_title = findViewById(R.id.phone_2_title);
             phone_1_subtitle = findViewById(R.id.phone_1_subtitle);
             phone_2_subtitle = findViewById(R.id.phone_2_subtitle);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
         }
     }
 
@@ -38,6 +46,8 @@ public class ComparisonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comparison);
 
         vh = new ViewHolder();
+
+        initializeNavItem();
 
         initializePhones();
         initializeViewDetails();
@@ -73,4 +83,31 @@ public class ComparisonActivity extends AppCompatActivity {
         intent.putExtra("phone_id", phone_id);
         startActivity(intent);
     }
+
+    /**
+     * Initialises the navigation item selected for the comparison page
+     */
+    public void initializeNavItem() {
+        //setting ItemSelectedListener
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
+                switch(menuItem.getItemId()){
+                    case R.id.nav_home:
+                        startActivity(new Intent(ComparisonActivity.this, MainActivity.class));
+                        return true;
+                    case R.id.nav_search:
+                        startActivity(new Intent(ComparisonActivity.this, SearchActivity.class));
+                        return true;
+                    case R.id.nav_cart:
+                        startActivity(new Intent(ComparisonActivity.this, CartActivity.class));
+                        return true;
+                }
+
+                return false;
+            }
+        });
+    }
+
+
 }

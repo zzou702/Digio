@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -24,12 +26,14 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     private class ViewHolder {
         RecyclerView recycler_view_phones;
+        BottomNavigationView bottom_navigation_view;
 
         /**
          * Constructor
          */
         public ViewHolder() {
             recycler_view_phones = (RecyclerView) findViewById(R.id.comparison_recycler_view);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
         }
     }
 
@@ -188,5 +192,30 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    /**
+     * Initialises the navigation item selected for the comparison filter page
+     */
+    public void initializeNavItem() {
+        //setting ItemSelectedListener
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
+                switch(menuItem.getItemId()){
+                    case R.id.nav_home:
+                        startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
+                        return true;
+                    case R.id.nav_search:
+                        startActivity(new Intent(ComparisonFilterActivity.this, SearchActivity.class));
+                        return true;
+                    case R.id.nav_cart:
+                        startActivity(new Intent(ComparisonFilterActivity.this, CartActivity.class));
+                        return true;
+                }
+
+                return false;
+            }
+        });
     }
 }
