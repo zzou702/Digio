@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         RecyclerView recycler_view_phones;
         BottomNavigationView bottom_navigation_view;
         TextView action_bar_title;
+        ImageButton action_bar_back_button;
 
         /**
          * Constructor
@@ -80,6 +83,18 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         vh.action_bar_title.setText("Choose one to compare");
         vh.action_bar_title.setTextSize(20);
+
+        // Setting the back button to be invisible
+        vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
+        vh.action_bar_back_button.setVisibility(View.VISIBLE);
+
+        // On click listener for the back button
+        vh.action_bar_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 

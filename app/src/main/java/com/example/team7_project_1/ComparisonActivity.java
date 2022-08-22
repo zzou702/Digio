@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class ComparisonActivity extends AppCompatActivity {
         BottomNavigationView bottom_navigation_view;
         ImageView phone_1_image, phone_2_image;
         TextView phone_1_title, phone_1_subtitle, phone_2_title, phone_2_subtitle, action_bar_title;
+        ImageButton action_bar_back_button;
 
         public ViewHolder() {
             phone_1_image = findViewById(R.id.phone_1_image);
@@ -71,6 +73,18 @@ public class ComparisonActivity extends AppCompatActivity {
         // Get the custom view and title id to set title suitable for the current page
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         vh.action_bar_title.setText("Comparison");
+
+        // Setting the back button to be invisible
+        vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
+        vh.action_bar_back_button.setVisibility(View.VISIBLE);
+
+        // On click listener for the back button
+        vh.action_bar_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 

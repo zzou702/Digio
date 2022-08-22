@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ActionBarContainer">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/action_bar_back_button"
+        style="@style/backButton"
+        android:background="@drawable/ic_baseline_arrow_back_24" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/action_bar_title"
         style="@style/ActionBarTitle"
+        android:layout_weight="1"
         android:text="DIGIO"
         android:textScaleX="1.04" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/Action_bar_back_button"
-        style="@style/backButton"
-        android:background="@drawable/ic_baseline_arrow_back_24" />
-</RelativeLayout>
+
+</LinearLayout>

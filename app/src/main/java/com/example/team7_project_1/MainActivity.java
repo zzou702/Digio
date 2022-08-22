@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         ProgressBar phone_load_progressbar;
         ViewPager banner_view_pager;
         TextView action_bar_title;
+        ImageButton action_bar_back_button;
 
         /**
          * Constructor
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a customer layout
+     * This method initialises the action bar using a custom layout
      * */
     public void initialiseActionBar(){
         // Use the customer layout for the action bar
@@ -114,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
         // Get the custom view and title id to set title suitable for the current page
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         vh.action_bar_title.setText("DIGIO");
+
+        // Setting the back button to be invisible
+        vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
+        vh.action_bar_back_button.setVisibility(View.INVISIBLE);
     }
 
 

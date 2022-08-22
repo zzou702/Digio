@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -46,6 +47,7 @@ public class SearchActivity extends AppCompatActivity {
         BottomNavigationView bottom_navigation_view;
         RecyclerView recycler_view_phones;
         TextView action_bar_title;
+        ImageButton action_bar_back_button;
 
         /**
          * Constructor
@@ -87,12 +89,16 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a customer layout
+     * This method initialises the action bar using a custom layout
      * */
     public void initialiseActionBar(){
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+
+        // Setting the back button to be invisible
+        vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
+        vh.action_bar_back_button.setVisibility(View.INVISIBLE);
     }
 
 

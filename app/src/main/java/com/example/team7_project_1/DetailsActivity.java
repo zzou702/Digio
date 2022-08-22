@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class DetailsActivity extends AppCompatActivity {
         TextView phone_name, phone_subtitle, phone_price, phone_description,
                 phone_rating, phone_storage, phone_memory, phone_battery_capacity,
                 action_bar_title;
+        ImageButton action_bar_back_button;
 
         public ViewHolder(){
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
@@ -80,7 +82,7 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a customer layout
+     * This method initialises the action bar using a custom layout
      * */
     public void initialiseActionBar(){
         // Use the customer layout for the action bar
@@ -91,6 +93,18 @@ public class DetailsActivity extends AppCompatActivity {
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
         vh.action_bar_title.setText(vh.phone_name.getText());
         vh.action_bar_title.setTextSize(21);
+
+        // Setting the back button to be visible
+        vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
+        vh.action_bar_back_button.setVisibility(View.VISIBLE);
+
+        // On click listener for the back button that returns to the previous activity
+        vh.action_bar_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
@@ -169,14 +183,6 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     /**
-     * Takes the user back to the previous page
-     */
-    public void backButtonClicked(View v){
-        finish();
-    }
-
-
-    /**
      * Takes the user to the compare filter page
      * */
     public void compareButtonClicked(View v) {
@@ -197,5 +203,4 @@ public class DetailsActivity extends AppCompatActivity {
             Toast.makeText(this, "This phone is already inside your cart!", Toast.LENGTH_LONG).show();
         }
     }
-
 }
