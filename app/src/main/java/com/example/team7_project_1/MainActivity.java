@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -339,22 +340,17 @@ public class MainActivity extends AppCompatActivity {
         String url_string = "https://www.google.com/"; //default website
 
         // Conditional statement to see which item is selected
-        switch(v.getId())
-        {
-            // If news 1 is clicked
-            case R.id.news_1 | R.id.news_text_1:
-                url_string = "https://9to5mac.com/2022/08/19/iphone-14-news/";
-                break;
-            // If news 2 is clicked
-            case R.id.news_2 | R.id.news_text_2:
-                url_string = "https://www.samsung.com/nz/news/local/seize-the-night-with-the-" +
-                        "samsung-galaxy-s22-ultra/";
-                break;
-            // If news 3 is clicked
-            case R.id.news_3 | R.id.news_text_3:
-                url_string = "https://www.theverge.com/23278136/xiaomi-12s-ultra-camera-leica-" +
-                        "versus-pixel-6-pro-galaxy-s22-iphone-13-max";
-                break;
+        int view_id = v.getId();
+
+        // switch statement does not work, duplicate case: R.ids not const at compile time
+        if (view_id == R.id.news_1 | view_id == R.id.news_text_1) {
+            url_string = "https://9to5mac.com/2022/08/19/iphone-14-news/";
+        } else if (view_id == R.id.news_2 | view_id == R.id.news_text_2) {
+            url_string = "https://www.samsung.com/nz/news/local/seize-the-night-with-the-" +
+                    "samsung-galaxy-s22-ultra/";
+        } else if (view_id == R.id.news_3 | view_id == R.id.news_text_3) {
+            url_string = "https://www.theverge.com/23278136/xiaomi-12s-ultra-camera-leica-" +
+                    "versus-pixel-6-pro-galaxy-s22-iphone-13-max";
         }
 
         // directing to the an external browser based on the selected news
