@@ -5,15 +5,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
-import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -24,18 +27,21 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     private class ViewHolder {
         RecyclerView recycler_view_phones;
+        BottomNavigationView bottom_navigation_view;
+        TextView action_bar_title;
 
         /**
          * Constructor
          */
         public ViewHolder() {
             recycler_view_phones = (RecyclerView) findViewById(R.id.comparison_recycler_view);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
         }
     }
 
     // Fields
     private String user_search; //the user search
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
     PhoneAdapter adapter;
     ViewHolder vh;
 
@@ -50,11 +56,31 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // Setting the PhoneID that was passed in the putExtra() method
         setPhoneID();
 
+        // Initialising the action bar
+        initialiseActionBar();
+
+        // initialising the bottom navigation bar ie setting onClickListener for each item
+        initializeNavItem();
+
         // Generating Phone List
         generatePhoneList();
 
     }
 
+
+    /**
+     * This method initialises the action bar using a custom layout
+     * */
+    public void initialiseActionBar(){
+        // Use the customer layout for the action bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+
+        // Get the custom view and title id to set title suitable for the current page
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        vh.action_bar_title.setText("Choose one to compare");
+        vh.action_bar_title.setTextSize(20);
+    }
 
 
     public void setPhoneID() {
@@ -131,6 +157,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         }
     }
 
+
     /**
      * Filters out the first_phone_id out of our phones and products ArrayLists as it doesn't make
      * sense to be able to compare a given phone to itself
@@ -188,5 +215,32 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+
+
+    /**
+     * Initialises the navigation item selected for the comparison filter page
+     */
+    public void initializeNavItem() {
+        //setting ItemSelectedListener
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
+                switch(menuItem.getItemId()){
+                    case R.id.nav_home:
+                        startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
+                        return true;
+                    case R.id.nav_search:
+                        startActivity(new Intent(ComparisonFilterActivity.this, SearchActivity.class));
+                        return true;
+                    case R.id.nav_cart:
+                        startActivity(new Intent(ComparisonFilterActivity.this, CartActivity.class));
+                        return true;
+                }
+
+                return false;
+            }
+        });
     }
 }

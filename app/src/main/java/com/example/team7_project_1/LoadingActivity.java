@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.team7_project_1.models.Phone;
@@ -30,6 +32,7 @@ public class LoadingActivity extends AppCompatActivity {
     /** View holder class*/
     private class ViewHolder{
         ProgressBar phone_load_progressbar;
+        TextView action_bar_title;
 
         public ViewHolder(){
             phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
@@ -45,9 +48,25 @@ public class LoadingActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
+        // Action bar
+        initialiseActionBar();
+
         // Fetch and store data from Firestore
         fetchPhoneData();
         fetchSpecificationTypesData();
+    }
+
+    /**
+     * This method initialises the action bar using a customer layout
+     * */
+    public void initialiseActionBar(){
+        // Use the customer layout for the action bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+
+        // Get the custom view and title id to set title suitable for the current page
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        vh.action_bar_title.setText("DIGIO");
     }
 
 
@@ -115,6 +134,7 @@ public class LoadingActivity extends AppCompatActivity {
                 });
     }
 
+
     public void fetchSpecificationTypesData() {
         ArrayList<SpecificationDatabaseType> specification_types = new ArrayList<>();
 
@@ -159,6 +179,7 @@ public class LoadingActivity extends AppCompatActivity {
                     asycStartMainActivity();
                 });
     }
+
 
     private void asycStartMainActivity() {
         // Check if both fetch tasks are complete
