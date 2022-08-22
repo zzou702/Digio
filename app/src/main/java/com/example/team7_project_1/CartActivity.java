@@ -1,6 +1,7 @@
 package com.example.team7_project_1;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -60,8 +61,8 @@ public class CartActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
-        //setting the title of the header
-        setTitle("Shopping Cart");
+        // Action bar
+        initialiseActionBar();
 
         generatePhoneList();
 
@@ -71,6 +72,17 @@ public class CartActivity extends AppCompatActivity {
 
         updateCheckoutVisibility();
     }
+
+
+    /**
+     * This method initialises the action bar using a customer layout
+     * */
+    public void initialiseActionBar(){
+        //actionbar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout_main);
+    }
+
 
     /**
      * Generates the phone list used to populated the RecyclerView, and setting the adapter needed

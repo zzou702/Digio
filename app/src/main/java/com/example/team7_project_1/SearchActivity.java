@@ -2,6 +2,7 @@ package com.example.team7_project_1;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,7 +20,6 @@ import android.widget.TextView;
 
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
-import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -73,10 +73,23 @@ public class SearchActivity extends AppCompatActivity {
         // Generating Phone List
         generatePhoneList();
 
+        // Action bar
+        initialiseActionBar();
+
         // Setup navigation bar
         initializeNavItem();
         setNavVisibility();
         setLabel();
+    }
+
+
+    /**
+     * This method initialises the action bar using a custom layout
+     * */
+    public void initialiseActionBar(){
+        // Use the customer layout for the action bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout_search);
     }
 
 

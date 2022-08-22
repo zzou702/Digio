@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ActionBarContainer">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/ActionBarTitle"
+        android:id="@+id/action_bar_title"
+        android:text="DIGIO"
+        android:textScaleX="1.1"
+        />
+</LinearLayout>

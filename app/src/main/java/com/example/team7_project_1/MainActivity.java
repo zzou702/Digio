@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView top_pics_recycler_view;
         ProgressBar phone_load_progressbar;
         ViewPager banner_view_pager;
+        TextView action_bar_title;
 
         /**
          * Constructor
@@ -90,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        initialiseBanner();
+        // Actionbar
+        initialiseActionBar();
 
-        //actionbar
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+        // Banner
+        initialiseBanner();
 
         // Generating the Top Picks
         generatedTopPicks();
@@ -104,6 +105,17 @@ public class MainActivity extends AppCompatActivity {
         setNavVisibility();
     }
 
+
+    /**
+     * This method initialises the action bar using a customer layout
+     * */
+    public void initialiseActionBar(){
+        //actionbar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout_main);
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        vh.action_bar_title.setText("DIGIO");
+    }
 
 
     /**

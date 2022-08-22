@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.team7_project_1.models.Phone;
@@ -45,9 +46,20 @@ public class LoadingActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
+        initialiseActionBar();
+
         // Fetch and store data from Firestore
         fetchPhoneData();
         fetchSpecificationTypesData();
+    }
+
+    /**
+     * This method initialises the action bar using a customer layout
+     * */
+    public void initialiseActionBar(){
+        //actionbar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar_layout_main);
     }
 
 
@@ -115,6 +127,7 @@ public class LoadingActivity extends AppCompatActivity {
                 });
     }
 
+
     public void fetchSpecificationTypesData() {
         ArrayList<SpecificationDatabaseType> specification_types = new ArrayList<>();
 
@@ -159,6 +172,7 @@ public class LoadingActivity extends AppCompatActivity {
                     asycStartMainActivity();
                 });
     }
+
 
     private void asycStartMainActivity() {
         // Check if both fetch tasks are complete
