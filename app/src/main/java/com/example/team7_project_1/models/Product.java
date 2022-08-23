@@ -56,7 +56,7 @@ public class Product implements IProduct {
     }
 
     public Phone getSoldPhone() {
-        return DataProvider.getPhoneById(id);
+        return (Phone) this;
     }
 
 }

@@ -162,10 +162,10 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
         for (Product product: DataProvider.getProducts()) {
-            String current_phone_name = product.getSoldPhone().getName();
+            String current_phone_name = product.getName();
             if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
                     (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                if (product.getSoldPhone().getId() != DataHolder.first_product_id) {
+                if (product.getId() != DataHolder.first_product_id) {
                     this.products.add(product);
                 }
             }
@@ -179,7 +179,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void filterOutFirstPhoneID() {
         for (Product product: DataProvider.getProducts()) {
-            if (product.getSoldPhone().getId() != DataHolder.first_product_id) {
+            if (product.getId() != DataHolder.first_product_id) {
                 this.products.add(product);
             }
         }
