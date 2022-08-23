@@ -158,7 +158,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         Product this_product = products.get(position);
 
         holder.phone_name.setText(this_product.getName());
-        holder.phone_subtitle.setText(this_product.getSoldPhone().getSubtitle());
+        holder.phone_subtitle.setText(this_product.getPhone().getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
         int image = DataProvider.getPhoneImageResourcesById(this_product.getId(), this.context)[0];

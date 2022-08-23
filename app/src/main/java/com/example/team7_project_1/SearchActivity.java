@@ -188,7 +188,7 @@ public class SearchActivity extends AppCompatActivity {
     public void filterCategories() {
         String category = this.chosen_category.name();
         for (Product product: DataProvider.getProducts()) {
-            String current_phone_operating_system = product.getSoldPhone().getOperatingSystem();
+            String current_phone_operating_system = product.getPhone().getOperatingSystem();
             if (category.equals("OTHER") && !current_phone_operating_system.equals("iOS") && !current_phone_operating_system.equals("Android")) {
                 this.products.add(product);
             }
@@ -208,7 +208,7 @@ public class SearchActivity extends AppCompatActivity {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
         for (Product product: DataProvider.getProducts()) {
-            String current_product_name = product.getSoldPhone().getName();
+            String current_product_name = product.getPhone().getName();
             if ((current_product_name.equalsIgnoreCase(this.user_search)) ||
             (current_product_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
                 this.products.add(product);

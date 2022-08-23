@@ -15,6 +15,6 @@ public interface IProduct {
 
     double getRating();
 
-    Phone getSoldPhone();
+    Phone getPhone();
 
 }

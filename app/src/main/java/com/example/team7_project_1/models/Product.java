@@ -55,7 +55,7 @@ public class Product implements IProduct {
         return rating;
     }
 
-    public Phone getSoldPhone() {
+    public Phone getPhone() {
         return (Phone) this;
     }
 

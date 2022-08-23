@@ -121,7 +121,7 @@ public class DetailsActivity extends AppCompatActivity {
             return;
         }
 
-        Phone current_phone = current_product.getSoldPhone();
+        Phone current_phone = current_product.getPhone();
 
 
         int[] images = DataProvider.getPhoneImageResourcesById(phone_id, this);
