@@ -21,7 +21,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 
 public class ComparisonActivity extends AppCompatActivity {
 
-    int phone1_id, phone2_id;
+    long phone1_id, phone2_id;
 
     /** View Holder Class */
     class ViewHolder {
@@ -126,7 +126,7 @@ public class ComparisonActivity extends AppCompatActivity {
     }
 
     /** Stars the details activity based on the phone selected*/
-    private void gotoDetailsActivity(int phone_id) {
+    private void gotoDetailsActivity(long phone_id) {
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("phone_id", phone_id);
         startActivity(intent);
