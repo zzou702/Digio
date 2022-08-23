@@ -4,7 +4,7 @@ import com.example.team7_project_1.DataProvider;
 
 public class Product implements IProduct {
     // Fields
-    private int sold_phone_id;
+    private int id;
     private String name;
     private double price;
     private String description;
@@ -13,8 +13,8 @@ public class Product implements IProduct {
     /**
      * Constructor
      */
-    public Product(int sold_phone_id, String name, double price, String description, double rating) {
-        this.sold_phone_id = sold_phone_id;
+    public Product(int id, String name, double price, String description, double rating) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -24,7 +24,7 @@ public class Product implements IProduct {
     @Override
     public String toString() {
         return "Product{" +
-                "soldPhoneId=" + sold_phone_id +
+                "soldPhoneId=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
@@ -35,8 +35,8 @@ public class Product implements IProduct {
     /**
      * Getters and Setters for fields
      */
-    public int getSoldPhoneId() {
-        return sold_phone_id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -56,7 +56,7 @@ public class Product implements IProduct {
     }
 
     public Phone getSoldPhone() {
-        return DataProvider.getPhoneById(sold_phone_id);
+        return DataProvider.getPhoneById(id);
     }
 
 }

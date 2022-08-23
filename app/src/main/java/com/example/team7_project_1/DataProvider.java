@@ -56,7 +56,7 @@ public class DataProvider {
 
     public static Product getProductByPhoneId(int phone_id) {
         for (Product product : all_products) {
-            if (product.getSoldPhoneId() == phone_id) {
+            if (product.getId() == phone_id) {
                 return product;
             }
         }

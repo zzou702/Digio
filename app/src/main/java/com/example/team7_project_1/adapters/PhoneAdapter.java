@@ -80,21 +80,21 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
                 extras.putInt("phone1_id", ComparisonFilterActivity.getPhoneID());
-                extras.putInt("phone2_id", clicked_product.getSoldPhoneId());
+                extras.putInt("phone2_id", clicked_product.getId());
                 intent.putExtras(extras);
                 context.startActivity(intent);
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra("phone_id",  clicked_product.getSoldPhoneId());
+                intent.putExtra("phone_id",  clicked_product.getId());
                 context.startActivity(intent);
             } else if (current_context instanceof CartActivity) {
                 if (v.equals(remove_from_cart_button)) {
                     removeAt(getAdapterPosition());
-                    DataHolder.removeFromShoppingCart(clicked_product.getSoldPhoneId());
+                    DataHolder.removeFromShoppingCart(clicked_product.getId());
                     Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
-                    intent.putExtra("phone_id", clicked_product.getSoldPhoneId());
+                    intent.putExtra("phone_id", clicked_product.getId());
                     context.startActivity(intent);
                 }
             }
@@ -161,7 +161,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         holder.phone_subtitle.setText(this_product.getSoldPhone().getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
-        int image = DataProvider.getPhoneImageResourcesById(this_product.getSoldPhoneId(), this.context)[0];
+        int image = DataProvider.getPhoneImageResourcesById(this_product.getId(), this.context)[0];
         holder.phone_main_image.setImageResource(image);
     }
 

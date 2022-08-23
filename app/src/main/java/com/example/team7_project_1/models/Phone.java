@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class Phone implements IPhone {
+public class Phone extends Product implements IPhone {
     // Fields
-    private int id;
-    private String name;
     private String subtitle;
     private String operating_system;
     private String brand;
@@ -21,9 +19,8 @@ public class Phone implements IPhone {
     /**
      * Constructor
      */
-    public Phone(int id, String name, String subtitle, String operating_system, String brand, String manufacturer_part_no) {
-        this.id = id;
-        this.name = name;
+    public Phone(int id, String name, double price, String description, double rating, String subtitle, String operating_system, String brand, String manufacturer_part_no) {
+        super(id, name, price, description, rating);
         this.subtitle = subtitle;
         this.operating_system = operating_system;
         this.brand = brand;
@@ -53,9 +50,7 @@ public class Phone implements IPhone {
     @NonNull
     @Override
     public String toString() {
-        return "Phone{" +
-                "id=" + this.id +
-                ", name='" + this.name + '\'' +
+        return "Phone{" + '\'' +
                 ", subtitle='" + this.subtitle + '\'' +
                 ", operatingSystem='" + this.operating_system + '\'' +
                 ", brand='" + this.brand + '\'' +
@@ -65,13 +60,6 @@ public class Phone implements IPhone {
     }
 
     /** Getters and setters for fields */
-    public int getId() {
-        return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
 
     public String getSubtitle() {
         return this.subtitle;
