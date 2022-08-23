@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Product;
@@ -237,6 +238,7 @@ public class CartActivity extends AppCompatActivity {
 
     public void checkoutButtonClicked(View view) {
         DataHolder.emptyCart();
+        Toast.makeText(this,"Thank you for your purchase!", Toast.LENGTH_LONG).show();
         //startActivity(CheckoutActivity);
     }
 }
