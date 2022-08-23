@@ -104,7 +104,7 @@ public class CartActivity extends AppCompatActivity {
 
 
     public void initializeArray() {
-        this.products = DataHolder.shopping_cart_products;
+        this.products = DataProvider.shopping_cart_products;
     }
 
 
@@ -227,7 +227,7 @@ public class CartActivity extends AppCompatActivity {
      * and checkout details
      */
     public void updateCheckoutVisibility() {
-        if (DataHolder.isCartEmpty()) {
+        if (DataProvider.isCartEmpty()) {
             vh.cart_details.setVisibility(View.GONE);
             vh.cart_empty_text.setVisibility(View.VISIBLE);
         } else {
@@ -237,7 +237,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void checkoutButtonClicked(View view) {
-        DataHolder.emptyCart();
+        DataProvider.emptyCart();
         Toast.makeText(this,"Thank you for your purchase!", Toast.LENGTH_LONG).show();
         //startActivity(CheckoutActivity);
     }

@@ -57,7 +57,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         vh = new ViewHolder();
 
         // Setting the PhoneID that was passed in the putExtra() method
-        setPhoneID();
+        DataProvider.setPhoneId((Long) getIntent().getLongExtra("phone1_id", DataProvider.first_product_id));
 
         // Initialising the action bar
         initialiseActionBar();
@@ -96,16 +96,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    public void setPhoneID() {
-        DataHolder.first_product_id = (Integer) getIntent().getIntExtra("phone1_id", DataHolder.first_product_id);
-    }
-
-    public static int getPhoneID() {
-        return DataHolder.first_product_id;
-    }
-
 
 
     /**
@@ -165,7 +155,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             String current_phone_name = product.getName();
             if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
                     (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                if (product.getId() != DataHolder.first_product_id) {
+                if (product.getId() != DataProvider.first_product_id) {
                     this.products.add(product);
                 }
             }
@@ -179,7 +169,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void filterOutFirstPhoneID() {
         for (Product product: DataProvider.getProducts()) {
-            if (product.getId() != DataHolder.first_product_id) {
+            if (product.getId() != DataProvider.first_product_id) {
                 this.products.add(product);
             }
         }

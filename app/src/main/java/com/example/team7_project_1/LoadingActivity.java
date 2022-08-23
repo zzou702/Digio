@@ -131,7 +131,7 @@ public class LoadingActivity extends AppCompatActivity {
 
                     // Start Main Activity once all data has been fetched
                     is_fetch_phones_complete = true;
-                    asycStartMainActivity();
+                    asyncStartMainActivity();
                 });
     }
 
@@ -177,12 +177,12 @@ public class LoadingActivity extends AppCompatActivity {
 
                     // Start Main Activity once all data has been fetched
                     is_fetch_specifications_complete = true;
-                    asycStartMainActivity();
+                    asyncStartMainActivity();
                 });
     }
 
 
-    private void asycStartMainActivity() {
+    private void asyncStartMainActivity() {
         // Check if both fetch tasks are complete
         if (!is_fetch_phones_complete || !is_fetch_specifications_complete) {
             return;

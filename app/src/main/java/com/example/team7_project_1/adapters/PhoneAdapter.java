@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
-import com.example.team7_project_1.DataHolder;
 import com.example.team7_project_1.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
@@ -26,7 +25,6 @@ import com.example.team7_project_1.R;
 import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Product;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
@@ -79,8 +77,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Intent intent = new Intent(context, ComparisonActivity.class);
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
-                extras.putInt("phone1_id", ComparisonFilterActivity.getPhoneID());
-                extras.putInt("phone2_id", clicked_product.getId());
+                extras.putLong("phone1_id", DataProvider.getPhoneId());
+                extras.putLong("phone2_id", clicked_product.getId());
                 intent.putExtras(extras);
                 context.startActivity(intent);
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
@@ -90,7 +88,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             } else if (current_context instanceof CartActivity) {
                 if (v.equals(remove_from_cart_button)) {
                     removeAt(getAdapterPosition());
-                    DataHolder.removeFromShoppingCart(clicked_product.getId());
+                    DataProvider.removeFromShoppingCart(clicked_product.getId());
                     Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);

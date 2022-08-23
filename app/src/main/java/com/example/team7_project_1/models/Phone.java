@@ -19,7 +19,7 @@ public class Phone extends Product implements IPhone {
     /**
      * Constructor
      */
-    public Phone(int id, String name, double price, String description, double rating, String subtitle, String operating_system, String brand, String manufacturer_part_no) {
+    public Phone(long id, String name, double price, String description, double rating, String subtitle, String operating_system, String brand, String manufacturer_part_no) {
         super(id, name, price, description, rating);
         this.subtitle = subtitle;
         this.operating_system = operating_system;

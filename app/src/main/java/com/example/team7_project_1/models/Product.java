@@ -4,7 +4,7 @@ import com.example.team7_project_1.DataProvider;
 
 public class Product implements IProduct {
     // Fields
-    private int id;
+    private long id;
     private String name;
     private double price;
     private String description;
@@ -13,7 +13,7 @@ public class Product implements IProduct {
     /**
      * Constructor
      */
-    public Product(int id, String name, double price, String description, double rating) {
+    public Product(long id, String name, double price, String description, double rating) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -35,7 +35,7 @@ public class Product implements IProduct {
     /**
      * Getters and Setters for fields
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

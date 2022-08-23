@@ -196,7 +196,7 @@ public class DetailsActivity extends AppCompatActivity {
      * Adds the current item/product to cart(DataHolder)
      * */
     public void addToCartButtonClicked(View v) {
-        boolean is_in_shopping_cart = DataHolder.addToShoppingCart(phone_id);
+        boolean is_in_shopping_cart = DataProvider.addToShoppingCart(phone_id);
         if (!is_in_shopping_cart) {
             Toast.makeText(this, "Added to cart!", Toast.LENGTH_SHORT).show();
         } else {
