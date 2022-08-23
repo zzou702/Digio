@@ -2,7 +2,7 @@ package com.example.team7_project_1.models;
 
 import com.example.team7_project_1.DataProvider;
 
-public class Product {
+public class Product implements IProduct {
     // Fields
     private int sold_phone_id;
     private String name;

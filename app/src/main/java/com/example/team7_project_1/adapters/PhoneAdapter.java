@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
-public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> {
+public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> implements IPhoneAdapter {
 
     // To make your view item clickable ensure that the view holder class implements View.OnClickListener and it has the onClick(View v) method
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

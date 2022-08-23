@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class Phone {
+public class Phone implements IPhone {
     // Fields
     private int id;
     private String name;
