@@ -2,7 +2,7 @@ package com.example.team7_project_1.models;
 
 import androidx.annotation.NonNull;
 
-public abstract class Specification {
+public abstract class Specification implements ISpecification {
     // Fields
     private String field_name;
     private String display_name;
