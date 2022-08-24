@@ -25,6 +25,8 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class ComparisonActivity extends AppCompatActivity {
 
@@ -91,6 +93,9 @@ public class ComparisonActivity extends AppCompatActivity {
         ArrayList<ArrayList> all_specs = new ArrayList<>();
         ArrayList<Specification> specs_product1 = IProduct.getProductById(product1_id).getPhone().getSpecifications();
         ArrayList<Specification> specs_product2 = IProduct.getProductById(product2_id).getPhone().getSpecifications();
+
+        Collections.sort(specs_product1);
+        Collections.sort(specs_product2);
 
         all_specs.add(specs_product1);
         all_specs.add(specs_product2);
