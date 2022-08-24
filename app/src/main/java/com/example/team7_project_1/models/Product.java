@@ -13,7 +13,7 @@ public abstract class Product implements IProduct {
     /**
      * Constructor
      */
-    public Product(long id, String name, double price, String description, double rating) {
+    protected Product(long id, String name, double price, String description, double rating) {
         this.id = id;
         this.name = name;
         this.price = price;
