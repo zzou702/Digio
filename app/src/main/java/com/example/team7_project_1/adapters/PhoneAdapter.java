@@ -77,13 +77,13 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Intent intent = new Intent(context, ComparisonActivity.class);
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
-                extras.putLong("phone1_id", DataProvider.getPhoneId());
-                extras.putLong("phone2_id", clicked_product.getId());
+                extras.putLong("product1_id", DataProvider.getProductId());
+                extras.putLong("product1_id", clicked_product.getId());
                 intent.putExtras(extras);
                 context.startActivity(intent);
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra("phone_id",  clicked_product.getId());
+                intent.putExtra("product_id",  clicked_product.getId());
                 context.startActivity(intent);
             } else if (current_context instanceof CartActivity) {
                 if (v.equals(remove_from_cart_button)) {
@@ -92,7 +92,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                     Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
-                    intent.putExtra("phone_id", clicked_product.getId());
+                    intent.putExtra("product_id", clicked_product.getId());
                     context.startActivity(intent);
                 }
             }
@@ -121,7 +121,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
 
     @NonNull
     @Override
-    public PhoneAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View phone_view;
 

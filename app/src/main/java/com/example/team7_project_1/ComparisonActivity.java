@@ -11,17 +11,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.team7_project_1.adapters.SpecificationAdapter;
+import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Phone;
+import com.example.team7_project_1.models.Product;
+import com.example.team7_project_1.models.Specification;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
+import java.util.ArrayList;
+
 public class ComparisonActivity extends AppCompatActivity {
 
-    long phone1_id, phone2_id;
+    long product1_id, product2_id;
 
     /** View Holder Class */
     class ViewHolder {
@@ -29,19 +36,22 @@ public class ComparisonActivity extends AppCompatActivity {
         ImageView phone_1_image, phone_2_image;
         TextView phone_1_title, phone_1_subtitle, phone_2_title, phone_2_subtitle, action_bar_title;
         ImageButton action_bar_back_button;
+        RecyclerView specs_recycler_view;
 
         public ViewHolder() {
-            phone_1_image = findViewById(R.id.phone_1_image);
-            phone_2_image = findViewById(R.id.phone_2_image);
-            phone_1_title = findViewById(R.id.phone_1_title);
-            phone_2_title = findViewById(R.id.phone_2_title);
-            phone_1_subtitle = findViewById(R.id.phone_1_subtitle);
-            phone_2_subtitle = findViewById(R.id.phone_2_subtitle);
-            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            this.phone_1_image = findViewById(R.id.phone_1_image);
+            this.phone_2_image = findViewById(R.id.phone_2_image);
+            this.phone_1_title = findViewById(R.id.phone_1_title);
+            this.phone_2_title = findViewById(R.id.phone_2_title);
+            this.phone_1_subtitle = findViewById(R.id.phone_1_subtitle);
+            this.phone_2_subtitle = findViewById(R.id.phone_2_subtitle);
+            this.bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            this.specs_recycler_view = findViewById(R.id.specs_recycler_view);
         }
     }
 
     ViewHolder vh;
+    SpecificationAdapter adapter;
 
     @Override
     protected void onCreate(Bundle saved_instance_state) {
@@ -49,6 +59,7 @@ public class ComparisonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comparison);
 
         vh = new ViewHolder();
+
 
         // Action bar
         initialiseActionBar();
@@ -59,6 +70,33 @@ public class ComparisonActivity extends AppCompatActivity {
         // Phones selected
         initializePhones();
         initializeViewDetails();
+
+        setSpecificationAdapter();
+    }
+
+    public void setSpecificationAdapter() {
+        ArrayList<ArrayList> all_specs = generateSpecsArrays();
+
+        adapter = new SpecificationAdapter(all_specs.get(0), all_specs.get(1), this);
+
+        // Creating horizontal vertical layout
+        LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        vh.specs_recycler_view.setLayoutManager(layout_manager);
+
+        // Attaching the adapter to the recyclerView in order to populate it
+        vh.specs_recycler_view.setAdapter(adapter);
+    }
+
+    public ArrayList<ArrayList> generateSpecsArrays() {
+        ArrayList<ArrayList> all_specs = new ArrayList<>();
+        ArrayList<Specification> specs_product1 = IProduct.getProductById(product1_id).getPhone().getSpecifications();
+        ArrayList<Specification> specs_product2 = IProduct.getProductById(product2_id).getPhone().getSpecifications();
+
+        all_specs.add(specs_product1);
+        all_specs.add(specs_product2);
+
+        return all_specs;
+
     }
 
 
@@ -92,20 +130,20 @@ public class ComparisonActivity extends AppCompatActivity {
      * This method initialises the two phones that have been selected to be compared
      * */
     private void initializePhones() {
-        phone1_id = getIntent().getIntExtra("phone1_id", 1);
-        phone2_id = getIntent().getIntExtra("phone2_id", 1);
+        product1_id = getIntent().getLongExtra("product1_id", 1);
+        product2_id = getIntent().getLongExtra("product2_id", 1);
     }
 
 
     /**
-     * This method initailises the details of the two phones selected that is displayed
+     * This method initializes the details of the two phones selected that is displayed
      * */
     private void initializeViewDetails() {
-        Phone phone1 = DataProvider.getPhoneById(phone1_id);
-        Phone phone2 = DataProvider.getPhoneById(phone2_id);
+        Phone phone1 = DataProvider.getPhoneById(product1_id);
+        Phone phone2 = DataProvider.getPhoneById(product2_id);
 
-        vh.phone_1_image.setImageResource(DataProvider.getPhoneImageResourcesById(phone1_id, this)[0]);
-        vh.phone_2_image.setImageResource(DataProvider.getPhoneImageResourcesById(phone2_id, this)[0]);
+        vh.phone_1_image.setImageResource(DataProvider.getPhoneImageResourcesById(product1_id, this)[0]);
+        vh.phone_2_image.setImageResource(DataProvider.getPhoneImageResourcesById(product2_id, this)[0]);
 
         vh.phone_1_title.setText(phone1.getName());
         vh.phone_2_title.setText(phone2.getName());
@@ -117,12 +155,12 @@ public class ComparisonActivity extends AppCompatActivity {
 
     /** Takes the user to details page of phone 1 */
     public void viewPhone1ButtonClicked(View v) {
-        gotoDetailsActivity(phone1_id);
+        gotoDetailsActivity(product1_id);
     }
 
     /** Takes the user to details page of phone 2 */
     public void viewPhone2ButtonClicked(View v) {
-        gotoDetailsActivity(phone2_id);
+        gotoDetailsActivity(product2_id);
     }
 
     /** Stars the details activity based on the phone selected*/
@@ -140,7 +178,7 @@ public class ComparisonActivity extends AppCompatActivity {
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()){
                     case R.id.nav_home:
                         startActivity(new Intent(ComparisonActivity.this, MainActivity.class));

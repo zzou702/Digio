@@ -29,7 +29,7 @@ public class DetailsActivity extends AppCompatActivity {
     // Creating Object of ViewPagerAdapter
     ViewPagerAdapter view_pager_adapter;
 
-    int phone_id;
+    long product_id;
     Product current_product;
 
     /** View holder class*/
@@ -41,7 +41,7 @@ public class DetailsActivity extends AppCompatActivity {
                 action_bar_title;
         ImageButton action_bar_back_button;
 
-        public ViewHolder(){
+        public ViewHolder() {
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
 
             view_pager = (ViewPager) findViewById(R.id.viewPager);
@@ -113,8 +113,8 @@ public class DetailsActivity extends AppCompatActivity {
      * detailed page
      * */
     public void loadProduct() {
-        phone_id = (Integer) getIntent().getIntExtra("phone_id", 1);
-        current_product = DataProvider.getProductByPhoneId(phone_id);
+        product_id = (Integer) getIntent().getIntExtra("product_id", 1);
+        current_product = DataProvider.getProductByPhoneId(product_id);
 
         if (current_product == null) {
             Log.e("LoadProduct", "Could not get product; product was NULL.");
@@ -124,7 +124,7 @@ public class DetailsActivity extends AppCompatActivity {
         Phone current_phone = current_product.getPhone();
 
 
-        int[] images = DataProvider.getPhoneImageResourcesById(phone_id, this);
+        int[] images = DataProvider.getPhoneImageResourcesById(product_id, this);
         view_pager_adapter = new ViewPagerAdapter(DetailsActivity.this, images);
 
         vh.phone_name.setText(current_product.getName());
@@ -187,7 +187,7 @@ public class DetailsActivity extends AppCompatActivity {
      * */
     public void compareButtonClicked(View v) {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
-        intent.putExtra("phone1_id", this.phone_id);
+        intent.putExtra("product1_id", this.product_id);
         startActivity(intent);
     }
 
@@ -196,7 +196,7 @@ public class DetailsActivity extends AppCompatActivity {
      * Adds the current item/product to cart(DataHolder)
      * */
     public void addToCartButtonClicked(View v) {
-        boolean is_in_shopping_cart = DataProvider.addToShoppingCart(phone_id);
+        boolean is_in_shopping_cart = DataProvider.addToShoppingCart(product_id);
         if (!is_in_shopping_cart) {
             Toast.makeText(this, "Added to cart!", Toast.LENGTH_SHORT).show();
         } else {

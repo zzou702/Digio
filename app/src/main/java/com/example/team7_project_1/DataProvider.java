@@ -180,11 +180,11 @@ public class DataProvider {
         shopping_cart_products.clear();
     }
 
-    public static void setPhoneId(long first_product_id) {
+    public static void setProductId(long first_product_id) {
         DataProvider.first_product_id = first_product_id;
     }
 
-    public static long getPhoneId() {
+    public static long getProductId() {
         return DataProvider.first_product_id;
     }
 }

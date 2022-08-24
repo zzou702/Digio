@@ -56,8 +56,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        // Setting the PhoneID that was passed in the putExtra() method
-        DataProvider.setPhoneId((Long) getIntent().getLongExtra("phone1_id", DataProvider.first_product_id));
+        // Setting the ProductId that was passed in the putExtra() method
+        long product1_id = getIntent().getLongExtra("product1_id", DataProvider.first_product_id);
+        DataProvider.setProductId(product1_id);
 
         // Initialising the action bar
         initialiseActionBar();
