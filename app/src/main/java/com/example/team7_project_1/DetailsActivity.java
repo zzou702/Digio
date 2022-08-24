@@ -113,7 +113,7 @@ public class DetailsActivity extends AppCompatActivity {
      * detailed page
      * */
     public void loadProduct() {
-        product_id = (Integer) getIntent().getIntExtra("product_id", 1);
+        product_id = (Long) getIntent().getLongExtra("product_id", 1);
         current_product = DataProvider.getProductByPhoneId(product_id);
 
         if (current_product == null) {
