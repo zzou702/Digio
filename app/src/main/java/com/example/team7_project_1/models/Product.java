@@ -2,7 +2,7 @@ package com.example.team7_project_1.models;
 
 import com.example.team7_project_1.DataProvider;
 
-public class Product implements IProduct {
+public abstract class Product implements IProduct {
     // Fields
     private long id;
     private String name;
