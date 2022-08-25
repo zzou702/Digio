@@ -26,6 +26,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -242,14 +243,14 @@ public class CartActivity extends AppCompatActivity {
             double total_price = 0;
 
             // Goes through every product in the cart/dataholder and add their price to total price
-            for(int i = 0; i<DataHolder.shopping_cart_products.size(); i++){
-                total_price += DataHolder.shopping_cart_products.get(i).getPrice();
+            for(int i = 0; i<DataProvider.shopping_cart_products.size(); i++){
+                total_price += DataProvider.shopping_cart_products.get(i).getPrice();
             }
 
             // Setting the text for each of the checkout section
-            vh.subtotal_text.setText("Subtotal:  $ " + total_price * (1 - GST_PERCENTAGE));
-            vh.gst.setText("GST:  $ " + total_price * GST_PERCENTAGE);
-            vh.total_text.setText("Total (Inc. GST):  $ " + total_price);
+            vh.subtotal_text.setText(String.format(Locale.getDefault(),"Subtotal:  $%.2f", total_price * (1 - GST_PERCENTAGE)));
+            vh.gst.setText(String.format(Locale.getDefault(),"GST:  $%.2f", total_price * GST_PERCENTAGE));
+            vh.total_text.setText(String.format(Locale.getDefault(),"Total (incl. GST):  $%.2f", total_price));
         }
     }
 
