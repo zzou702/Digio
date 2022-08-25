@@ -1,25 +1,21 @@
 package com.example.team7_project_1.handlers;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.content.Intent;
-import android.util.Log;
-import android.view.View;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.team7_project_1.DataProvider;
 import com.example.team7_project_1.LoadingActivity;
-import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.mappers.PhoneMapper;
 import com.example.team7_project_1.mappers.SpecificationMapper;
 
 public class MapHandler {
-    public static final Object wait_obj = new Object();
+    /*
+    MapHandler serves as middleware between Application/Activity layer and Persistence/Data layer
+     */
+
     static PhoneMapper phoneMapper;
     static SpecificationMapper specificationMapper;
+    static LoadingActivity loadingActivity;
 
-    static AppCompatActivity requestingActivity;
+    public static void setContextToCallback(LoadingActivity loadingActivity) {
+        MapHandler.loadingActivity = loadingActivity;
+    }
 
     public static void initializePhoneMapper(String collection_path) {
         phoneMapper = new PhoneMapper(collection_path);
@@ -29,23 +25,18 @@ public class MapHandler {
         specificationMapper = new SpecificationMapper(collection_path);
     }
 
-    public static void setEndActivity() {
-
-    }
-
     public static void beginFetch() {
         phoneMapper.fetchFromDatabase();
         specificationMapper.fetchFromDatabase();
     }
 
+    /*
+    Called by mappers when they have finished fetching
+     */
     public static void callbackFromFetch() {
-        Log.i("test", "=============== called");
-        synchronized (wait_obj) {
-            // Check if both fetch tasks are complete
-            if (phoneMapper.isStillFetching() || specificationMapper.isStillFetching()) {
-                return;
-            }
-            wait_obj.notify();
+        if (phoneMapper.isStillFetching() || specificationMapper.isStillFetching()) {
+            return;
         }
+        loadingActivity.finishLoading();
     }
 }

@@ -24,7 +24,6 @@ public class PhoneMapper extends DataMapper {
 
     @Override
     public void fetchFromDatabase() {
-        Log.i("test", "=============== " + getCollectionPath());
         ArrayList<Phone> phones = new ArrayList<>();
         ArrayList<Product> products = new ArrayList<>();
 
@@ -34,7 +33,6 @@ public class PhoneMapper extends DataMapper {
 
         db.collection(getCollectionPath()).get()
                 .addOnSuccessListener(documentSnapshots -> {
-                    Log.i("test", "=============== fetching");
                     if (documentSnapshots.isEmpty()) {
                         Log.d("Load", "onSuccess: LIST EMPTY");
                         return;
@@ -51,7 +49,6 @@ public class PhoneMapper extends DataMapper {
                     DataProvider.setProductList(products);
 
                     setIsFetchComplete(true);
-                    Log.i("test", "=============== calling");
                     MapHandler.callbackFromFetch();
                 });
     }

@@ -58,19 +58,10 @@ public class LoadingActivity extends AppCompatActivity {
         initialiseActionBar();
 
         // Fetch and store data from Firestore
+        MapHandler.setContextToCallback(this);
         MapHandler.initializePhoneMapper("phones");
         MapHandler.initializeSpecificationMapper("specifications");
         MapHandler.beginFetch();
-
-//        synchronized (MapHandler.wait_obj) {
-//            try {
-//                MapHandler.wait_obj.wait();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            finishLoading();
-//            Log.i("test", "=============== FINISHED");
-//        }
     }
 
     /**
