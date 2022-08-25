@@ -31,7 +31,9 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:orientation="vertical"
-            android:gravity="end">
+            android:gravity="end"
+            android:elevation="10dp"
+            android:background="@color/white">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,18 +52,19 @@
                 android:layout_gravity="left"
                 style="@style/CardViewTitle"/>
             <TextView
-                android:id="@+id/tax"
+                android:id="@+id/gst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tax: $0"
+                android:text="GST: $0"
                 android:layout_gravity="left"
                 style="@style/CardViewTitle"/>
             <TextView
                 android:id="@+id/total_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total: $0"
+                android:text="Total (Inc. GST): $0"
                 android:layout_gravity="left"
+                android:layout_marginBottom="5dp"
                 style="@style/CardViewTitle"/>
             <Button
                 android:layout_width="wrap_content"

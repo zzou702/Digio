@@ -35,7 +35,7 @@ public class CartActivity extends AppCompatActivity {
     private class ViewHolder {
         RecyclerView recycler_view_phones;
         BottomNavigationView bottom_navigation_view;
-        TextView cart_empty_text;
+        TextView cart_empty_text, subtotal_text, total_text, gst;
         LinearLayout cart_details;
         TextView action_bar_title;
         ImageButton action_bar_back_button;
@@ -48,12 +48,16 @@ public class CartActivity extends AppCompatActivity {
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
             cart_empty_text = findViewById(R.id.cart_empty_text);
             cart_details = findViewById(R.id.cart_details);
+            subtotal_text = findViewById(R.id.subtotal_text);
+            total_text = findViewById(R.id.total_text);
+            gst = findViewById(R.id.gst);
         }
     }
 
     ViewHolder vh;
     PhoneAdapter adapter;
     ArrayList<Product> products = new ArrayList<>();
+    double GST_PERCENTAGE = 0.15;
 
     @Override
     protected void onCreate(Bundle saved_instance_state) {
@@ -233,6 +237,19 @@ public class CartActivity extends AppCompatActivity {
         } else {
             vh.cart_details.setVisibility(View.VISIBLE);
             vh.cart_empty_text.setVisibility(View.GONE);
+
+            // variable for total price
+            double total_price = 0;
+
+            // Goes through every product in the cart/dataholder and add their price to total price
+            for(int i = 0; i<DataHolder.shopping_cart_products.size(); i++){
+                total_price += DataHolder.shopping_cart_products.get(i).getPrice();
+            }
+
+            // Setting the text for each of the checkout section
+            vh.subtotal_text.setText("Subtotal:  $ " + total_price * (1 - GST_PERCENTAGE));
+            vh.gst.setText("GST:  $ " + total_price * GST_PERCENTAGE);
+            vh.total_text.setText("Total (Inc. GST):  $ " + total_price);
         }
     }
 
