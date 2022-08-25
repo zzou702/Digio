@@ -107,6 +107,9 @@ public class LoadingActivity extends AppCompatActivity {
                         Phone current_phone = new Phone (
                                 Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
                                 Objects.requireNonNull(data.get("name")).toString(),
+                                Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
+                                Objects.requireNonNull(data.get("description")).toString(),
+                                Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()),
                                 Objects.requireNonNull(data.get("subtitle")).toString(),
                                 Objects.requireNonNull(data.get("operatingSystem")).toString(),
                                 Objects.requireNonNull(data.get("brand")).toString(),
@@ -115,15 +118,7 @@ public class LoadingActivity extends AppCompatActivity {
                         current_phone.parseSpecifications(data.get("specifications"));
 
                         phones.add(current_phone);
-
-                        Product current_product = new Product(
-                                current_phone.getId(),
-                                current_phone.getName(),
-                                Double.parseDouble(Objects.requireNonNull(data.get("price")).toString()),
-                                Objects.requireNonNull(data.get("description")).toString(),
-                                Double.parseDouble(Objects.requireNonNull(data.get("rating")).toString()));
-
-                        products.add(current_product);
+                        products.add(current_phone);
 
                         // fails: Could not deserialize object. Expected a List, but got a class java.util.HashMap
                         // https://stackoverflow.com/questions/55694354/expected-a-list-while-deserializing-but-got-a-class-java-util-hashmap
@@ -136,7 +131,7 @@ public class LoadingActivity extends AppCompatActivity {
 
                     // Start Main Activity once all data has been fetched
                     is_fetch_phones_complete = true;
-                    asycStartMainActivity();
+                    asyncStartMainActivity();
                 });
     }
 
@@ -182,12 +177,12 @@ public class LoadingActivity extends AppCompatActivity {
 
                     // Start Main Activity once all data has been fetched
                     is_fetch_specifications_complete = true;
-                    asycStartMainActivity();
+                    asyncStartMainActivity();
                 });
     }
 
 
-    private void asycStartMainActivity() {
+    private void asyncStartMainActivity() {
         // Check if both fetch tasks are complete
         if (!is_fetch_phones_complete || !is_fetch_specifications_complete) {
             return;

@@ -2,9 +2,9 @@ package com.example.team7_project_1.models;
 
 import com.example.team7_project_1.DataProvider;
 
-public class Product implements IProduct {
+public abstract class Product implements IProduct {
     // Fields
-    private int sold_phone_id;
+    private long id;
     private String name;
     private double price;
     private String description;
@@ -13,8 +13,8 @@ public class Product implements IProduct {
     /**
      * Constructor
      */
-    public Product(int sold_phone_id, String name, double price, String description, double rating) {
-        this.sold_phone_id = sold_phone_id;
+    protected Product(long id, String name, double price, String description, double rating) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -24,7 +24,7 @@ public class Product implements IProduct {
     @Override
     public String toString() {
         return "Product{" +
-                "soldPhoneId=" + sold_phone_id +
+                "soldPhoneId=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
@@ -35,8 +35,8 @@ public class Product implements IProduct {
     /**
      * Getters and Setters for fields
      */
-    public int getSoldPhoneId() {
-        return sold_phone_id;
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -55,8 +55,8 @@ public class Product implements IProduct {
         return rating;
     }
 
-    public Phone getSoldPhone() {
-        return DataProvider.getPhoneById(sold_phone_id);
+    public Phone getPhone() {
+        return (Phone) this;
     }
 
 }

@@ -1,11 +1,13 @@
 package com.example.team7_project_1.models;
 
+import android.provider.ContactsContract;
+
 import com.example.team7_project_1.DataProvider;
 
 public interface IProduct {
     String toString();
 
-    int getSoldPhoneId();
+    long getId();
 
     String getName();
 
@@ -15,5 +17,15 @@ public interface IProduct {
 
     double getRating();
 
-    Phone getSoldPhone();
+    Phone getPhone();
+
+    static Product getProductById(long product_id) {
+        for (Product product : DataProvider.getProducts()) {
+            if (product.getId() == product_id) {
+                return product;
+            }
+        }
+        return null;
+    }
+
 }

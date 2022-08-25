@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
-import com.example.team7_project_1.DataHolder;
 import com.example.team7_project_1.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
@@ -26,7 +25,6 @@ import com.example.team7_project_1.R;
 import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Product;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
@@ -79,22 +77,22 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Intent intent = new Intent(context, ComparisonActivity.class);
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
-                extras.putInt("phone1_id", ComparisonFilterActivity.getPhoneID());
-                extras.putInt("phone2_id", clicked_product.getSoldPhoneId());
+                extras.putLong("product1_id", DataProvider.getProductId());
+                extras.putLong("product1_id", clicked_product.getId());
                 intent.putExtras(extras);
                 context.startActivity(intent);
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra("phone_id",  clicked_product.getSoldPhoneId());
+                intent.putExtra("product_id",  clicked_product.getId());
                 context.startActivity(intent);
             } else if (current_context instanceof CartActivity) {
                 if (v.equals(remove_from_cart_button)) {
                     removeAt(getAdapterPosition());
-                    DataHolder.removeFromShoppingCart(clicked_product.getSoldPhoneId());
+                    DataProvider.removeFromShoppingCart(clicked_product.getId());
                     Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
-                    intent.putExtra("phone_id", clicked_product.getSoldPhoneId());
+                    intent.putExtra("product_id", clicked_product.getId());
                     context.startActivity(intent);
                 }
             }
@@ -123,7 +121,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
 
     @NonNull
     @Override
-    public PhoneAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View phone_view;
 
@@ -158,10 +156,10 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         Product this_product = products.get(position);
 
         holder.phone_name.setText(this_product.getName());
-        holder.phone_subtitle.setText(this_product.getSoldPhone().getSubtitle());
+        holder.phone_subtitle.setText(this_product.getPhone().getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
-        int image = DataProvider.getPhoneImageResourcesById(this_product.getSoldPhoneId(), this.context)[0];
+        int image = DataProvider.getPhoneImageResourcesById(this_product.getId(), this.context)[0];
         holder.phone_main_image.setImageResource(image);
     }
 

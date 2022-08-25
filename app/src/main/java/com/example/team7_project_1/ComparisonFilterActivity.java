@@ -56,8 +56,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        // Setting the PhoneID that was passed in the putExtra() method
-        setPhoneID();
+        // Setting the ProductId that was passed in the putExtra() method
+        long product1_id = getIntent().getLongExtra("product1_id", DataProvider.first_product_id);
+        DataProvider.setProductId(product1_id);
 
         // Initialising the action bar
         initialiseActionBar();
@@ -96,16 +97,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    public void setPhoneID() {
-        DataHolder.first_product_id = (Integer) getIntent().getIntExtra("phone1_id", DataHolder.first_product_id);
-    }
-
-    public static int getPhoneID() {
-        return DataHolder.first_product_id;
-    }
-
 
 
     /**
@@ -162,10 +153,10 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
         for (Product product: DataProvider.getProducts()) {
-            String current_phone_name = product.getSoldPhone().getName();
+            String current_phone_name = product.getName();
             if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
                     (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                if (product.getSoldPhone().getId() != DataHolder.first_product_id) {
+                if (product.getId() != DataProvider.first_product_id) {
                     this.products.add(product);
                 }
             }
@@ -179,7 +170,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void filterOutFirstPhoneID() {
         for (Product product: DataProvider.getProducts()) {
-            if (product.getSoldPhone().getId() != DataHolder.first_product_id) {
+            if (product.getId() != DataProvider.first_product_id) {
                 this.products.add(product);
             }
         }

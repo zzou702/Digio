@@ -2,7 +2,7 @@ package com.example.team7_project_1.models;
 
 import androidx.annotation.NonNull;
 
-public abstract class Specification implements ISpecification {
+public abstract class Specification implements ISpecification, Comparable<Specification> {
     // Fields
     private String field_name;
     private String display_name;
@@ -35,5 +35,10 @@ public abstract class Specification implements ISpecification {
                 ", displayName='" + display_name + '\'' +
                 ", value='" + getFormattedValue() + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Specification e) {
+        return this.getDisplayName().compareTo(e.getDisplayName());
     }
 }

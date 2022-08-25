@@ -5,10 +5,6 @@ import java.util.ArrayList;
 public interface IPhone {
     void parseSpecifications(Object spec_obj);
 
-    int getId();
-
-    String getName();
-
     String getSubtitle();
 
     String getOperatingSystem();

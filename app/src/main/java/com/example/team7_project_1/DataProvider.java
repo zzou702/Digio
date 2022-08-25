@@ -23,8 +23,18 @@ public class DataProvider {
     private static ArrayList<Product> all_products;
     private static ArrayList<SpecificationDatabaseType> all_specification_types;
 
+
+    // Fields used in the CartActivity in order to keep track of what phones the user has put
+    // in their shopping cart
+    static ArrayList<Product> shopping_cart_products = new ArrayList<>();
+
+    // Field used in the ComparisonFilterActivity to keep track of the ID of the first product we
+    // decided to compare
+    static long first_product_id = -1;
+
+
     /**
-     * Getters and setters for the all_phones and all_products ArrayLists
+     * Getters and setters for the all_phones and all_products ArrayLists as well as shopping_cart_products
      */
     public static void setPhoneList(ArrayList<Phone> phones) {
         // Create copy of list for storage
@@ -44,7 +54,7 @@ public class DataProvider {
         return all_products;
     }
 
-    public static Phone getPhoneById(int id) {
+    public static Phone getPhoneById(long id) {
         for (Phone phone : all_phones) {
             if (phone.getId() == id) {
                 return phone;
@@ -54,9 +64,9 @@ public class DataProvider {
         return null;
     }
 
-    public static Product getProductByPhoneId(int phone_id) {
+    public static Product getProductByPhoneId(long phone_id) {
         for (Product product : all_products) {
-            if (product.getSoldPhoneId() == phone_id) {
+            if (product.getId() == phone_id) {
                 return product;
             }
         }
@@ -136,7 +146,7 @@ public class DataProvider {
         }
     }
 
-    public static int[] getPhoneImageResourcesById(int phone_id, Context context) {
+    public static int[] getPhoneImageResourcesById(long phone_id, Context context) {
         int[] images = new int[NUM_PHONE_IMAGES];
 
         for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
@@ -145,5 +155,36 @@ public class DataProvider {
 
         // TODO: handle when images not found, return NotFound image?
         return images;
+    }
+
+    public static boolean addToShoppingCart(long phone_id) {
+        Product equivalent_product = DataProvider.getProductByPhoneId(phone_id);
+        if (!shopping_cart_products.contains(equivalent_product)) {
+            shopping_cart_products.add(equivalent_product);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static void removeFromShoppingCart(long phone_id) {
+        Product equivalent_product = DataProvider.getProductByPhoneId(phone_id);
+        shopping_cart_products.remove(equivalent_product);
+    }
+
+    public static boolean isCartEmpty() {
+        return shopping_cart_products.isEmpty();
+    }
+
+    public static void emptyCart() {
+        shopping_cart_products.clear();
+    }
+
+    public static void setProductId(long first_product_id) {
+        DataProvider.first_product_id = first_product_id;
+    }
+
+    public static long getProductId() {
+        return DataProvider.first_product_id;
     }
 }
