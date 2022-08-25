@@ -2,14 +2,13 @@ package com.example.team7_project_1.mappers;
 
 import android.util.Log;
 
-import com.example.team7_project_1.DataProvider;
+import com.example.team7_project_1.utilities.DataProvider;
 import com.example.team7_project_1.handlers.MapHandler;
 import com.example.team7_project_1.models.SpecificationDatabaseType;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 

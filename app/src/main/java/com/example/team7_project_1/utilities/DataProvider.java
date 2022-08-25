@@ -1,7 +1,6 @@
-package com.example.team7_project_1;
+package com.example.team7_project_1.utilities;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.team7_project_1.models.BoolSpecification;
 import com.example.team7_project_1.models.Phone;
@@ -23,14 +22,13 @@ public class DataProvider {
     private static ArrayList<Product> all_products;
     private static ArrayList<SpecificationDatabaseType> all_specification_types;
 
-
     // Fields used in the CartActivity in order to keep track of what phones the user has put
     // in their shopping cart
-    static ArrayList<Product> shopping_cart_products = new ArrayList<>();
+    private static ArrayList<Product> shopping_cart_products = new ArrayList<>();
 
     // Field used in the ComparisonFilterActivity to keep track of the ID of the first product we
     // decided to compare
-    static long first_product_id = -1;
+    private static long first_product_id = -1;
 
 
     /**
@@ -72,6 +70,14 @@ public class DataProvider {
         }
         // could not find product of phone_id
         return null;
+    }
+
+    public static ArrayList<Product> getShoppingCartProducts() {
+        return shopping_cart_products;
+    }
+
+    public static long getFirstProductId() {
+        return first_product_id;
     }
 
 

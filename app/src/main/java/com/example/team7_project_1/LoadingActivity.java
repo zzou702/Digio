@@ -1,11 +1,8 @@
 package com.example.team7_project_1;
 
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -15,24 +12,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.team7_project_1.handlers.MapHandler;
-import com.example.team7_project_1.mappers.DataMapper;
-import com.example.team7_project_1.models.Phone;
-import com.example.team7_project_1.models.Product;
-import com.example.team7_project_1.models.SpecificationDatabaseType;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import com.example.team7_project_1.utilities.DataProvider;
 
 
 public class LoadingActivity extends AppCompatActivity {
 
     //categories to be chosen
     public SearchActivity.Category category;
-    private boolean is_fetch_phones_complete, is_fetch_specifications_complete = false;
 
     /** View holder class*/
     private class ViewHolder{

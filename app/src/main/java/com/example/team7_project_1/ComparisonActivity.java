@@ -17,15 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.adapters.SpecificationAdapter;
 import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Phone;
-import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.models.Specification;
+import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class ComparisonActivity extends AppCompatActivity {

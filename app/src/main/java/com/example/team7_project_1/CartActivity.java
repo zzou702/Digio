@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Product;
+import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
@@ -109,7 +110,7 @@ public class CartActivity extends AppCompatActivity {
 
 
     public void initializeArray() {
-        this.products = DataProvider.shopping_cart_products;
+        this.products = DataProvider.getShoppingCartProducts();
     }
 
 
@@ -242,9 +243,12 @@ public class CartActivity extends AppCompatActivity {
             // variable for total price
             double total_price = 0;
 
-            // Goes through every product in the cart/dataholder and add their price to total price
-            for(int i = 0; i<DataProvider.shopping_cart_products.size(); i++){
-                total_price += DataProvider.shopping_cart_products.get(i).getPrice();
+            // Goes through every product in the cart and add their price to total price
+
+            ArrayList<Product> products = DataProvider.getShoppingCartProducts();
+
+            for(int i = 0; i < products.size(); i++){
+                total_price += products.get(i).getPrice();
             }
 
             // Setting the text for each of the checkout section

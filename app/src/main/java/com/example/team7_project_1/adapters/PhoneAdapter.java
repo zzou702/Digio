@@ -18,12 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
-import com.example.team7_project_1.DataProvider;
+import com.example.team7_project_1.utilities.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
 import com.example.team7_project_1.SearchActivity;
-import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Product;
 
 import java.util.ArrayList;

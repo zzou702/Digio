@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Product;
+import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         vh = new ViewHolder();
 
         // Setting the ProductId that was passed in the putExtra() method
-        long product1_id = getIntent().getLongExtra("product1_id", DataProvider.first_product_id);
+        long product1_id = getIntent().getLongExtra("product1_id", DataProvider.getFirstProductId());
         DataProvider.setProductId(product1_id);
 
         // Initialising the action bar
@@ -156,7 +157,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             String current_phone_name = product.getName();
             if ((current_phone_name.equalsIgnoreCase(this.user_search)) ||
                     (current_phone_name.toLowerCase().contains(this.user_search.toLowerCase()))) {
-                if (product.getId() != DataProvider.first_product_id) {
+                if (product.getId() != DataProvider.getFirstProductId()) {
                     this.products.add(product);
                 }
             }
@@ -170,7 +171,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void filterOutFirstPhoneId() {
         for (Product product: DataProvider.getProducts()) {
-            if (product.getId() != DataProvider.first_product_id) {
+            if (product.getId() != DataProvider.getFirstProductId()) {
                 this.products.add(product);
             }
         }
