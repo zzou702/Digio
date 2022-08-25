@@ -1,8 +1,6 @@
 package com.example.team7_project_1.models;
 
-import android.provider.ContactsContract;
-
-import com.example.team7_project_1.DataProvider;
+import com.example.team7_project_1.utilities.DataProvider;
 
 public interface IProduct {
     String toString();

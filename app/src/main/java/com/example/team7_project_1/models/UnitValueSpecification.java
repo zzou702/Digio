@@ -1,6 +1,6 @@
 package com.example.team7_project_1.models;
 
-import com.example.team7_project_1.DataProvider;
+import com.example.team7_project_1.utilities.DataProvider;
 
 public class UnitValueSpecification extends Specification {
     // Fields

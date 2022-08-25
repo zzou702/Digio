@@ -2,11 +2,10 @@ package com.example.team7_project_1.models;
 
 import androidx.annotation.NonNull;
 
-import com.example.team7_project_1.DataProvider;
+import com.example.team7_project_1.utilities.DataProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class Phone extends Product implements IPhone {
     // Fields

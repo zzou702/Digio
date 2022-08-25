@@ -26,6 +26,7 @@ import android.widget.*;
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
 import com.example.team7_project_1.adapters.PhoneAdapter;
 import com.example.team7_project_1.models.Product;
+import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
