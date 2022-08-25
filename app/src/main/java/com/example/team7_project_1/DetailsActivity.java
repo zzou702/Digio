@@ -116,6 +116,9 @@ public class DetailsActivity extends AppCompatActivity {
         product_id = (Long) getIntent().getLongExtra("product_id", 1);
         current_product = DataProvider.getProductByPhoneId(product_id);
 
+        // Incrementing the frequency of the current product
+        current_product.incrementFrequency();
+
         if (current_product == null) {
             Log.e("LoadProduct", "Could not get product; product was NULL.");
             return;

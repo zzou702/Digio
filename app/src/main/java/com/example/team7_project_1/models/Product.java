@@ -2,23 +2,25 @@ package com.example.team7_project_1.models;
 
 import com.example.team7_project_1.DataProvider;
 
-public abstract class Product implements IProduct {
+public abstract class Product implements IProduct, Comparable<Product> {
     // Fields
     private long id;
     private String name;
     private double price;
     private String description;
     private double rating;
+    private long frequency;
 
     /**
      * Constructor
      */
-    protected Product(long id, String name, double price, String description, double rating) {
+    protected Product(long id, String name, double price, String description, double rating, long frequency) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.rating = rating;
+        this.frequency = frequency;
     }
 
     @Override
@@ -53,6 +55,19 @@ public abstract class Product implements IProduct {
 
     public double getRating() {
         return rating;
+    }
+
+    public long getFrequency() {
+        return frequency;
+    }
+
+    public void incrementFrequency() {
+        frequency++;
+    }
+
+    @Override
+    public int compareTo(Product product) {
+        return Long.valueOf(product.frequency).compareTo(Long.valueOf(this.frequency));
     }
 
     public Phone getPhone() {

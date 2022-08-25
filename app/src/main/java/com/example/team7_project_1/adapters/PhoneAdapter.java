@@ -23,6 +23,7 @@ import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
 import com.example.team7_project_1.SearchActivity;
+import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Product;
 
 import java.util.ArrayList;
@@ -78,8 +79,11 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
                 extras.putLong("product1_id", DataProvider.getProductId());
-                extras.putLong("product1_id", clicked_product.getId());
+                extras.putLong("product2_id", clicked_product.getId());
                 intent.putExtras(extras);
+
+                // Since we already increased the frequency of product1 we must also do the same for product2
+                clicked_product.incrementFrequency();
                 context.startActivity(intent);
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);

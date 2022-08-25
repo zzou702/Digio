@@ -108,7 +108,7 @@ public class ComparisonActivity extends AppCompatActivity {
     /**
      * This method initialises the action bar using a customer layout
      * */
-    public void initialiseActionBar(){
+    public void initialiseActionBar() {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
@@ -171,7 +171,7 @@ public class ComparisonActivity extends AppCompatActivity {
     /** Stars the details activity based on the phone selected*/
     private void gotoDetailsActivity(long phone_id) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("phone_id", phone_id);
+        intent.putExtra("product_id", phone_id);
         startActivity(intent);
     }
 

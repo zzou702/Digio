@@ -38,7 +38,7 @@ public abstract class Specification implements ISpecification, Comparable<Specif
     }
 
     @Override
-    public int compareTo(Specification e) {
-        return this.getDisplayName().compareTo(e.getDisplayName());
+    public int compareTo(Specification spec) {
+        return this.getDisplayName().compareTo(spec.getDisplayName());
     }
 }

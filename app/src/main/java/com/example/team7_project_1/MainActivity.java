@@ -32,7 +32,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -198,11 +200,17 @@ public class MainActivity extends AppCompatActivity {
      * Adds the corresponding product and phone to array for later use
      */
     public void initializeArray() {
-        for (Product product : DataProvider.getProducts()) {
-            if (product.getRating() >= 4.3) {
-                this.products.add(product);
-            }
+        ArrayList<Product> all_products = DataProvider.getProducts();
+        Collections.sort(all_products);
+
+        for(int i = 0; i < 5; i++) {
+            this.products.add(all_products.get(i));
         }
+//        for (Product product : DataProvider.getProducts()) {
+//            if (product.getRating() >= 4.3) {
+//                this.products.add(product);
+//            }
+//        }
     }
 
 
