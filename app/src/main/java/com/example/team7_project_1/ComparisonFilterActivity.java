@@ -139,7 +139,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         if (this.user_search != null) {
             filterUserSearches();
         } else {
-            filterOutFirstPhoneID();
+            filterOutFirstPhoneId();
         }
     }
 
@@ -168,7 +168,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * Filters out the first_phone_id out of our phones and products ArrayLists as it doesn't make
      * sense to be able to compare a given phone to itself
      */
-    public void filterOutFirstPhoneID() {
+    public void filterOutFirstPhoneId() {
         for (Product product: DataProvider.getProducts()) {
             if (product.getId() != DataProvider.first_product_id) {
                 this.products.add(product);
@@ -216,6 +216,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String new_text) {
+                adapter.getFilter().filter(new_text);
                 return false;
             }
         });

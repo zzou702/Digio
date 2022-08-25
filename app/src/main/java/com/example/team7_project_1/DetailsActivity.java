@@ -33,7 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
     Product current_product;
 
     /** View holder class*/
-    private class ViewHolder{
+    private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         ViewPager view_pager; // creating object of ViewPager
         TextView phone_name, phone_subtitle, phone_price, phone_description,

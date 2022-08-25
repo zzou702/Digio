@@ -228,8 +228,8 @@ public class SearchActivity extends AppCompatActivity {
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
-                switch(menuItem.getItemId()){
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()) {
                     case R.id.nav_home:
                         startActivity(new Intent(SearchActivity.this, MainActivity.class));
                         return true;
