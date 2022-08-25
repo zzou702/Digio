@@ -16,7 +16,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,7 +31,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Timer;
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
-        RecyclerView top_pics_recycler_view;
+        RecyclerView top_picks_recycler_view;
         ProgressBar phone_load_progressbar;
         ViewPager banner_view_pager;
         TextView action_bar_title;
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
          */
         public ViewHolder() {
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
-            top_pics_recycler_view = findViewById(R.id.top_picks_recycler_view);
+            top_picks_recycler_view = findViewById(R.id.top_picks_recycler_view);
             phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
             banner_view_pager = findViewById(R.id.banner);
         }
@@ -188,10 +186,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Creating horizontal linear layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        vh.top_pics_recycler_view.setLayoutManager(layout_manager);
+        vh.top_picks_recycler_view.setLayoutManager(layout_manager);
 
         // Attaching the adapter to the recyclerView in order to populate it
-        vh.top_pics_recycler_view.setAdapter(adapter);
+        vh.top_picks_recycler_view.setAdapter(adapter);
     }
 
 
