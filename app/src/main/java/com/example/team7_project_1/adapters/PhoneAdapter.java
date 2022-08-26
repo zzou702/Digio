@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
+import com.example.team7_project_1.models.Category;
+import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
@@ -38,6 +40,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         public TextView phone_subtitle;
         public TextView phone_name;
         public ImageView phone_main_image;
+        public ImageView os_icon;
+        public ImageView brand_icon;
         public TextView phone_price;
         public Button remove_from_cart_button;
 
@@ -52,6 +56,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             this.phone_main_image = v.findViewById(R.id.phone_main_image);
             this.phone_price = v.findViewById(R.id.phone_price);
             this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
+            this.os_icon = v.findViewById(R.id.os_icon);
+            this.brand_icon = v.findViewById(R.id.brand_icon);
 
             if (is_cart) {
                 this.remove_from_cart_button = v.findViewById(R.id.remove_from_cart_button);
@@ -154,16 +160,22 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull PhoneAdapter. ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // Getting the phone and product associated with it in the given position in the RecyclerView
         Product this_product = products.get(position);
+        Phone this_phone = this_product.getPhone();
 
-        holder.phone_name.setText(this_product.getName());
-        holder.phone_subtitle.setText(this_product.getPhone().getSubtitle());
+        holder.phone_name.setText(this_phone.getName());
+        holder.phone_subtitle.setText(this_phone.getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
-        int image = DataProvider.getPhoneImageResourcesById(this_product.getId(), this.context)[0];
+        int image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
         holder.phone_main_image.setImageResource(image);
+
+//        Category this_category = this_phone.getCategory();
+//
+//        holder.os_icon.setImageResource(this_category.getOSImageId());
+//        holder.brand_icon.setImageResource(this_category.getBrandImageId());
     }
 
 

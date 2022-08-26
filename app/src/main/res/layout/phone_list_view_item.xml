@@ -57,12 +57,12 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/os_icon"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_gravity="center"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/android_logo"
-                    style="@style/CardViewTitle" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/android_logo" />
 
                 <TextView
                     android:id="@+id/phone_price"
@@ -75,12 +75,12 @@
                     style="@style/CardViewTitle" />
 
                 <ImageView
+                    android:id="@+id/brand_icon"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_gravity="center"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/windows_logo"
-                    style="@style/CardViewTitle" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/windows_logo" />
             </RelativeLayout>
 
 
