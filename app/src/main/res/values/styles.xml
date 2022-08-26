@@ -6,6 +6,18 @@
         <item name="android:background">#aaa</item>
     </style>
 
+    <style name="BottomNavigationBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/menu_background_top_border</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="menu">@menu/bottom_menu</item>
+        <item name="itemTextColor">@drawable/selector</item>
+        <item name="itemIconTint">@drawable/selector</item>
+    </style>
+
 <!--    Categories-->
 
     <!--    Android-->
