@@ -12,6 +12,17 @@
         android:layout_height="match_parent"
         android:paddingBottom="54dp"/>
 
+    <TextView
+        android:id="@+id/no_results_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="34sp"
+        android:layout_gravity="center"
+        android:text="Sorry no results were found. Please try again."
+        android:gravity="center"
+        android:fontFamily="@font/montserrat_regular"
+        android:textStyle="bold"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/BottomNavigationBar"
         android:id="@+id/bottom_nav_bar"/>

@@ -39,13 +39,15 @@ public class SearchActivity extends AppCompatActivity {
         RecyclerView recycler_view_phones;
         TextView action_bar_title;
         ImageButton action_bar_back_button;
+        TextView no_results_text;
 
         /**
          * Constructor
          */
         public ViewHolder() {
-            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            bottom_navigation_view = (BottomNavigationView) findViewById(R.id.bottom_nav_bar);
             recycler_view_phones = (RecyclerView) findViewById(R.id.search_recycler_view);
+            no_results_text = (TextView) findViewById(R.id.no_results_text);
         }
     }
 
@@ -64,11 +66,14 @@ public class SearchActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
+        // Generating the product list
+        generateProductList();
+
         // Action bar
         initialiseActionBar();
 
-        // Generating the product list
-        generateProductList();
+        // Setting empty results text
+        setEmptyResults();
 
         // Setup navigation bar
         initializeNavItem();
@@ -90,6 +95,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //Setting the title of the page
         setLabel();
+
     }
 
 
@@ -114,13 +120,24 @@ public class SearchActivity extends AppCompatActivity {
                 vh.action_bar_title.setText("Other OS");
             }
         } else if (this.chosen_category == null && user_search != null) {
-            if (products.isEmpty()) {
-                vh.action_bar_title.setText(String.valueOf("No Results Found"));
-            } else {
+            if (!products.isEmpty()) {
                 vh.action_bar_title.setText(String.valueOf(products.size()) + " Results Found");
             }
         }
     }
+
+    /**
+     * Changing the visibility of the no_results_text TextView depending on whether or not there are any results
+     */
+    public void setEmptyResults() {
+        if (products.isEmpty()) {
+            vh.no_results_text.setVisibility(View.VISIBLE);
+        } else {
+            vh.no_results_text.setVisibility(View.GONE);
+        }
+    }
+
+
 
 
 

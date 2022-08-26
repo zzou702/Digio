@@ -32,13 +32,15 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         BottomNavigationView bottom_navigation_view;
         TextView action_bar_title;
         ImageButton action_bar_back_button;
+        TextView no_results_text;
 
         /**
          * Constructor
          */
         public ViewHolder() {
             recycler_view_phones = (RecyclerView) findViewById(R.id.comparison_recycler_view);
-            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            bottom_navigation_view = (BottomNavigationView) findViewById(R.id.bottom_nav_bar);
+            no_results_text = (TextView) findViewById(R.id.no_results_text);
         }
     }
 
@@ -62,6 +64,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
         // Initialising the action bar
         initialiseActionBar();
+
+        // Setting empty results text
+        setEmptyResults();
 
         // Initialising the bottom navigation bar ie setting onClickListener for each item
         initializeNavItem();
@@ -99,11 +104,20 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             vh.action_bar_title.setText("Choose one to compare");
             vh.action_bar_title.setTextSize(20);
         } else {
-            if (products.isEmpty()) {
-                vh.action_bar_title.setText(String.valueOf("No Results Found"));
-            } else {
+            if (!products.isEmpty()) {
                 vh.action_bar_title.setText(String.valueOf(products.size()) + " Results Found");
             }
+        }
+    }
+
+    /**
+     * Changing the visibility of the no_results_text TextView depending on whether or not there are any results
+     */
+    public void setEmptyResults() {
+        if (products.isEmpty()) {
+            vh.no_results_text.setVisibility(View.VISIBLE);
+        } else {
+            vh.no_results_text.setVisibility(View.GONE);
         }
     }
 

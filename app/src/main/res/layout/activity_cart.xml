@@ -10,9 +10,11 @@
         android:id="@+id/cart_empty_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
+        android:textSize="34sp"
         android:text="Your cart is empty"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat_regular"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:id="@+id/cart_details"
