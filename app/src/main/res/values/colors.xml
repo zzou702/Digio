@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="ActionBarTitleColor">#FF000000</color>
     <color name="brand_primary">#B91A74</color>
-    <color name="brand_secondary">#F7E1C1</color>
+    <color name="brand_secondary">#D96868</color>
+    <color name="brand_tertiary">#F7E1C1</color>
 </resources>

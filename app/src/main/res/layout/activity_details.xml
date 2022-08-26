@@ -103,21 +103,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <Button
+                    <Button style="@style/DetailsButtonSecondary"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
                         android:text="Compare"
-                        android:fontFamily="@font/lato_bold"
                         android:onClick="compareButtonClicked"/>
-                    <Button
+                    <Button style="@style/DetailsButtonPrimary"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
                         android:text="Add to cart +"
-                        android:fontFamily="@font/lato_bold"
                         android:onClick="addToCartButtonClicked"/>
                 </LinearLayout>
 

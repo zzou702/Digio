@@ -32,7 +32,7 @@
                             android:text="256GB Sierra Blue"/>
                     </LinearLayout>
 
-                    <Button
+                    <Button style="@style/DetailsButtonSecondary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="View"
@@ -52,7 +52,7 @@
                             android:text="128GB Grey Mirror"/>
                     </LinearLayout>
 
-                    <Button
+                    <Button style="@style/DetailsButtonSecondary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="View"

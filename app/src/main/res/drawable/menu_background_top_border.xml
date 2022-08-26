@@ -8,7 +8,7 @@
             <gradient
                 android:angle="0"
                 android:endColor="@color/brand_primary"
-                android:startColor="@color/brand_secondary" />
+                android:startColor="@color/brand_tertiary" />
 
         </shape>
     </item>
