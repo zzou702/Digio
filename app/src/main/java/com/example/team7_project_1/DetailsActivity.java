@@ -23,6 +23,8 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
+
 public class DetailsActivity extends AppCompatActivity {
 
     // Creating Object of ViewPagerAdapter
@@ -197,9 +199,9 @@ public class DetailsActivity extends AppCompatActivity {
     public void addToCartButtonClicked(View v) {
         boolean is_in_shopping_cart = DataProvider.addToShoppingCart(product_id);
         if (!is_in_shopping_cart) {
-            Toast.makeText(this, "Added to cart!", Toast.LENGTH_SHORT).show();
+            Toasty.normal(this, "Added to cart!", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "This phone is already inside your cart!", Toast.LENGTH_LONG).show();
+            Toasty.normal(this, "This phone is already inside your cart!", Toast.LENGTH_SHORT).show();
         }
     }
 }

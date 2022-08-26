@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements IProductAdapter {
 
     // To make your view item clickable ensure that the view holder class implements View.OnClickListener and it has the onClick(View v) method
@@ -109,7 +111,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     removeAt(getAdapterPosition());
                     DataProvider.removeFromShoppingCart(clicked_product.getId());
                     ((CartActivity)context).updateCheckoutVisibility();
-                    Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
+                    Toasty.normal(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
                     intent.putExtra("product_id", clicked_product.getId());

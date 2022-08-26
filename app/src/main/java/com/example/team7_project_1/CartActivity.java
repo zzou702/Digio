@@ -28,6 +28,8 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
+
 public class CartActivity extends AppCompatActivity {
 
     /**
@@ -255,7 +257,7 @@ public class CartActivity extends AppCompatActivity {
      */
     public void checkoutButtonClicked(View view) {
         DataProvider.emptyCart();
-        Toast.makeText(this,"Thank you for your purchase!", Toast.LENGTH_LONG).show();
+        Toasty.normal(this, "Thank you for your purchase!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MainActivity.class);
         this.startActivity(intent);
     }
