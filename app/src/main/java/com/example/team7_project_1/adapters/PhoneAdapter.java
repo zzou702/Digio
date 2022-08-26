@@ -99,6 +99,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 if (v.equals(remove_from_cart_button)) {
                     removeAt(getAdapterPosition());
                     DataProvider.removeFromShoppingCart(clicked_product.getId());
+                    ((CartActivity)context).updateCheckoutVisibility();
                     Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);

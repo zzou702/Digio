@@ -84,7 +84,7 @@ public class CartActivity extends AppCompatActivity {
     /**
      * This method initialises the action bar using a custom layout
      * */
-    public void initialiseActionBar(){
+    public void initialiseActionBar() {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
