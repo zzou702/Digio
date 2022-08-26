@@ -64,14 +64,11 @@ public class SearchActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        // Generating Phone List
-        generatePhoneList();
-
         // Action bar
         initialiseActionBar();
 
-        //Setting the title of the page
-        setLabel();
+        // Generating Phone List
+        generatePhoneList();
 
         // Setup navigation bar
         initializeNavItem();
@@ -82,16 +79,18 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * This method initialises the action bar using a custom layout
      * */
-    public void initialiseActionBar(){
-        // Use the customer layout for the action bar
+    public void initialiseActionBar() {
+        // Use the custom layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
 
         // Setting the back button to be invisible
         vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
         vh.action_bar_back_button.setVisibility(View.INVISIBLE);
-    }
 
+        //Setting the title of the page
+        setLabel();
+    }
 
 
     /**
@@ -101,19 +100,24 @@ public class SearchActivity extends AppCompatActivity {
         // Get the custom view and title id to set title suitable for the current page
         vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
 
-        //Check whether the user clicked into the page through the category buttons or not
-        if(this.chosen_category == null) {
+        // Check whether the user clicked into the page through the category buttons or not
+        if(this.chosen_category == null && user_search == null) {
             vh.action_bar_title.setText("Search");
         }else if (this.chosen_category != null && user_search == null) {
 
-            /* Change the string that will be outputted based on the category selected */
-            // If the Category chosen is iOS
+            // Change the string that will be outputted based on the category selected
             if(this.chosen_category.equals(Category.Names.IOS)) {
                 vh.action_bar_title.setText("iOS");
             }else if(this.chosen_category.equals(Category.Names.ANDROID)) { // If the Category chose is Android
                 vh.action_bar_title.setText("Android");
             }else if(this.chosen_category.equals(Category.Names.OTHER)) { // If the Category Chosen is Other
                 vh.action_bar_title.setText("Other OS");
+            }
+        } else if (this.chosen_category == null && user_search != null) {
+            if (products.isEmpty()) {
+                vh.action_bar_title.setText(String.valueOf("No Results Found"));
+            } else {
+                vh.action_bar_title.setText(String.valueOf(products.size()) + " Results Found");
             }
         }
     }

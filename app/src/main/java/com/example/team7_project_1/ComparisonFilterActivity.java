@@ -57,9 +57,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        // Setting the ProductId that was passed in the putExtra() method
-        long product1_id = getIntent().getLongExtra("product1_id", DataProvider.getFirstProductId());
-        DataProvider.setProductId(product1_id);
+
+        // Generating Phone List
+        generatePhoneList();
 
         // Initialising the action bar
         initialiseActionBar();
@@ -67,8 +67,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // initialising the bottom navigation bar ie setting onClickListener for each item
         initializeNavItem();
 
-        // Generating Phone List
-        generatePhoneList();
 
     }
 
@@ -76,15 +74,10 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     /**
      * This method initialises the action bar using a custom layout
      * */
-    public void initialiseActionBar(){
-        // Use the customer layout for the action bar
+    public void initialiseActionBar() {
+        // Use the custom layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
-
-        // Get the custom view and title id to set title suitable for the current page
-        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
-        vh.action_bar_title.setText("Choose one to compare");
-        vh.action_bar_title.setTextSize(20);
 
         // Setting the back button to be invisible
         vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
@@ -92,8 +85,28 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
         // On click listener for the back button
         vh.action_bar_back_button.setOnClickListener(view -> finish());
+
+        //Setting the title of the page
+        setLabel();
     }
 
+    /**
+     * Changes the title on the header based on user action
+     */
+    public void setLabel() {
+        // Get the custom view and title id to set title suitable for the current page
+        vh.action_bar_title = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_title);
+        if (user_search == null) {
+            vh.action_bar_title.setText("Choose one to compare");
+            vh.action_bar_title.setTextSize(20);
+        } else {
+            if (products.isEmpty()) {
+                vh.action_bar_title.setText(String.valueOf("No Results Found"));
+            } else {
+                vh.action_bar_title.setText(String.valueOf(products.size()) + " Results Found");
+            }
+        }
+    }
 
     /**
      * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
@@ -126,6 +139,10 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * Initializes the phones and products ArrayLists
      */
     public void initializeArray() {
+        // Setting the ProductId that was passed in the putExtra() method
+        long product1_id = getIntent().getLongExtra("product1_id", DataProvider.getFirstProductId());
+        DataProvider.setProductId(product1_id);
+
         // Getting the user search that have been passed using the putExtra() method
         this.user_search = (String) getIntent().getStringExtra("user_search");
 

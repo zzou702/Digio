@@ -160,6 +160,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         // Getting the phone and product associated with it in the given position in the RecyclerView
         Product this_product = products.get(position);
         Phone this_phone = this_product.getPhone();
@@ -180,7 +181,6 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             holder.brand_icon.setImageResource(this_category.getBrandImageId(context));
         }
     }
-
 
     @Override
     public int getItemCount() {
@@ -222,7 +222,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
          * Updating the products displayed
          */
         @Override
-        protected void publishResults(CharSequence char_sequence, FilterResults filter_results) {
+        public void publishResults(CharSequence char_sequence, FilterResults filter_results) {
             products.clear();
             products.addAll((Collection<? extends Product>) filter_results.values);
             notifyDataSetChanged();
