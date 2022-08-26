@@ -91,12 +91,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         vh.action_bar_back_button.setVisibility(View.VISIBLE);
 
         // On click listener for the back button
-        vh.action_bar_back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        vh.action_bar_back_button.setOnClickListener(view -> finish());
     }
 
 
@@ -232,23 +227,20 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void initializeNavItem() {
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
-                switch(menuItem.getItemId()){
-                    case R.id.nav_home:
-                        startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
-                        return true;
-                    case R.id.nav_search:
-                        startActivity(new Intent(ComparisonFilterActivity.this, SearchActivity.class));
-                        return true;
-                    case R.id.nav_cart:
-                        startActivity(new Intent(ComparisonFilterActivity.this, CartActivity.class));
-                        return true;
-                }
-
-                return false;
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
+            switch(menuItem.getItemId()){
+                case R.id.nav_home:
+                    startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
+                    return true;
+                case R.id.nav_search:
+                    startActivity(new Intent(ComparisonFilterActivity.this, SearchActivity.class));
+                    return true;
+                case R.id.nav_cart:
+                    startActivity(new Intent(ComparisonFilterActivity.this, CartActivity.class));
+                    return true;
             }
+
+            return false;
         });
     }
 }
