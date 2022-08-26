@@ -137,21 +137,18 @@ public class CartActivity extends AppCompatActivity {
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_cart);
 
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menu_item){
-                switch(menu_item.getItemId()){
-                    case R.id.nav_home:
-                        startActivity(new Intent(CartActivity.this, MainActivity.class));
-                        return true;
-                    case R.id.nav_search:
-                        startActivity(new Intent(CartActivity.this, SearchActivity.class));
-                        return true;
-                    case R.id.nav_cart:
-                        return true;
-                }
-                return false;
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menu_item -> {
+            switch(menu_item.getItemId()){
+                case R.id.nav_home:
+                    startActivity(new Intent(CartActivity.this, MainActivity.class));
+                    return true;
+                case R.id.nav_search:
+                    startActivity(new Intent(CartActivity.this, SearchActivity.class));
+                    return true;
+                case R.id.nav_cart:
+                    return true;
             }
+            return false;
         });
     }
 
@@ -214,14 +211,11 @@ public class CartActivity extends AppCompatActivity {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean is_open) {
-                        if(is_open){
-                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
-                        }else{
-                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
-                        }
+                is_open -> {
+                    if(is_open){
+                        vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                    }else{
+                        vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                     }
                 }
         );

@@ -166,22 +166,19 @@ public class DetailsActivity extends AppCompatActivity {
     /** Initialises the navigation item selected for the home page*/
     public void initializeNavItem(){
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
-                switch(menuItem.getItemId()) {
-                    case R.id.nav_home:
-                        startActivity(new Intent(DetailsActivity.this, MainActivity.class));
-                        return true;
-                    case R.id.nav_search:
-                        startActivity(new Intent(DetailsActivity.this, SearchActivity.class));
-                        return true;
-                    case R.id.nav_cart:
-                        startActivity(new Intent(DetailsActivity.this, CartActivity.class));
-                        return true;
-                }
-                return false;
+        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
+            switch(menuItem.getItemId()) {
+                case R.id.nav_home:
+                    startActivity(new Intent(DetailsActivity.this, MainActivity.class));
+                    return true;
+                case R.id.nav_search:
+                    startActivity(new Intent(DetailsActivity.this, SearchActivity.class));
+                    return true;
+                case R.id.nav_cart:
+                    startActivity(new Intent(DetailsActivity.this, CartActivity.class));
+                    return true;
             }
+            return false;
         });
     }
 
