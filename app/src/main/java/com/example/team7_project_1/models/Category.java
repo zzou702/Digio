@@ -5,11 +5,18 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 public abstract class Category {
-    @NonNull
-    public abstract String toString();
+
+    public final String brand;
+
+    Category(String brand) {
+        this.brand = brand;
+    }
 
     public abstract int getOSImageId(Context context);
     public abstract int getBrandImageId(Context context);
+
+    @NonNull
+    public abstract String toString();
 
     public enum Names {
         /**

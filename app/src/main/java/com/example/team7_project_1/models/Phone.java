@@ -35,11 +35,11 @@ public class Phone extends Product implements IPhone {
      */
     private void assignToCategory() {
         if (Category.Names.ANDROID.equals(operating_system)) {
-           this.category = new AndroidCategory();
+           this.category = new AndroidCategory(this.brand);
         } else if (Category.Names.IOS.equals(operating_system)) {
-            this.category = new IOSCategory();
+            this.category = new IOSCategory(this.brand);
         } else {
-            this.category = new OtherCategory();
+            this.category = new OtherCategory(this.brand);
         }
     }
 

@@ -3,8 +3,14 @@ package com.example.team7_project_1.models;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
+import java.util.Locale;
+
 
 public class AndroidCategory extends Category {
+    public AndroidCategory(String brand) {
+        super(brand);
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -18,6 +24,7 @@ public class AndroidCategory extends Category {
 
     @Override
     public int getBrandImageId(Context context) {
-        return context.getResources().getIdentifier("android_logo", "drawable", context.getPackageName());
+        return context.getResources().getIdentifier(
+                String.format(Locale.getDefault(), "%s_logo", brand.toLowerCase()), "drawable", context.getPackageName());
     }
 }
