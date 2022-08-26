@@ -1,6 +1,14 @@
 package com.example.team7_project_1.models;
 
+import androidx.annotation.NonNull;
+
 public class IOSCategory extends Category {
+    @NonNull
+    @Override
+    public String toString() {
+        return Names.IOS.toString();
+    }
+
     @Override
     public int getOSImageId() {
 //        context.getResources().getIdentifier(String.format(Locale.getDefault(),

@@ -29,8 +29,17 @@ public class Phone extends Product implements IPhone {
         assignToCategory();
     }
 
+    /**
+     * Determines the category based on OS
+     */
     private void assignToCategory() {
-        switch()
+        if (Category.Names.ANDROID.equals(operating_system)) {
+            category = new AndroidCategory();
+        } else if (Category.Names.IOS.equals(operating_system)) {
+            category = new IOSCategory();
+        } else {
+            category = new OtherCategory();
+        }
     }
 
     public void parseSpecifications(Object spec_obj) {

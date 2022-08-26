@@ -12,13 +12,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.team7_project_1.handlers.MapHandler;
+import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.utilities.DataProvider;
 
 
 public class LoadingActivity extends AppCompatActivity {
-
-    //categories to be chosen
-    public SearchActivity.Category category;
 
     /** View holder class*/
     private class ViewHolder{
