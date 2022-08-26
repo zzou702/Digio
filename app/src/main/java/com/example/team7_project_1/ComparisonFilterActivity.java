@@ -51,7 +51,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.comparison_search);
+        setContentView(R.layout.activity_comparison_search);
 
         // Initialising the ViewHolder
         vh = new ViewHolder();
