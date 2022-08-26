@@ -1,11 +1,8 @@
 package com.example.team7_project_1.models;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 
-
-import java.util.Locale;
 
 public class AndroidCategory extends Category {
     @NonNull

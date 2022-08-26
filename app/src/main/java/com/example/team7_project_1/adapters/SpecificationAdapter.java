@@ -3,16 +3,13 @@ package com.example.team7_project_1.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.R;
 import android.content.Context;
-import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.models.Specification;
 
 import java.util.ArrayList;
