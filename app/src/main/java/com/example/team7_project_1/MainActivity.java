@@ -41,7 +41,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     // Categories to be chosen
-    public SearchActivity.Category category;
+    public CategoryNames category;
 
     // Array for banners
     int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
@@ -269,13 +269,13 @@ public class MainActivity extends AppCompatActivity {
         switch(v.getId())
         {
             case R.id.category_btn_android: //if android button is pressed
-                this.category = SearchActivity.Category.ANDROID;
+                this.category = CategoryNames.ANDROID;
                 break;
             case R.id.category_btn_ios: //if ios button is pressed
-                this.category = SearchActivity.Category.IOS;
+                this.category = CategoryNames.IOS;
                 break;
             case R.id.category_btn_other: // if OTHER button is pressed
-                this.category = SearchActivity.Category.OTHER;
+                this.category = CategoryNames.OTHER;
                 break;
         }
 

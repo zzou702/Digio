@@ -13,7 +13,8 @@ public class Phone extends Product implements IPhone {
     private String operating_system;
     private String brand;
     private String manufacturer_part_no;
-    private ArrayList<Specification> specifications = new ArrayList<>();;
+    private ArrayList<Specification> specifications = new ArrayList<>();
+    private Category category;
 
     /**
      * Constructor
@@ -25,6 +26,11 @@ public class Phone extends Product implements IPhone {
         this.brand = brand;
         this.manufacturer_part_no = manufacturer_part_no;
 
+        assignToCategory();
+    }
+
+    private void assignToCategory() {
+        switch()
     }
 
     public void parseSpecifications(Object spec_obj) {
