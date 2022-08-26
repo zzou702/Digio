@@ -1,12 +1,17 @@
 package com.example.team7_project_1;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -14,12 +19,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.example.team7_project_1.adapters.SpecificationAdapter;
 import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Specification;
 import com.example.team7_project_1.utilities.DataProvider;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -142,6 +153,42 @@ public class ComparisonActivity extends AppCompatActivity {
         vh.phone_1_image.setImageResource(DataProvider.getPhoneImageResourcesById(product1_id, this)[0]);
         vh.phone_2_image.setImageResource(DataProvider.getPhoneImageResourcesById(product2_id, this)[0]);
          */
+
+        StorageReference image1 = DataProvider.getPhoneImageResourcesById(product1_id, this)[0];
+        image1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getBaseContext())
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)         //ALL or NONE as your requirement
+                        .into(vh.phone_1_image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        StorageReference image2 = DataProvider.getPhoneImageResourcesById(product2_id, this)[0];
+        image2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getBaseContext())
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)         //ALL or NONE as your requirement
+                        .into(vh.phone_1_image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         vh.phone_1_title.setText(phone1.getName());
         vh.phone_2_title.setText(phone2.getName());
 
