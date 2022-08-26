@@ -24,9 +24,4 @@ public class StringSpecification extends Specification {
         return this.value;
     }
 
-    @Override
-    public boolean isBetterThan(Specification other_spec) {
-        // TODO: implement
-        return false;
-    }
 }

@@ -25,6 +25,9 @@ public class ViewPagerAdapter extends PagerAdapter {
     int[] images;
     LayoutInflater m_layout_inflater;
 
+    /**
+     * Constructor
+     */
     public ViewPagerAdapter(Context context, int[] images) {
         this.context = context;
         this.images = images;

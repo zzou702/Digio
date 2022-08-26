@@ -47,7 +47,9 @@ public class SpecificationAdapter extends RecyclerView.Adapter<SpecificationAdap
     private ArrayList<Specification> specs_product2;
     private Context context;
 
-    /** Constructor */
+    /**
+     * Constructor
+     */
     public SpecificationAdapter(ArrayList<Specification> specs_product1, ArrayList<Specification> specs_product2, Context context) {
         this.specs_product1 = specs_product1;
         this.specs_product2 = specs_product2;
@@ -60,7 +62,7 @@ public class SpecificationAdapter extends RecyclerView.Adapter<SpecificationAdap
         LayoutInflater inflater = LayoutInflater.from(context);
         View comparison_view = inflater.inflate(R.layout.spec_comparison_item, parent, false);
 
-        // Create ViewHolder
+        // create ViewHolder
         ViewHolder holder = new ViewHolder(comparison_view);
 
         return holder;
@@ -89,6 +91,9 @@ public class SpecificationAdapter extends RecyclerView.Adapter<SpecificationAdap
 
     }
 
+    /**
+     * Gets the number of items
+     */
     @Override
     public int getItemCount() {
         if (specs_product1.size() >= specs_product2.size()) {

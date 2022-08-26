@@ -21,7 +21,7 @@ import android.widget.*;
 
 
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
-import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.adapters.ProductAdapter;
 import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Fields
     ArrayList<Product> products = new ArrayList<Product>();
-    PhoneAdapter adapter;
+    ProductAdapter adapter;
     ViewHolder vh;
 
     @Override
@@ -89,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
         // Initialising the ViewHolder
         vh = new ViewHolder();
 
-        // Actionbar
+        // Action Bar
         initialiseActionBar();
 
         // Banner
         initialiseBanner();
 
-        // Generating the Top Picks
+        // Generating the top picks
         generatedTopPicks();
 
         // Setup navigation bar
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method initialises the action bar using a custom layout
      * */
-    public void initialiseActionBar(){
+    public void initialiseActionBar() {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
@@ -126,15 +126,15 @@ public class MainActivity extends AppCompatActivity {
      * Initializes the banner images with a timer that automatically scrolls indefinitely
      */
     public void initialiseBanner() {
-        //setting up the adapter for the banner image
+        // Setting up the adapter for the banner image
         banner_view_pager_adapter = new ViewPagerAdapter(MainActivity.this, banner);
         vh.banner_view_pager.setAdapter(banner_view_pager_adapter);
 
-        //initialise the last item of the banner
+        // Initialise the last item of the banner
         vh.banner_view_pager.setCurrentItem(current_page, true);
 
 
-        //setting the timer for the banner image
+        // Setting the timer for the banner image
         final Handler handler = new Handler();
         final Runnable update = new Runnable() {
             @Override
@@ -142,19 +142,20 @@ public class MainActivity extends AppCompatActivity {
                 // Getting the current item index
                 current_page = vh.banner_view_pager.getCurrentItem();
 
-                // If the current banner image is the last one in the array
-                if(current_page == banner.length-1){
-                    current_page = 0; // Set the current page to the first item
+                // If the current banner image is the last one in the array set the current page to
+                // the first page. Otherwise set it to the next page.
+                if(current_page == banner.length-1) {
+                    current_page = 0;
                 }else {
-                    current_page++; // Else set to the next page
+                    current_page++;
                 }
 
-                //setting the current item for the banner
+                // Setting the current item for the banner
                 vh.banner_view_pager.setCurrentItem(current_page, true);
             }
         };
 
-        //new thread for the timer
+        // New thread for the timer
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -167,12 +168,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * Generates the top picks phone list used to populated the RecyclerView, and setting the adapter needed
+     * Generates the top picks product list used to populated the RecyclerView, and setting the adapter needed
      * in order to achieve this
      */
     public void generatedTopPicks() {
         initializeArray();
-        setPhoneAdapter();
+        setProductAdapter();
     }
 
 
@@ -180,8 +181,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Sets the adapter for the RecyclerView
      */
-    public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,this);
+    public void setProductAdapter() {
+        adapter = new ProductAdapter(products,this);
 
         // Creating horizontal linear layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -334,13 +335,14 @@ public class MainActivity extends AppCompatActivity {
      * This method takes the user to the website on the browser if the user clicks on one
      * of the news
      * */
-    public void newsClicked(View v){
-        String url_string = "https://www.google.com/"; //default website
+    public void newsClicked(View v) {
+        // Default website
+        String url_string = "https://www.google.com/";
 
-        // Conditional statement to see which item is selected
+        // Conditional statement to check which item is selected
         int view_id = v.getId();
 
-        // switch statement does not work, duplicate case: R.ids not const at compile time
+        // Switch statement does not work, duplicate case: R.ids not const at compile time
         if (view_id == R.id.news_1 | view_id == R.id.news_text_1) {
             url_string = "https://9to5mac.com/2022/08/19/iphone-14-news/";
         } else if (view_id == R.id.news_2 | view_id == R.id.news_text_2) {
@@ -351,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
                     "versus-pixel-6-pro-galaxy-s22-iphone-13-max";
         }
 
-        // directing to the an external browser based on the selected news
+        // Directing the user to an external browser based on the selected news
         Intent browser_intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url_string));
         startActivity(browser_intent);
     }

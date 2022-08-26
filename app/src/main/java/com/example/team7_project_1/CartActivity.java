@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.adapters.ProductAdapter;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -57,7 +57,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     ViewHolder vh;
-    PhoneAdapter adapter;
+    ProductAdapter adapter;
     ArrayList<Product> products = new ArrayList<>();
     double GST_PERCENTAGE = 0.15;
 
@@ -71,7 +71,8 @@ public class CartActivity extends AppCompatActivity {
         // Action bar
         initialiseActionBar();
 
-        generatePhoneList();
+        // Generating the product list
+        generateProductList();
 
         // Setup navigation bar
         initializeNavItem();
@@ -100,12 +101,12 @@ public class CartActivity extends AppCompatActivity {
 
 
     /**
-     * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
+     * Generates the product list used to populated the RecyclerView, and setting the adapter needed
      * in order to achieve this
      */
-    public void generatePhoneList() {
+    public void generateProductList() {
         initializeArray();
-        setPhoneAdapter();
+        setProductAdapter();
     }
 
 
@@ -117,8 +118,8 @@ public class CartActivity extends AppCompatActivity {
     /**
      * Sets the adapter for the RecyclerView
      */
-    public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,this);
+    public void setProductAdapter() {
+        adapter = new ProductAdapter(products,this);
 
         // Creating horizontal vertical layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

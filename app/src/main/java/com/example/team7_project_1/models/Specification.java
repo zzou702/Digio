@@ -25,7 +25,6 @@ public abstract class Specification implements ISpecification, Comparable<Specif
 
     public abstract String getValue();
     public abstract String getFormattedValue();
-    public abstract boolean isBetterThan(Specification other_spec);
 
     @NonNull
     @Override

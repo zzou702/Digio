@@ -39,9 +39,4 @@ public class UnitValueSpecification extends Specification {
         return this.value + this.unit;
     }
 
-    @Override
-    public boolean isBetterThan(Specification other_spec) {
-        // TODO: implement
-        return false;
-    }
 }

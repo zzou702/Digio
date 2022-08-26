@@ -19,7 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
-import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.adapters.ProductAdapter;
 import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
@@ -53,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
     private Category.Names chosen_category; //the chosen category
     private String user_search; //the user search
     ArrayList<Product> products = new ArrayList<Product>();
-    PhoneAdapter adapter;
+    ProductAdapter adapter;
     ViewHolder vh;
 
     @Override
@@ -67,8 +67,8 @@ public class SearchActivity extends AppCompatActivity {
         // Action bar
         initialiseActionBar();
 
-        // Generating Phone List
-        generatePhoneList();
+        // Generating the product list
+        generateProductList();
 
         // Setup navigation bar
         initializeNavItem();
@@ -77,10 +77,10 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a custom layout
-     * */
+     * Initialises the action bar using a custom layout
+     */
     public void initialiseActionBar() {
-        // Use the custom layout for the action bar
+        // Using the custom layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
 
@@ -94,7 +94,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /**
-     * Changes the title on the header based on user action
+     * Changes the title on the header based on the user's action
      */
     public void setLabel() {
         // Get the custom view and title id to set title suitable for the current page
@@ -125,12 +125,12 @@ public class SearchActivity extends AppCompatActivity {
 
 
     /**
-     * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
+     * Generates the product list used to populated the RecyclerView, and setting the adapter needed
      * in order to achieve this
      */
-    public void generatePhoneList() {
+    public void generateProductList() {
         initializeArray();
-        setPhoneAdapter();
+        setProductAdapter();
     }
 
 
@@ -138,8 +138,9 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * Sets the adapter for the RecyclerView
      */
-    public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,this);
+    public void setProductAdapter() {
+        // creating new PhoneAdapter
+        adapter = new ProductAdapter(products,this);
 
         // Creating layout with 2 vertical columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
@@ -168,7 +169,7 @@ public class SearchActivity extends AppCompatActivity {
         if (this.chosen_category != null) {
             filterCategories();
         } else if (this.user_search != null) {
-            filterUserSearches();
+            filterUserSearch();
         } else {
             this.products = new ArrayList<>(DataProvider.getProducts());
         }
@@ -199,7 +200,7 @@ public class SearchActivity extends AppCompatActivity {
      * Filters phones by the given user search and puts these phones and associated products into
      * the phones and products ArrayLists
      */
-    public void filterUserSearches() {
+    public void filterUserSearch() {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
         for (Product product: DataProvider.getProducts()) {

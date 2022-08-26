@@ -26,9 +26,9 @@ import java.util.Collections;
 
 public class ComparisonActivity extends AppCompatActivity {
 
-    long product1_id, product2_id;
-
-    /** View Holder Class */
+    /**
+     * View Holder Class
+     */
     class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         ImageView phone_1_image, phone_2_image;
@@ -36,6 +36,9 @@ public class ComparisonActivity extends AppCompatActivity {
         ImageButton action_bar_back_button;
         RecyclerView specs_recycler_view;
 
+        /**
+         * Constructor
+         */
         public ViewHolder() {
             this.phone_1_image = findViewById(R.id.phone_1_image);
             this.phone_2_image = findViewById(R.id.phone_2_image);
@@ -50,12 +53,14 @@ public class ComparisonActivity extends AppCompatActivity {
 
     ViewHolder vh;
     SpecificationAdapter adapter;
+    long product1_id, product2_id;
 
     @Override
     protected void onCreate(Bundle saved_instance_state) {
         super.onCreate(saved_instance_state);
         setContentView(R.layout.activity_comparison);
 
+        // Initialising the ViewHolder
         vh = new ViewHolder();
 
 
@@ -65,14 +70,27 @@ public class ComparisonActivity extends AppCompatActivity {
         // Navigation bar
         initializeNavItem();
 
-        // Phones selected
-        initializePhones();
+        // Generating the specification of the two products
+        generateProductSpecsList();
+
         initializeViewDetails();
 
+    }
+
+    /**
+     * Generates the list of specifications for each product which are then used to populated the
+     * RecyclerView, and setting the adapter needed in order to achieve this
+     */
+    public void generateProductSpecsList() {
+        initializeProducts();
         setSpecificationAdapter();
     }
 
+    /**
+     * Sets the adapter for the RecyclerView
+     */
     public void setSpecificationAdapter() {
+        // Getting the product's specifications
         ArrayList<ArrayList> all_specs = generateSpecsArrays();
 
         adapter = new SpecificationAdapter(all_specs.get(0), all_specs.get(1), this);
@@ -85,6 +103,9 @@ public class ComparisonActivity extends AppCompatActivity {
         vh.specs_recycler_view.setAdapter(adapter);
     }
 
+    /**
+     * Generating the specifications of each product
+     */
     public ArrayList<ArrayList> generateSpecsArrays() {
         ArrayList<ArrayList> all_specs = new ArrayList<>();
         ArrayList<Specification> specs_product1 = IProduct.getProductById(product1_id).getPhone().getSpecifications();
@@ -102,10 +123,10 @@ public class ComparisonActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a customer layout
-     * */
+     * Initialises the action bar using a customer layout
+     */
     public void initialiseActionBar() {
-        // Use the customer layout for the action bar
+        // Use the custom layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
 
@@ -123,17 +144,17 @@ public class ComparisonActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the two phones that have been selected to be compared
-     * */
-    private void initializePhones() {
+     * Initialises the two products that have been selected to be compared
+     */
+    private void initializeProducts() {
         product1_id = getIntent().getLongExtra("product1_id", 1);
         product2_id = getIntent().getLongExtra("product2_id", 1);
     }
 
 
     /**
-     * This method initializes the details of the two phones selected that is displayed
-     * */
+     * Initializes the details of the two phones selected that is displayed
+     */
     private void initializeViewDetails() {
         Phone phone1 = DataProvider.getPhoneById(product1_id);
         Phone phone2 = DataProvider.getPhoneById(product2_id);
@@ -149,20 +170,26 @@ public class ComparisonActivity extends AppCompatActivity {
     }
 
 
-    /** Takes the user to details page of phone 1 */
+    /**
+     * Takes the user to details page of product 1
+     */
     public void viewPhone1ButtonClicked(View v) {
         gotoDetailsActivity(product1_id);
     }
 
-    /** Takes the user to details page of phone 2 */
+    /**
+     * Takes the user to details page of product 2
+     */
     public void viewPhone2ButtonClicked(View v) {
         gotoDetailsActivity(product2_id);
     }
 
-    /** Stars the details activity based on the phone selected*/
-    private void gotoDetailsActivity(long phone_id) {
+    /**
+     * Stars the details activity based on the product selected
+     */
+    private void gotoDetailsActivity(long product_id) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("product_id", phone_id);
+        intent.putExtra("product_id", product_id);
         startActivity(intent);
     }
 
@@ -171,7 +198,7 @@ public class ComparisonActivity extends AppCompatActivity {
      * Initialises the navigation item selected for the comparison page
      */
     public void initializeNavItem() {
-        //setting ItemSelectedListener
+        // Setting ItemSelectedListener
         vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()){
                 case R.id.nav_home:

@@ -9,14 +9,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.adapters.ProductAdapter;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,7 +45,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     // Fields
     private String user_search; //the user search
     ArrayList<Product> products = new ArrayList<>();
-    PhoneAdapter adapter;
+    ProductAdapter adapter;
     ViewHolder vh;
 
     @Override
@@ -58,13 +57,13 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         vh = new ViewHolder();
 
 
-        // Generating Phone List
-        generatePhoneList();
+        // Generating the product list
+        generateProductList();
 
         // Initialising the action bar
         initialiseActionBar();
 
-        // initialising the bottom navigation bar ie setting onClickListener for each item
+        // Initialising the bottom navigation bar ie setting onClickListener for each item
         initializeNavItem();
 
 
@@ -109,12 +108,12 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     }
 
     /**
-     * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
+     * Generates the product list used to populated the RecyclerView, and sets the adapter needed
      * in order to achieve this
      */
-    public void generatePhoneList() {
+    public void generateProductList() {
         initializeArray();
-        setPhoneAdapter();
+        setProductAdapter();
     }
 
 
@@ -122,8 +121,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     /**
      * Sets the adapter for the RecyclerView
      */
-    public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,this);
+    public void setProductAdapter() {
+        adapter = new ProductAdapter(products,this);
 
         // Creating layout with 2 vertical columns
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
@@ -150,7 +149,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         // phones whose name is somewhat associated with the user_search
         // if both chosen_category and user_search are null - get all phones
         if (this.user_search != null) {
-            filterUserSearches();
+            filterUserSearch();
         } else {
             filterOutFirstPhoneId();
         }
@@ -162,7 +161,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      * Filters phones by the given user search and puts these phones and associated products into
      * the phones and products ArrayLists
      */
-    public void filterUserSearches() {
+    public void filterUserSearch() {
         // "Cleaning" the user search
         this.user_search = this.user_search.trim();
         for (Product product: DataProvider.getProducts()) {
