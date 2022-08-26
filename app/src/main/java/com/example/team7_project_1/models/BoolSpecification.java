@@ -25,9 +25,4 @@ public class BoolSpecification extends Specification {
         return Boolean.toString(this.value);
     }
 
-    @Override
-    public boolean isBetterThan(Specification other_spec) {
-        // TODO: implement
-        return false;
-    }
 }

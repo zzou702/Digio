@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
-public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> implements IPhoneAdapter {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements IProductAdapter {
 
     // To make your view item clickable ensure that the view holder class implements View.OnClickListener and it has the onClick(View v) method
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -56,10 +56,16 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             this.phone_main_image = v.findViewById(R.id.phone_main_image);
             this.phone_price = v.findViewById(R.id.phone_price);
             this.phone_subtitle = v.findViewById(R.id.phone_subtitle);
-            this.os_icon = v.findViewById(R.id.os_icon);
-            this.brand_icon = v.findViewById(R.id.brand_icon);
 
-            if (is_cart) {
+            // If its an instance of either SearchActivity or ComparisonFilterActivity then we need
+            // to be able to dynamically change the os and brand icons depending on each phone
+            if (context instanceof SearchActivity || context instanceof ComparisonFilterActivity) {
+                this.os_icon = v.findViewById(R.id.os_icon);
+                this.brand_icon = v.findViewById(R.id.brand_icon);
+            }
+            // If its an instance of CartActivity we need to make the remove_from_cart_button
+            // clickable
+            if (context instanceof CartActivity) {
                 this.remove_from_cart_button = v.findViewById(R.id.remove_from_cart_button);
                 remove_from_cart_button.setOnClickListener(this);
             }
@@ -90,14 +96,19 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 // Since we already increased the frequency of product1 we must also do the same for product2
                 clicked_product.incrementFrequency();
                 context.startActivity(intent);
+
+            // Goes to DetailsActivity
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("product_id",  clicked_product.getId());
                 context.startActivity(intent);
             } else if (current_context instanceof CartActivity) {
+                // If the remove_from_cart_button is pressed then the product is removed. If we press
+                // the cardView of the product instead then we go to the DetailsActivity
                 if (v.equals(remove_from_cart_button)) {
                     removeAt(getAdapterPosition());
                     DataProvider.removeFromShoppingCart(clicked_product.getId());
+                    ((CartActivity)context).updateCheckoutVisibility();
                     Toast.makeText(context, "Removed from cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
@@ -107,6 +118,9 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             }
         }
 
+        /**
+         * Removes product from the RecyclerView
+         */
         public void removeAt(int position) {
             products.remove(position);
             notifyItemRemoved(position);
@@ -118,14 +132,12 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
     private ArrayList<Product> products;
     private ArrayList<Product> products_all;
     private Context context;
-    private boolean is_cart;
 
     /** Constructor */
-    public PhoneAdapter(ArrayList<Product> products, boolean is_cart, Context context) {
+    public ProductAdapter(ArrayList<Product> products, Context context) {
         this.products = products;
         this.products_all = new ArrayList<>(products);
         this.context = context;
-        this.is_cart = is_cart;
     }
 
     @NonNull
@@ -147,7 +159,7 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
             phone_view = inflater.inflate(R.layout.phone_list_view_item, parent, false);
         }
 
-        // Create ViewHolder
+        // create ViewHolder
         ViewHolder holder = new ViewHolder(phone_view);
 
         return holder;
@@ -161,39 +173,50 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         // Getting the phone and product associated with it in the given position in the RecyclerView
         Product this_product = products.get(position);
         Phone this_phone = this_product.getPhone();
 
+        // Setting Views according to product's values
         holder.phone_name.setText(this_phone.getName());
         holder.phone_subtitle.setText(this_phone.getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
-        int image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
-        holder.phone_main_image.setImageResource(image);
+        int phone_image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
+        holder.phone_main_image.setImageResource(phone_image);
 
-//        Category this_category = this_phone.getCategory();
-//
-//        holder.os_icon.setImageResource(this_category.getOSImageId());
-//        holder.brand_icon.setImageResource(this_category.getBrandImageId());
+        // Setting OS and brand icons based on phone category
+        Category this_category = this_phone.getCategory();
+        if (context instanceof SearchActivity || context instanceof ComparisonFilterActivity) {
+            holder.os_icon.setImageResource(this_category.getOSImageId(context));
+            holder.brand_icon.setImageResource(this_category.getBrandImageId(context));
+        }
     }
 
-
+    /**
+     * Gets the number of items
+     */
     @Override
     public int getItemCount() {
         return products.size();
     }
 
 
+    @Override
     public Filter getFilter() {
         return filter;
     }
 
+    /**
+     * Filters out products dynamically as the user types into the search bar
+     */
     Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence char_sequence) {
             ArrayList<Product> filtered_products = new ArrayList<>();
 
+            // If the user hasn't typed anything then we show all the phones
             if (char_sequence.toString().isEmpty()) {
                 filtered_products.addAll(products_all);
             } else {
@@ -211,8 +234,11 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         }
 
 
+        /**
+         * Updating the products displayed
+         */
         @Override
-        protected void publishResults(CharSequence char_sequence, FilterResults filter_results) {
+        public void publishResults(CharSequence char_sequence, FilterResults filter_results) {
             products.clear();
             products.addAll((Collection<? extends Product>) filter_results.values);
             notifyDataSetChanged();

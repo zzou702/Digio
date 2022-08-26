@@ -19,25 +19,17 @@
 
 
     <style name="CategoryButtonAndroid" parent="CategoryButton">
-        <!--        See res/drawable/android_logo.xml-->
         <item name="android:background">@drawable/android_logo</item>
-
     </style>
 
     <!--    IOS-->
-
     <style name="CategoryButtonIOS" parent="CategoryButton">
-<!--        See res/drawable/ios_logo.xml-->
-
         <item name="android:background">@drawable/ios_logo</item>
     </style>
 
     <!--    Other-->
-
     <style name="CategoryButtonOther" parent="CategoryButton">
-
-        <!--        See res/drawable/windows_logo.xml-->
-        <item name="android:background">@drawable/windows_logo</item>
+        <item name="android:background">@drawable/other_category_icon</item>
     </style>
 
     <style name="CategoryTitle" parent="TextAppearance.AppCompat">

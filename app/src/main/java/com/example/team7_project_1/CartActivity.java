@@ -1,6 +1,6 @@
 package com.example.team7_project_1;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -18,13 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.adapters.ProductAdapter;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -57,7 +56,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     ViewHolder vh;
-    PhoneAdapter adapter;
+    ProductAdapter adapter;
     ArrayList<Product> products = new ArrayList<>();
     double GST_PERCENTAGE = 0.15;
 
@@ -71,7 +70,8 @@ public class CartActivity extends AppCompatActivity {
         // Action bar
         initialiseActionBar();
 
-        generatePhoneList();
+        // Generating the product list
+        generateProductList();
 
         // Setup navigation bar
         initializeNavItem();
@@ -82,9 +82,9 @@ public class CartActivity extends AppCompatActivity {
 
 
     /**
-     * This method initialises the action bar using a custom layout
-     * */
-    public void initialiseActionBar(){
+     * Initialises the action bar using a custom layout
+     */
+    public void initialiseActionBar() {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
@@ -100,12 +100,12 @@ public class CartActivity extends AppCompatActivity {
 
 
     /**
-     * Generates the phone list used to populated the RecyclerView, and setting the adapter needed
+     * Generates the product list used to populated the RecyclerView, and setting the adapter needed
      * in order to achieve this
      */
-    public void generatePhoneList() {
+    public void generateProductList() {
         initializeArray();
-        setPhoneAdapter();
+        setProductAdapter();
     }
 
 
@@ -117,8 +117,8 @@ public class CartActivity extends AppCompatActivity {
     /**
      * Sets the adapter for the RecyclerView
      */
-    public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,true,this);
+    public void setProductAdapter() {
+        adapter = new ProductAdapter(products,this);
 
         // Creating horizontal vertical layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -208,7 +208,7 @@ public class CartActivity extends AppCompatActivity {
      */
     public void setNavVisibility(){
 
-        // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
+        // Listening to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,
                 is_open -> {
@@ -237,13 +237,11 @@ public class CartActivity extends AppCompatActivity {
             // variable for total price
             double total_price = 0;
 
-            // Goes through every product in the cart and add their price to total price
-
-            ArrayList<Product> products = DataProvider.getShoppingCartProducts();
-
-            for(int i = 0; i < products.size(); i++){
-                total_price += products.get(i).getPrice();
+            // Going through every product in the cart and adds their price to total price
+            for (Product product : DataProvider.getShoppingCartProducts()) {
+                total_price += product.getPrice();
             }
+
 
             // Setting the text for each of the checkout section
             vh.subtotal_text.setText(String.format(Locale.getDefault(),"Subtotal:  $%.2f", total_price * (1 - GST_PERCENTAGE)));
@@ -252,9 +250,13 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Empties the cart, shows a toast to the user and goes back to the MainActivity
+     */
     public void checkoutButtonClicked(View view) {
         DataProvider.emptyCart();
         Toast.makeText(this,"Thank you for your purchase!", Toast.LENGTH_LONG).show();
-        //startActivity(CheckoutActivity);
+        Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
     }
 }

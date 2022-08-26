@@ -1,8 +1,14 @@
 package com.example.team7_project_1.models;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 public class IOSCategory extends Category {
+    public IOSCategory(String brand) {
+        super(brand);
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -10,14 +16,15 @@ public class IOSCategory extends Category {
     }
 
     @Override
-    public int getOSImageId() {
-//        context.getResources().getIdentifier(String.format(Locale.getDefault(),
-//                "p%d_%d_medium", phone_id, image_index + 1), "drawable", context.getPackageName());
-        return 0;
+    public int getOSImageId(Context context) {
+        return context.getResources().getIdentifier("ios_logo", "drawable", context.getPackageName());
     }
 
+    /**
+     * It returns 0 as the IOS phones do not have a logo for their brand
+     */
     @Override
-    public int getBrandImageId() {
+    public int getBrandImageId(Context context) {
         return 0;
     }
 }

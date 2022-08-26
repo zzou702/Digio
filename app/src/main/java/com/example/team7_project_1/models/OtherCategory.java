@@ -1,8 +1,14 @@
 package com.example.team7_project_1.models;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 public class OtherCategory extends Category {
+    public OtherCategory(String brand) {
+        super(brand);
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -10,14 +16,17 @@ public class OtherCategory extends Category {
     }
 
     @Override
-    public int getOSImageId() {
-//        context.getResources().getIdentifier(String.format(Locale.getDefault(),
-//                "p%d_%d_medium", phone_id, image_index + 1), "drawable", context.getPackageName());
-        return 0;
+    public int getOSImageId(Context context) {
+        return context.getResources().getIdentifier("other_category_icon", "drawable", context.getPackageName());
     }
 
     @Override
-    public int getBrandImageId() {
-        return 0;
+    public int getBrandImageId(Context context) {
+        switch (this.brand) {
+            case "Microsoft":
+                return context.getResources().getIdentifier("windows_logo", "drawable", context.getPackageName());
+            default:
+                return 0;
+        }
     }
 }

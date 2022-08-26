@@ -16,7 +16,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:orientation="vertical"
                 android:gravity="center">
                 <TextView
@@ -25,7 +25,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center_horizontal"
                     android:gravity="center"
-                    android:text="iPhone 13 Pro Max (2022) fhaklf"
+                    android:text="iPhone 13 Pro Max (2022)\nTest\nTest"
                     style="@style/CardViewTitle"/>
 
                 <TextView
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center_horizontal"
                     android:gravity="center"
-                    android:text="Test"
+                    android:text="Test\nTest"
                     android:layout_marginBottom="6dp"
                     style="@style/CardViewSubtitle"/>
             </LinearLayout>
@@ -66,21 +66,20 @@
 
                 <TextView
                     android:id="@+id/phone_price"
+                    style="@style/CardViewTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
+                    android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:layout_centerInParent="true"
-                    android:text="$2900.99"
-                    style="@style/CardViewTitle" />
+                    android:text="$2900.99" />
 
                 <ImageView
                     android:id="@+id/brand_icon"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"
-                    android:layout_gravity="center"
-                    android:src="@drawable/windows_logo" />
+                    android:layout_gravity="center"/>
             </RelativeLayout>
 
 
