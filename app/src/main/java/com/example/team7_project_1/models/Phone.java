@@ -13,7 +13,8 @@ public class Phone extends Product implements IPhone {
     private String operating_system;
     private String brand;
     private String manufacturer_part_no;
-    private ArrayList<Specification> specifications = new ArrayList<>();;
+    private ArrayList<Specification> specifications = new ArrayList<>();
+    private Category category;
 
     /**
      * Constructor
@@ -25,6 +26,20 @@ public class Phone extends Product implements IPhone {
         this.brand = brand;
         this.manufacturer_part_no = manufacturer_part_no;
 
+        assignToCategory();
+    }
+
+    /**
+     * Determines the category based on OS
+     */
+    private void assignToCategory() {
+        if (Category.Names.ANDROID.equals(operating_system)) {
+            category = new AndroidCategory();
+        } else if (Category.Names.IOS.equals(operating_system)) {
+            category = new IOSCategory();
+        } else {
+            category = new OtherCategory();
+        }
     }
 
     public void parseSpecifications(Object spec_obj) {

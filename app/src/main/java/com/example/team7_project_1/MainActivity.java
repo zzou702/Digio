@@ -1,9 +1,6 @@
 package com.example.team7_project_1;
 
 
-import androidx.annotation.NonNull;
-
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -25,6 +22,7 @@ import android.widget.*;
 
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
 import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -41,7 +39,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     // Categories to be chosen
-    public SearchActivity.Category category;
+    public Category.Names category;
 
     // Array for banners
     int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
@@ -269,13 +267,13 @@ public class MainActivity extends AppCompatActivity {
         switch(v.getId())
         {
             case R.id.category_btn_android: //if android button is pressed
-                this.category = SearchActivity.Category.ANDROID;
+                this.category = Category.Names.ANDROID;
                 break;
             case R.id.category_btn_ios: //if ios button is pressed
-                this.category = SearchActivity.Category.IOS;
+                this.category = Category.Names.IOS;
                 break;
             case R.id.category_btn_other: // if OTHER button is pressed
-                this.category = SearchActivity.Category.OTHER;
+                this.category = Category.Names.OTHER;
                 break;
         }
 

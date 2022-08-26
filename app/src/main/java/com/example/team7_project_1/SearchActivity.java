@@ -1,7 +1,6 @@
 package com.example.team7_project_1;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -21,6 +20,7 @@ import android.widget.TextView;
 
 
 import com.example.team7_project_1.adapters.PhoneAdapter;
+import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,16 +31,6 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
-
-    /**
-     * Represents the type of category the user selected
-     */
-    public enum Category {
-        ANDROID,
-        IOS,
-        OTHER,
-    }
-
     /**
      * View holder class
      */
@@ -60,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     // Fields
-    private Category chosen_category; //the chosen category
+    private Category.Names chosen_category; //the chosen category
     private String user_search; //the user search
     ArrayList<Product> products = new ArrayList<Product>();
     PhoneAdapter adapter;
@@ -118,11 +108,11 @@ public class SearchActivity extends AppCompatActivity {
 
             /* Change the string that will be outputted based on the category selected */
             // If the Category chosen is iOS
-            if(this.chosen_category == Category.IOS){
+            if(this.chosen_category.equals(Category.Names.IOS)) {
                 vh.action_bar_title.setText("iOS");
-            }else if(this.chosen_category == Category.ANDROID){ // If the Category chose is Android
+            }else if(this.chosen_category.equals(Category.Names.ANDROID)) { // If the Category chose is Android
                 vh.action_bar_title.setText("Android");
-            }else if(this.chosen_category == Category.OTHER){ // If the Category Chosen is Other
+            }else if(this.chosen_category.equals(Category.Names.OTHER)) { // If the Category Chosen is Other
                 vh.action_bar_title.setText("Other OS");
             }
         }
@@ -163,7 +153,7 @@ public class SearchActivity extends AppCompatActivity {
     public void initializeArray() {
         // Getting the chosen category and user search that have been passed using the putExtra()
         // method
-        this.chosen_category = (Category) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
+        this.chosen_category = (Category.Names) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
         this.user_search = (String) getIntent().getStringExtra("user_search");
 
         // If the chosen_category is not null - filter all phones by category and get only the phones
