@@ -1,13 +1,15 @@
 package com.example.team7_project_1.models;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 public abstract class Category {
     @NonNull
     public abstract String toString();
 
-    public abstract int getOSImageId();
-    public abstract int getBrandImageId();
+    public abstract int getOSImageId(Context context);
+    //public abstract int getBrandImageId(Context context);
 
     public enum Names {
         /**

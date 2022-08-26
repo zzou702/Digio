@@ -172,10 +172,12 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         int image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
         holder.phone_main_image.setImageResource(image);
 
-//        Category this_category = this_phone.getCategory();
-//
-//        holder.os_icon.setImageResource(this_category.getOSImageId());
-//        holder.brand_icon.setImageResource(this_category.getBrandImageId());
+        // Set OS and brand icons based on phone category
+
+        Category this_category = this_phone.getCategory();
+        holder.os_icon.setImageResource(image);
+        //holder.os_icon.setImageResource(this_category.getOSImageId(this.context));
+        //holder.brand_icon.setImageResource(this_category.getBrandImageId(this.context));
     }
 
 
