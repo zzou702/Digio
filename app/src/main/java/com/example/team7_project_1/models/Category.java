@@ -9,7 +9,7 @@ public abstract class Category {
     public abstract String toString();
 
     public abstract int getOSImageId(Context context);
-    //public abstract int getBrandImageId(Context context);
+    public abstract int getBrandImageId(Context context);
 
     public enum Names {
         /**

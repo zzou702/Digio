@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
      * Sets the adapter for the RecyclerView
      */
     public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,false,this);
+        adapter = new PhoneAdapter(products,this);
 
         // Creating horizontal linear layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -203,11 +203,6 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < 5; i++) {
             this.products.add(all_products.get(i));
         }
-//        for (Product product : DataProvider.getProducts()) {
-//            if (product.getRating() >= 4.3) {
-//                this.products.add(product);
-//            }
-//        }
     }
 
 

@@ -118,7 +118,7 @@ public class CartActivity extends AppCompatActivity {
      * Sets the adapter for the RecyclerView
      */
     public void setPhoneAdapter() {
-        adapter = new PhoneAdapter(products,true,this);
+        adapter = new PhoneAdapter(products,this);
 
         // Creating horizontal vertical layout
         LinearLayoutManager layout_manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -255,6 +255,7 @@ public class CartActivity extends AppCompatActivity {
     public void checkoutButtonClicked(View view) {
         DataProvider.emptyCart();
         Toast.makeText(this,"Thank you for your purchase!", Toast.LENGTH_LONG).show();
-        //startActivity(CheckoutActivity);
+        Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
     }
 }

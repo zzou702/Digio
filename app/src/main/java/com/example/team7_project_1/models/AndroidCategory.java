@@ -16,6 +16,11 @@ public class AndroidCategory extends Category {
 
     @Override
     public int getOSImageId(Context context) {
-        return context.getResources().getIdentifier("android_logo.png", "drawable", context.getPackageName());
+        return context.getResources().getIdentifier("android_logo", "drawable", context.getPackageName());
+    }
+
+    @Override
+    public int getBrandImageId(Context context) {
+        return context.getResources().getIdentifier("android_logo", "drawable", context.getPackageName());
     }
 }

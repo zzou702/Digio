@@ -13,6 +13,11 @@ public class OtherCategory extends Category {
 
     @Override
     public int getOSImageId(Context context) {
-        return context.getResources().getIdentifier("windows_logo.png", "drawable", context.getPackageName());
+        return context.getResources().getIdentifier("windows_logo", "drawable", context.getPackageName());
+    }
+
+    @Override
+    public int getBrandImageId(Context context) {
+        return context.getResources().getIdentifier("windows_logo", "drawable", context.getPackageName());
     }
 }
