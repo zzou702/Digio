@@ -98,7 +98,7 @@
                     android:textSize="26sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/montserrat_regular"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="20dp"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/top_picks_recycler_view"
                     android:layout_width="match_parent"
