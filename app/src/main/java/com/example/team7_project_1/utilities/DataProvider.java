@@ -32,6 +32,9 @@ public class DataProvider {
     private static final int NUM_PHONE_IMAGES = 4;
     public static final String NOT_APPLICABLE = "N/A";
 
+    private static int NUM_IMAGES = 117;
+    public static StorageReference[]  image_holder;
+
     private static StorageReference storage_ref;
 
     private static ArrayList<Phone> all_phones;
@@ -170,6 +173,7 @@ public class DataProvider {
 
     public static StorageReference[] getPhoneImageResourcesById(long phone_id, Context context) {
         StorageReference[] images = new StorageReference[NUM_PHONE_IMAGES];
+
         //storage_ref = FirebaseStorage.getInstance().getReference("phone_images/" + Long.toString(phone_id) + "_" + Integer.toString(image_index+1) + "_medium.jpeg");
 
         String ph_id = Long.toString(phone_id);
@@ -206,36 +210,6 @@ public class DataProvider {
 
             images[image_index] = storage_ref;
         }
-/*
-        String ph_id = Long.toString(phone_id);
-
-
-        int image_index = 0;
-        
-        String imgPath = "phone_images/p" + ph_id + "_" + (image_index + 1) + "_medium.jpeg";
-        FirebaseStorage mStorage = FirebaseStorage.getInstance();
-        StorageReference storageRef = mStorage.getReference(imgPath);
-        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context)
-                        .load(uri)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)         //ALL or NONE as your requirement
-                        .into(myViewHolder.spImg);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-                Glide.with(context)
-                        .load(R.drawable.ic_image_error)
-                        .fitCenter()
-                        .into(myViewHolder.spImg);
-            }
-        });
-        
-        
-        
 
 /*
         for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
@@ -245,6 +219,7 @@ public class DataProvider {
         // TODO: handle when images not found, return NotFound image?
         return images;
     }
+
 
     public static boolean addToShoppingCart(long phone_id) {
         Product equivalent_product = DataProvider.getProductByPhoneId(phone_id);

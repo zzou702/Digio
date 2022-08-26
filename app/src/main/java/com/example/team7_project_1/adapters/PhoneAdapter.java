@@ -197,8 +197,6 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
-        //Bitmap bitmap = BitmapFactory.decodeFile(image.getPath());
-        //holder.phone_main_image.setImageBitmap(bitmap);
 
 
 

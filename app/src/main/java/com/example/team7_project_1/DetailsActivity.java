@@ -19,6 +19,7 @@ import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.storage.StorageReference;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -130,8 +131,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         //int[] images = DataProvider.getPhoneImageResourcesById(product_id, this);
 
-        //String[] images = DataProvider.getPhoneImageResourcesById(product_id, this);
-        //view_pager_adapter = new ViewPagerAdapter(DetailsActivity.this, images);
+        StorageReference[] images = DataProvider.getPhoneImageResourcesById(product_id, this);
+        view_pager_adapter = new ViewPagerAdapter(DetailsActivity.this, images);
 
         vh.phone_name.setText(current_product.getName());
         vh.phone_subtitle.setText(current_phone.getSubtitle());

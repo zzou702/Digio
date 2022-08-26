@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         initialiseActionBar();
 
         // Banner
-        initialiseBanner();
+        //initialiseBanner();
 
         // Generating the Top Picks
         generatedTopPicks();
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void initialiseBanner() {
         //setting up the adapter for the banner image
-        banner_view_pager_adapter = new ViewPagerAdapter(MainActivity.this, banner);
+        //banner_view_pager_adapter = new ViewPagerAdapter(MainActivity.this, banner);
         vh.banner_view_pager.setAdapter(banner_view_pager_adapter);
 
         //initialise the last item of the banner
