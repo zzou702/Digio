@@ -14,9 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.team7_project_1.handlers.MapHandler;
 import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.utilities.DataProvider;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class LoadingActivity extends AppCompatActivity {
+
+    private StorageReference mStorageRef;
 
     /** View holder class*/
     private class ViewHolder{

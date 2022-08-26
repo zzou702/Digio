@@ -138,9 +138,10 @@ public class ComparisonActivity extends AppCompatActivity {
         Phone phone1 = DataProvider.getPhoneById(product1_id);
         Phone phone2 = DataProvider.getPhoneById(product2_id);
 
+        /*
         vh.phone_1_image.setImageResource(DataProvider.getPhoneImageResourcesById(product1_id, this)[0]);
         vh.phone_2_image.setImageResource(DataProvider.getPhoneImageResourcesById(product2_id, this)[0]);
-
+         */
         vh.phone_1_title.setText(phone1.getName());
         vh.phone_2_title.setText(phone2.getName());
 

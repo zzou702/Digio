@@ -2,6 +2,9 @@ package com.example.team7_project_1.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
@@ -26,7 +31,13 @@ import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
 import com.example.team7_project_1.SearchActivity;
 import com.example.team7_project_1.models.Product;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
@@ -169,8 +180,28 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         holder.phone_subtitle.setText(this_phone.getSubtitle());
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
-        int image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
-        holder.phone_main_image.setImageResource(image);
+
+        StorageReference image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
+        image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context)
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)         //ALL or NONE as your requirement
+                        .into(holder.phone_main_image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Bitmap bitmap = BitmapFactory.decodeFile(image.getPath());
+        //holder.phone_main_image.setImageBitmap(bitmap);
+
+
+
 
 //        Category this_category = this_phone.getCategory();
 //

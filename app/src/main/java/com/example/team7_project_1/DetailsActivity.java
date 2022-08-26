@@ -128,8 +128,10 @@ public class DetailsActivity extends AppCompatActivity {
         Phone current_phone = current_product.getPhone();
 
 
-        int[] images = DataProvider.getPhoneImageResourcesById(product_id, this);
-        view_pager_adapter = new ViewPagerAdapter(DetailsActivity.this, images);
+        //int[] images = DataProvider.getPhoneImageResourcesById(product_id, this);
+
+        //String[] images = DataProvider.getPhoneImageResourcesById(product_id, this);
+        //view_pager_adapter = new ViewPagerAdapter(DetailsActivity.this, images);
 
         vh.phone_name.setText(current_product.getName());
         vh.phone_subtitle.setText(current_phone.getSubtitle());

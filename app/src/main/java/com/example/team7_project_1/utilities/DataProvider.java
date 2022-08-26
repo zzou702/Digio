@@ -1,14 +1,28 @@
 package com.example.team7_project_1.utilities;
 
 import android.content.Context;
+import android.net.Uri;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.team7_project_1.R;
 import com.example.team7_project_1.models.BoolSpecification;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.models.Specification;
 import com.example.team7_project_1.models.SpecificationDatabaseType;
 import com.example.team7_project_1.models.UnitValueSpecification;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -17,6 +31,8 @@ public class DataProvider {
     // Fields
     private static final int NUM_PHONE_IMAGES = 4;
     public static final String NOT_APPLICABLE = "N/A";
+
+    private static StorageReference storage_ref;
 
     private static ArrayList<Phone> all_phones;
     private static ArrayList<Product> all_products;
@@ -152,12 +168,79 @@ public class DataProvider {
         }
     }
 
-    public static int[] getPhoneImageResourcesById(long phone_id, Context context) {
-        int[] images = new int[NUM_PHONE_IMAGES];
+    public static StorageReference[] getPhoneImageResourcesById(long phone_id, Context context) {
+        StorageReference[] images = new StorageReference[NUM_PHONE_IMAGES];
+        //storage_ref = FirebaseStorage.getInstance().getReference("phone_images/" + Long.toString(phone_id) + "_" + Integer.toString(image_index+1) + "_medium.jpeg");
+
+        String ph_id = Long.toString(phone_id);
+
 
         for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
-            images[image_index] = context.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", context.getPackageName());
+            storage_ref = FirebaseStorage.getInstance().getReference("phone_images/p"
+                    + ph_id + "_" + (image_index + 1) + "_medium.jpeg");
+
+            images[image_index] = storage_ref;
+            File local_file = null;
+
+            try {
+                local_file = File.createTempFile("tempfile", "jpeg");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int finalImage_index = image_index;
+            storage_ref.getFile(local_file)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            images[finalImage_index] = storage_ref;
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Failed to retrieve image from firebase storage", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+            images[image_index] = storage_ref;
         }
+/*
+        String ph_id = Long.toString(phone_id);
+
+
+        int image_index = 0;
+        
+        String imgPath = "phone_images/p" + ph_id + "_" + (image_index + 1) + "_medium.jpeg";
+        FirebaseStorage mStorage = FirebaseStorage.getInstance();
+        StorageReference storageRef = mStorage.getReference(imgPath);
+        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context)
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)         //ALL or NONE as your requirement
+                        .into(myViewHolder.spImg);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Glide.with(context)
+                        .load(R.drawable.ic_image_error)
+                        .fitCenter()
+                        .into(myViewHolder.spImg);
+            }
+        });
+        
+        
+        
+
+/*
+        for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
+            images[image_index] = context.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", context.getPackageName());
+        }*/
 
         // TODO: handle when images not found, return NotFound image?
         return images;
