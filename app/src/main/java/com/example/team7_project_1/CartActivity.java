@@ -61,6 +61,8 @@ public class CartActivity extends AppCompatActivity {
     ViewHolder vh;
     ProductAdapter adapter;
     ArrayList<Product> products = new ArrayList<>();
+
+    // This is the percentage of tax(GST) that will be applied to the price of the products
     double GST_PERCENTAGE = 0.15;
 
     @Override
@@ -147,18 +149,17 @@ public class CartActivity extends AppCompatActivity {
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_cart);
 
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menu_item -> {
-            switch(menu_item.getItemId()){
-                case R.id.nav_home:
-                    startActivity(new Intent(CartActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(CartActivity.this, SearchActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                case R.id.nav_cart:
-                    return true;
+        vh.bottom_navigation_view.setOnItemSelectedListener(menu_item -> {
+            if(menu_item.getItemId() == R.id.nav_home) {
+                startActivity(new Intent(CartActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                return true;
+            }else if (menu_item.getItemId() == R.id.nav_search){
+                startActivity(new Intent(CartActivity.this, SearchActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                return true;
+            }else if (menu_item.getItemId() == R.id.nav_cart) {
+                return true;
             }
             return false;
         });

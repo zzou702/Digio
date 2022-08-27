@@ -26,7 +26,6 @@ import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
 
@@ -46,16 +45,16 @@ public class SearchActivity extends AppCompatActivity {
          * Constructor
          */
         public ViewHolder() {
-            bottom_navigation_view = (BottomNavigationView) findViewById(R.id.bottom_nav_bar);
-            recycler_view_phones = (RecyclerView) findViewById(R.id.search_recycler_view);
-            no_results_text = (TextView) findViewById(R.id.no_results_text);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            recycler_view_phones = findViewById(R.id.search_recycler_view);
+            no_results_text = findViewById(R.id.no_results_text);
         }
     }
 
     // Fields
     private Category.Names chosen_category; //the chosen category
     private String user_search; //the user search
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
     ProductAdapter adapter;
     ViewHolder vh;
 
@@ -123,7 +122,8 @@ public class SearchActivity extends AppCompatActivity {
             }
         } else if (this.chosen_category == null && user_search != null) {
             if (!products.isEmpty()) {
-                vh.action_bar_title.setText(String.valueOf(products.size()) + " Results Found");
+                vh.action_bar_title.setText((products.size()) + " Results Found");
+                vh.action_bar_title.setTextSize(21);
             }
         }
     }
@@ -178,7 +178,7 @@ public class SearchActivity extends AppCompatActivity {
         // Getting the chosen category and user search that have been passed using the putExtra()
         // method
         this.chosen_category = (Category.Names) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
-        this.user_search = (String) getIntent().getStringExtra("user_search");
+        this.user_search = getIntent().getStringExtra("user_search");
 
         // If the chosen_category is not null - filter all phones by category and get only the phones
         // that fit into our category
@@ -241,19 +241,18 @@ public class SearchActivity extends AppCompatActivity {
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_search);
 
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
-            switch(menuItem.getItemId()) {
-                case R.id.nav_home:
-                    startActivity(new Intent(SearchActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(SearchActivity.this, SearchActivity.class));
-                    return true;
-                case R.id.nav_cart:
-                    startActivity(new Intent(SearchActivity.this, CartActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    return true;
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
+            if(menuItem.getItemId() == R.id.nav_home) {
+                startActivity(new Intent(SearchActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                return true;
+            }else if (menuItem.getItemId() == R.id.nav_search) {
+                startActivity(new Intent(SearchActivity.this, SearchActivity.class));
+                return true;
+            }else if(menuItem.getItemId() == R.id.nav_cart){
+                startActivity(new Intent(SearchActivity.this, CartActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
             }
             return false;
         });
@@ -309,34 +308,20 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Takes the user back to the previous page
-     * @param v
-     */
-    public void backButtonClicked(View v){
-        finish();
-    }
-
-
 
     /**
      * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
      * activated
      */
     public void setNavVisibility(){
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener (
                 this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean is_open) {
-                        if (is_open) {
-                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
-                        }else {
-                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
-                        }
+                is_open -> {
+                    if (is_open) {
+                        vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                    }else {
+                        vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                     }
                 }
         );

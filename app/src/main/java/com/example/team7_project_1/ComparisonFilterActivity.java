@@ -38,9 +38,9 @@ public class ComparisonFilterActivity extends AppCompatActivity {
          * Constructor
          */
         public ViewHolder() {
-            recycler_view_phones = (RecyclerView) findViewById(R.id.comparison_recycler_view);
-            bottom_navigation_view = (BottomNavigationView) findViewById(R.id.bottom_nav_bar);
-            no_results_text = (TextView) findViewById(R.id.no_results_text);
+            recycler_view_phones = findViewById(R.id.comparison_recycler_view);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            no_results_text = findViewById(R.id.no_results_text);
         }
     }
 
@@ -110,7 +110,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             vh.action_bar_title.setTextSize(20);
         } else {
             if (!products.isEmpty()) {
-                vh.action_bar_title.setText(String.valueOf(products.size()) + " Results Found");
+                vh.action_bar_title.setText((products.size()) + " Results Found");
+                vh.action_bar_title.setTextSize(21);
             }
         }
     }
@@ -166,7 +167,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         DataProvider.setFirstProductId(product1_id);
 
         // Getting the user search that have been passed using the putExtra() method
-        this.user_search = (String) getIntent().getStringExtra("user_search");
+        this.user_search = getIntent().getStringExtra("user_search");
 
         // If the user_search is not null - filter all phones by the user_search and get only the
         // phones whose name is somewhat associated with the user_search
@@ -269,20 +270,19 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void initializeNavItem() {
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
-            switch(menuItem.getItemId()){
-                case R.id.nav_home:
-                    startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(ComparisonFilterActivity.this, SearchActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    return true;
-                case R.id.nav_cart:
-                    startActivity(new Intent(ComparisonFilterActivity.this, CartActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    return true;
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.nav_home) {
+                startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
+            } else if (menuItem.getItemId() == R.id.nav_search){
+                startActivity(new Intent(ComparisonFilterActivity.this, SearchActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
+            }else if (menuItem.getItemId() == R.id.nav_cart){
+                startActivity(new Intent(ComparisonFilterActivity.this, CartActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
             }
             return false;
         });

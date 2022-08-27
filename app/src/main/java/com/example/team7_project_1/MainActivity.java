@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Fields
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
     ProductAdapter adapter;
     ViewHolder vh;
     // Categories to be chosen
@@ -138,23 +136,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the timer for the banner image
         final Handler handler = new Handler();
-        final Runnable update = new Runnable() {
-            @Override
-            public void run() {
-                // Getting the current item index
-                current_page = vh.banner_view_pager.getCurrentItem();
+        final Runnable update = () -> {
+            // Getting the current item index
+            current_page = vh.banner_view_pager.getCurrentItem();
 
-                // If the current banner image is the last one in the array set the current page to
-                // the first page. Otherwise set it to the next page.
-                if(current_page == banner.length-1) {
-                    current_page = 0;
-                }else {
-                    current_page++;
-                }
-
-                // Setting the current item for the banner
-                vh.banner_view_pager.setCurrentItem(current_page, true);
+            // If the current banner image is the last one in the array set the current page to
+            // the first page. Otherwise set it to the next page.
+            if(current_page == banner.length-1) {
+                current_page = 0;
+            }else {
+                current_page++;
             }
+
+            // Setting the current item for the banner
+            vh.banner_view_pager.setCurrentItem(current_page, true);
         };
 
         // New thread for the timer
@@ -263,17 +258,16 @@ public class MainActivity extends AppCompatActivity {
      * @param v
      */
     public void categoryButtonPressed(View v) {
-        switch(v.getId())
-        {
-            case R.id.category_btn_android: //if android button is pressed
-                this.category = Category.Names.ANDROID;
-                break;
-            case R.id.category_btn_ios: //if ios button is pressed
-                this.category = Category.Names.IOS;
-                break;
-            case R.id.category_btn_other: // if OTHER button is pressed
-                this.category = Category.Names.OTHER;
-                break;
+        if (v.getId() == R.id.category_btn_android) {
+            //if android button is pressed
+            this.category = Category.Names.ANDROID;
+        } else if (v.getId() == R.id.category_btn_ios){
+            //if ios button is pressed
+            this.category = Category.Names.IOS;
+
+        }else if (v.getId() == R.id.category_btn_other){
+            // if OTHER button is pressed
+            this.category = Category.Names.OTHER;
         }
 
         // directing to the new activity(ListActivity) and passing the category selected to
@@ -292,26 +286,23 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Initialises the navigation item selected for the main page
      */
-    @SuppressWarnings("deprecation")
     public void initializeNavItem() {
         //set home selected
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
 
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
-            switch(menuItem.getItemId()){
-                case R.id.nav_home:
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(MainActivity.this, SearchActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    return true;
-                case R.id.nav_cart:
-                    startActivity(new Intent(MainActivity.this, CartActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    return true;
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
+            if(menuItem.getItemId() == R.id.nav_home) {
+                return true;
+            }else if(menuItem.getItemId() == R.id.nav_search) {
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
+            }else if(menuItem.getItemId() == R.id.nav_cart){
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
             }
-
             return false;
         });
     }
@@ -326,14 +317,11 @@ public class MainActivity extends AppCompatActivity {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean is_open) {
-                        if(is_open){
-                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
-                        }else{
-                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
-                        }
+                is_open -> {
+                    if(is_open){
+                        vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                    }else{
+                        vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                     }
                 }
         );

@@ -3,7 +3,6 @@ package com.example.team7_project_1.utilities;
 import android.content.Context;
 
 import com.example.team7_project_1.models.BoolSpecification;
-import com.example.team7_project_1.models.IPhone;
 import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
@@ -133,6 +132,7 @@ public class DataProvider {
             phone.setSpecifications(typed_specifications);
         }
     }
+
 
     /**
      * Gets the images of a product given its id
