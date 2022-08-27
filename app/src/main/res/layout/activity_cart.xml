@@ -31,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="20dp"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="20dp"
             android:orientation="vertical"
             android:gravity="end"
             android:elevation="10dp"
@@ -51,42 +52,74 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/subtotal_text"
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Subtotal: $0"
-                    android:layout_gravity="left"
-                    style="@style/CardViewTitle"/>
-                <TextView
-                    android:id="@+id/gst"
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Subtotal:"
+                        style="@style/CardViewTitle"/>
+                    <TextView
+                        android:id="@+id/subtotal_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="$0"
+                        style="@style/CardViewTitle2"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="GST: $0"
-                    android:layout_gravity="left"
-                    style="@style/CardViewTitle"/>
-                <TextView
-                    android:id="@+id/total_text"
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="GST:"
+                        style="@style/CardViewTitle"/>
+                    <TextView
+                        android:id="@+id/gst"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="$0"
+                        style="@style/CardViewTitle2"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total (Inc. GST): $0"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="5dp"
-                    style="@style/CardViewTitle"/>
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Total (Inc. GST):"
+                        style="@style/CardViewTitle"/>
+                    <TextView
+                        android:id="@+id/total_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="$0"
+                        style="@style/CardViewTitle2"/>
+                </LinearLayout>
             </LinearLayout>
 
-            <Button
+            <Button style="@style/DetailsButtonPrimary"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:text="Proceed to Checkout"
-                android:textSize="14sp"
-                android:textColor="@color/white"
                 android:paddingHorizontal="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@color/black"
-                android:fontFamily="@font/lato_bold"
                 android:onClick="checkoutButtonClicked" />
         </LinearLayout>
 

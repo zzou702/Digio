@@ -246,9 +246,9 @@ public class CartActivity extends AppCompatActivity {
 
 
             // Setting the text for each of the checkout section
-            vh.subtotal_text.setText(String.format(Locale.getDefault(),"Subtotal:  $%.2f", total_price * (1 - GST_PERCENTAGE)));
-            vh.gst.setText(String.format(Locale.getDefault(),"GST:  $%.2f", total_price * GST_PERCENTAGE));
-            vh.total_text.setText(String.format(Locale.getDefault(),"Total (incl. GST):  $%.2f", total_price));
+            vh.subtotal_text.setText(String.format(Locale.getDefault(),"$%.2f", total_price * (1 - GST_PERCENTAGE)));
+            vh.gst.setText(String.format(Locale.getDefault(),"$%.2f", total_price * GST_PERCENTAGE));
+            vh.total_text.setText(String.format(Locale.getDefault(),"$%.2f", total_price));
         }
     }
 

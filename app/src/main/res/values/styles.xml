@@ -64,7 +64,11 @@
     <style name="CardViewTitle" parent="android:Widget.TextView">
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#676464</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+    <style name="CardViewTitle2" parent="android:Widget.TextView">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#676464</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
     <style name="CardViewSubtitle" parent="android:Widget.TextView">
