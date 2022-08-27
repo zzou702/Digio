@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ComparisonFilterActivity extends AppCompatActivity {
 
     /**
-     * View holder class
+     * ViewHolder Class
      */
     private class ViewHolder {
         RecyclerView recycler_view_phones;
@@ -70,9 +70,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
 
         // Initialising the bottom navigation bar ie setting onClickListener for each item
         initializeNavItem();
-
-
     }
+
 
 
     /**
@@ -98,6 +97,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         setLabel();
     }
 
+
+
     /**
      * Changes the title on the header based on user action
      */
@@ -114,6 +115,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         }
     }
 
+
+
     /**
      * Changing the visibility of the no_results_text TextView depending on whether or not there are any results
      */
@@ -124,6 +127,8 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             vh.no_results_text.setVisibility(View.GONE);
         }
     }
+
+
 
     /**
      * Generates the product list used to populated the RecyclerView, and sets the adapter needed
@@ -194,6 +199,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Filters out the first_phone_id out of our phones and products ArrayLists as it doesn't make
      * sense to be able to compare a given phone to itself
@@ -207,8 +213,11 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Creates the top bar menu used for the user to search for phones
+     * @param menu
+     * @return boolean (true/false)
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -250,7 +259,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         return true;
     }
 
@@ -276,7 +284,6 @@ public class ComparisonFilterActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
             }
-
             return false;
         });
     }

@@ -33,7 +33,7 @@ import es.dmoral.toasty.Toasty;
 public class CartActivity extends AppCompatActivity {
 
     /**
-     *  View holder class
+     *  ViewHolder Class
      */
     private class ViewHolder {
         RecyclerView recycler_view_phones;
@@ -57,6 +57,7 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
+    // Fields
     ViewHolder vh;
     ProductAdapter adapter;
     ArrayList<Product> products = new ArrayList<>();
@@ -83,6 +84,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Initialises the action bar using a custom layout
      */
@@ -101,6 +103,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Generates the product list used to populated the RecyclerView, and setting the adapter needed
      * in order to achieve this
@@ -111,9 +114,13 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Initializes the products array by getting the products inside the cart from the DataProvider
+     */
     public void initializeArray() {
         this.products = DataProvider.getShoppingCartProducts();
     }
+
 
 
     /**
@@ -131,10 +138,11 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Initialises the navigation item selected for the search page
      */
-    public void initializeNavItem(){
+    public void initializeNavItem() {
         //set home selected
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_cart);
 
@@ -157,9 +165,10 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Creates the top bar menu used for the user to search for phones
+     * @param menu
+     * @return boolean (true/false)
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -210,7 +219,7 @@ public class CartActivity extends AppCompatActivity {
      * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
      * activated
      */
-    public void setNavVisibility(){
+    public void setNavVisibility() {
 
         // Listening to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
@@ -224,6 +233,7 @@ public class CartActivity extends AppCompatActivity {
                 }
         );
     }
+
 
 
     /**
@@ -256,6 +266,7 @@ public class CartActivity extends AppCompatActivity {
 
     /**
      * Empties the cart, shows a toast to the user and goes back to the MainActivity
+     * @param view
      */
     public void checkoutButtonClicked(View view) {
         DataProvider.emptyCart();

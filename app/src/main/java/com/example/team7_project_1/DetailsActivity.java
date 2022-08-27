@@ -1,6 +1,5 @@
 package com.example.team7_project_1;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,13 +27,9 @@ import es.dmoral.toasty.Toasty;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    // Creating Object of ViewPagerAdapter
-    ViewPagerAdapter view_pager_adapter;
-
-    long product_id;
-    Product current_product;
-
-    /** View holder class*/
+    /**
+     * ViewHolder Class
+     */
     private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
         ViewPager view_pager; // creating object of ViewPager
@@ -60,7 +55,11 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    // Fields
     ViewHolder vh;
+    ViewPagerAdapter view_pager_adapter;
+    long product_id;
+    Product current_product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +82,11 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
+
     /**
-     * This method initialises the action bar using a custom layout
-     * */
-    public void initialiseActionBar(){
+     * Initialises the action bar using a custom layout
+     */
+    public void initialiseActionBar() {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
@@ -114,7 +114,7 @@ public class DetailsActivity extends AppCompatActivity {
     /**
      * This method loads the product that has been selected from the previous page and populates the
      * detailed page
-     * */
+     */
     public void loadProduct() {
         product_id = (Long) getIntent().getLongExtra("product_id", 1);
         current_product = DataProvider.getProductByPhoneId(product_id);
@@ -143,6 +143,8 @@ public class DetailsActivity extends AppCompatActivity {
         vh.phone_battery_capacity.setText(current_phone.getSpecification("batteryCapacity").getValue());
     }
 
+
+
     /**
      * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
      * activated
@@ -165,7 +167,10 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
-    /** Initialises the navigation item selected for the home page*/
+
+    /**
+     * Initialises the navigation item selected for the home page
+     */
     public void initializeNavItem(){
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
@@ -188,9 +193,11 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Takes the user to the compare filter page
-     * */
+     * @param v
+     */
     public void compareButtonClicked(View v) {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
         intent.putExtra("product1_id", this.product_id);
@@ -199,9 +206,11 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Adds the current item/product to cart(DataHolder)
-     * */
+     * @param v
+     */
     public void addToCartButtonClicked(View v) {
         boolean is_in_shopping_cart = DataProvider.addToShoppingCart(product_id);
         if (!is_in_shopping_cart) {

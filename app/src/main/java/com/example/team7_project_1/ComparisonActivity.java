@@ -25,7 +25,7 @@ import java.util.Collections;
 public class ComparisonActivity extends AppCompatActivity {
 
     /**
-     * View Holder Class
+     * ViewHolder Class
      */
     class ViewHolder {
         BottomNavigationView bottom_navigation_view;
@@ -75,6 +75,8 @@ public class ComparisonActivity extends AppCompatActivity {
 
     }
 
+
+
     /**
      * Generates the list of specifications for each product which are then used to populated the
      * RecyclerView, and setting the adapter needed in order to achieve this
@@ -83,6 +85,8 @@ public class ComparisonActivity extends AppCompatActivity {
         initializeProducts();
         setSpecificationAdapter();
     }
+
+
 
     /**
      * Sets the adapter for the RecyclerView
@@ -101,6 +105,8 @@ public class ComparisonActivity extends AppCompatActivity {
         vh.specs_recycler_view.setAdapter(adapter);
     }
 
+
+
     /**
      * Generating the specifications of each product
      */
@@ -118,6 +124,7 @@ public class ComparisonActivity extends AppCompatActivity {
         return all_specs;
 
     }
+
 
 
     /**
@@ -146,6 +153,7 @@ public class ComparisonActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Initialises the two products that have been selected to be compared
      */
@@ -153,6 +161,7 @@ public class ComparisonActivity extends AppCompatActivity {
         product1_id = getIntent().getLongExtra("product1_id", 1);
         product2_id = getIntent().getLongExtra("product2_id", 1);
     }
+
 
 
     /**
@@ -173,8 +182,10 @@ public class ComparisonActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Takes the user to details page of product 1
+     * @param v
      */
     public void viewPhone1ButtonClicked(View v) {
         gotoDetailsActivity(product1_id);
@@ -182,13 +193,16 @@ public class ComparisonActivity extends AppCompatActivity {
 
     /**
      * Takes the user to details page of product 2
+     * @param v
      */
     public void viewPhone2ButtonClicked(View v) {
         gotoDetailsActivity(product2_id);
     }
 
+
     /**
      * Stars the details activity based on the product selected
+     * @param product_id
      */
     private void gotoDetailsActivity(long product_id) {
         Intent intent = new Intent(this, DetailsActivity.class);
@@ -198,6 +212,7 @@ public class ComparisonActivity extends AppCompatActivity {
         // Fade transition
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+
 
 
     /**

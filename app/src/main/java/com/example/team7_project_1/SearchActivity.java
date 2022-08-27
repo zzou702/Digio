@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
     /**
-     * View holder class
+     * ViewHolder Class
      */
     private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
@@ -81,6 +81,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Initialises the action bar using a custom layout
      */
@@ -95,8 +96,8 @@ public class SearchActivity extends AppCompatActivity {
 
         //Setting the title of the page
         setLabel();
-
     }
+
 
 
     /**
@@ -126,6 +127,8 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+
+
     /**
      * Changing the visibility of the no_results_text TextView depending on whether or not there are any results
      */
@@ -136,8 +139,6 @@ public class SearchActivity extends AppCompatActivity {
             vh.no_results_text.setVisibility(View.GONE);
         }
     }
-
-
 
 
 
@@ -258,9 +259,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Creates the top bar menu used for the user to search for phones
+     * @param menu
+     * @return boolean (true/false)
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -302,14 +304,13 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         return true;
     }
 
 
-
     /**
      * Takes the user back to the previous page
+     * @param v
      */
     public void backButtonClicked(View v){
         finish();

@@ -17,12 +17,17 @@ import com.example.team7_project_1.utilities.DataProvider;
 
 public class LoadingActivity extends AppCompatActivity {
 
-    /** View holder class*/
+    /**
+     *  ViewHolder Class
+     */
     private class ViewHolder{
         ProgressBar phone_load_progressbar;
         TextView action_bar_title;
         ImageButton action_bar_back_button;
 
+        /**
+         * Constructor
+         */
         public ViewHolder(){
             phone_load_progressbar = findViewById(R.id.phone_load_progressBar);
         }
@@ -47,10 +52,12 @@ public class LoadingActivity extends AppCompatActivity {
         MapHandler.beginFetch();
     }
 
+
+
     /**
      * This method initialises the action bar using a customer layout
-     * */
-    public void initialiseActionBar(){
+     */
+    public void initialiseActionBar() {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar_layout);
@@ -64,6 +71,12 @@ public class LoadingActivity extends AppCompatActivity {
         vh.action_bar_back_button.setVisibility(View.GONE);
     }
 
+
+
+    /**
+     * Once we have finished loading all our data from the database then we can move the user to
+     * the MainActivity
+     */
     public void finishLoading() {
         DataProvider.parsePhoneSpecifications();
         vh.phone_load_progressbar.setVisibility(View.INVISIBLE);

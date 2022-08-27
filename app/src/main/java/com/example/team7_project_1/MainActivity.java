@@ -39,26 +39,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Categories to be chosen
-    public Category.Names category;
-
-    // Array for banners
-    int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
-
-    // Adapter for the banner images
-    ViewPagerAdapter banner_view_pager_adapter;
-
-    /* variables for the banner and timer */
-    int current_page = 0; // Keeps track of the current item in the banner
-    Timer timer; // Timer for auto sliding for the banner
-    final long DELAY_MS = 500;
-    final long PERIOD_MS = 5000; // 5 seconds before executing the next task
-
-    int NUM_TOP_PICKS = 8; //number of products in the top picks
-
-
     /**
-     * View holder class
+     * ViewHolder Class
      */
     private class ViewHolder {
         BottomNavigationView bottom_navigation_view;
@@ -83,6 +65,21 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> products = new ArrayList<Product>();
     ProductAdapter adapter;
     ViewHolder vh;
+    // Categories to be chosen
+    public Category.Names category;
+
+    // Array for banners
+    int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
+    // Adapter for the banner images
+    ViewPagerAdapter banner_view_pager_adapter;
+
+    /* Variables for the banner and timer */
+    int current_page = 0; // Keeps track of the current item in the banner
+    Timer timer; // Timer for auto sliding for the banner
+    final long DELAY_MS = 500;
+    final long PERIOD_MS = 5000; // 5 seconds before executing the next task
+
+    int NUM_TOP_PICKS = 8; // Number of products in the top picks
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,9 +104,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * This method initialises the action bar using a custom layout
-     * */
+     */
     public void initialiseActionBar() {
         // Use the customer layout for the action bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -123,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         vh.action_bar_back_button = getSupportActionBar().getCustomView().findViewById(R.id.action_bar_back_button);
         vh.action_bar_back_button.setVisibility(View.INVISIBLE);
     }
+
 
 
     /**
@@ -210,9 +209,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Creates the top bar menu used for the user to search for phones
+     * @param menu
+     * @return boolean (true/false)
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -258,9 +258,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Takes the user to the category page depending on what category button is pressed
+     * @param v
      */
     public void categoryButtonPressed(View v) {
         switch(v.getId())
@@ -343,7 +343,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method takes the user to the website on the browser if the user clicks on one
      * of the news
-     * */
+     * @param v
+     */
     public void newsClicked(View v) {
         // Default website
         String url_string = "https://www.google.com/";
