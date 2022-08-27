@@ -64,7 +64,7 @@ public abstract class Product implements IProduct, Comparable<Product> {
 
     @Override
     public int compareTo(Product product) {
-        return Long.valueOf(product.frequency).compareTo(Long.valueOf(this.frequency));
+        return Long.compare(product.frequency, this.frequency);
     }
 
     public Phone getPhone() {

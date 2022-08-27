@@ -38,7 +38,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == ((LinearLayout) object);
+        return view == (object);
     }
 
     @NonNull
@@ -48,7 +48,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         View item_view = m_layout_inflater.inflate(R.layout.pager_item, container, false);
 
         // referencing the image view from the pager_item.xml file
-        ImageView image_view = (ImageView) item_view.findViewById(R.id.imageViewMain);
+        ImageView image_view = item_view.findViewById(R.id.imageViewMain);
 
         // setting the image in the imageView
         image_view.setImageResource(images[position]);

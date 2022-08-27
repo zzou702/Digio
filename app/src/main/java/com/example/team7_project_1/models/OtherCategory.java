@@ -38,11 +38,10 @@ public class OtherCategory extends Category {
      */
     @Override
     public int getBrandImageId(Context context) {
-        switch (this.brand) {
-            case "Microsoft":
+        if (this.brand.equals("Microsoft")) {
                 return context.getResources().getIdentifier("windows_logo", "drawable", context.getPackageName());
-            default:
-                return 0;
         }
+
+        return 0;
     }
 }
