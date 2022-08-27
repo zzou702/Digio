@@ -23,6 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
+import com.example.team7_project_1.LoadingActivity;
 import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.utilities.DataProvider;
@@ -34,6 +35,7 @@ import com.example.team7_project_1.models.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.internal.StorageReferenceUri;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -181,6 +183,8 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         holder.phone_price.setText(String.format(Locale.getDefault(), "$%.2f",this_product.getPrice()));
 
 
+        // Initialised the Storage reference object
+
         StorageReference image = DataProvider.getPhoneImageResourcesById(this_phone.getId(), this.context)[0];
         image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -199,6 +203,16 @@ public class PhoneAdapter extends RecyclerView.Adapter<PhoneAdapter.ViewHolder> 
         });
 
 
+        /*
+        for (Uri uri : LoadingActivity.uri_array){
+            if (uri.equals(image)){
+                Glide.with(context)
+                        .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)         //ALL or NONE as your requirement
+                        .into(holder.phone_main_image);
+                break;
+            }
+        }*/
 
 
 //        Category this_category = this_phone.getCategory();

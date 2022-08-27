@@ -31,9 +31,7 @@ public class DataProvider {
     // Fields
     private static final int NUM_PHONE_IMAGES = 4;
     public static final String NOT_APPLICABLE = "N/A";
-
-    private static int NUM_IMAGES = 117;
-    public static StorageReference[]  image_holder;
+    private static int NUM_BANNER_IMAGES = 3;
 
     private static StorageReference storage_ref;
 
@@ -171,19 +169,67 @@ public class DataProvider {
         }
     }
 
+
+    /**
+     * This method returns an array of storage references of the banner image
+     * */
+    public static StorageReference[] getBannerImages(Context context){
+        //initialise the array containing the banner storage references
+        StorageReference[] banner = new StorageReference[NUM_BANNER_IMAGES];
+
+        //Going through all the banner images in the firebase storage
+        for(int index = 0; index<NUM_BANNER_IMAGES; index++){
+            // Getting the storage reference
+            storage_ref = FirebaseStorage.getInstance().getReference("banner_images/banner_"
+                    + (index+1) +".jpeg");
+
+            // Local file to test whether the reference has been successfully retrieved
+            File local_file = null;
+
+            try {
+                local_file = File.createTempFile("tempfile", "jpeg");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // Index to be used in the method below
+            int final_index = index;
+            storage_ref.getFile(local_file)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            // If the image has been successfully retrieved, add the reference to the array
+                            banner[final_index] = storage_ref;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Not successful, display a message
+                            Toast.makeText(context, "Failed to retrieve image from firebase storage", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+        return banner;
+    }
+
+
+    /**
+     * This method returns an array of storage references of all the photos of a phone identifies with
+     * phone_id
+     * */
     public static StorageReference[] getPhoneImageResourcesById(long phone_id, Context context) {
-        StorageReference[] images = new StorageReference[NUM_PHONE_IMAGES];
+        // Initialised an array of image references
+        StorageReference[] image_reference = new StorageReference[NUM_PHONE_IMAGES];
 
-        //storage_ref = FirebaseStorage.getInstance().getReference("phone_images/" + Long.toString(phone_id) + "_" + Integer.toString(image_index+1) + "_medium.jpeg");
-
+        // Phone id string
         String ph_id = Long.toString(phone_id);
 
-
+        // Going through the firebase storage and getting the images corresponding to the phone id
         for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
             storage_ref = FirebaseStorage.getInstance().getReference("phone_images/p"
                     + ph_id + "_" + (image_index + 1) + "_medium.jpeg");
 
-            images[image_index] = storage_ref;
+            // local file to test whether it succeeded retrieving the Storage reference
             File local_file = null;
 
             try {
@@ -197,8 +243,8 @@ public class DataProvider {
                     .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            images[finalImage_index] = storage_ref;
-
+                            //if the image storage reference was successfully retrieved, add it to the array
+                            image_reference[finalImage_index] = storage_ref;
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -208,16 +254,14 @@ public class DataProvider {
                         }
                     });
 
-            images[image_index] = storage_ref;
         }
-
-/*
+        /*
         for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
             images[image_index] = context.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", context.getPackageName());
         }*/
 
         // TODO: handle when images not found, return NotFound image?
-        return images;
+        return image_reference;
     }
 
 

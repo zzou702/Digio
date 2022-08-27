@@ -26,6 +26,7 @@ import com.example.team7_project_1.models.Category;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.storage.StorageReference;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public Category.Names category;
 
     // Array for banners
-    int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
+    public StorageReference[] banner;
 
     // Adapter for the banner images
     ViewPagerAdapter banner_view_pager_adapter;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         initialiseActionBar();
 
         // Banner
-        //initialiseBanner();
+        initialiseBanner();
 
         // Generating the Top Picks
         generatedTopPicks();
@@ -126,8 +127,9 @@ public class MainActivity extends AppCompatActivity {
      * Initializes the banner images with a timer that automatically scrolls indefinitely
      */
     public void initialiseBanner() {
+        banner = DataProvider.getBannerImages(this);
         //setting up the adapter for the banner image
-        //banner_view_pager_adapter = new ViewPagerAdapter(MainActivity.this, banner);
+        banner_view_pager_adapter = new ViewPagerAdapter(MainActivity.this, banner);
         vh.banner_view_pager.setAdapter(banner_view_pager_adapter);
 
         //initialise the last item of the banner

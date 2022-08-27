@@ -19,6 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.team7_project_1.DetailsActivity;
 import com.example.team7_project_1.MainActivity;
 import com.example.team7_project_1.R;
+import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
@@ -67,6 +68,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         // setting the image in the imageView
         //image_view.setImageResource(images[position]);
 
+
         images[position].getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -82,6 +84,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         // Adding the View
         Objects.requireNonNull(container).addView(item_view);
