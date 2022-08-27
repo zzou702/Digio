@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
+import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
@@ -117,7 +118,7 @@ public class DetailsActivity extends AppCompatActivity {
      */
     public void loadProduct() {
         product_id = (Long) getIntent().getLongExtra("product_id", 1);
-        current_product = DataProvider.getProductByPhoneId(product_id);
+        current_product = IProduct.getProductById(product_id);
 
         // Incrementing the frequency of the current product
         current_product.incrementFrequency();
