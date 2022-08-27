@@ -9,7 +9,6 @@
     tools:context=".MainActivity">
 
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="70dp"
+            android:paddingBottom="80dp"
             android:hint="@string/label"
             >
 
@@ -30,7 +29,7 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="225dp"
+                android:layout_height="300dp"
                 android:minHeight="200dp"
                 android:background="@color/white"
                 />
@@ -120,90 +119,102 @@
                 />
 
             <LinearLayout
-                style="@style/NewsContainer"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                >
-                <ImageButton
-                    android:id="@+id/news_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@drawable/news_1"
-                    android:onClick="newsClicked"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    style="@style/NewsContainer"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <ImageButton
+                        android:id="@+id/news_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="@drawable/news_1"
+                        android:onClick="newsClicked"/>
 
-                <TextView
-                    style="@style/NewsCaption"
-                    android:id="@+id/news_text_1"
-                    android:justificationMode="inter_word"
-                    android:lineSpacingMultiplier="1.1"
-                    android:text="iPhone 14, Rethink What a Phone Can Do"
-                    android:onClick="newsClicked"/>
+                    <TextView
+                        style="@style/NewsCaption"
+                        android:id="@+id/news_text_1"
+                        android:justificationMode="inter_word"
+                        android:lineSpacingMultiplier="1.1"
+                        android:text="iPhone 14, Rethink What a Phone Can Do"
+                        android:onClick="newsClicked"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/NewsContainer"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <ImageButton
+                        android:id="@+id/news_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="@drawable/news_2"
+                        android:onClick="newsClicked"/>
+
+                    <TextView
+                        style="@style/NewsCaption"
+                        android:id="@+id/news_text_2"
+                        android:justificationMode="inter_word"
+                        android:lineSpacingMultiplier="1.1"
+                        android:text="Seize the Night with Samsung S22 Ultra"
+                        android:onClick="newsClicked"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                style="@style/NewsContainer"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                >
-                <ImageButton
-                    android:id="@+id/news_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@drawable/news_2"
-                    android:onClick="newsClicked"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    style="@style/NewsContainer"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <ImageButton
+                        android:id="@+id/news_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="@drawable/news_3"
+                        android:onClick="newsClicked"/>
 
-                <TextView
-                    style="@style/NewsCaption"
-                    android:id="@+id/news_text_2"
-                    android:justificationMode="inter_word"
-                    android:lineSpacingMultiplier="1.1"
-                    android:text="Seize the Night with Samsung S22 Ultra"
-                    android:onClick="newsClicked"/>
+                    <TextView
+                        style="@style/NewsCaption"
+                        android:id="@+id/news_text_3"
+                        android:justificationMode="inter_word"
+                        android:lineSpacingMultiplier="1.1"
+                        android:text="The Xiaomi 12S Ultra, an occasionally incredible camera"
+                        android:onClick="newsClicked"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/NewsContainer"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <ImageButton
+                        android:id="@+id/news_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="@drawable/news_4"
+                        android:onClick="newsClicked"/>
+
+                    <TextView
+                        style="@style/NewsCaption"
+                        android:id="@+id/news_text_4"
+                        android:justificationMode="inter_word"
+                        android:lineSpacingMultiplier="1.1"
+                        android:text="iPhone 14 price leak could be great news ahead of launch"
+                        android:onClick="newsClicked"/>
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                style="@style/NewsContainer"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                >
-                <ImageButton
-                    android:id="@+id/news_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@drawable/news_3"
-                    android:onClick="newsClicked"/>
-
-                <TextView
-                    style="@style/NewsCaption"
-                    android:id="@+id/news_text_3"
-                    android:justificationMode="inter_word"
-                    android:lineSpacingMultiplier="1.1"
-                    android:text="The Xiaomi 12S Ultra, an occasionally incredible camera"
-                    android:onClick="newsClicked"/>
-            </LinearLayout>
-
-            <LinearLayout
-                style="@style/NewsContainer"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                >
-                <ImageButton
-                    android:id="@+id/news_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@drawable/news_4"
-                    android:onClick="newsClicked"/>
-
-                <TextView
-                    style="@style/NewsCaption"
-                    android:id="@+id/news_text_4"
-                    android:justificationMode="inter_word"
-                    android:lineSpacingMultiplier="1.1"
-                    android:text="iPhone 14 price leak could be great news ahead of launch"
-                    android:onClick="newsClicked"/>
-            </LinearLayout>
-
-
         </LinearLayout>
 
     </ScrollView>

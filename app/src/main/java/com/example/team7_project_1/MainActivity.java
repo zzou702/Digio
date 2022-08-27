@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     final long DELAY_MS = 500;
     final long PERIOD_MS = 5000; // 5 seconds before executing the next task
 
+    int NUM_TOP_PICKS = 8; //number of products in the top picks
+
 
     /**
      * View holder class
@@ -201,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Product> all_products = DataProvider.getProducts();
         Collections.sort(all_products);
 
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < NUM_TOP_PICKS; i++) {
             this.products.add(all_products.get(i));
         }
     }
@@ -351,6 +353,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (view_id == R.id.news_3 | view_id == R.id.news_text_3) {
             url_string = "https://www.theverge.com/23278136/xiaomi-12s-ultra-camera-leica-" +
                     "versus-pixel-6-pro-galaxy-s22-iphone-13-max";
+        }else if (view_id == R.id.news_4 | view_id == R.id.news_text_4) {
+            url_string = "https://www.imore.com/iphone/iphone-14/iphone-14-price-leak-could-" +
+                    "be-great-news-ahead-of-launch";
         }
 
         // Directing the user to an external browser based on the selected news
