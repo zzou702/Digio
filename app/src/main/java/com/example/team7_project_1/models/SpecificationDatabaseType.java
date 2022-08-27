@@ -3,6 +3,7 @@ package com.example.team7_project_1.models;
 import androidx.annotation.NonNull;
 
 public class SpecificationDatabaseType {
+
     // Fields
     private String field_name;
     private String type;

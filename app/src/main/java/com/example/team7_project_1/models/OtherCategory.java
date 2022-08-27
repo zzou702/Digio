@@ -5,6 +5,10 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 public class OtherCategory extends Category {
+
+    /**
+     * Constructor
+     */
     public OtherCategory(String brand) {
         super(brand);
     }

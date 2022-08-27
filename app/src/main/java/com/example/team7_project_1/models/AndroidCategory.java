@@ -7,6 +7,10 @@ import java.util.Locale;
 
 
 public class AndroidCategory extends Category {
+
+    /**
+     * Constructor
+     */
     public AndroidCategory(String brand) {
         super(brand);
     }

@@ -1,6 +1,7 @@
 package com.example.team7_project_1.models;
 
 public abstract class Product implements IProduct, Comparable<Product> {
+
     // Fields
     private long id;
     private String name;

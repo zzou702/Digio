@@ -6,8 +6,12 @@ import androidx.annotation.NonNull;
 
 public abstract class Category {
 
+    // Field
     public final String brand;
 
+    /**
+     * Constructor
+     */
     Category(String brand) {
         this.brand = brand;
     }

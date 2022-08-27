@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Phone extends Product implements IPhone {
+
     // Fields
     private String subtitle;
     private String operating_system;

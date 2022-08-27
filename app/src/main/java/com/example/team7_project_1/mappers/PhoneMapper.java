@@ -15,7 +15,9 @@ import java.util.Objects;
 
 public class PhoneMapper extends DataMapper {
 
-
+    /**
+     * Constructor
+     */
     public PhoneMapper(String collection_path) {
         super(collection_path);
     }

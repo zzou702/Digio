@@ -92,7 +92,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 Intent intent = new Intent(context, ComparisonActivity.class);
                 Bundle extras = new Bundle();
                 // Passing the required phone IDs for comparison
-                extras.putLong("product1_id", DataProvider.getProductId());
+                extras.putLong("product1_id", DataProvider.getFirstProductId());
                 extras.putLong("product2_id", clicked_product.getId());
                 intent.putExtras(extras);
 

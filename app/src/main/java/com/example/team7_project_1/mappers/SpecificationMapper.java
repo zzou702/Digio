@@ -14,6 +14,9 @@ import java.util.Objects;
 
 public class SpecificationMapper extends DataMapper {
 
+    /**
+     * Constructor
+     */
     public SpecificationMapper(String collection_path) {
         super(collection_path);
     }

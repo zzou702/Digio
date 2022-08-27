@@ -3,6 +3,7 @@ package com.example.team7_project_1.models;
 import java.util.ArrayList;
 
 public interface IPhone {
+
     void parseSpecifications(Object spec_obj);
 
     String getSubtitle();

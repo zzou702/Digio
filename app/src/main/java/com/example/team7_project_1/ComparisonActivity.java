@@ -168,8 +168,8 @@ public class ComparisonActivity extends AppCompatActivity {
      * Initializes the details of the two phones selected that is displayed
      */
     private void initializeViewDetails() {
-        Phone phone1 = DataProvider.getPhoneById(product1_id);
-        Phone phone2 = DataProvider.getPhoneById(product2_id);
+        Phone phone1 = IProduct.getProductById(product1_id).getPhone();
+        Phone phone2 = IProduct.getProductById(product2_id).getPhone();
 
         vh.phone_1_image.setImageResource(DataProvider.getPhoneImageResourcesById(product1_id, this)[0]);
         vh.phone_2_image.setImageResource(DataProvider.getPhoneImageResourcesById(product2_id, this)[0]);

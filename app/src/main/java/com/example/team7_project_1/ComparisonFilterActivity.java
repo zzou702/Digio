@@ -163,7 +163,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
     public void initializeArray() {
         // Setting the ProductId that was passed in the putExtra() method
         long product1_id = getIntent().getLongExtra("product1_id", DataProvider.getFirstProductId());
-        DataProvider.setProductId(product1_id);
+        DataProvider.setFirstProductId(product1_id);
 
         // Getting the user search that have been passed using the putExtra() method
         this.user_search = (String) getIntent().getStringExtra("user_search");

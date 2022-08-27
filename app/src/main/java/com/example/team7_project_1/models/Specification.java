@@ -3,6 +3,7 @@ package com.example.team7_project_1.models;
 import androidx.annotation.NonNull;
 
 public abstract class Specification implements ISpecification, Comparable<Specification> {
+
     // Fields
     private String field_name;
     private String display_name;

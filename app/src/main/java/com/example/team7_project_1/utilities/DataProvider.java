@@ -3,6 +3,8 @@ package com.example.team7_project_1.utilities;
 import android.content.Context;
 
 import com.example.team7_project_1.models.BoolSpecification;
+import com.example.team7_project_1.models.IPhone;
+import com.example.team7_project_1.models.IProduct;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.models.Specification;
@@ -32,7 +34,7 @@ public class DataProvider {
 
 
     /**
-     * Getters and setters for the all_phones and all_products ArrayLists as well as shopping_cart_products
+     * Getters and setters for the all_phones and all_products ArrayLists
      */
     public static void setPhoneList(ArrayList<Phone> phones) {
         // Create copy of list for storage
@@ -50,34 +52,6 @@ public class DataProvider {
 
     public static ArrayList<Product> getProducts() {
         return all_products;
-    }
-
-    public static Phone getPhoneById(long id) {
-        for (Phone phone : all_phones) {
-            if (phone.getId() == id) {
-                return phone;
-            }
-        }
-        // could not find phone of id
-        return null;
-    }
-
-    public static Product getProductByPhoneId(long phone_id) {
-        for (Product product : all_products) {
-            if (product.getId() == phone_id) {
-                return product;
-            }
-        }
-        // could not find product of phone_id
-        return null;
-    }
-
-    public static ArrayList<Product> getShoppingCartProducts() {
-        return shopping_cart_products;
-    }
-
-    public static long getFirstProductId() {
-        return first_product_id;
     }
 
 
@@ -152,45 +126,82 @@ public class DataProvider {
         }
     }
 
-    public static int[] getPhoneImageResourcesById(long phone_id, Context context) {
+    /**
+     * Gets the images of a product given its id
+     * @param product_id
+     * @param context
+     * @return int[] array containing the values for the images
+     */
+    public static int[] getPhoneImageResourcesById(long product_id, Context context) {
         int[] images = new int[NUM_PHONE_IMAGES];
 
         for (int image_index = 0; image_index < NUM_PHONE_IMAGES; image_index++) {
-            images[image_index] = context.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", phone_id, image_index + 1), "drawable", context.getPackageName());
+            images[image_index] = context.getResources().getIdentifier(String.format(Locale.getDefault(),"p%d_%d_medium", product_id, image_index + 1), "drawable", context.getPackageName());
         }
 
         // TODO: handle when images not found, return NotFound image?
         return images;
     }
 
-    public static boolean addToShoppingCart(long phone_id) {
-        Product equivalent_product = DataProvider.getProductByPhoneId(phone_id);
-        if (!shopping_cart_products.contains(equivalent_product)) {
-            shopping_cart_products.add(equivalent_product);
+
+
+    /** SHOPPING CART*/
+
+    /**
+     * Returns the shopping cart ArrayList
+     * @return ArrayList with products in shopping cart
+     */
+    public static ArrayList<Product> getShoppingCartProducts() {
+        return shopping_cart_products;
+    }
+
+    /**
+     * Adds a given product from the shopping cart given its id
+     * @param product_id
+     */
+    public static boolean addToShoppingCart(long product_id) {
+        Product product = IProduct.getProductById(product_id);
+        if (!shopping_cart_products.contains(product)) {
+            shopping_cart_products.add(product);
             return false;
         } else {
             return true;
         }
     }
 
-    public static void removeFromShoppingCart(long phone_id) {
-        Product equivalent_product = DataProvider.getProductByPhoneId(phone_id);
-        shopping_cart_products.remove(equivalent_product);
+    /**
+     * Removes a given product from the shopping cart given its id
+     * @param product_id
+     */
+    public static void removeFromShoppingCart(long product_id) {
+        Product product = IProduct.getProductById(product_id);
+        shopping_cart_products.remove(product);
     }
 
+    /**
+     * Checks if the shopping cart is empty or not
+     * @return true if its empty and false otherwise
+     */
     public static boolean isCartEmpty() {
         return shopping_cart_products.isEmpty();
     }
 
+    /**
+     * Empties the shopping cart. Done when the user checks out.
+     */
     public static void emptyCart() {
         shopping_cart_products.clear();
     }
 
-    public static void setProductId(long first_product_id) {
+
+    /** Getter and setter for first_product_id which is used when comparing two given products */
+    public static void setFirstProductId(long first_product_id) {
         DataProvider.first_product_id = first_product_id;
     }
 
-    public static long getProductId() {
-        return DataProvider.first_product_id;
+    public static long getFirstProductId() {
+        return first_product_id;
     }
+
+
 }

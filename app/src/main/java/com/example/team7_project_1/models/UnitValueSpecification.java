@@ -3,6 +3,7 @@ package com.example.team7_project_1.models;
 import com.example.team7_project_1.utilities.DataProvider;
 
 public class UnitValueSpecification extends Specification {
+
     // Fields
     private double value;
     private String unit;

@@ -1,6 +1,7 @@
 package com.example.team7_project_1.models;
 
 public class BoolSpecification extends Specification {
+
     // Field
     private boolean value;
 
@@ -11,6 +12,7 @@ public class BoolSpecification extends Specification {
         super(field_name, display_name);
         this.value = value;
     }
+
 
     /**
      * Getter and setter for value field
