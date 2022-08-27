@@ -9,6 +9,7 @@ import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.models.Specification;
 import com.example.team7_project_1.models.SpecificationDatabaseType;
+import com.example.team7_project_1.models.StringSpecification;
 import com.example.team7_project_1.models.UnitValueSpecification;
 
 import java.util.ArrayList;
@@ -65,31 +66,38 @@ public class DataProvider {
             ArrayList<Specification> typed_specifications = new ArrayList<>();
             ArrayList<Specification> stored_string_specs = phone.getSpecifications();
 
-            for (Specification string_spec : stored_string_specs) {
+            for (Specification phone_string_spec : stored_string_specs) {
                 SpecificationDatabaseType spec_type = null;
 
                 // Lookup specification type of stored string specification
                 for (SpecificationDatabaseType spec_type_item : all_specification_types) {
-                    if (spec_type_item.getFieldName().equals(string_spec.getFieldName())) {
+                    if (spec_type_item.getFieldName().equals(phone_string_spec.getFieldName())) {
                         spec_type = spec_type_item;
                         break;
                     }
                 }
 
-                // Use String type as default (existing stored stringSpec)
-                Specification specification = string_spec;
+                // Use existing stored stringSpec to reference values
+                Specification specification = phone_string_spec;
 
                 // null if no matching spec type found
-                if (spec_type != null && !spec_type.getType().equals("String")) {
+                if (spec_type != null) {
                     // Create typed specifications
                     switch (spec_type.getType()) {
+                        case "String": {
+                            specification = new StringSpecification(
+                                    spec_type.getFieldName(),
+                                    spec_type.getDisplayName(),
+                                    phone_string_spec.getValue());
+                            break;
+                        }
                         case "Boolean": {
                             boolean value;
 
-                            if (string_spec.getFormattedValue().equals(NOT_APPLICABLE)) {
+                            if (phone_string_spec.getFormattedValue().equals(NOT_APPLICABLE)) {
                                 value = false; // default
                             } else {
-                                value = Boolean.parseBoolean(string_spec.getValue());
+                                value = Boolean.parseBoolean(phone_string_spec.getValue());
                             }
 
                             specification = new BoolSpecification(
@@ -102,10 +110,10 @@ public class DataProvider {
                         case "UnitValue": {
                             double value;
 
-                            if (string_spec.getFormattedValue().equals(NOT_APPLICABLE)) {
+                            if (phone_string_spec.getFormattedValue().equals(NOT_APPLICABLE)) {
                                 value = -1; // default
                             } else {
-                                value = Double.parseDouble(string_spec.getValue());
+                                value = Double.parseDouble(phone_string_spec.getValue());
                             }
 
                             specification = new UnitValueSpecification(
