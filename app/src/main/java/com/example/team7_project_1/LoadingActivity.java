@@ -68,7 +68,7 @@ public class LoadingActivity extends AppCompatActivity {
         DataProvider.parsePhoneSpecifications();
         vh.phone_load_progressbar.setVisibility(View.INVISIBLE);
 
-        finish();
         startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+        finish();
     }
 }
