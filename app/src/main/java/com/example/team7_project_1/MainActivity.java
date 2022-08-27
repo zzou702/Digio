@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -280,6 +281,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
         intent.putExtra("CATEGORY_CHOSEN", this.category);
         startActivity(intent);
+
+        // transition
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
 

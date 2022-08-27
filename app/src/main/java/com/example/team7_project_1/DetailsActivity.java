@@ -1,5 +1,6 @@
 package com.example.team7_project_1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -104,6 +105,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
     }
@@ -170,12 +172,15 @@ public class DetailsActivity extends AppCompatActivity {
             switch(menuItem.getItemId()) {
                 case R.id.nav_home:
                     startActivity(new Intent(DetailsActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
                 case R.id.nav_search:
                     startActivity(new Intent(DetailsActivity.this, SearchActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
                 case R.id.nav_cart:
                     startActivity(new Intent(DetailsActivity.this, CartActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
             }
             return false;
@@ -190,6 +195,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
         intent.putExtra("product1_id", this.product_id);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 

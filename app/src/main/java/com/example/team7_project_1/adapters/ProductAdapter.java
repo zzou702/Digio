@@ -1,5 +1,6 @@
 package com.example.team7_project_1.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -98,12 +99,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 // Since we already increased the frequency of product1 we must also do the same for product2
                 clicked_product.incrementFrequency();
                 context.startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-            // Goes to DetailsActivity
+                // Goes to DetailsActivity
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("product_id",  clicked_product.getId());
                 context.startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             } else if (current_context instanceof CartActivity) {
                 // If the remove_from_cart_button is pressed then the product is removed. If we press
                 // the cardView of the product instead then we go to the DetailsActivity
@@ -116,9 +119,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     Intent intent = new Intent(context, DetailsActivity.class);
                     intent.putExtra("product_id", clicked_product.getId());
                     context.startActivity(intent);
+                    ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
                 }
             }
         }
+
+
 
         /**
          * Removes product from the RecyclerView
