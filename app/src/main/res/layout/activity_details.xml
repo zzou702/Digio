@@ -127,7 +127,8 @@
                     android:orientation="horizontal"
                     android:gravity="center">
 
-                    <LinearLayout style="@style/SpecContainer">
+                    <LinearLayout style="@style/SpecContainer"
+                        android:layout_weight="1">
                         <TextView style="@style/SpecTitle"
                             android:text="Rated" />
                         <TextView style="@style/SpecValue"
@@ -139,7 +140,8 @@
 
                     <!--  TEST Specifications -->
 
-                    <LinearLayout style="@style/SpecContainer">
+                    <LinearLayout style="@style/SpecContainer"
+                        android:layout_weight="1">
                         <TextView style="@style/SpecTitle"
                             android:text="Storage"/>
                         <TextView style="@style/SpecValue"
@@ -148,7 +150,8 @@
                         <TextView style="@style/SpecTitle"
                             android:text="GB"/>
                     </LinearLayout>
-                    <LinearLayout style="@style/SpecContainer">
+                    <LinearLayout style="@style/SpecContainer"
+                        android:layout_weight="1">
                         <TextView style="@style/SpecTitle"
                             android:text="Memory"/>
                         <TextView style="@style/SpecValue"
@@ -157,7 +160,8 @@
                         <TextView style="@style/SpecTitle"
                             android:text="GB"/>
                     </LinearLayout>
-                    <LinearLayout style="@style/SpecContainer">
+                    <LinearLayout style="@style/SpecContainer"
+                        android:layout_weight="1">
                         <TextView style="@style/SpecTitle"
                             android:text="Battery"/>
                         <TextView style="@style/SpecValue"
