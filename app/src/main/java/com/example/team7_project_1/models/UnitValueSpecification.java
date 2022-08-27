@@ -35,7 +35,7 @@ public class UnitValueSpecification extends Specification {
 
     @Override
     public String getFormattedValue() {
-        return this.value + this.unit;
+        return this.getValue() + " " + this.unit;
     }
 
 }
