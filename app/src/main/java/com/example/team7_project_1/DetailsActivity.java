@@ -105,7 +105,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
     }
@@ -195,7 +195,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(DetailsActivity.this, ComparisonFilterActivity.class);
         intent.putExtra("product1_id", this.product_id);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 

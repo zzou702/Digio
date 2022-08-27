@@ -88,7 +88,11 @@ public class ComparisonFilterActivity extends AppCompatActivity {
         vh.action_bar_back_button.setVisibility(View.VISIBLE);
 
         // On click listener for the back button
-        vh.action_bar_back_button.setOnClickListener(view -> finish());
+        vh.action_bar_back_button.setOnClickListener(view -> {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        );
 
         //Setting the title of the page
         setLabel();
@@ -261,12 +265,15 @@ public class ComparisonFilterActivity extends AppCompatActivity {
             switch(menuItem.getItemId()){
                 case R.id.nav_home:
                     startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
                 case R.id.nav_search:
                     startActivity(new Intent(ComparisonFilterActivity.this, SearchActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
                 case R.id.nav_cart:
                     startActivity(new Intent(ComparisonFilterActivity.this, CartActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
             }
 

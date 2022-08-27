@@ -99,7 +99,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 // Since we already increased the frequency of product1 we must also do the same for product2
                 clicked_product.incrementFrequency();
                 context.startActivity(intent);
-                ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                 // Goes to DetailsActivity
             } else if (current_context instanceof MainActivity || current_context instanceof SearchActivity) {
@@ -119,7 +119,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     Intent intent = new Intent(context, DetailsActivity.class);
                     intent.putExtra("product_id", clicked_product.getId());
                     context.startActivity(intent);
-                    ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                 }
             }
