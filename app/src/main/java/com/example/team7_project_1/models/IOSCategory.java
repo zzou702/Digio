@@ -15,13 +15,21 @@ public class IOSCategory extends Category {
         return Names.IOS.toString();
     }
 
+    /**
+     * Gets the OS image for the given iOS phone
+     * @param context
+     * @return int value of the OS image
+     */
     @Override
     public int getOSImageId(Context context) {
         return context.getResources().getIdentifier("ios_logo", "drawable", context.getPackageName());
     }
 
     /**
-     * It returns 0 as the IOS phones do not have a logo for their brand
+     * Gets the brand image for the phone. It returns 0 as the iOS phones do not have a logo
+     * for their brand.
+     * @param context
+     * @return int value of the brand image
      */
     @Override
     public int getBrandImageId(Context context) {

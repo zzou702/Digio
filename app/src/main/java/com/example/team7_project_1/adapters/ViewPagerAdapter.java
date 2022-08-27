@@ -17,6 +17,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     // reference: https://www.digitalocean.com/community/tutorials/android-viewpager-example-tutorial
 
+    // Fields
     Context context;
     int[] images;
     LayoutInflater m_layout_inflater;

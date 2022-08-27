@@ -63,7 +63,6 @@ public class PhoneMapper extends DataMapper {
 
         // requiresNonNull to prevent passing null values to constructor
         // NOTE: if NullPointerException, might be due to field not added to database
-
         Phone current_phone = new Phone (
                 Integer.parseInt(Objects.requireNonNull(data.get("id")).toString()),
                 Objects.requireNonNull(data.get("name")).toString(),

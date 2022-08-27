@@ -4,11 +4,12 @@ import com.example.team7_project_1.LoadingActivity;
 import com.example.team7_project_1.mappers.PhoneMapper;
 import com.example.team7_project_1.mappers.SpecificationMapper;
 
+/**
+ * MapHandler serves as middleware between Application/Activity layer and Persistence/Data layer
+ */
 public class MapHandler {
-    /*
-    MapHandler serves as middleware between Application/Activity layer and Persistence/Data layer
-     */
 
+    // Fields
     static PhoneMapper phone_mapper;
     static SpecificationMapper specification_mapper;
     static LoadingActivity loading_activity;
@@ -30,8 +31,8 @@ public class MapHandler {
         specification_mapper.fetchFromDatabase();
     }
 
-    /*
-    Called by mappers when they have finished fetching
+    /**
+     * Called by mappers when they have finished fetching
      */
     public static void callbackFromFetch() {
         if (phone_mapper.isStillFetching() || specification_mapper.isStillFetching()) {

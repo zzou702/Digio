@@ -22,7 +22,7 @@ public class DataProvider {
     private static ArrayList<Product> all_products;
     private static ArrayList<SpecificationDatabaseType> all_specification_types;
 
-    // Fields used in the CartActivity in order to keep track of what phones the user has put
+    // Field used in the CartActivity in order to keep track of what phones the user has put
     // in their shopping cart
     private static ArrayList<Product> shopping_cart_products = new ArrayList<>();
 

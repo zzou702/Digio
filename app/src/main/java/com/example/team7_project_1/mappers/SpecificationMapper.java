@@ -53,7 +53,6 @@ public class SpecificationMapper extends DataMapper {
 
         // requiresNonNull to prevent passing null values to constructor
         // NOTE: if NullPointerException, might be due to field not added to database
-
         return new SpecificationDatabaseType(
                 Objects.requireNonNull(data.get("fieldName")).toString(),
                 Objects.requireNonNull(data.get("type")).toString(),
