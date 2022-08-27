@@ -220,7 +220,7 @@ public class ComparisonActivity extends AppCompatActivity {
      */
     public void initializeNavItem() {
         // Setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()){
                 case R.id.nav_home:
                     startActivity(new Intent(ComparisonActivity.this, MainActivity.class));

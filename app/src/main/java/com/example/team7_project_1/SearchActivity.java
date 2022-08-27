@@ -241,7 +241,7 @@ public class SearchActivity extends AppCompatActivity {
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_search);
 
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()) {
                 case R.id.nav_home:
                     startActivity(new Intent(SearchActivity.this, MainActivity.class));
@@ -309,15 +309,6 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Takes the user back to the previous page
-     * @param v
-     */
-    public void backButtonClicked(View v){
-        finish();
-    }
-
-
 
     /**
      * Sets the bottom navigation bar visible or invisible depending on whether the keyboard is
@@ -329,14 +320,11 @@ public class SearchActivity extends AppCompatActivity {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener (
                 this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean is_open) {
-                        if (is_open) {
-                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
-                        }else {
-                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
-                        }
+                is_open -> {
+                    if (is_open) {
+                        vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                    }else {
+                        vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                     }
                 }
         );

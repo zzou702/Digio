@@ -20,7 +20,6 @@ import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.Locale;
 
@@ -42,17 +41,17 @@ public class DetailsActivity extends AppCompatActivity {
         public ViewHolder() {
             bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
 
-            view_pager = (ViewPager) findViewById(R.id.viewPager);
+            view_pager = findViewById(R.id.viewPager);
 
-            phone_name = (TextView) findViewById(R.id.phone_name);
-            phone_subtitle = (TextView) findViewById(R.id.phone_subtitle);
-            phone_price = (TextView) findViewById(R.id.phone_price);
-            phone_description = (TextView) findViewById(R.id.phone_description);
-            phone_rating = (TextView) findViewById(R.id.phone_rating);
+            phone_name = findViewById(R.id.phone_name);
+            phone_subtitle = findViewById(R.id.phone_subtitle);
+            phone_price = findViewById(R.id.phone_price);
+            phone_description = findViewById(R.id.phone_description);
+            phone_rating = findViewById(R.id.phone_rating);
 
-            phone_storage = (TextView) findViewById(R.id.phone_storage);
-            phone_memory = (TextView) findViewById(R.id.phone_memory);
-            phone_battery_capacity = (TextView) findViewById(R.id.phone_battery_capacity);
+            phone_storage = findViewById(R.id.phone_storage);
+            phone_memory = findViewById(R.id.phone_memory);
+            phone_battery_capacity = findViewById(R.id.phone_battery_capacity);
         }
     }
 
@@ -102,12 +101,9 @@ public class DetailsActivity extends AppCompatActivity {
         vh.action_bar_back_button.setVisibility(View.VISIBLE);
 
         // On click listener for the back button that returns to the previous activity
-        vh.action_bar_back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            }
+        vh.action_bar_back_button.setOnClickListener(view -> {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
     }
 
@@ -154,14 +150,11 @@ public class DetailsActivity extends AppCompatActivity {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean is_open) {
-                        if(is_open) {
-                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
-                        }else{
-                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
-                        }
+                is_open -> {
+                    if(is_open) {
+                        vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                    }else{
+                        vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                     }
                 }
         );
@@ -170,11 +163,11 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     /**
-     * Initialises the navigation item selected for the home page
+     * Initialises the navigation item selected for the details page
      */
     public void initializeNavItem(){
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()) {
                 case R.id.nav_home:
                     startActivity(new Intent(DetailsActivity.this, MainActivity.class));

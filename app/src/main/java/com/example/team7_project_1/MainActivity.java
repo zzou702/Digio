@@ -292,13 +292,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Initialises the navigation item selected for the main page
      */
-    @SuppressWarnings("deprecation")
     public void initializeNavItem() {
         //set home selected
         vh.bottom_navigation_view.setSelectedItemId(R.id.nav_home);
 
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()){
                 case R.id.nav_home:
                     return true;
@@ -326,14 +325,11 @@ public class MainActivity extends AppCompatActivity {
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener(
                 this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean is_open) {
-                        if(is_open){
-                            vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
-                        }else{
-                            vh.bottom_navigation_view.setVisibility(View.VISIBLE);
-                        }
+                is_open -> {
+                    if(is_open){
+                        vh.bottom_navigation_view.setVisibility(View.INVISIBLE);
+                    }else{
+                        vh.bottom_navigation_view.setVisibility(View.VISIBLE);
                     }
                 }
         );

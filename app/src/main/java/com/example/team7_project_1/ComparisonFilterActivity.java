@@ -269,7 +269,7 @@ public class ComparisonFilterActivity extends AppCompatActivity {
      */
     public void initializeNavItem() {
         //setting ItemSelectedListener
-        vh.bottom_navigation_view.setOnNavigationItemSelectedListener(menuItem -> {
+        vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
             switch(menuItem.getItemId()){
                 case R.id.nav_home:
                     startActivity(new Intent(ComparisonFilterActivity.this, MainActivity.class));
