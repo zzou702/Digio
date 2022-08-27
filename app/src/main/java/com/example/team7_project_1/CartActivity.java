@@ -150,17 +150,16 @@ public class CartActivity extends AppCompatActivity {
 
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnItemSelectedListener(menu_item -> {
-            switch(menu_item.getItemId()){
-                case R.id.nav_home:
-                    startActivity(new Intent(CartActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(CartActivity.this, SearchActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                case R.id.nav_cart:
-                    return true;
+            if(menu_item.getItemId() == R.id.nav_home) {
+                startActivity(new Intent(CartActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                return true;
+            }else if (menu_item.getItemId() == R.id.nav_search){
+                startActivity(new Intent(CartActivity.this, SearchActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                return true;
+            }else if (menu_item.getItemId() == R.id.nav_cart) {
+                return true;
             }
             return false;
         });

@@ -258,17 +258,16 @@ public class MainActivity extends AppCompatActivity {
      * @param v
      */
     public void categoryButtonPressed(View v) {
-        switch(v.getId())
-        {
-            case R.id.category_btn_android: //if android button is pressed
-                this.category = Category.Names.ANDROID;
-                break;
-            case R.id.category_btn_ios: //if ios button is pressed
-                this.category = Category.Names.IOS;
-                break;
-            case R.id.category_btn_other: // if OTHER button is pressed
-                this.category = Category.Names.OTHER;
-                break;
+        if (v.getId() == R.id.category_btn_android) {
+            //if android button is pressed
+            this.category = Category.Names.ANDROID;
+        } else if (v.getId() == R.id.category_btn_ios){
+            //if ios button is pressed
+            this.category = Category.Names.IOS;
+
+        }else if (v.getId() == R.id.category_btn_other){
+            // if OTHER button is pressed
+            this.category = Category.Names.OTHER;
         }
 
         // directing to the new activity(ListActivity) and passing the category selected to
@@ -293,19 +292,17 @@ public class MainActivity extends AppCompatActivity {
 
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
-            switch(menuItem.getItemId()){
-                case R.id.nav_home:
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(MainActivity.this, SearchActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    return true;
-                case R.id.nav_cart:
-                    startActivity(new Intent(MainActivity.this, CartActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    return true;
+            if(menuItem.getItemId() == R.id.nav_home) {
+                return true;
+            }else if(menuItem.getItemId() == R.id.nav_search) {
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
+            }else if(menuItem.getItemId() == R.id.nav_cart){
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
             }
-
             return false;
         });
     }

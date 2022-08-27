@@ -168,19 +168,18 @@ public class DetailsActivity extends AppCompatActivity {
     public void initializeNavItem(){
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
-            switch(menuItem.getItemId()) {
-                case R.id.nav_home:
-                    startActivity(new Intent(DetailsActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(DetailsActivity.this, SearchActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    return true;
-                case R.id.nav_cart:
-                    startActivity(new Intent(DetailsActivity.this, CartActivity.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    return true;
+            if (menuItem.getItemId() == R.id.nav_home) {
+                startActivity(new Intent(DetailsActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
+            } else if (menuItem.getItemId() == R.id.nav_search){
+                startActivity(new Intent(DetailsActivity.this, SearchActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
+            }else if (menuItem.getItemId() == R.id.nav_cart){
+                startActivity(new Intent(DetailsActivity.this, CartActivity.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                return true;
             }
             return false;
         });

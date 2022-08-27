@@ -242,18 +242,17 @@ public class SearchActivity extends AppCompatActivity {
 
         //setting ItemSelectedListener
         vh.bottom_navigation_view.setOnItemSelectedListener(menuItem -> {
-            switch(menuItem.getItemId()) {
-                case R.id.nav_home:
-                    startActivity(new Intent(SearchActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    return true;
-                case R.id.nav_search:
-                    startActivity(new Intent(SearchActivity.this, SearchActivity.class));
-                    return true;
-                case R.id.nav_cart:
-                    startActivity(new Intent(SearchActivity.this, CartActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    return true;
+            if(menuItem.getItemId() == R.id.nav_home) {
+                startActivity(new Intent(SearchActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                return true;
+            }else if (menuItem.getItemId() == R.id.nav_search) {
+                startActivity(new Intent(SearchActivity.this, SearchActivity.class));
+                return true;
+            }else if(menuItem.getItemId() == R.id.nav_cart){
+                startActivity(new Intent(SearchActivity.this, CartActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
             }
             return false;
         });
