@@ -20,9 +20,7 @@ public class SpecificationDatabaseType {
         this.unit = unit;
     }
 
-    /**
-     * Getters and Setters for fields
-     */
+    /** Getters and Setters for fields */
     public String getFieldName() {
         return field_name;
     }

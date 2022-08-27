@@ -33,9 +33,7 @@ public abstract class Product implements IProduct, Comparable<Product> {
                 '}';
     }
 
-    /**
-     * Getters and Setters for fields
-     */
+    /** Getters and setters for fields */
     public long getId() {
         return id;
     }

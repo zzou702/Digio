@@ -17,9 +17,7 @@ public class UnitValueSpecification extends Specification {
         this.unit = unit;
     }
 
-    /**
-     * Getter and setter for value field
-     */
+    /** Getter and setter for value field */
     @Override
     public String getValue() {
         // -1 set by DataProvider due to empty field value

@@ -13,9 +13,7 @@ public class StringSpecification extends Specification {
         this.value = value;
     }
 
-    /**
-     * Getter and setter for value field
-     */
+    /** Getter and setter for value field */
     public String getValue() {
         return this.value;
     }

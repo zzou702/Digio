@@ -14,9 +14,7 @@ public class BoolSpecification extends Specification {
     }
 
 
-    /**
-     * Getter and setter for value field
-     */
+    /** Getter and setter for value field */
     @Override
     public String getValue() {
         return Boolean.toString(this.value);

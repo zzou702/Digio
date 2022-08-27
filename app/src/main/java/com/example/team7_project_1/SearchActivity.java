@@ -31,6 +31,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
+
     /**
      * ViewHolder Class
      */
