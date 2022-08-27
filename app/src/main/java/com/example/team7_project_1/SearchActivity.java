@@ -26,7 +26,6 @@ import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
 
@@ -46,16 +45,16 @@ public class SearchActivity extends AppCompatActivity {
          * Constructor
          */
         public ViewHolder() {
-            bottom_navigation_view = (BottomNavigationView) findViewById(R.id.bottom_nav_bar);
-            recycler_view_phones = (RecyclerView) findViewById(R.id.search_recycler_view);
-            no_results_text = (TextView) findViewById(R.id.no_results_text);
+            bottom_navigation_view = findViewById(R.id.bottom_nav_bar);
+            recycler_view_phones = findViewById(R.id.search_recycler_view);
+            no_results_text = findViewById(R.id.no_results_text);
         }
     }
 
     // Fields
     private Category.Names chosen_category; //the chosen category
     private String user_search; //the user search
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
     ProductAdapter adapter;
     ViewHolder vh;
 
@@ -123,7 +122,8 @@ public class SearchActivity extends AppCompatActivity {
             }
         } else if (this.chosen_category == null && user_search != null) {
             if (!products.isEmpty()) {
-                vh.action_bar_title.setText(String.valueOf(products.size()) + " Results Found");
+                vh.action_bar_title.setText((products.size()) + " Results Found");
+                vh.action_bar_title.setTextSize(21);
             }
         }
     }
@@ -178,7 +178,7 @@ public class SearchActivity extends AppCompatActivity {
         // Getting the chosen category and user search that have been passed using the putExtra()
         // method
         this.chosen_category = (Category.Names) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
-        this.user_search = (String) getIntent().getStringExtra("user_search");
+        this.user_search = getIntent().getStringExtra("user_search");
 
         // If the chosen_category is not null - filter all phones by category and get only the phones
         // that fit into our category
@@ -315,8 +315,6 @@ public class SearchActivity extends AppCompatActivity {
      * activated
      */
     public void setNavVisibility(){
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_bar);
-
         // listens to the keyboard, if the keyboard is opened, set the bottom nav bar invisible
         KeyboardVisibilityEvent.setEventListener (
                 this,

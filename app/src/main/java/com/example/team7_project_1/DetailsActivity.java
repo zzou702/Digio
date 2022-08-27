@@ -113,7 +113,7 @@ public class DetailsActivity extends AppCompatActivity {
      * detailed page
      */
     public void loadProduct() {
-        product_id = (Long) getIntent().getLongExtra("product_id", 1);
+        product_id = getIntent().getLongExtra("product_id", 1);
         current_product = IProduct.getProductById(product_id);
 
         // Incrementing the frequency of the current product
