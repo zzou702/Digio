@@ -182,27 +182,6 @@
                     android:onClick="newsClicked"/>
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/NewsContainer"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                >
-                <ImageButton
-                    android:id="@+id/news_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@drawable/news_4"
-                    android:onClick="newsClicked"/>
-
-                <TextView
-                    style="@style/NewsCaption"
-                    android:id="@+id/news_text_4"
-                    android:justificationMode="inter_word"
-                    android:lineSpacingMultiplier="1.1"
-                    android:text="iPhone 14 price leak could be great news ahead of launch"
-                    android:onClick="newsClicked"/>
-            </LinearLayout>
-
 
         </LinearLayout>
 

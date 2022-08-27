@@ -351,6 +351,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (view_id == R.id.news_3 | view_id == R.id.news_text_3) {
             url_string = "https://www.theverge.com/23278136/xiaomi-12s-ultra-camera-leica-" +
                     "versus-pixel-6-pro-galaxy-s22-iphone-13-max";
+        }else if (view_id == R.id.news_4 | view_id == R.id.news_text_4) {
+            url_string = "https://www.imore.com/iphone/iphone-14/iphone-14-price-leak-could-" +
+                    "be-great-news-ahead-of-launch";
         }
 
         // Directing the user to an external browser based on the selected news
