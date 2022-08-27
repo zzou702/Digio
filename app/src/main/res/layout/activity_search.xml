@@ -10,16 +10,18 @@
         android:id="@+id/search_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="54dp"/>
+        android:paddingBottom="70dp"/>
 
     <TextView
         android:id="@+id/no_results_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="34sp"
         android:layout_gravity="center"
-        android:text="Sorry no results were found. Please try again."
+        android:layout_marginBottom="54dp"
+        android:padding="30dp"
+        android:text="Sorry, no results were found.\n\nPlease try again."
         android:gravity="center"
+        android:textSize="34sp"
         android:fontFamily="@font/montserrat_regular"
         android:textStyle="bold"/>
 
