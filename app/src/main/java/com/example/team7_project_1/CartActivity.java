@@ -143,9 +143,11 @@ public class CartActivity extends AppCompatActivity {
             switch(menu_item.getItemId()){
                 case R.id.nav_home:
                     startActivity(new Intent(CartActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     return true;
                 case R.id.nav_search:
                     startActivity(new Intent(CartActivity.this, SearchActivity.class));
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     return true;
                 case R.id.nav_cart:
                     return true;

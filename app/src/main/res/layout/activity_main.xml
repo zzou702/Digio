@@ -185,6 +185,7 @@
             <LinearLayout
                 style="@style/NewsContainer"
                 android:layout_marginTop="40dp"
+                android:paddingBottom="50dp"
                 android:orientation="vertical"
                 >
                 <ImageButton

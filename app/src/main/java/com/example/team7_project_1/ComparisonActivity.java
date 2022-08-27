@@ -137,7 +137,12 @@ public class ComparisonActivity extends AppCompatActivity {
         vh.action_bar_back_button.setVisibility(View.VISIBLE);
 
         // On click listener for the back button
-        vh.action_bar_back_button.setOnClickListener(view -> finish());
+        vh.action_bar_back_button.setOnClickListener(view -> {
+            finish();
+
+            // Sliding transition
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        });
     }
 
 
@@ -189,6 +194,9 @@ public class ComparisonActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("product_id", product_id);
         startActivity(intent);
+
+        // Fade transition
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 
@@ -201,12 +209,15 @@ public class ComparisonActivity extends AppCompatActivity {
             switch(menuItem.getItemId()){
                 case R.id.nav_home:
                     startActivity(new Intent(ComparisonActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
                 case R.id.nav_search:
                     startActivity(new Intent(ComparisonActivity.this, SearchActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
                 case R.id.nav_cart:
                     startActivity(new Intent(ComparisonActivity.this, CartActivity.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     return true;
             }
 
