@@ -299,9 +299,11 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.nav_search:
                     startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;
                 case R.id.nav_cart:
                     startActivity(new Intent(MainActivity.this, CartActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     return true;
             }
 
