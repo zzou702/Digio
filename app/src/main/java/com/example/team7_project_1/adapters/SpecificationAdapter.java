@@ -72,8 +72,8 @@ public class SpecificationAdapter extends RecyclerView.Adapter<SpecificationAdap
 
         String spec_name = current_spec_product1.getDisplayName();
 
-        String spec_value_product1 = current_spec_product1.getValue();
-        String spec_value_product2 = current_spec_product2.getValue();
+        String spec_value_product1 = current_spec_product1.getFormattedValue();
+        String spec_value_product2 = current_spec_product2.getFormattedValue();
 
         if (spec_value_product1 == null) {
             spec_value_product1 = "N/A";
