@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     final long DELAY_MS = 500;
     final long PERIOD_MS = 5000; // 5 seconds before executing the next task
 
+    int NUM_TOP_PICKS = 8; //number of products in the top picks
+
 
     /**
      * View holder class
@@ -201,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Product> all_products = DataProvider.getProducts();
         Collections.sort(all_products);
 
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < NUM_TOP_PICKS; i++) {
             this.products.add(all_products.get(i));
         }
     }
