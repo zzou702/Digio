@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_project_1.CartActivity;
 import com.example.team7_project_1.ComparisonActivity;
 import com.example.team7_project_1.ComparisonFilterActivity;
-import com.example.team7_project_1.models.Category;
+import com.example.team7_project_1.models.ICategory;
 import com.example.team7_project_1.models.Phone;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.example.team7_project_1.DetailsActivity;
@@ -196,7 +196,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.phone_main_image.setImageResource(phone_image);
 
         // Setting OS and brand icons based on phone category
-        Category this_category = this_phone.getCategory();
+        ICategory this_category = this_phone.getCategory();
         if (context instanceof SearchActivity || context instanceof ComparisonFilterActivity) {
             holder.os_icon.setImageResource(this_category.getOSImageId(context));
             holder.brand_icon.setImageResource(this_category.getBrandImageId(context));

@@ -22,7 +22,7 @@ import android.widget.*;
 
 import com.example.team7_project_1.adapters.ViewPagerAdapter;
 import com.example.team7_project_1.adapters.ProductAdapter;
-import com.example.team7_project_1.models.Category;
+import com.example.team7_project_1.models.ICategory;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     ProductAdapter adapter;
     ViewHolder vh;
     // Categories to be chosen
-    public Category.Names category;
+    public ICategory.Names category;
 
     // Array for banners
     int[] banner = {R.drawable.banner_1, R.drawable.banner_2, R.drawable.banner_3};
@@ -260,14 +260,14 @@ public class MainActivity extends AppCompatActivity {
     public void categoryButtonPressed(View v) {
         if (v.getId() == R.id.category_btn_android) {
             //if android button is pressed
-            this.category = Category.Names.ANDROID;
+            this.category = ICategory.Names.ANDROID;
         } else if (v.getId() == R.id.category_btn_ios){
             //if ios button is pressed
-            this.category = Category.Names.IOS;
+            this.category = ICategory.Names.IOS;
 
         }else if (v.getId() == R.id.category_btn_other){
             // if OTHER button is pressed
-            this.category = Category.Names.OTHER;
+            this.category = ICategory.Names.OTHER;
         }
 
         // directing to the new activity(ListActivity) and passing the category selected to

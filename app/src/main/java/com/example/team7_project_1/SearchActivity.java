@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 
 import com.example.team7_project_1.adapters.ProductAdapter;
-import com.example.team7_project_1.models.Category;
+import com.example.team7_project_1.models.ICategory;
 import com.example.team7_project_1.models.Product;
 import com.example.team7_project_1.utilities.DataProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     // Fields
-    private Category.Names chosen_category; //the chosen category
+    private ICategory.Names chosen_category; //the chosen category
     private String user_search; //the user search
     ArrayList<Product> products = new ArrayList<>();
     ProductAdapter adapter;
@@ -113,11 +113,11 @@ public class SearchActivity extends AppCompatActivity {
         }else if (this.chosen_category != null && user_search == null) {
 
             // Change the string that will be outputted based on the category selected
-            if(this.chosen_category.equals(Category.Names.IOS)) {
+            if(this.chosen_category.equals(ICategory.Names.IOS)) {
                 vh.action_bar_title.setText("iOS");
-            }else if(this.chosen_category.equals(Category.Names.ANDROID)) { // If the Category chose is Android
+            }else if(this.chosen_category.equals(ICategory.Names.ANDROID)) { // If the Category chose is Android
                 vh.action_bar_title.setText("Android");
-            }else if(this.chosen_category.equals(Category.Names.OTHER)) { // If the Category Chosen is Other
+            }else if(this.chosen_category.equals(ICategory.Names.OTHER)) { // If the Category Chosen is Other
                 vh.action_bar_title.setText("Other OS");
             }
         } else if (this.chosen_category == null && user_search != null) {
@@ -177,7 +177,7 @@ public class SearchActivity extends AppCompatActivity {
     public void initializeArray() {
         // Getting the chosen category and user search that have been passed using the putExtra()
         // method
-        this.chosen_category = (Category.Names) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
+        this.chosen_category = (ICategory.Names) getIntent().getSerializableExtra("CATEGORY_CHOSEN");
         this.user_search = getIntent().getStringExtra("user_search");
 
         // If the chosen_category is not null - filter all phones by category and get only the phones
