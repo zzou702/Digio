@@ -12,7 +12,8 @@
         style="@style/ActionBarTitle"
         android:layout_weight="1"
         android:text="DIGIO"
-        android:textScaleX="1.04" />
+        android:textScaleX="1.04"
+        android:layout_width="0dp" />
 
 
 </LinearLayout>
