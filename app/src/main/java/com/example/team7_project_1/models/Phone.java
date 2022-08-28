@@ -10,10 +10,10 @@ import java.util.HashMap;
 public class Phone extends Product implements IPhone {
 
     // Fields
-    private String subtitle;
-    private String operating_system;
-    private String brand;
-    private String manufacturer_part_no;
+    private final String subtitle;
+    private final String operating_system;
+    private final String brand;
+    private final String manufacturer_part_no;
     private ArrayList<Specification> specifications = new ArrayList<>();
 
     private Category category;
@@ -45,7 +45,6 @@ public class Phone extends Product implements IPhone {
     }
 
     public void parseSpecifications(Object spec_obj) {
-        // TODO: see if theres an alternative to remove unchecked cast; we know that spec_obj is a hashmap in database
         HashMap<String,Object> spec_map = (HashMap<String, Object>) spec_obj;
 
         for (HashMap.Entry<String, Object> entry : spec_map.entrySet()) {

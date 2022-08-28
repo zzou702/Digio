@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 public abstract class Specification implements ISpecification, Comparable<Specification> {
 
     // Fields
-    private String field_name;
-    private String display_name;
+    private final String field_name;
+    private final String display_name;
 
     /**
      * Constructor

@@ -3,7 +3,7 @@ package com.example.team7_project_1.models;
 public class BoolSpecification extends Specification {
 
     // Field
-    private boolean value;
+    private final boolean value;
 
     /**
      * Constructor

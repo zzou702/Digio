@@ -93,7 +93,7 @@ public class ComparisonActivity extends AppCompatActivity {
      */
     public void setSpecificationAdapter() {
         // Getting the product's specifications
-        ArrayList<ArrayList> all_specs = generateSpecsArrays();
+        ArrayList<ArrayList<Specification>> all_specs = generateSpecsArrays();
 
         adapter = new SpecificationAdapter(all_specs.get(0), all_specs.get(1), this);
 
@@ -110,8 +110,9 @@ public class ComparisonActivity extends AppCompatActivity {
     /**
      * Generating the specifications of each product
      */
-    public ArrayList<ArrayList> generateSpecsArrays() {
-        ArrayList<ArrayList> all_specs = new ArrayList<>();
+    public ArrayList<ArrayList<Specification>> generateSpecsArrays() {
+        ArrayList<ArrayList<Specification>> all_specs = new ArrayList<>();
+
         ArrayList<Specification> specs_product1 = IProduct.getProductById(product1_id).getPhone().getSpecifications();
         ArrayList<Specification> specs_product2 = IProduct.getProductById(product2_id).getPhone().getSpecifications();
 

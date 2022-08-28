@@ -1,5 +1,7 @@
 package com.example.team7_project_1.models;
 
+import androidx.annotation.NonNull;
+
 public interface ISpecification {
 
     String getFieldName();
@@ -8,5 +10,6 @@ public interface ISpecification {
 
     String getFormattedValue();
 
+    @NonNull
     String toString();
 }
