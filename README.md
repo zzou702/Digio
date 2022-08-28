@@ -1,7 +1,7 @@
 # project-1-java-team7
 
 ## Android Trading app DIGIO
-Our app DIGIO is an android trading app that specialises in the sale of mobile phones across different operating systems. Our app follows a simple and elegant design that is accompanied with a variety of selection of mobile phones both old and new. As well as our special comparison feature that differentiates us from our major competitors.
+Our app DIGIO is an android trading app that specialises in the sale of mobile phones from different operating systems. Our app follows a simple and elegant design that is accompanied with a variety of selection of mobile phones both old and new, as well as our special comparison feature that differentiates us from our major competitors.
 
 
 ## Instructions on how to use our app
