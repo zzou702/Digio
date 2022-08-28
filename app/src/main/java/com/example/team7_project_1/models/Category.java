@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-public abstract class Category {
+public abstract class Category implements ICategory {
 
     // Field
     public final String brand;
@@ -21,30 +21,5 @@ public abstract class Category {
 
     @NonNull
     public abstract String toString();
-
-    public enum Names {
-        /**
-         * Represents the type of category the user selected
-         */
-        ANDROID ("Android"),
-        IOS ("iOS"),
-        OTHER ("Other");
-
-        private final String name;
-
-        private Names(String name) {
-            this.name = name;
-        }
-
-        public boolean equals(String otherName) {
-            // (otherName == null) check is not needed because name.equals(null) returns false
-            return name.equals(otherName);
-        }
-
-        @NonNull
-        public String toString() {
-            return this.name;
-        }
-    }
 
 }
