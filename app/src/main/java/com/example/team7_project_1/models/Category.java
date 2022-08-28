@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-public abstract class Category {
+public abstract class Category implements ICategory {
 
     // Field
     public final String brand;
