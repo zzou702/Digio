@@ -34,7 +34,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:textStyle="bold"
                 android:text="iPhone 13 Pro Max (2002)"
-                android:textSize="12dp"
+                android:textSize="13dp"
                 />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="iPhone 13 Pro Max (2002)"
-                android:textSize="12dp"/>
+                android:textSize="13dp"/>
         </LinearLayout>
         <TextView
             android:id="@+id/phone_price"
@@ -56,8 +56,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:text="price"
-            android:textSize="12dp" />
-
+            android:textSize="13dp" />
 
 
     </LinearLayout>
