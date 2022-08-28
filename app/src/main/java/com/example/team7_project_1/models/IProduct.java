@@ -1,9 +1,12 @@
 package com.example.team7_project_1.models;
 
+import androidx.annotation.NonNull;
+
 import com.example.team7_project_1.utilities.DataProvider;
 
 public interface IProduct {
 
+    @NonNull
     String toString();
 
     long getId();

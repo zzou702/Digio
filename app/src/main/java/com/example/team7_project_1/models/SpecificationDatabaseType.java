@@ -5,10 +5,10 @@ import androidx.annotation.NonNull;
 public class SpecificationDatabaseType {
 
     // Fields
-    private String field_name;
-    private String type;
-    private String display_name;
-    private String unit;
+    private final String field_name;
+    private final String type;
+    private final String display_name;
+    private final String unit;
 
     /**
      * Constructor

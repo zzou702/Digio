@@ -14,6 +14,9 @@ public class MapHandler {
     static SpecificationMapper specification_mapper;
     static LoadingActivity loading_activity;
 
+    /**
+     * Set the activity that receives callback from fetching
+     */
     public static void setContextToCallback(LoadingActivity loading_activity) {
         MapHandler.loading_activity = loading_activity;
     }

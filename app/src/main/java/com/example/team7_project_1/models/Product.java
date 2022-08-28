@@ -1,13 +1,15 @@
 package com.example.team7_project_1.models;
 
+import androidx.annotation.NonNull;
+
 public abstract class Product implements IProduct, Comparable<Product> {
 
     // Fields
-    private long id;
-    private String name;
-    private double price;
-    private String description;
-    private double rating;
+    private final long id;
+    private final String name;
+    private final double price;
+    private final String description;
+    private final double rating;
     private long frequency;
 
     /**
@@ -22,6 +24,7 @@ public abstract class Product implements IProduct, Comparable<Product> {
         this.frequency = frequency;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Product{" +

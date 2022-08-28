@@ -16,8 +16,7 @@ import java.util.ArrayList;
 
 public class SpecificationAdapter extends RecyclerView.Adapter<SpecificationAdapter.ViewHolder> {
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         // Declare objects of all the views to be manipulated
         public TextView spec_title;
@@ -93,10 +92,6 @@ public class SpecificationAdapter extends RecyclerView.Adapter<SpecificationAdap
      */
     @Override
     public int getItemCount() {
-        if (specs_product1.size() >= specs_product2.size()) {
-            return specs_product1.size();
-        } else {
-            return specs_product2.size();
-        }
+        return Math.max(specs_product1.size(), specs_product2.size());
     }
 }

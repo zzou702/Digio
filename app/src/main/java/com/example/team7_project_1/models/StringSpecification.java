@@ -3,7 +3,7 @@ package com.example.team7_project_1.models;
 public class StringSpecification extends Specification {
 
     // Field
-    private String value;
+    private final String value;
 
     /**
      * Constructor
